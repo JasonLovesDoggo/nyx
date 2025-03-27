@@ -13,9 +13,6 @@
 	"format": "prettier --write .",
 	"lint": "prettier --check . && eslint ."
   },
-  "engines": {
-	"node": ">=18.18.0"
-  },
   "devDependencies": {
 	"@eslint/compat": "^1.2.5",
 	"@eslint/js": "^9.18.0",
