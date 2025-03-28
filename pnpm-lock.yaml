@@ -17,6 +17,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      lucide-svelte:
+        specifier: ^0.484.0
+        version: 0.484.0(svelte@5.25.3)
       reading-time:
         specifier: ^1.5.0
         version: 1.5.0
@@ -46,8 +49,8 @@ importers:
         specifier: ^5.0.0
         version: 5.2.5
       '@lucide/svelte':
-        specifier: ^0.484.0
-        version: 0.484.0(svelte@5.25.3)
+        specifier: ^0.485.0
+        version: 0.485.0(svelte@5.25.3)
       '@neoconfetti/svelte':
         specifier: ^2.0.0
         version: 2.2.2(svelte@5.25.3)
@@ -111,15 +114,9 @@ importers:
       tailwind-merge:
         specifier: ^3.0.2
         version: 3.0.2
-      tailwind-variants:
-        specifier: ^1.0.0
-        version: 1.0.0(tailwindcss@4.0.17)
       tailwindcss:
         specifier: ^4.0.0
         version: 4.0.17
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@4.0.17)
       typescript:
         specifier: ^5.0.0
         version: 5.8.2
@@ -712,8 +709,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@lucide/svelte@0.484.0':
-    resolution: {integrity: sha512-yuHwfJxE1n3kOg/4hIsvAUrBv3Mood/8BCcugUyRhxyr4EJDtjHJiiCpjJmtnk1gqkCYAEREKoGPaSGilcjYKw==}
+  '@lucide/svelte@0.485.0':
+    resolution: {integrity: sha512-8+pW8gyRc7D9tklhNxXV3v0N/7yIo64Njjs/+6zaD2d4dDqQkPT8WgVUQ/XXoKAAimJNiyrtu1SK4YiK42Jo9Q==}
     peerDependencies:
       svelte: ^5
 
@@ -1545,6 +1542,11 @@ packages:
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
+  lucide-svelte@0.484.0:
+    resolution: {integrity: sha512-QCPrcz+fqWP3jKtcWrzPemI1vcb/IgHNrwMbgm2YHgkmYH1V4L8wxGeEP3EGrLpC0Kiv4W0vN/haHLksg5bW7A==}
+    peerDependencies:
+      svelte: ^3 || ^4 || ^5.0.0-next.42
+
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
@@ -1904,17 +1906,6 @@ packages:
 
   tailwind-merge@3.0.2:
     resolution: {integrity: sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==}
-
-  tailwind-variants@1.0.0:
-    resolution: {integrity: sha512-2WSbv4ulEEyuBKomOunut65D8UZwxrHoRfYnxGcQNnHqlSCp2+B7Yz2W+yrNDrxRodOXtGD/1oCcKGNBnUqMqA==}
-    engines: {node: '>=16.x', pnpm: '>=7.x'}
-    peerDependencies:
-      tailwindcss: '*'
-
-  tailwindcss-animate@1.0.7:
-    resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
-    peerDependencies:
-      tailwindcss: '>=3.0.0 || insiders'
 
   tailwindcss@4.0.17:
     resolution: {integrity: sha512-OErSiGzRa6rLiOvaipsDZvLMSpsBZ4ysB4f0VKGXUrjw2jfkJRd6kjRKV2+ZmTCNvwtvgdDam5D7w6WXsdLJZw==}
@@ -2493,7 +2484,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@lucide/svelte@0.484.0(svelte@5.25.3)':
+  '@lucide/svelte@0.485.0(svelte@5.25.3)':
     dependencies:
       svelte: 5.25.3
 
@@ -3308,6 +3299,10 @@ snapshots:
 
   lodash.merge@4.6.2: {}
 
+  lucide-svelte@0.484.0(svelte@5.25.3):
+    dependencies:
+      svelte: 5.25.3
+
   magic-string@0.30.17:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -3663,15 +3658,6 @@ snapshots:
   tabbable@6.2.0: {}
 
   tailwind-merge@3.0.2: {}
-
-  tailwind-variants@1.0.0(tailwindcss@4.0.17):
-    dependencies:
-      tailwind-merge: 3.0.2
-      tailwindcss: 4.0.17
-
-  tailwindcss-animate@1.0.7(tailwindcss@4.0.17):
-    dependencies:
-      tailwindcss: 4.0.17
 
   tailwindcss@4.0.17: {}
 
