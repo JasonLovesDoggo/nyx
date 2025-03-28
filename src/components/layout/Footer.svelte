@@ -3,12 +3,10 @@
 	export let value;
 
 	const year = new Date().getFullYear();
-
 </script>
 
-
-<footer class="flex items-center justify-center w-full h-16 border-t border-surface0">
-	<div class="text-subtext0">
+<footer class="flex items-center justify-between w-full max-w-screen-xl h-16 m-auto mb-5 p-5 bg-crust rounded-lg">
+	<div class="">
 		&copy; {year} Jason Cameron
 	</div>
 
@@ -17,5 +15,4 @@
 	<div>
 		Views: {value}
 	</div>
-
 </footer>
