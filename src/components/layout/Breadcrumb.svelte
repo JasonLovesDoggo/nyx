@@ -32,22 +32,42 @@
 
 
 <nav aria-label="Breadcrumb">
-	<ol class="flex items-center">
+	<ol class="flex items-center font-mono text-sm">
 		<li class="inline-flex items-center">
-			<a href="/" class="font-mono text-sm">~</a>
+			<a class="bc-link" href="/">~</a>
 		</li>
 		{#if breadcrumbs && breadcrumbs.length > 1}
-			<li class="text-lavender mx-0.5">/</li>
+			<li class="mx-0.5">/</li>
 			{#each breadcrumbs.slice(1) as crumb, i (i)}
 				<li class="inline-flex items-center">
 					{#if i === breadcrumbs.slice(1).length - 1}
 						<span aria-current="page">{crumb.name}</span>
 					{:else}
-						<a href={crumb.href}>{crumb.name}</a>
-						<span class="text-lavender mx-0.5">/</span>
+						<a class="bc-link" href={crumb.href}>{crumb.name}</a>
+						<span class="mx-0.5">/</span>
 					{/if}
 				</li>
 			{/each}
 		{/if}
 	</ol>
 </nav>
+
+
+<style>
+	.bc-link:hover {
+			scale: 105%;
+      color: var(--catppuccin-color-mauve);
+      animation: wiggle 1s ease-in-out infinite;
+
+	}
+
+  @keyframes wiggle {
+      0%,
+      100% {
+          transform: rotate(-3deg);
+      }
+      50% {
+          transform: rotate(3deg);
+      }
+  }
+</style>
