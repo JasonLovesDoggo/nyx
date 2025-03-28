@@ -1,0 +1,32 @@
+---
+title: Hello World
+description: This is my first blog post
+date: 2025-03-27
+updated: 2025-03-27
+published: true
+featured: true
+tags:
+  - introduction
+  - svelte
+  - web development
+---
+
+# Hello World!
+
+Welcome to my first blog post. This post is written in **Markdown** and processed through mdsvex.
+
+## Features
+
+- SvelteKit 5.0
+- TypeScript
+- TailwindCSS with Catppuccin Mocha theme
+- mdsvex for Markdown processing
+
+## Code Example
+
+```js
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet('World'));

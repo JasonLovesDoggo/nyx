@@ -1,13 +1,14 @@
 <script lang="ts">
 	import "../app.css";
-
-	let { children } = $props();
+	import Header from "../components/layout/Header.svelte";
+	import Footer from "../components/layout/Footer.svelte";
+	export let data;
 </script>
 
-<nav>
-	<a href="/">Home</a>
-	<a href="/about">About</a>
-	<a href="/post">Settings</a>
-</nav>
-
-{@render children()}
+<div class="flex min-h-screen flex-col">
+	<Header />
+	<main class="flex-1">
+		<slot />
+	</main>
+	<Footer value={data.footerData.value} />
+</div>
