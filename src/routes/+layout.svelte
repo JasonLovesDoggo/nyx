@@ -9,7 +9,7 @@
 
 
 
-<div class="flex min-h-screen flex-col bg-base">
+<div class="flex min-h-screen flex-col bg-base text-text">
 	<Header />
 	<main class="flex-1">
 		<slot />
