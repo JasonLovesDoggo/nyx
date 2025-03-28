@@ -1,5 +1,10 @@
 @import 'tailwindcss';
+@import "../static/css/catpuccin.css"; /*See https://github.com/catppuccin/tailwindcss/pull/22*/
+
+
 @import '@fontsource/fira-mono';
+
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+@plugin "@catppuccin/tailwindcss";
 

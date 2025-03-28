@@ -3,9 +3,13 @@
 	import Header from "../components/layout/Header.svelte";
 	import Footer from "../components/layout/Footer.svelte";
 	export let data;
+
+
 </script>
 
-<div class="flex min-h-screen flex-col">
+
+
+<div class="flex min-h-screen flex-col bg-base">
 	<Header />
 	<main class="flex-1">
 		<slot />
