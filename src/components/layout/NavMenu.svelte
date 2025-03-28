@@ -5,7 +5,7 @@
 
 <nav class="flex items-center space-x-4">
 	<ul class="flex items-center space-x-4">
-		{#each navItems as item}
+		{#each navItems as item (item.title)} <!--fixme: currently puts the content.. after the page-->
 			<li>
 				{#if item.submenu}
 					<button
@@ -18,7 +18,7 @@
 					</button>
 					<div class="absolute top-full left-0 w-48 bg-base-200 rounded-md shadow-md z-10">
 						<ul class="py-2">
-							{#each item.submenu as subItem}
+							{#each item.submenu as subItem (item + subItem.title)}
 								<li>
 									<a
 										href={subItem.href}

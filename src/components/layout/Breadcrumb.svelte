@@ -30,7 +30,6 @@
 	});
 </script>
 
-{@debug breadcrumbs}
 
 <nav aria-label="Breadcrumb">
 	<ol class="flex items-center">

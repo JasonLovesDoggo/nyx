@@ -3,7 +3,7 @@
 	import NavigationMenu from "./NavMenu.svelte";
 </script>
 
-<div class="w-full bg-base-300 rounded-md flex items-center justify-between p-4">
+<div class="flex items-center justify-between h-16 m-auto mt-5 p-5 bg-crust rounded-lg mx-5">
 	<Breadcrumb />
 	<NavigationMenu />
 </div>
