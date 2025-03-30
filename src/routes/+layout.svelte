@@ -3,13 +3,13 @@
 	import Header from "../components/layout/Header.svelte";
 	import Footer from "../components/layout/Footer.svelte";
 	import { page } from "$app/state";
-	import { site } from '$lib/config/site';
+	import Site from '$lib/config';
 
 	const {data, children} = $props()
 
-	let title = $state(site.name)
+	let title = $state(Site.name)
 	$effect(() => {
-		title = [site.name, ...page.url.pathname.split("/").slice(1)].filter(Boolean).join(" - ")}
+		title = [Site.name, ...page.url.pathname.split("/").slice(1)].filter(Boolean).join(" - ")}
 	);
 </script>
 
@@ -18,7 +18,7 @@
 </svelte:head>
 
 
-<div class="flex min-h-screen flex-col bg-base text-text">
+<div class="flex min-h-screen flex-col bg-base text-text max-w-[70%] mx-auto">
 	<Header />
 	<main class="flex-1">
 		{@render children?.()}

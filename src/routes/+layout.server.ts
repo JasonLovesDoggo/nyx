@@ -1,4 +1,4 @@
-import { Site } from '$lib/config';
+import Site from '$lib/config';
 
 interface AbacusResponse {
 		value: number;

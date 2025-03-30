@@ -1,4 +1,4 @@
-import { type Icon } from '@lucide/svelte';
+import type { Icon } from '@tabler/icons-svelte';
 
 interface NavItem {
 	title: string;
