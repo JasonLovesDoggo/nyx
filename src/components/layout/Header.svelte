@@ -6,7 +6,7 @@
 	let { toggleSidebar } = $props<{ toggleSidebar: () => void }>();
 </script>
 
-<div class="m-auto mx-30 mt-5 flex h-16 items-center justify-between rounded-lg p-5">
+<div class="flex h-16 items-center justify-between p-5">
 	<Breadcrumb />
 	<button
 		onclick={toggleSidebar}
