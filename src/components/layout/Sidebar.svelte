@@ -74,11 +74,7 @@
 						href={item.href}
 						target={item.external ? '_blank' : undefined}
 						rel={item.external ? 'noopener noreferrer' : undefined}
-						class:text-accent={isActive}
-						class:underline={isActive}
-						class:decoration-wavy={isActive}
-						class:decoration-2={isActive}
-						class="hover:bg-surface0 focus:bg-surface1 block rounded p-2 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-mauve"
+						class="hover:bg-surface0 focus:bg-surface1 block rounded p-2 transition-colors duration-150 focus:outline-none "
 						aria-current={isActive ? 'page' : undefined}
 					>
 					{item.title}
@@ -100,11 +96,7 @@
 						href={item.href}
 						target={item.external ? '_blank' : undefined}
 						rel={item.external ? 'noopener noreferrer' : undefined}
-						class:text-accent={isActive}
-						class:underline={isActive}
-						class:decoration-wavy={isActive}
-						class:decoration-2={isActive}
-						class="hover:bg-surface0 focus:bg-surface1 block rounded p-2 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-mauve"
+						class="hover:bg-surface0 focus:bg-surface1 block rounded p-2 transition-colors duration-150 focus:outline-none"
 						aria-current={isActive ? 'page' : undefined}
 					>
 					{item.title}
