@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { cn } from '$lib/utils';
 	import { navItems } from '$lib/config/navItems';
 </script>
 
@@ -9,12 +8,12 @@
 			<!--fixme: currently puts the content.. after the page-->
 			<li>
 				{#if item.submenu}
-					<button
-						class={cn(
-							'focus-visible:ring-ring data-[active]:bg-accent data-[active]:text-accent-foreground inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:opacity-50',
-							'h-9 px-3'
-						)}
-					>
+					<button>
+<!--						class={cn(-->
+<!--							'focus-visible:ring-ring data-[active]:bg-accent data-[active]:text-accent-foreground inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:opacity-50',-->
+<!--							'h-9 px-3'-->
+<!--						)-->
+<!--						}-->
 						{item.title}
 					</button>
 					<div class="bg-base-200 absolute top-full left-0 z-10 w-48 rounded-md shadow-md">
@@ -32,13 +31,12 @@
 						</ul>
 					</div>
 				{:else}
-					<a
-						href={item.href}
-						class={cn(
-							'focus-visible:ring-ring data-[active]:bg-accent data-[active]:text-accent-foreground inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:opacity-50',
-							'h-9 px-3'
-						)}
-					>
+					<a>
+<!--						href={item.href}-->
+<!--						class={cn(-->
+<!--							'focus-visible:ring-ring data-[active]:bg-accent data-[active]:text-accent-foreground inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:opacity-50',-->
+<!--							'h-9 px-3'-->
+<!--						)}-->
 						{item.title}
 					</a>
 				{/if}

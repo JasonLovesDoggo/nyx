@@ -61,8 +61,7 @@
 		</div>
 	</div>
 
-	<!-- Central Separator: Only shown between groups on larger screens -->
-	<span class="text-surface0 hidden flex-shrink-0 lg:inline">-</span>
+
 
 	<div class="flex flex-wrap items-center justify-end gap-x-3 gap-y-2">
 		<a
