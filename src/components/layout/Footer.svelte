@@ -23,25 +23,21 @@
 			href: Site.socials.github,
 			label: 'GitHub Profile',
 			Icon: IconBrandGithub,
-			hover: 'hover:text-mauve'
 		},
 		{
 			href: Site.socials.linkedin,
 			label: 'LinkedIn Profile',
 			Icon: IconBrandLinkedin,
-			hover: 'hover:text-blue'
 		},
 		{
 			href: Site.socials.bluesky,
 			label: 'Bluesky Profile',
 			Icon: IconBrandBluesky,
-			hover: 'hover:text-sky'
 		},
 		{
 			href: Site.socials.instagram,
 			label: 'Instagram Profile',
 			Icon: IconBrandInstagram,
-			hover: 'hover:text-pink'
 		}
 	];
 </script>
@@ -73,7 +69,7 @@
 			href="https://abacus.jasoncameron.dev"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="text-subtext1 hover:text-sky transition-colors duration-200"
+			class="text-subtext1 hover:text-accent transition-colors duration-200"
 			title="View Site Analytics"
 		>
 			{ViewCount} views
@@ -86,7 +82,7 @@
 				href={commitLinkUrl}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="text-subtext1 hover:text-mauve flex items-center gap-x-1 transition-colors duration-200"
+				class="text-subtext1 hover:text-accent flex items-center gap-x-1 transition-colors duration-200"
 				title="View deployment commit ({PUBLIC_COMMIT_SHA})"
 			>
 				<IconGitCommit size={18} stroke={1.5} class="flex-shrink-0" />
@@ -109,7 +105,7 @@
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label={item.label}
-					class="text-subtext1 {item.hover} transition-colors duration-200"
+					class="text-subtext1 hover:text-accent transition-colors duration-200"
 				>
 					<Icon stroke={1.5} />
 				</a>

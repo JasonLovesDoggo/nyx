@@ -1,13 +1,26 @@
 @import 'tailwindcss';
-@import '../static/css/catpuccin.css'; /*See https://github.com/catppuccin/tailwindcss/pull/22*/
 
 @import '@fontsource/jetbrains-mono';
 
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
-@plugin "@catppuccin/tailwindcss";
+/*@plugin "@catppuccin/tailwindcss";*/ /*See https://github.com/catppuccin/tailwindcss/pull/22*/
+@theme {
+	--color-*: initial;
+} /* reset all colors to initial */
+
+@import '../static/css/catpuccin.css'; /*noqa: this line is supposed to be after the above @theme */
+@import '../static/css/colors.css'; /*contains the static colors needed for the color selector*/
+
+
+
+:root {
+	--current-accent-color: var(--color-peach); /*accent default's to peach */
+}
 
 @theme {
+	--color-accent: var(--current-accent-color);
+
 	--animate-wiggle: wiggle 1s ease-in-out infinite;
 	@keyframes wiggle {
 		0%,
