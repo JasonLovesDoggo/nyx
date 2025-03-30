@@ -4,4 +4,4 @@
 	const { data }: PageProps = $props();
 </script>
 
-wow it'	s {data.slug}
+wow it' s {data.slug}

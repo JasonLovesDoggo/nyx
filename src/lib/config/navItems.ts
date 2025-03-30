@@ -13,9 +13,9 @@ export const navItems: NavItem[] = [
 	{ title: 'Resume', href: 'https://jasoncameron.dev/resume.pdf' },
 	{
 		title: 'More',
-		href: '#',
+		href: '#'
 		// submenu: [
-			// { title: 'Foodle', href: 'http://jasoncameron.dev/foodle/' },
+		// { title: 'Foodle', href: 'http://jasoncameron.dev/foodle/' },
 		// ],
-	},
+	}
 ];

@@ -13,11 +13,11 @@
 		if (currentPath !== lastPath) {
 			lastPath = currentPath;
 
-			const pathSegments = currentPath.split('/').filter(segment => segment !== '');
+			const pathSegments = currentPath.split('/').filter((segment) => segment !== '');
 			const newBreadcrumbs = [{ name: 'Home', href: '/' }];
 
 			let accumulatedPath = '/';
-			pathSegments.forEach(segment => {
+			pathSegments.forEach((segment) => {
 				accumulatedPath += `${segment}/`;
 				newBreadcrumbs.push({
 					name: segment.charAt(0).toUpperCase() + segment.slice(1),
@@ -29,7 +29,6 @@
 		}
 	});
 </script>
-
 
 <nav aria-label="Breadcrumb">
 	<ol class="flex items-center font-mono text-sm">
@@ -52,22 +51,20 @@
 	</ol>
 </nav>
 
-
 <style>
 	.bc-link:hover {
-			scale: 105%;
-      color: var(--catppuccin-color-mauve);
-      animation: wiggle 1s ease-in-out infinite;
-
+		scale: 105%;
+		color: var(--catppuccin-color-mauve);
+		animation: wiggle 1s ease-in-out infinite;
 	}
 
-  @keyframes wiggle {
-      0%,
-      100% {
-          transform: rotate(-3deg);
-      }
-      50% {
-          transform: rotate(3deg);
-      }
-  }
+	@keyframes wiggle {
+		0%,
+		100% {
+			transform: rotate(-3deg);
+		}
+		50% {
+			transform: rotate(3deg);
+		}
+	}
 </style>
