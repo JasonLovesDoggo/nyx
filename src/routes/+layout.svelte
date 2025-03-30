@@ -22,5 +22,5 @@
 	<main class="flex-1">
 		{@render children?.()}
 	</main>
-	<Footer value={data.footerData.value} commitSha={data.cfCommitSha} />
+	<Footer value={data.footerData.value} />
 </div>

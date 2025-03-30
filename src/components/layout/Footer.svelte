@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { PUBLIC_COMMIT_SHA } from '$env/static/public';
+
 	import Site from '$lib/config';
 	import {
 		IconBrandBluesky,
@@ -8,13 +10,13 @@
 		IconGitCommit
 	} from '@tabler/icons-svelte';
 
-	const { value, commitSha } = $props();
+	const { value } = $props();
 
 	const ViewCount = $derived(value.toLocaleString());
 
 	const year = new Date().getFullYear();
-	const shortSha = commitSha ? commitSha.substring(0, 7) : 'dev';
-	const commitLinkUrl = commitSha ? `${Site.repo.commitBaseUrl}${commitSha}` : '#';
+	const shortSha = PUBLIC_COMMIT_SHA ? PUBLIC_COMMIT_SHA.substring(0, 7) : 'dev';
+	const commitLinkUrl = PUBLIC_COMMIT_SHA ? `${Site.repo.commitBaseUrl}${PUBLIC_COMMIT_SHA}` : '#';
 
 	const socialIconLinks = [
 		{
@@ -79,13 +81,13 @@
 
 		<span class="text-surface0 hidden sm:inline">-</span>
 
-		{#if commitSha && commitSha !== 'dev'}
+		{#if PUBLIC_COMMIT_SHA && PUBLIC_COMMIT_SHA !== 'dev'}
 			<a
 				href={commitLinkUrl}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="text-subtext1 hover:text-mauve flex items-center gap-x-1 transition-colors duration-200"
-				title="View deployment commit ({commitSha})"
+				title="View deployment commit ({PUBLIC_COMMIT_SHA})"
 			>
 				<IconGitCommit size={18} stroke={1.5} class="flex-shrink-0" />
 				<span>{shortSha}</span>
