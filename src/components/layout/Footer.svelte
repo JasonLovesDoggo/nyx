@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Site from '$lib/config';
-	import { PUBLIC_COMMIT_SHA } from '$env/static/public';
+	import { CF_PAGES_COMMIT_SHA } from '$env/static/public';
 	import {
 		IconBrandBluesky,
 		IconBrandGithub,
@@ -14,7 +14,7 @@
 	const ViewCount = $derived(value.toLocaleString());
 
 	const year = new Date().getFullYear();
-	const commitSha = PUBLIC_COMMIT_SHA;
+	const commitSha = CF_PAGES_COMMIT_SHA;
 	const shortSha = commitSha ? commitSha.substring(0, 7) : 'dev';
 	const commitLinkUrl = commitSha ? `${Site.repo.commitBaseUrl}${commitSha}` : '#';
 
