@@ -1,4 +1,3 @@
-// .\lib\config\navItems.ts
 import type { Icon } from '@tabler/icons-svelte';
 
 interface NavItem {
