@@ -31,9 +31,9 @@
 </script>
 
 <nav aria-label="Breadcrumb">
-	<ol class="flex items-center font-mono text-sm">
+	<ol class="flex items-center font-mono text-md">
 		<li class="inline-flex items-center">
-			<a class="bc-link" href="/">~</a>
+			<a class="animation-wiggle hover:text-accent" href="/">~</a>
 		</li>
 		{#if breadcrumbs && breadcrumbs.length > 1}
 			<li class="mx-0.5">/</li>
@@ -42,7 +42,7 @@
 					{#if i === breadcrumbs.slice(1).length - 1}
 						<span aria-current="page">{crumb.name}</span>
 					{:else}
-						<a class="bc-link" href={crumb.href}>{crumb.name}</a>
+						<a class="animation-wiggle hover:text-accent" href={crumb.href}>{crumb.name}</a>
 						<span class="mx-0.5">/</span>
 					{/if}
 				</li>
@@ -50,21 +50,3 @@
 		{/if}
 	</ol>
 </nav>
-
-<style>
-	.bc-link:hover {
-		scale: 105%;
-		color: var(--catppuccin-color-mauve);
-		animation: wiggle 1s ease-in-out infinite;
-	}
-
-	@keyframes wiggle {
-		0%,
-		100% {
-			transform: rotate(-3deg);
-		}
-		50% {
-			transform: rotate(3deg);
-		}
-	}
-</style>
