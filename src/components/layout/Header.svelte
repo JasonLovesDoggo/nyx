@@ -10,7 +10,7 @@
 	<Breadcrumb />
 	<button
 		onclick={toggleSidebar}
-		class="text-text hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded p-2 md:hidden"
+		class="text-text hover:text-accent rounded p-2 md:hidden"
 	aria-label="Open navigation menu"
 	aria-expanded="false"
 	aria-controls="sidebar-nav"
@@ -24,7 +24,7 @@
 				href={item.href}
 				target={item.external ? '_blank' : undefined}
 				rel={item.external ? 'noopener noreferrer' : undefined}
-				class="text-text hover:text-accent rounded px-3 py-2 text-sm font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-accent"
+				class="text-text hover:text-accent rounded px-3 py-2 text-sm font-medium transition-colors duration-150"
 			>
 				{item.title}
 			</a>
@@ -32,7 +32,7 @@
 		<!-- Consider adding a "More..." button here for desktop that opens the sidebar -->
 		<button
 			onclick={toggleSidebar}
-			class="text-text hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded px-3 py-2 text-sm font-medium"
+			class="text-text hover:text-accent rounded px-3 py-2 text-sm font-medium"
 			aria-label="Open more navigation items"
 		>
 			More...
