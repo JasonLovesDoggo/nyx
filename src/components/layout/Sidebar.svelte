@@ -66,6 +66,7 @@
 						rel={item.external ? 'noopener noreferrer' : undefined}
 						class="hover:bg-surface0 focus:bg-surface1 block rounded p-2 transition-colors duration-150 focus:outline-none "
 						aria-current={isActive ? 'page' : undefined}
+						onclick={closeSidebar}
 					>
 					{item.title}
 					</a>
@@ -85,6 +86,7 @@
 						rel={item.external ? 'noopener noreferrer' : undefined}
 						class="hover:bg-surface0 focus:bg-surface1 block rounded p-2 transition-colors duration-150 focus:outline-none"
 						aria-current={isActive ? 'page' : undefined}
+						onclick={closeSidebar}
 					>
 					{item.title}
 					</a>
