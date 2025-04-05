@@ -8,6 +8,7 @@
 	import Site from '$lib/config';
 	import { Accent, getCssVarName } from '$lib/stores/theme';
 	import { browser } from '$app/environment';
+	import { onNavigate } from '$app/navigation';
 
 	const { data, children } = $props();
 
@@ -34,6 +35,17 @@
 				`var(${accentVarName})`
 			);
 		}
+	});
+	// View transitions
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
 	});
 </script>
 
