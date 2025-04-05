@@ -12,6 +12,5 @@ export const Accent = writable<AccentColorName>('peach'); // Default Peach
 
 
 export function getCssVarName(colorName: AccentColorName): string {
-	// Check if your catppuccin.css uses '--color-{name}' or '--ctp-{name}'
 	return `--color-${colorName}`;
 }
