@@ -8,7 +8,7 @@
 	--color-*: initial;
 } /* reset all colors to initial */
 
-@import '../static/css/catpuccin.css'; /*noqa: this line is supposed to be after the above @theme */
+@import '../static/css/catppuccin.css'; /*noqa: this line is supposed to be after the above @theme */
 @import '../static/css/colors.css'; /*contains the static colors needed for the color selector*/
 
 
@@ -34,3 +34,30 @@
 		}
 	}
 }
+
+
+
+
+/*@keyframes slide-from-right {*/
+/*	from {*/
+/*		transform: translateX(30px);*/
+/*	}*/
+/*}*/
+
+/*@keyframes slide-to-left {*/
+/*	to {*/
+/*		transform: translateX(-30px);*/
+/*	}*/
+/*}*/
+
+/*:root::view-transition-old(root) {*/
+/*	animation:*/
+/*			90ms cubic-bezier(0.4, 0, 1, 1) both wiggle,*/
+/*			300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;*/
+/*}*/
+
+/*:root::view-transition-new(root) {*/
+/*	animation:*/
+/*			210ms cubic-bezier(0, 0, 0.2, 1) 90ms both wiggle,*/
+/*			300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;*/
+/*}*/
