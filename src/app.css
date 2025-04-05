@@ -23,6 +23,7 @@
 }
 
 @theme {
+	--font-jetbrains-mono: 'JetBrains Mono', monospace;
 	--animate-wiggle: wiggle 1s ease-in-out infinite;
 	@keyframes wiggle {
 		0%,

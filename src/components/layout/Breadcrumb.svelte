@@ -14,7 +14,7 @@
 	</li>
 {/snippet}
 
-<ul class="flex items-center font-mono text-md" role="navigation" aria-label="Breadcrumbs">
+<ul class="flex items-center text-md" role="navigation" aria-label="Breadcrumbs">
 	{@render breadcrumb({ text: "~", href: "/" })}
 
 	{#each breadcrumbs as text, i ("Bred" + i)}
