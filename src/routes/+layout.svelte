@@ -1,12 +1,11 @@
-<!-- .\routes\+layout.svelte -->
 <script lang="ts">
 	import '../app.css';
 	import Header from '../components/layout/Header.svelte';
 	import Footer from '../components/layout/Footer.svelte';
-	import Sidebar from '../components/layout/Sidebar.svelte'; // Import the new sidebar
+	import Sidebar from '../components/layout/Sidebar.svelte';
 	import { page } from '$app/state';
 	import Site from '$lib/config';
-	import { Accent, getCssVarName } from '$lib/stores/theme';
+	import { Palette, paletteNames } from '$lib/stores/theme';
 	import { browser } from '$app/environment';
 	import { onNavigate } from '$app/navigation';
 
@@ -16,24 +15,14 @@
 		[Site.name, ...page.url.pathname.split('/').slice(1)].filter(Boolean).join(' - ')
 	);
 
-	// State for sidebar visibility
 	let isSidebarOpen = $state(false);
-
-	function toggleSidebar() {
-		isSidebarOpen = !isSidebarOpen;
-	}
-
-	function closeSidebar() {
-		isSidebarOpen = false;
-	}
+	function toggleSidebar() { isSidebarOpen = !isSidebarOpen; }
+	function closeSidebar() { isSidebarOpen = false; }
 
 	$effect(() => {
 		if (browser) {
-			const accentVarName = getCssVarName($Accent);
-			document.documentElement.style.setProperty(
-				'--current-accent-color',
-				`var(${accentVarName})`
-			);
+			document.documentElement.classList.remove(...paletteNames);
+			document.documentElement.classList.add($Palette);
 		}
 	});
 	// View transitions
@@ -53,15 +42,11 @@
 	<title>{title}</title>
 </svelte:head>
 
-<div class="bg-base text-text mx-auto flex min-h-screen max-w-[70vw] flex-col">
+<div class="text-text mx-auto flex min-h-screen max-w-[90%] flex-col md:max-w-[80%]">
 	<Header {toggleSidebar} />
-
-	<!-- Sidebar component included and props passed -->
 	<Sidebar isOpen={isSidebarOpen} {closeSidebar} />
-
-	<main class="flex-1 my-[8vh] mx-auto px-5 py-8 max-w-[70%] ">
+	<main class="flex-1 px-0 py-8 md:px-5">
 		{@render children?.()}
 	</main>
-
 	<Footer value={data.footerData.value} />
 </div>
