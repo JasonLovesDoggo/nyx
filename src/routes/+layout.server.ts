@@ -6,11 +6,16 @@ export const load: LayoutServerLoad = async () => {
 	let footerData;
 	try {
 		footerData = await fetch(`${instance}/hit/${namespace}/${key}`, {
-			signal: AbortSignal.timeout(3000) // 3 second timeout
+			signal: AbortSignal.timeout(2500) // 2.5 second timeout
 		}).then((res) => res.json());
+		footerData.value = footerData.value.toLocaleString();
 	} catch (error) {
 		console.error('Error fetching footer data:', error);
-		return { footerData: '000000' };
+		return {
+			footerData: {
+				value: 'infinite'
+			}
+		};
 	}
 	return { footerData };
 };

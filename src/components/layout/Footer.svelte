@@ -6,8 +6,6 @@
 
 	const { value } = $props();
 
-	const ViewCount = $derived(value.toLocaleString());
-
 	const year = new Date().getFullYear();
 	const shortSha = PUBLIC_COMMIT_SHA ? PUBLIC_COMMIT_SHA.substring(0, 7) : 'dev';
 	const commitLinkUrl = PUBLIC_COMMIT_SHA ? `${Site.repo.commitBaseUrl}${PUBLIC_COMMIT_SHA}` : '#';
@@ -40,7 +38,7 @@
 			class="text-subtext1 hover:text-accent transition-colors duration-200"
 			title="View Site Analytics"
 		>
-			{ViewCount} views
+			{value} views
 		</a>
 
 		<span class="text-surface0 hidden sm:inline">-</span>
