@@ -11,11 +11,11 @@
 	<button
 		onclick={toggleSidebar}
 		class="text-text hover:text-accent rounded p-2 md:hidden"
-	aria-label="Open navigation menu"
-	aria-expanded="false"
-	aria-controls="sidebar-nav"
+		aria-label="Open navigation menu"
+		aria-expanded="false"
+		aria-controls="sidebar-nav"
 	>
-	<IconMenu2 size={24} />
+		<IconMenu2 size={24} />
 	</button>
 	<nav class="hidden items-center space-x-4 md:flex">
 		{#each mainNavItems as item (item.title)}

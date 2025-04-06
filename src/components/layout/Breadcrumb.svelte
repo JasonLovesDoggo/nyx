@@ -7,21 +7,21 @@
 {#snippet breadcrumb({ text, href = undefined })}
 	<li class="inline-flex items-center">
 		{#if href}
-			<a class="animation-wiggle hover:text-accent" href={href}>{text}</a>
+			<a class="animation-wiggle hover:text-accent" {href}>{text}</a>
 		{:else}
 			<span aria-current="page">{text}</span>
 		{/if}
 	</li>
 {/snippet}
 
-<ul class="flex items-center text-md" role="navigation" aria-label="Breadcrumbs">
+<ul class="text-md flex items-center" role="navigation" aria-label="Breadcrumbs">
 	<li class="inline-flex items-center">
-		<a class="animation-wiggle text-accent hover:text-accent/40 " href="/">~</a>
+		<a class="animation-wiggle text-accent hover:text-accent/40" href="/">~</a>
 	</li>
 
-	{#each breadcrumbs as text, i ("Bred" + i)}
+	{#each breadcrumbs as text, i ('Bred' + i)}
 		<li class="mx-0.5">/</li>
-		{@const href = "/" + breadcrumbs.slice(0, i + 1).join("/")}
+		{@const href = '/' + breadcrumbs.slice(0, i + 1).join('/')}
 
 		{#if i === breadcrumbs.length - 1}
 			{@render breadcrumb({ text })}

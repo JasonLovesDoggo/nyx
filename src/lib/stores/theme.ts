@@ -3,17 +3,28 @@ import { browser } from '$app/environment';
 
 // --- Accent Colors ---
 export const accentColorNames = [
-	'rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 'peach',
-	'yellow', 'green', 'teal', 'sky', 'sapphire', 'blue', 'lavender'
+	'rosewater',
+	'flamingo',
+	'pink',
+	'mauve',
+	'red',
+	'maroon',
+	'peach',
+	'yellow',
+	'green',
+	'teal',
+	'sky',
+	'sapphire',
+	'blue',
+	'lavender'
 ] as const;
 
-
-export type AccentColorName = typeof accentColorNames[number];
+export type AccentColorName = (typeof accentColorNames)[number];
 
 const initialAccent = 'peach';
 export const Accent = writable<AccentColorName>(initialAccent);
 
-Accent.subscribe(value => {
+Accent.subscribe((value) => {
 	if (browser) {
 		document.documentElement.style.setProperty('--current-accent-color', `var(--color-${value})`);
 	}
@@ -21,7 +32,7 @@ Accent.subscribe(value => {
 
 // --- Palettes ---
 export const paletteNames = ['latte', 'frappe', 'macchiato', 'mocha'] as const;
-export type PaletteName = typeof paletteNames[number];
+export type PaletteName = (typeof paletteNames)[number];
 
 let initialPalette = 'mocha' as PaletteName;
 if (browser) {

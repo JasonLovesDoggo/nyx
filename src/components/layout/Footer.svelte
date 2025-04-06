@@ -2,9 +2,7 @@
 	import { PUBLIC_COMMIT_SHA } from '$env/static/public';
 
 	import Site from '$lib/config/common';
-	import {
-		IconGitCommit
-	} from '@tabler/icons-svelte';
+	import { IconGitCommit } from '@tabler/icons-svelte';
 
 	const { value } = $props();
 
@@ -26,15 +24,13 @@
 		<div class="flex items-center gap-1 whitespace-nowrap" title="Service Status">
 			<span class="relative mr-1.5 flex h-3 w-3">
 				<span
-					class="animate-duration-[2000ms] absolute inline-flex h-full w-full animate-ping rounded-full bg-green/75"
+					class="animate-duration-[2000ms] bg-green/75 absolute inline-flex h-full w-full animate-ping rounded-full"
 				></span>
-				<span class="relative inline-flex h-3 w-3 rounded-full bg-green"></span>
+				<span class="bg-green relative inline-flex h-3 w-3 rounded-full"></span>
 			</span>
 			<span class="text-subtext1 text-sm font-medium">All Services Nominal</span>
 		</div>
 	</div>
-
-
 
 	<div class="flex flex-wrap items-center justify-end gap-x-3 gap-y-2">
 		<a

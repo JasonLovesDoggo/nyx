@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import type { Icon } from '@tabler/icons-svelte';
 
 	type Props = {
@@ -18,8 +17,12 @@
 	const IconComponent = icon ? icon : null;
 </script>
 
-<a {href} {target} {rel}
-	 class={`inline-flex items-center gap-1.5 text-subtext1 transition-colors duration-200 hover:text-accent ${extraClasses}`}>
+<a
+	{href}
+	{target}
+	{rel}
+	class={`text-subtext1 hover:text-accent inline-flex items-center gap-1.5 transition-colors duration-200 ${extraClasses}`}
+>
 	{#if icon}
 		<IconComponent size={18} stroke={1.5} class="flex-shrink-0" />
 	{/if}

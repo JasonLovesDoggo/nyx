@@ -16,8 +16,12 @@
 	);
 
 	let isSidebarOpen = $state(false);
-	function toggleSidebar() { isSidebarOpen = !isSidebarOpen; }
-	function closeSidebar() { isSidebarOpen = false; }
+	function toggleSidebar() {
+		isSidebarOpen = !isSidebarOpen;
+	}
+	function closeSidebar() {
+		isSidebarOpen = false;
+	}
 
 	$effect(() => {
 		if (browser) {

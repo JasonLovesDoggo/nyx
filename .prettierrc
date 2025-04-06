@@ -1,6 +1,6 @@
 {
 	"useTabs": true,
-  	"endOfLine": "lf",
+	"endOfLine": "lf",
 	"singleQuote": true,
 	"trailingComma": "none",
 	"printWidth": 100,

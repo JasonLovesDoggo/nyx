@@ -3,7 +3,7 @@ import {
 	IconBrandBluesky,
 	IconBrandGithub,
 	IconBrandInstagram,
-	IconBrandLinkedin,
+	IconBrandLinkedin
 } from '@tabler/icons-svelte';
 
 interface SocialLink {
@@ -19,10 +19,11 @@ interface Site {
 		github: string;
 		linkedin: string;
 		calcom: string;
+		wakatime: string;
 	};
-	socials: SocialLink[]
-	repo: { url: string; commitBaseUrl: string }}
-
+	socials: SocialLink[];
+	repo: { url: string; commitBaseUrl: string };
+}
 
 const Site: Site = {
 	name: 'Portfolio',
@@ -32,9 +33,10 @@ const Site: Site = {
 		key: 'portfolio'
 	},
 	out: {
-		github: "https://github.com/JasonLovesDoggo",
-		linkedin: "https://www.linkedin.com/in/jsoncameron/",
-		calcom: "https://cal.com/jsoncam/15min"
+		github: 'https://github.com/JasonLovesDoggo',
+		linkedin: 'https://www.linkedin.com/in/jsoncameron/',
+		calcom: 'https://cal.com/jsoncam/15min',
+		wakatime: 'https://wakatime.com/@jasonlovesdoggo'
 	},
 	socials: [
 		{
