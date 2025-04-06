@@ -1,18 +1,31 @@
 @import 'tailwindcss';
 
-@import '@fontsource/jetbrains-mono';
-
-@plugin '@tailwindcss/forms';
-/*@plugin "@catppuccin/tailwindcss";*/ /*See https://github.com/catppuccin/tailwindcss/pull/22*/
 @theme {
 	--color-*: initial;
 } /* reset all colors to initial */
-
+@import '@fontsource/jetbrains-mono';
 @import '../static/css/catppuccin.css'; /*noqa: this line is supposed to be after the above @theme */
 @import '../static/css/colors.css'; /*contains the static colors needed for the color selector*/
+@plugin '@tailwindcss/forms';
+/*@plugin "@catppuccin/tailwindcss";*/ /*See https://github.com/catppuccin/tailwindcss/pull/22*/
 
 :root {
 	--current-accent-color: var(--color-peach); /*accent default's to peach */
+}
+
+@layer utilities {
+	.scrollbar {
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-accent) transparent;
+	}
+
+	.scrollbar::-webkit-scrollbar-thumb {
+		border-radius: 100vh;
+	}
+
+	.scrollbar::-webkit-scrollbar-thumb:hover {
+		background-color: color-mix(in oklch, currentColor, var(--color-mantle));
+	}
 }
 
 @utility bg-* {
