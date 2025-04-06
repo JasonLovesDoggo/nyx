@@ -1,168 +1,195 @@
-<!-- src/routes/+page.svelte -->
 <script lang="ts">
 	import LinkWithIcon from '$components/LinkWithIcon.svelte';
-	import { Accent, accentColorNames } from '$lib/stores/theme'; // For Color Selector
+	import { Accent, accentColorNames, Palette, paletteNames } from '$lib/stores/theme';
+
 	import {
-		IconBrandGithub, IconBrandLinkedin, IconFileCv, IconMail, IconArrowRight,
-		IconBuildingFactory2, IconBriefcase, IconSchool, IconCode,
-		IconExternalLink, IconCalendarEvent, IconColorSwatch, IconArticle,
-		IconActivity, IconListCheck
+		IconActivity,
+		IconArrowRight,
+		IconArticle,
+		IconBrandGithub,
+		IconBriefcase,
+		IconCalendarEvent,
+		IconChevronLeft,
+		IconChevronRight,
+		IconCode,
+		IconExternalLink,
+		IconPalette,
+		IconSchool
 	} from '@tabler/icons-svelte';
+	import { Home } from '$lib/config/pages';
+	import Site from '$lib/config/common';
+	import {
+		codingStats,
+		featuredProjects,
+		latestCommits,
+		latestPosts,
+		organizations,
+		workExperience
+	} from '$lib/config/about';
 
-	// --- State for Name Hover ---
 	let isNameHovered = $state(false);
+	let currentProjectIndex = $state(0);
 
+	// --- Computed Derived State ---
+	const currentProject = $derived(featuredProjects[currentProjectIndex]);
 
-	// --- Data (Replace placeholders) ---
-	const organizations = [
-		{ name: 'Hack Club', href: 'https://hackclub.com', icon: IconBuildingFactory2, external: true },
-		{ name: 'JAMHacks Lead', href: '[Link?]', icon: IconBuildingFactory2, external: true }
-	];
-	const workExperience = [
-		{ company: 'Shopify', role: 'Incoming SWE Intern', href: 'https://shopify.com', icon: IconBriefcase, external: true }
-		// { company: 'Sunnybrook', role: 'ML Research', href:'[Link]', icon: IconBriefcase, external: true },
-		// { company: 'UWaterloo', role: 'Research', href:'[Link]', icon: IconBriefcase, external: true },
-	];
-	const featuredProjects = [
-		{
-			title: 'Anti-Scraper Development',
-			description: 'Engineered systems to identify, analyze, and block malicious web scraping bots.',
-			icon: IconBrandLinkedin,
-			href: '/projects/anti-scraping', // Internal link example
-			external: false
-		},
-		{
-			title: 'CVE Discovery & Reporting',
-			description: 'Contributed to web security by discovering and reporting vulnerabilities.',
-			icon: IconBrandLinkedin,
-			href: '[Link to CVE details]', // External link example
-			external: true
-		},
-		{
-			title: 'Deep Learning Framework (C++)',
-			description: 'Built a foundational deep learning framework from the ground up using C++.',
-			icon: IconCode,
-			href: '/projects/dl-framework',
-			external: false
-		},
-		{
-			title: 'AI Agent for 3D Models (UofTHacks Winner)',
-			description: 'Created an award-winning AI agent converting text/images to 3D-printable models.',
-			icon: IconCode,
-			href: '/projects/ai-3d-agent',
-			external: false
-		}
-	];
-	const latestPosts = [ // Fetch these dynamically later
-		{ title: 'Understanding Web Scraper Tactics', href: '/blog/scraper-tactics' },
-		{ title: 'My First CVE Discovery Journey', href: '/blog/first-cve' }
-	];
-	const codingStats = { language: 'Python', hours: '1,200+' }; // Example WakaTime data - Fetch dynamically
-	const latestCommits = [ // Fetch these dynamically later
-		{ repo: 'jasonlovesdoggo/nyx', message: 'feat: Implement actual bento grid', href: '...', sha: 'abc1234' } ,
-		{ repo: 'some-other/project', message: 'fix: Address issue #5', href: '...', sha: 'def5678' }
-	];
-	const socialLinks = [
-		{ href: "https://github.com/jasonlovesdoggo", text: "GitHub", icon: IconBrandGithub, external: true },
-		{ href: "https://www.linkedin.com/in/jsoncameron/", text: "LinkedIn", icon: IconBrandLinkedin, external: true },
-		{ href: "/resume.pdf", text: "Resume", icon: IconFileCv, external: true }, // External for file handling
-	];
-	const calLink = "https://cal.com/jasoncameron/meet";
+	// --- Functions ---
+	function nextProject() {
+		currentProjectIndex = (currentProjectIndex + 1) % featuredProjects.length;
+	}
 
+	function prevProject() {
+		currentProjectIndex =
+			(currentProjectIndex - 1 + featuredProjects.length) % featuredProjects.length;
+	}
 </script>
 
-<svelte:head>
-	<title>Jason Cameron - Student & Engineer</title>
-	<meta name="description" content="Jason Cameron's personal site. High school student passionate about backend, DevOps, cybersecurity, anti-bot systems, and leading tech initiatives."/>
-	<meta name="robots" content="noai, noimageai" />
-</svelte:head>
-
-<div class="mx-auto max-w-4xl space-y-10 px-4 py-8 md:space-y-14 md:py-12">
-
-	<!-- Section 1: Hero / Introduction - Less Dense -->
-	<section class="space-y-5">
+<div class="mx-auto max-w-6xl space-y-12 px-0 py-8 md:space-y-16 md:px-4 md:py-12">
+	<!-- Section 1: Hero / Introduction -->
+	<section class="space-y-5 px-4 md:px-0">
 		<h1 class="text-3xl font-bold md:text-4xl">
-			Hi! I'm
-			<span
-				class="group relative inline-block text-accent  font-bold transition-opacity duration-200 "
-				onmouseenter={() => isNameHovered = true}
-				onmouseleave={() => isNameHovered = false}
-				onfocus={() => isNameHovered = true}
-				onblur={() => isNameHovered = false}
-				tabindex="0"
-				role="button"
-				aria-label="Jason Cameron - Hover or focus to see a fun fact"
-			>
-				<span class:hidden={!isNameHovered}>JSON</span>
-				<span class:hidden={isNameHovered}>Jason</span>
+			Hey! I'm
+			<span class="text-accent">
+				<span
+					onmouseenter={() => (isNameHovered = true)}
+					onmouseleave={() => (isNameHovered = false)}
+					onfocus={() => (isNameHovered = true)}
+					onblur={() => (isNameHovered = false)}
+					tabindex="0"
+					role="button"
+					aria-label="Jason Cameron - Hover or focus to see a fun fact"
+				>
+					<span>Jason</span>
+					<span class:hidden={!isNameHovered}>'JSON'</span>
+				</span>
+				<span>Cameron</span>
 			</span>
 		</h1>
-		<p class="text-lg text-subtext0 leading-relaxed max-w-prose">
+		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
 			A high school student building and securing web infrastructure. I focus on
-			<strong class="font-medium text-text">backend systems</strong>, <strong class="font-medium text-text">DevOps</strong>, and <strong class="font-medium text-text">cybersecurity</strong>, especially crafting defenses against automated threats. I enjoy leading initiatives and tackling complex technical challenges.
+			<strong class="text-text font-medium">backend systems</strong>,
+			<strong class="text-text font-medium">DevOps</strong>, and
+			<strong class="text-text font-medium">cybersecurity</strong>, especially crafting defenses
+			against automated threats. I enjoy leading initiatives and tackling complex technical
+			challenges.
 		</p>
-		<!-- Links below text -->
-		<div class="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2">
-			{#each socialLinks as link (link.href)}
+		<div class="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2">
+			{#each Home.socialLinks as link (link.href)}
 				<LinkWithIcon
 					href={link.href}
 					text={link.text}
 					icon={link.icon}
-					external={link.external}
+					external={true}
 					class="text-sm"
 				/>
+				<span class="text-surface1 text-xs">|</span>
 			{/each}
-			<a href="/about" class="group inline-flex items-center gap-1 text-sm text-subtext1 transition-colors duration-200 hover:text-accent">
+			<a
+				href="/about"
+				class="group text-subtext1 hover:text-accent inline-flex items-center gap-1 text-sm transition-colors duration-200"
+			>
 				<span>More about me</span>
-				<IconArrowRight size={16} class="transition-transform duration-200 group-hover:translate-x-0.5" />
+				<IconArrowRight
+					size={16}
+					class="transition-transform duration-200 group-hover:translate-x-0.5"
+				/>
 			</a>
 		</div>
 	</section>
 
 	<!-- Section 2: Bento Grid Container -->
-	<section class="rounded-lg border border-surface0 bg-mantle p-4 md:p-5">
+	<section class="px-4 md:px-0">
 		<h2 class="sr-only">Dashboard / Highlights</h2>
-		<!-- Define the grid structure (e.g., 3 columns) -->
-		<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
-			<!-- Box 1: Featured Projects (Spans more columns/rows) -->
-			<div class="rounded-lg bg-base p-3 shadow-sm ring-1 ring-surface1/50 sm:col-span-2 lg:row-span-2">
-				<h3 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
-					<IconListCheck size={18} class="text-accent" />
-					Featured Projects
-				</h3>
-				<div class="space-y-3">
-					{#each featuredProjects as item (item.title)}
-						{@const Icon = item.icon}
-						<a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined} class="group block rounded-md border border-surface1 bg-mantle p-2.5 transition-colors hover:border-surface2 hover:bg-surface0">
-							<div class="flex items-start gap-2.5">
-								<Icon size={18} class="text-accent mt-0.5 flex-shrink-0" />
-								<div class="flex-1">
-									<h4 class="font-medium text-text group-hover:text-accent text-sm leading-tight">
-										{item.title}
-										{#if item.external}
-											<IconExternalLink size={12} class="ml-1 inline-block text-subtext1 group-hover:text-accent" />
-										{/if}
-									</h4>
-									<p class="mt-0.5 text-xs text-subtext0">{item.description}</p>
-								</div>
-							</div>
+		<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
+			<!-- Box 1: Featured Projects -->
+			<div
+				class="border-surface0 bg-base rounded-xl border p-4 shadow-lg sm:col-span-2 lg:col-span-2 lg:row-span-2"
+			>
+				<div class="mb-4 flex items-center justify-between">
+					<h3 class="text-text flex items-center gap-2 text-sm font-semibold">
+						<span class="text-mauve">#</span> Featured Projects
+					</h3>
+					<div class="flex items-center gap-1.5">
+						<a
+							href="/projects"
+							class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border px-2 py-0.5 text-xs transition"
+						>
+							View All Projects
 						</a>
-					{/each}
+						<button
+							onclick={prevProject}
+							title="Previous Project"
+							class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border p-1 transition"
+						>
+							<IconChevronLeft size={16} />
+						</button>
+						<button
+							onclick={nextProject}
+							title="Next Project"
+							class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border p-1 transition"
+						>
+							<IconChevronRight size={16} />
+						</button>
+					</div>
 				</div>
-				<a href="/projects" class="group mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline">
-					<span>All projects</span>
-					<IconArrowRight size={14} class="transition-transform duration-200 group-hover:translate-x-0.5" />
-				</a>
+
+				<div
+					class="bg-mantle relative min-h-[240px] rounded-lg p-4 shadow-inner ring-1 ring-black/10"
+				>
+					<div class="bg-red absolute top-0 bottom-0 left-0 w-2.5 rounded-l-lg opacity-50"></div>
+					<div class="bg-green absolute top-0 right-0 bottom-0 w-2.5 rounded-r-lg opacity-50"></div>
+					<div class="relative z-10">
+						<h4 class="text-text mb-1 flex items-center gap-2 font-semibold">
+							<span class="text-mauve">##</span>
+							{currentProject.title}
+						</h4>
+						<p class="text-subtext0 mb-4 text-sm">{currentProject.description}</p>
+						<div class="flex items-center gap-2">
+							{#if currentProject.githubHref}
+								<a
+									href={currentProject.githubHref}
+									target="_blank"
+									rel="noopener noreferrer"
+									title="View on GitHub"
+									class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border p-1.5 transition"
+								>
+									<IconBrandGithub size={16} />
+								</a>
+							{/if}
+							<a
+								href={currentProject.href}
+								target={currentProject.external ? '_blank' : undefined}
+								rel={currentProject.external ? 'noopener noreferrer' : undefined}
+								title="View Project/Details"
+								class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border p-1.5 transition"
+							>
+								<IconExternalLink size={16} />
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<!-- Box 2: Color Selector -->
-			<div class="rounded-lg bg-base p-3 shadow-sm ring-1 ring-surface1/50">
-				<h3 class="mb-3 flex items-center gap-2 font-semibold text-text">
-					<IconColorSwatch size={18} class="text-accent" />
-					Theme Accent
+			<!-- Box 2: Theme Selector -->
+			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+				<h3 class="text-text mb-4 flex items-center gap-2 text-sm font-semibold">
+					<IconPalette size={16} class="text-accent" />
+					Theme
 				</h3>
-				<div class="flex flex-wrap gap-2">
+				<div
+					class="bg-mantle ring-surface0 mb-4 flex flex-wrap items-center justify-center gap-1 rounded-md p-1 ring-1 md:justify-start"
+				>
+					{#each paletteNames as name (name)}
+						{@const isSelected = $Palette === name}
+						<button
+							onclick={() => ($Palette = name)}
+							class={`flex-1 rounded-[5px] px-2 py-1 text-center text-xs font-medium transition ${isSelected ? 'bg-base text-text ring-accent/70 shadow-sm ring-1 ring-inset' : 'text-subtext1 hover:text-subtext0'}`}
+						>
+							{name.charAt(0).toUpperCase() + name.slice(1)}
+						</button>
+					{/each}
+				</div>
+				<div class="grid grid-cols-7 gap-2.5">
 					{#each accentColorNames as colorName (colorName)}
 						{@const isSelected = $Accent === colorName}
 						<button
@@ -170,7 +197,7 @@
 							title={colorName.charAt(0).toUpperCase() + colorName.slice(1)}
 							onclick={() => ($Accent = colorName)}
 							style:background-color={`var(--color-${colorName})`}
-							class={`h-5 w-5 rounded-full transition-all duration-150 ${isSelected ? 'ring-2 ring-offset-2 ring-offset-base ring-accent' : 'hover:scale-110'}`}
+							class={`aspect-square w-full min-w-5 rounded-md shadow-sm transition-all duration-150 ${isSelected ? 'ring-offset-base ring-accent scale-105 ring-2 ring-offset-2' : 'opacity-80 hover:scale-110 hover:opacity-100'}`}
 						>
 							<span class="sr-only">{colorName}</span>
 						</button>
@@ -179,110 +206,157 @@
 			</div>
 
 			<!-- Box 3: Latest Blog Posts -->
-			<div class="rounded-lg bg-base p-3 shadow-sm ring-1 ring-surface1/50">
-				<h3 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
-					<IconArticle size={18} class="text-accent" />
+			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
+					<IconArticle size={16} class="text-accent" />
 					Latest Posts
 				</h3>
 				{#if latestPosts.length > 0}
-					<ul class="space-y-1.5 text-xs">
+					<ul class="space-y-2 text-sm">
 						{#each latestPosts as post (post.href)}
-							<li><a href={post.href} class="text-text hover:underline line-clamp-1">{post.title}</a></li>
+							<li>
+								<a
+									href={post.href}
+									class="text-subtext0 hover:text-accent line-clamp-1 hover:underline"
+									>{post.title}</a
+								>
+							</li>
 						{/each}
 					</ul>
 				{:else}
-					<p class="text-subtext1 text-xs italic">No posts yet.</p>
+					<p class="text-subtext1 text-sm italic">No posts yet.</p>
 				{/if}
-				<a href="/blog" class="group mt-2 inline-flex items-center gap-1 text-xs text-accent hover:underline">
+				<a
+					href="/blog"
+					class="group text-accent mt-3 inline-flex items-center gap-1 text-sm hover:underline"
+				>
 					<span>All posts</span>
-					<IconArrowRight size={14} class="transition-transform duration-200 group-hover:translate-x-0.5" />
+					<IconArrowRight
+						size={14}
+						class="transition-transform duration-200 group-hover:translate-x-0.5"
+					/>
 				</a>
 			</div>
 
 			<!-- Box 4: Coding Stats -->
-			<div class="rounded-lg bg-base p-3 shadow-sm ring-1 ring-surface1/50">
-				<h3 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
-					<IconCode size={18} class="text-accent" />
-					Coding Activity
+			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
+					<IconCode size={16} class="text-accent" />
+					Coding Stats
 				</h3>
-				<p class="text-subtext0 text-xs">Primary: <span class="text-text font-medium">{codingStats.language}</span></p>
-				<p class="text-subtext0 text-xs">Hours: <span class="text-text font-medium">{codingStats.hours}</span> <span class="text-overlay0">(WakaTime)</span></p>
-				<a href="[Link to WakaTime/GitHub Stats]" target="_blank" rel="noopener noreferrer" class="group mt-2 inline-flex items-center gap-1 text-xs text-accent hover:underline">
+				<p class="text-subtext0 text-sm">
+					Primary: <span class="text-text font-medium">{codingStats.language}</span>
+				</p>
+				<p class="text-subtext0 text-sm">
+					Hours: <span class="text-text font-medium">{codingStats.hours}</span>
+					<span class="text-overlay0 text-xs">(WakaTime)</span>
+				</p>
+				<a
+					href={Site.out.wakatime}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group text-accent mt-3 inline-flex items-center gap-1 text-sm hover:underline"
+				>
 					<span>View stats</span>
-					<IconExternalLink size={12} class="inline-block" />
+					<IconExternalLink size={14} class="inline-block" />
 				</a>
 			</div>
 
-			<!-- Box 5: Latest Commits -->
-			<div class="rounded-lg bg-base p-3 shadow-sm ring-1 ring-surface1/50">
-				<h3 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
-					<IconActivity size={18} class="text-accent" />
+			<!-- Box 5: Book a chat -->
+
+			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
+					<IconCalendarEvent size={16} class="text-accent" />
+					Let's Connect
+				</h3>
+				<p class="text-subtext0 mb-4 text-sm">todo: ASPOLKFED? think of quirky line here</p>
+				<a
+					href={Site.out.calcom}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="bg-surface0 text-text hover:bg-accent/80 focus:ring-accent/50 focus:ring-offset-base inline-flex w-full items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium shadow-sm transition-colors hover:text-base focus:ring-2 focus:ring-offset-2 focus:outline-none"
+				>
+					<IconCalendarEvent size={16} />
+					Book a Chat
+				</a>
+			</div>
+
+			<!-- Box 6: Latest Commits -->
+			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
+					<IconActivity size={16} class="text-accent" />
 					Recent Commits
 				</h3>
 				{#if latestCommits.length > 0}
-					<ul class="space-y-1 text-xs">
+					<ul class="space-y-1.5 text-sm">
 						{#each latestCommits as commit (commit.sha)}
 							<li>
-								<a href={commit.href} target="_blank" rel="noopener noreferrer" class="block truncate text-subtext0 hover:text-accent">
-									<span class="text-text font-medium">{commit.repo.split('/')[1]}:</span> {commit.message}
+								<a
+									href={commit.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="text-subtext0 hover:text-accent block truncate"
+									title={`${commit.repo}: ${commit.message}`}
+								>
+									<span class="text-text font-medium">{commit.repo.split('/')[1]}:</span>
+									{commit.message}
 								</a>
 							</li>
 						{/each}
 					</ul>
 				{:else}
-					<p class="text-subtext1 text-xs italic">No recent public commits.</p>
+					<p class="text-subtext1 text-sm italic">No recent public commits.</p>
 				{/if}
-				<a href="https://github.com/jasonlovesdoggo" target="_blank" rel="noopener noreferrer" class="group mt-2 inline-flex items-center gap-1 text-xs text-accent hover:underline">
+				<a
+					href="https://github.com/jasonlovesdoggo"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group text-accent mt-3 inline-flex items-center gap-1 text-sm hover:underline"
+				>
 					<span>View GitHub</span>
-					<IconExternalLink size={12} class="inline-block" />
+					<IconExternalLink size={14} class="inline-block" />
 				</a>
 			</div>
 
-			<!-- Box 6: Roles / Affiliations (Moved inside grid) -->
-			<div class="rounded-lg bg-base p-3 shadow-sm ring-1 ring-surface1/50">
-				<h3 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
-					<IconBriefcase size={18} class="text-accent" />
+			<!-- Box 7: Roles / Affiliations -->
+			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
+					<IconBriefcase size={16} class="text-accent" />
 					Roles & Affiliations
 				</h3>
-				<div class="space-y-1.5 text-xs">
-					<div class="flex items-center gap-1.5 text-subtext0">
-						<IconSchool size={16} class="text-sky flex-shrink-0" />
+				<div class="space-y-2 text-sm">
+					<div class="text-subtext0 flex items-center gap-2">
+						<IconSchool size={18} class="text-sky flex-shrink-0" />
 						<span>Student @ High School</span>
 					</div>
 					{#if workExperience.length > 0}
 						{#each workExperience as exp (exp.company)}
 							{@const ExpIcon = exp.icon}
-							<div class="flex items-center gap-1.5 text-subtext0">
-								<ExpIcon size={16} class="text-green flex-shrink-0" />
-								<span title={exp.role + ' @ ' + exp.company}>{exp.company} ({exp.role.includes('Incoming') ? 'Incoming' : 'Past'})</span>
+							<div class="text-subtext0 flex items-center gap-2">
+								<ExpIcon size={18} class="text-green flex-shrink-0" />
+								<span title={exp.role + ' @ ' + exp.company}
+									>{exp.company}
+									({exp.role.includes('Incoming') ? 'Incoming' : 'Past'})</span
+								>
 							</div>
 						{/each}
 					{/if}
 					{#if organizations.length > 0}
 						{#each organizations as org (org.name)}
 							{@const OrgIcon = org.icon}
-							<div class="flex items-center gap-1.5 text-subtext0">
-								<OrgIcon size={16} class="text-mauve flex-shrink-0" />
-								<a href={org.href} target="_blank" rel="noopener noreferrer" class="hover:text-accent hover:underline">Leading @ {org.name}</a>
+							<div class="text-subtext0 flex items-center gap-2">
+								<OrgIcon size={18} class="text-mauve flex-shrink-0" />
+								<a
+									href={org.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="hover:text-accent hover:underline">Leading @ {org.name}</a
+								>
 							</div>
 						{/each}
 					{/if}
 				</div>
 			</div>
-
-			<!-- Box 7: Book a Call -->
-			<div class="rounded-xl border border-surface0 bg-base p-4 shadow-lg lg:col-span-1">
-				<h3 class="mb-3 flex items-center gap-2 text-sm font-semibold text-text">
-					<IconCalendarEvent size={16} class="text-accent" />
-					Let's Connect
-				</h3>
-				<p class="text-sm text-subtext0 mb-4">Interested in collaborating or discussing tech?</p>
-				<a href={calLink} target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-overlay0 px-3 py-1.5 text-sm font-medium text-text shadow-sm transition-colors hover:bg-overlay1 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-base">
-					<IconCalendarEvent size={16}/> Book a Call
-				</a>
-			</div>
-
 		</div>
 	</section>
-
 </div>
