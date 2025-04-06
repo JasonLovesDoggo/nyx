@@ -17,8 +17,7 @@
 	>
 	<IconMenu2 size={24} />
 	</button>
-	<nav class="hidden items-center space-x-4 md:flex"> <!-- Nav appears on medium screens and up -->
-		<!-- Desktop Links (Main Items) -->
+	<nav class="hidden items-center space-x-4 md:flex">
 		{#each mainNavItems as item (item.title)}
 			<a
 				href={item.href}
@@ -29,7 +28,6 @@
 				{item.title}
 			</a>
 		{/each}
-		<!-- Consider adding a "More..." button here for desktop that opens the sidebar -->
 		<button
 			onclick={toggleSidebar}
 			class="text-text hover:text-accent rounded px-3 py-2 text-sm font-medium"

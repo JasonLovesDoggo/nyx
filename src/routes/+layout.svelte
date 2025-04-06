@@ -4,7 +4,7 @@
 	import Footer from '../components/layout/Footer.svelte';
 	import Sidebar from '../components/layout/Sidebar.svelte';
 	import { page } from '$app/state';
-	import Site from '$lib/config';
+	import Site from '$lib/config/common';
 	import { Palette, paletteNames } from '$lib/stores/theme';
 	import { browser } from '$app/environment';
 	import { onNavigate } from '$app/navigation';

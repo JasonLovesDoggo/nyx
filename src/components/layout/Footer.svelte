@@ -1,12 +1,8 @@
 <script lang="ts">
 	import { PUBLIC_COMMIT_SHA } from '$env/static/public';
 
-	import Site from '$lib/config';
+	import Site from '$lib/config/common';
 	import {
-		IconBrandBluesky,
-		IconBrandGithub,
-		IconBrandInstagram,
-		IconBrandLinkedin,
 		IconGitCommit
 	} from '@tabler/icons-svelte';
 
@@ -17,29 +13,6 @@
 	const year = new Date().getFullYear();
 	const shortSha = PUBLIC_COMMIT_SHA ? PUBLIC_COMMIT_SHA.substring(0, 7) : 'dev';
 	const commitLinkUrl = PUBLIC_COMMIT_SHA ? `${Site.repo.commitBaseUrl}${PUBLIC_COMMIT_SHA}` : '#';
-
-	const socialIconLinks = [
-		{
-			href: Site.socials.github,
-			label: 'GitHub Profile',
-			Icon: IconBrandGithub,
-		},
-		{
-			href: Site.socials.linkedin,
-			label: 'LinkedIn Profile',
-			Icon: IconBrandLinkedin,
-		},
-		{
-			href: Site.socials.bluesky,
-			label: 'Bluesky Profile',
-			Icon: IconBrandBluesky,
-		},
-		{
-			href: Site.socials.instagram,
-			label: 'Instagram Profile',
-			Icon: IconBrandInstagram,
-		}
-	];
 </script>
 
 <footer
@@ -97,10 +70,10 @@
 		<span class="text-surface0 hidden sm:inline">-</span>
 
 		<div class="flex items-center gap-x-3">
-			{#each socialIconLinks as item (item.href)}
-				{@const Icon = item.Icon}
+			{#each Site.socials as item (item.url)}
+				{@const Icon = item.icon}
 				<a
-					href={item.href}
+					href={item.url}
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label={item.label}

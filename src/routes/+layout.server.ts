@@ -1,4 +1,4 @@
-import Site from '$lib/config';
+import Site from '$lib/config/common';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async () => {
