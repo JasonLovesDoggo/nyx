@@ -15,7 +15,9 @@
 {/snippet}
 
 <ul class="flex items-center text-md" role="navigation" aria-label="Breadcrumbs">
-	{@render breadcrumb({ text: "~", href: "/" })}
+	<li class="inline-flex items-center">
+		<a class="animation-wiggle text-accent hover:text-accent/40 " href="/">~</a>
+	</li>
 
 	{#each breadcrumbs as text, i ("Bred" + i)}
 		<li class="mx-0.5">/</li>
