@@ -270,15 +270,15 @@
 				</div>
 			</div>
 
-			<!-- Box 7: Book a Call / Contact -->
-			<div class="rounded-lg bg-base p-3 shadow-sm ring-1 ring-surface1/50 lg:col-span-1">
-				<h3 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
-					<IconCalendarEvent size={18} class="text-accent" />
+			<!-- Box 7: Book a Call -->
+			<div class="rounded-xl border border-surface0 bg-base p-4 shadow-lg lg:col-span-1">
+				<h3 class="mb-3 flex items-center gap-2 text-sm font-semibold text-text">
+					<IconCalendarEvent size={16} class="text-accent" />
 					Let's Connect
 				</h3>
-				<p class="text-xs text-subtext0 mb-3">Interested in collaborating or discussing tech? Feel free to book a time.</p>
-				<a href={calLink} target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-3 py-1.5 text-xs font-medium text-base shadow-sm transition-colors hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-base">
-					Book a Call (Cal.com)
+				<p class="text-sm text-subtext0 mb-4">Interested in collaborating or discussing tech?</p>
+				<a href={calLink} target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-overlay0 px-3 py-1.5 text-sm font-medium text-text shadow-sm transition-colors hover:bg-overlay1 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-base">
+					<IconCalendarEvent size={16}/> Book a Call
 				</a>
 			</div>
 
