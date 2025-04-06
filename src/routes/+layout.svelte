@@ -53,13 +53,13 @@
 	<title>{title}</title>
 </svelte:head>
 
-<div class="bg-base text-text mx-auto flex min-h-screen max-w-[80%] flex-col">
+<div class="bg-base text-text mx-auto flex min-h-screen max-w-[70vw] flex-col">
 	<Header {toggleSidebar} />
 
 	<!-- Sidebar component included and props passed -->
 	<Sidebar isOpen={isSidebarOpen} {closeSidebar} />
 
-	<main class="flex-1 px-5 py-8 max-w-[80%] ">
+	<main class="flex-1 my-[8vh] mx-auto px-5 py-8 max-w-[70%] ">
 		{@render children?.()}
 	</main>
 
