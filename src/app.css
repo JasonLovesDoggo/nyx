@@ -17,6 +17,10 @@
 	--current-accent-color: var(--color-peach); /*accent default's to peach */
 }
 
+@utility bg-* { /*apply transitions on everything that overrides the bg*/
+	@apply transition-colors duration-600 ease-in-out;
+}
+
 @theme static {
 	--color-accent: var(--current-accent-color);
 
