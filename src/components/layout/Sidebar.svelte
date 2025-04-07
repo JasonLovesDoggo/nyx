@@ -3,20 +3,17 @@
 	import { mainNavItems, moreNavItems } from '$lib/config/navItems';
 	import { IconX } from '@tabler/icons-svelte';
 	import { page } from '$app/state';
+	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
+	import ColorSelector from '$components/themes/ColorSelector.svelte';
 
 	let { isOpen, closeSidebar } = $props<{ isOpen: boolean; closeSidebar: () => void }>();
 
 	let currentPath = $derived(page.url.pathname);
-
-	// Function to update the accent color store
-	function selectAccent(colorName: (typeof accentColorNames)[number]) {
-		$Accent = colorName;
-	}
 </script>
 
 {#if isOpen}
 	<div
-		class="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ease-in-out"
+		class="fixed inset-0 z-30 backdrop-blur-sm transition-opacity duration-300 ease-in-out"
 		onclick={closeSidebar}
 		onkeydown={(e) => e.key === 'Escape' && closeSidebar()}
 		role="button"
@@ -45,22 +42,10 @@
 	</div>
 
 	<div class="border-surface0 flex-shrink-0 border-b p-4">
-		<span class="text-subtext1 mb-2 block text-xs font-medium">Accent Color:</span>
-		<div class="flex flex-wrap gap-2">
-			{#each accentColorNames as colorName (colorName)}
-				{@const isSelected = $Accent === colorName}
-				<button
-					aria-label={`Select ${colorName} accent color`}
-					title={colorName.charAt(0).toUpperCase() + colorName.slice(1)}
-					onclick={() => selectAccent(colorName)}
-					style="background-color: var(--color-{colorName})"
-					class={'accent-square h-6 w-6 rounded transition-all duration-300' +
-						(isSelected ? ' ring-accent ring-2' : '')}
-				>
-					<span class="sr-only">{colorName}</span>
-				</button>
-			{/each}
+		<div class="pb-1">
+			<ThemeSelector />
 		</div>
+		<ColorSelector />
 	</div>
 
 	<nav class="flex-1 overflow-y-auto p-4">

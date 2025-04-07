@@ -1,6 +1,5 @@
 <script lang="ts">
 	import LinkWithIcon from '$components/LinkWithIcon.svelte';
-	import { Accent, accentColorNames, Palette, paletteNames } from '$lib/stores/theme';
 
 	import {
 		IconActivity,
@@ -13,7 +12,6 @@
 		IconChevronRight,
 		IconCode,
 		IconExternalLink,
-		IconPalette,
 		IconSchool
 	} from '@tabler/icons-svelte';
 	import { Home } from '$lib/config/pages';
@@ -26,6 +24,8 @@
 		organizations,
 		workExperience
 	} from '$lib/config/about';
+	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
+	import ColorSelector from '$components/themes/ColorSelector.svelte';
 
 	let isNameHovered = $state(false);
 	let currentProjectIndex = $state(0);
@@ -172,37 +172,8 @@
 
 			<!-- Box 2: Theme Selector -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
-				<h3 class="text-text mb-4 flex items-center gap-2 text-sm font-semibold">
-					<IconPalette size={16} class="text-accent" />
-					Theme
-				</h3>
-				<div
-					class="bg-mantle ring-surface0 mb-4 flex flex-wrap items-center justify-center gap-1 rounded-md p-1 ring-1 md:justify-start"
-				>
-					{#each paletteNames as name (name)}
-						{@const isSelected = $Palette === name}
-						<button
-							onclick={() => ($Palette = name)}
-							class={`flex-1 rounded-[5px] px-2 py-1 text-center text-xs font-medium transition ${isSelected ? 'bg-base text-text ring-accent/70 shadow-sm ring-1 ring-inset' : 'text-subtext1 hover:text-subtext0'}`}
-						>
-							{name.charAt(0).toUpperCase() + name.slice(1)}
-						</button>
-					{/each}
-				</div>
-				<div class="grid grid-cols-7 gap-2.5">
-					{#each accentColorNames as colorName (colorName)}
-						{@const isSelected = $Accent === colorName}
-						<button
-							aria-label={`Select ${colorName} accent color`}
-							title={colorName.charAt(0).toUpperCase() + colorName.slice(1)}
-							onclick={() => ($Accent = colorName)}
-							style:background-color={`var(--color-${colorName})`}
-							class={`aspect-square w-full min-w-5 rounded-md shadow-sm transition-all duration-150 ${isSelected ? 'ring-offset-base ring-accent scale-105 ring-2 ring-offset-2' : 'opacity-80 hover:scale-110 hover:opacity-100'}`}
-						>
-							<span class="sr-only">{colorName}</span>
-						</button>
-					{/each}
-				</div>
+				<ThemeSelector />
+				<ColorSelector />
 			</div>
 
 			<!-- Box 3: Latest Blog Posts -->
