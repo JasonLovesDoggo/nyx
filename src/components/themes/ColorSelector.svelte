@@ -10,7 +10,7 @@
 			title={colorName.charAt(0).toUpperCase() + colorName.slice(1)}
 			onclick={() => ($Accent = colorName)}
 			style:background-color={`var(--color-${colorName})`}
-			class={`aspect-square w-full min-w-5 rounded-md shadow-sm transition-all duration-150 ${isSelected ? 'ring-offset-base ring-accent scale-105 ring-2 ring-offset-2' : 'opacity-80 hover:scale-110 hover:opacity-100'}`}
+			class={`aspect-square min-h-5 w-full min-w-5 rounded-md shadow-sm transition-all duration-150 ${isSelected ? 'ring-offset-base ring-accent scale-105 ring-2 ring-offset-2' : 'opacity-80 hover:scale-110 hover:opacity-100'}`}
 		>
 			<span class="sr-only">{colorName}</span>
 		</button>

@@ -82,5 +82,5 @@
 }
 
 ::view-transition-new(root) {
-	animation: reveal 0.5s ease-in-out forwards;
+	animation: reveal 0.7s linear forwards;
 }
