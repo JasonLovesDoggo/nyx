@@ -25,9 +25,9 @@ const initialAccent = 'peach';
 export const Accent = writable<AccentColorName>(initialAccent);
 
 Accent.subscribe((value) => {
-	if (browser) {
+	handleTransition(() => {
 		document.documentElement.style.setProperty('--current-accent-color', `var(--color-${value})`);
-	}
+	});
 });
 
 // --- Palettes ---
@@ -42,3 +42,21 @@ if (browser) {
 	}
 }
 export const Palette = writable<PaletteName>(initialPalette);
+
+Palette.subscribe((value) => {
+	handleTransition(() => {
+		document.documentElement.classList.remove(...paletteNames);
+		document.documentElement.classList.add(value);
+	});
+});
+
+function handleTransition(callback: () => void) {
+	if (!browser) {
+		return;
+	}
+	if (document.startViewTransition) {
+		document.startViewTransition(callback);
+	} else {
+		callback();
+	}
+}

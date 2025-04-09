@@ -11,6 +11,8 @@
 
 :root {
 	--current-accent-color: var(--color-peach); /*accent default's to peach */
+	--x: 100%;
+	--y: 100%;
 }
 
 @layer utilities {
@@ -51,26 +53,34 @@
 	}
 }
 
-/*@keyframes slide-from-right {*/
-/*	from {*/
-/*		transform: translateX(30px);*/
-/*	}*/
-/*}*/
+/*View Transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+}
 
-/*@keyframes slide-to-left {*/
-/*	to {*/
-/*		transform: translateX(-30px);*/
-/*	}*/
-/*}*/
+::view-transition-old(root) {
+	z-index: 0;
+}
 
-/*:root::view-transition-old(root) {*/
-/*	animation:*/
-/*			90ms cubic-bezier(0.4, 0, 1, 1) both wiggle,*/
-/*			300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;*/
-/*}*/
+::view-transition-new(root) {
+	z-index: 1;
+}
 
-/*:root::view-transition-new(root) {*/
-/*	animation:*/
-/*			210ms cubic-bezier(0, 0, 0.2, 1) 90ms both wiggle,*/
-/*			300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;*/
-/*}*/
+@keyframes reveal {
+	from {
+		clip-path: circle(
+			0% at var(--x, 50%) var(--y, 50%)
+		); /*todo: make the effect take place at the current cursor location? (set x, cursor)*/
+		opacity: 0.7;
+	}
+	to {
+		clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
+		opacity: 1;
+	}
+}
+
+::view-transition-new(root) {
+	animation: reveal 0.5s ease-in-out forwards;
+}

@@ -10,8 +10,8 @@ export const organizations = [
 ];
 export const workExperience = [
 	{
-		company: 'Shopify',
-		role: 'Incoming SWE Intern',
+		company: 'Homeless',
+		role: 'Incoming Intern',
 		href: 'https://shopify.com',
 		icon: IconBriefcase,
 		external: true
