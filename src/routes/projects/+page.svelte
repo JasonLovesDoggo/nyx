@@ -29,7 +29,6 @@
 					class="border-surface0 bg-base hover:border-accent group block space-y-3 rounded-xl border p-5 shadow-lg transition-colors duration-200"
 					style:view-transition-name="project-card-{project.slug}"
 				>
-					<!-- Add a container for image if you want thumbs here -->
 					<img
 						src={project.metadata.imageUrl}
 						alt={project.metadata.imageAlt}
