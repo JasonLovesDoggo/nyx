@@ -1,0 +1,14 @@
+---
+title: Cool Project A
+description: A really cool project I worked on.
+date: 2024-01-15
+published: true
+featured: true  # <--- This one will be featured
+tags:
+  - svelte
+  - api
+---
+
+# Cool Project A
+
+Details about project A...

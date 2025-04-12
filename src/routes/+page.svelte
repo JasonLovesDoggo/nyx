@@ -1,18 +1,18 @@
 <script lang="ts">
 	import LinkWithIcon from '$components/LinkWithIcon.svelte';
-
+	import Featured from '$components/layout/Featured.svelte'; // <--- Import Featured component
 	import {
-		IconActivity,
 		IconArrowRight,
-		IconArticle,
-		IconBriefcase,
-		IconCalendarEvent,
-		IconCode,
 		IconExternalLink,
+		IconArticle,
+		IconCode,
+		IconCalendarEvent,
+		IconActivity,
+		IconBriefcase,
 		IconSchool
 	} from '@tabler/icons-svelte';
-	import { Home } from '$lib/config/pages';
 	import Site from '$lib/config/common';
+	import { Home } from '$lib/config/pages';
 	import {
 		codingStats,
 		latestCommits,
@@ -23,12 +23,33 @@
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
 
+	// Define the type for the data coming from the load function
+	interface ProjectMetadata {
+		title: string;
+		description: string;
+		date: string;
+		published: boolean;
+		featured?: boolean;
+		tags?: string[];
+		// Add other expected fields
+	}
+	interface FeaturedProject {
+		slug: string;
+		metadata: ProjectMetadata;
+	}
+	type PageData = {
+		featuredProjects: FeaturedProject[];
+	};
+
+	let { data }: { data: PageData } = $props();
+
 	let isNameHovered = $state(false);
 </script>
 
 <div class="mx-auto max-w-6xl space-y-12 px-0 py-8 md:space-y-16 md:px-4 md:py-12">
 	<!-- Section 1: Hero / Introduction -->
-	<section class="min-h-[90vh] space-y-5 px-4 md:px-0">
+	<section class="space-y-5 px-4 md:px-0">
+		<!-- ... existing hero content ... -->
 		<h1 class="text-3xl font-bold md:text-4xl">
 			Hey! I'm
 			<span class="text-accent">
@@ -64,8 +85,11 @@
 					external={true}
 					class="text-sm"
 				/>
-				<span class="text-surface1 text-xs">|</span>
+				{#if link !== Home.socialLinks[Home.socialLinks.length - 1]}
+					<span class="text-surface1 text-xs">|</span>
+				{/if}
 			{/each}
+			<span class="text-surface1 text-xs">|</span>
 			<a
 				href="/about"
 				class="group text-subtext1 hover:text-accent inline-flex items-center gap-1 text-sm transition-colors duration-200"
@@ -79,10 +103,14 @@
 		</div>
 	</section>
 
-	<!-- Section 2: Bento Grid Container -->
+	<!-- Section 2: Featured Projects (using the component) -->
+	<Featured projects={data.featuredProjects} />
+
+	<!-- Section 3: Bento Grid Container -->
 	<section class="px-4 md:px-0">
 		<h2 class="sr-only">Dashboard / Highlights</h2>
 		<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
+			<!-- ... your existing bento boxes ... -->
 			<!-- Box 2: Theme Selector -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<ThemeSelector />

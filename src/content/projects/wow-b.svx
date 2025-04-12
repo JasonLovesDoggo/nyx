@@ -1,0 +1,14 @@
+---
+title: Awesome Project B
+description: Another great project.
+date: 2024-02-20
+published: true
+featured: true
+tags:
+  - golang
+  - infrastructure
+---
+
+# Awesome Project B
+
+Details about project B...

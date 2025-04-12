@@ -1,0 +1,13 @@
+---
+title: Normal Project C
+description: A standard project.
+date: 2024-03-10
+published: true
+featured: false # <--- Not featured
+tags:
+  - documentation
+---
+
+# Normal Project C
+
+Details about project C...
