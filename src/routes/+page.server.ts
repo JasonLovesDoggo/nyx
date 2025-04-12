@@ -52,7 +52,6 @@ export const load: PageServerLoad = async () => {
 		(a, b) => new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime()
 	);
 
-	console.log('Featured Projects:', featuredProjects);
 	return {
 		featuredProjects // Return only the projects loaded by this page server load
 	};
