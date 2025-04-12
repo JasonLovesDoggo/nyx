@@ -1,12 +1,15 @@
 ---
 title: Cool Project A
-description: A really cool project I worked on.
+description: A really cool project I worked on, demonstrating advanced Svelte techniques.
 date: 2024-01-15
 published: true
-featured: true  # <--- This one will be featured
+featured: true
 tags:
   - svelte
   - api
+  - visualization
+imageUrl: /projects/test.jpeg
+imageAlt: Abstract visualization representing Cool Project A
 ---
 
 # Cool Project A
