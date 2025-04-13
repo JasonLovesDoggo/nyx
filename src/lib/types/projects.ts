@@ -11,6 +11,10 @@ export interface ProjectMetadata {
 	// githubUrl?: string;
 }
 
+export interface WithMetadata {
+	metadata: ProjectMetadata;
+}
+
 export interface ProjectEntry {
 	slug: string;
 	metadata: ProjectMetadata;
@@ -19,5 +23,3 @@ export interface ProjectEntry {
 export interface ProjectPageData extends ProjectEntry {
 	content: ConstructorOfATypedSvelteComponent;
 }
-
-export type SvelteComponent = ConstructorOfATypedSvelteComponent;
