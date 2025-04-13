@@ -17,16 +17,21 @@
 	{#if data.metadata.tags}
 		<meta name="keywords" content={data.metadata.tags.join(', ')} />
 	{/if}
-	<!-- Optional: Add OpenGraph/Twitter card meta tags using the banner image -->
 	<meta property="og:title" content={data.metadata.title} />
 	<meta property="og:description" content={data.metadata.description} />
-	<meta property="og:image" content={new URL(data.metadata.imageUrl, page.url.origin).href} />
-	<!-- Make sure imageUrl is absolute for OG -->
+	{#if data.metadata.imageUrl}
+		<meta property="og:image" content={new URL(data.metadata.imageUrl, page.url.origin).href} />
+	{/if}
 	<meta property="og:type" content="article" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={data.metadata.title} />
 	<meta name="twitter:description" content={data.metadata.description} />
-	<meta name="twitter:image" content={new URL(data.metadata.imageUrl, page.url.origin).href} />
+	{#if data.metadata.imageUrl}
+		<meta
+			name="twitter:image:src"
+			content={new URL(data.metadata.imageUrl, page.url.origin).href}
+		/>
+	{/if}
 </svelte:head>
 
 <article class="mx-auto max-w-4xl">
