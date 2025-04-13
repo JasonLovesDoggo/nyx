@@ -1,1 +1,10 @@
+name = "nyx"
+pages_build_output_dir = ".svelte-kit/cloudflare"
+compatibility_date = "2025-03-27"
 compatibility_flags = [ "nodejs_compat" ]
+
+[placement]
+mode = "off"
+
+[env.production.placement]
+mode = "smart"
