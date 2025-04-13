@@ -161,7 +161,7 @@
 				</p>
 				<p class="text-subtext0 text-sm">
 					Hours: <span class="text-text font-medium">{codingStats.hours}</span>
-					<span class="text-overlay0 text-xs">(WakaTime)</span>
+					<span class="text-overlay2 text-xs">(WakaTime)</span>
 				</p>
 				<a
 					href={Site.out.wakatime}

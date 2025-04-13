@@ -5,8 +5,8 @@ export interface ProjectMetadata {
 	published: boolean;
 	featured?: boolean;
 	tags?: string[];
-	imageUrl: string; // <-- Add image URL
-	imageAlt: string; // <-- Add alt text for image
+	imageUrl?: string; // <-- Add image URL
+	imageAlt?: string; // <-- Add alt text for image
 	// projectUrl?: string; // Optional: Add if you have live demo/repo links specific to the project
 	// githubUrl?: string;
 }

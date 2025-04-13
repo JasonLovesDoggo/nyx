@@ -23,6 +23,7 @@
 
 <svelte:head>
 	<title>{title}</title>
+	<meta name="description" content={Site.description} />
 </svelte:head>
 
 <div class="text-text mx-auto flex min-h-screen max-w-[90%] flex-col md:max-w-[80%]">

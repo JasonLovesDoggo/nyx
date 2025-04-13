@@ -14,19 +14,21 @@
 	</li>
 {/snippet}
 
-<ul class="text-md flex items-center" role="navigation" aria-label="Breadcrumbs">
-	<li class="inline-flex items-center">
-		<a class="animation-wiggle text-accent hover:text-accent/40" href="/">~</a>
-	</li>
+<nav aria-label="Breadcrumbs">
+	<ul class="text-md flex items-center">
+		<li class="inline-flex items-center">
+			<a class="animation-wiggle text-accent hover:text-accent/40" href="/">~</a>
+		</li>
 
-	{#each breadcrumbs as text, i ('Bred' + i)}
-		<li class="mx-0.5">/</li>
-		{@const href = '/' + breadcrumbs.slice(0, i + 1).join('/')}
+		{#each breadcrumbs as text, i ('Bred' + i)}
+			<li class="mx-0.5">/</li>
+			{@const href = '/' + breadcrumbs.slice(0, i + 1).join('/')}
 
-		{#if i === breadcrumbs.length - 1}
-			{@render breadcrumb({ text })}
-		{:else}
-			{@render breadcrumb({ text, href })}
-		{/if}
-	{/each}
-</ul>
+			{#if i === breadcrumbs.length - 1}
+				{@render breadcrumb({ text })}
+			{:else}
+				{@render breadcrumb({ text, href })}
+			{/if}
+		{/each}
+	</ul>
+</nav>
