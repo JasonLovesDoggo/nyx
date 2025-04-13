@@ -8,6 +8,7 @@
 @import '../static/css/catppuccin.css'; /*noqa: this line is supposed to be after the above @theme */
 @import '../static/css/colors.css'; /*contains the static colors needed for the color selector*/
 @plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
 /*@plugin "@catppuccin/tailwindcss";*/ /*See https://github.com/catppuccin/tailwindcss/pull/22*/
 
 :root {

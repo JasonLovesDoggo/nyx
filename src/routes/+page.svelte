@@ -139,7 +139,7 @@
 					<p class="text-subtext1 text-sm italic">No posts yet.</p>
 				{/if}
 				<a
-					href="/blog"
+					href="/posts"
 					class="group text-accent mt-3 inline-flex items-center gap-1 text-sm hover:underline"
 				>
 					<span>All posts</span>

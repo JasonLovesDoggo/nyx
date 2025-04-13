@@ -7,8 +7,8 @@ export interface ProjectMetadata {
 	tags?: string[];
 	imageUrl?: string; // <-- Add image URL
 	imageAlt?: string; // <-- Add alt text for image
-	// projectUrl?: string; // Optional: Add if you have live demo/repo links specific to the project
-	// githubUrl?: string;
+	projectUrl?: string;
+	githubUrl?: string;
 }
 
 export interface WithMetadata {
