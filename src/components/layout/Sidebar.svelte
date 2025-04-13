@@ -26,8 +26,6 @@
 	class={`bg-mantle text-text border-surface0 fixed inset-y-0 right-0 z-40 flex w-64 transform flex-col border-l shadow-xl transition-transform duration-300 ease-in-out ${
 		isOpen ? 'translate-x-0' : 'translate-x-full'
 	}`}
-	aria-hidden={!isOpen}
-	role="navigation"
 	id="sidebar-nav"
 >
 	<div class="border-surface0 flex h-16 flex-shrink-0 items-center justify-between border-b p-4">

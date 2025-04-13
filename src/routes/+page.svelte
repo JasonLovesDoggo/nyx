@@ -1,24 +1,20 @@
 <script lang="ts">
 	import LinkWithIcon from '$components/LinkWithIcon.svelte';
-
+	import Featured from '$components/layout/Featured.svelte'; // <--- Import Featured component
 	import {
-		IconActivity,
 		IconArrowRight,
-		IconArticle,
-		IconBrandGithub,
-		IconBriefcase,
-		IconCalendarEvent,
-		IconChevronLeft,
-		IconChevronRight,
-		IconCode,
 		IconExternalLink,
+		IconArticle,
+		IconCode,
+		IconCalendarEvent,
+		IconActivity,
+		IconBriefcase,
 		IconSchool
 	} from '@tabler/icons-svelte';
-	import { Home } from '$lib/config/pages';
 	import Site from '$lib/config/common';
+	import { Home } from '$lib/config/pages';
 	import {
 		codingStats,
-		featuredProjects,
 		latestCommits,
 		latestPosts,
 		organizations,
@@ -27,26 +23,33 @@
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
 
+	// Define the type for the data coming from the load function
+	interface ProjectMetadata {
+		title: string;
+		description: string;
+		date: string;
+		published: boolean;
+		featured?: boolean;
+		tags?: string[];
+		// Add other expected fields
+	}
+	interface FeaturedProject {
+		slug: string;
+		metadata: ProjectMetadata;
+	}
+	type PageData = {
+		featuredProjects: FeaturedProject[];
+	};
+
+	let { data }: { data: PageData } = $props();
+
 	let isNameHovered = $state(false);
-	let currentProjectIndex = $state(0);
-
-	// --- Computed Derived State ---
-	const currentProject = $derived(featuredProjects[currentProjectIndex]);
-
-	// --- Functions ---
-	function nextProject() {
-		currentProjectIndex = (currentProjectIndex + 1) % featuredProjects.length;
-	}
-
-	function prevProject() {
-		currentProjectIndex =
-			(currentProjectIndex - 1 + featuredProjects.length) % featuredProjects.length;
-	}
 </script>
 
 <div class="mx-auto max-w-6xl space-y-12 px-0 py-8 md:space-y-16 md:px-4 md:py-12">
 	<!-- Section 1: Hero / Introduction -->
 	<section class="space-y-5 px-4 md:px-0">
+		<!-- ... existing hero content ... -->
 		<h1 class="text-3xl font-bold md:text-4xl">
 			Hey! I'm
 			<span class="text-accent">
@@ -82,8 +85,11 @@
 					external={true}
 					class="text-sm"
 				/>
-				<span class="text-surface1 text-xs">|</span>
+				{#if link !== Home.socialLinks[Home.socialLinks.length - 1]}
+					<span class="text-surface1 text-xs">|</span>
+				{/if}
 			{/each}
+			<span class="text-surface1 text-xs">|</span>
 			<a
 				href="/about"
 				class="group text-subtext1 hover:text-accent inline-flex items-center gap-1 text-sm transition-colors duration-200"
@@ -97,79 +103,14 @@
 		</div>
 	</section>
 
-	<!-- Section 2: Bento Grid Container -->
+	<!-- Section 2: Featured Projects (using the component) -->
+	<Featured projects={data.featuredProjects} />
+
+	<!-- Section 3: Bento Grid Container -->
 	<section class="px-4 md:px-0">
 		<h2 class="sr-only">Dashboard / Highlights</h2>
 		<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
-			<!-- Box 1: Featured Projects -->
-			<div
-				class="border-surface0 bg-base rounded-xl border p-4 shadow-lg sm:col-span-2 lg:col-span-2 lg:row-span-2"
-			>
-				<div class="mb-4 flex items-center justify-between">
-					<h3 class="text-text flex items-center gap-2 text-sm font-semibold">
-						<span class="text-mauve">#</span> Featured Projects
-					</h3>
-					<div class="flex items-center gap-1.5">
-						<a
-							href="/projects"
-							class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border px-2 py-0.5 text-xs transition"
-						>
-							View All Projects
-						</a>
-						<button
-							onclick={prevProject}
-							title="Previous Project"
-							class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border p-1 transition"
-						>
-							<IconChevronLeft size={16} />
-						</button>
-						<button
-							onclick={nextProject}
-							title="Next Project"
-							class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border p-1 transition"
-						>
-							<IconChevronRight size={16} />
-						</button>
-					</div>
-				</div>
-
-				<div
-					class="bg-mantle relative min-h-[240px] rounded-lg p-4 shadow-inner ring-1 ring-black/10"
-				>
-					<div class="bg-red absolute top-0 bottom-0 left-0 w-2.5 rounded-l-lg opacity-50"></div>
-					<div class="bg-green absolute top-0 right-0 bottom-0 w-2.5 rounded-r-lg opacity-50"></div>
-					<div class="relative z-10">
-						<h4 class="text-text mb-1 flex items-center gap-2 font-semibold">
-							<span class="text-mauve">##</span>
-							{currentProject.title}
-						</h4>
-						<p class="text-subtext0 mb-4 text-sm">{currentProject.description}</p>
-						<div class="flex items-center gap-2">
-							{#if currentProject.githubHref}
-								<a
-									href={currentProject.githubHref}
-									target="_blank"
-									rel="noopener noreferrer"
-									title="View on GitHub"
-									class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border p-1.5 transition"
-								>
-									<IconBrandGithub size={16} />
-								</a>
-							{/if}
-							<a
-								href={currentProject.href}
-								target={currentProject.external ? '_blank' : undefined}
-								rel={currentProject.external ? 'noopener noreferrer' : undefined}
-								title="View Project/Details"
-								class="border-overlay0 bg-surface0 text-subtext1 hover:border-overlay1 hover:text-subtext0 rounded border p-1.5 transition"
-							>
-								<IconExternalLink size={16} />
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			<!-- ... your existing bento boxes ... -->
 			<!-- Box 2: Theme Selector -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<ThemeSelector />
@@ -220,7 +161,7 @@
 				</p>
 				<p class="text-subtext0 text-sm">
 					Hours: <span class="text-text font-medium">{codingStats.hours}</span>
-					<span class="text-overlay0 text-xs">(WakaTime)</span>
+					<span class="text-overlay2 text-xs">(WakaTime)</span>
 				</p>
 				<a
 					href={Site.out.wakatime}

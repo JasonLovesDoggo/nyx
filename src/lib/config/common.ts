@@ -14,6 +14,7 @@ interface SocialLink {
 
 interface Site {
 	name: string;
+	description: string;
 	abacus: { instance: string; namespace: string; key: string };
 	out: {
 		github: string;
@@ -27,6 +28,7 @@ interface Site {
 
 const Site: Site = {
 	name: 'Portfolio',
+	description: "Jason Cameron's Portfolio",
 	abacus: {
 		instance: 'https://abacus.jasoncameron.dev',
 		namespace: 'jasoncameron',
