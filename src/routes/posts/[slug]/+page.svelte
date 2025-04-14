@@ -21,9 +21,13 @@
 	<header class="mb-8 space-y-2">
 		<h1 class="text-3xl font-bold">{data.metadata.title}</h1>
 		<p class="text-subtext0 text-sm">
-			{formatDate(data.metadata.date)}
-			{#if data.metadata.updated}
-				| Updated {formatDate(data.metadata.updated)}
+			{#if data.metadata.published_at}
+				{formatDate(data.metadata.published_at)}
+			{:else}
+				Draft
+			{/if}
+			{#if data.metadata.updated_at}
+				| Updated {formatDate(data.metadata.updated_at)}
 			{/if}
 		</p>
 		{#if data.metadata.tags}

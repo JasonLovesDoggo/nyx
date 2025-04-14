@@ -4,9 +4,8 @@ import type { SvelteComponent } from 'svelte';
 export interface PostMetadata {
 	title: string;
 	description: string;
-	date: string;
-	updated?: string;
-	published: boolean;
+	updated_at?: string;
+	published_at?: string; // if it's not set, it won't be published
 	featured?: boolean;
 	tags?: string[];
 }
@@ -36,8 +35,11 @@ export function getAllPosts(): PostEntry[] {
 				slug: slugFrom(path),
 				metadata: (mod as PostEntry).metadata as PostMetadata
 			}))
-			.filter((p) => p.metadata.published)
-			.sort((a, b) => +new Date(b.metadata.date) - +new Date(a.metadata.date));
+			.filter((p) => {
+				const publishedAt = p.metadata.published_at;
+				return publishedAt && !isNaN(new Date(publishedAt).getTime());
+			})
+			.sort((a, b) => +new Date(b.metadata.published_at!) - +new Date(a.metadata.published_at!));
 	}
 	return _allPosts;
 }
@@ -53,6 +55,6 @@ export function getFeaturedPosts(): PostEntry[] {
 export function getPostBySlug(slug: string): PostPageData {
 	const path = `/content/posts/${slug}.svx`;
 	const mod = (postModules as Record<string, SvelteComponent>)[path];
-	if (!mod || !mod.metadata.published) throw error(404, `Post not found: ${slug}`);
+	if (!mod || !mod.metadata.published_at) throw error(404, `Post not found: ${slug}`);
 	return { slug, metadata: mod.metadata, content: mod.default } satisfies PostPageData;
 }

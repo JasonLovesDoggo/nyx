@@ -21,7 +21,11 @@
 				>
 					<h2 class="text-xl font-semibold">{post.metadata.title}</h2>
 					<p class="text-subtext0 text-sm">{post.metadata.description}</p>
-					<p class="text-overlay0 mt-2 text-xs">{formatDate(post.metadata.date)}</p>
+					{#if post.metadata.published_at}
+						<p class="text-overlay0 mt-2 text-xs">{formatDate(post.metadata.published_at)}</p>
+					{:else}
+						<p class="text-overlay0 mt-2 text-xs">Draft</p>
+					{/if}
 				</a>
 			{/each}
 		</div>
