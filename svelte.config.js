@@ -47,7 +47,8 @@ const config = {
 			$components: 'src/components',
 			$utils: 'src/lib/utils',
 			$types: 'src/lib/types',
-			$content: 'content'
+			$content: 'content',
+			$static: 'static'
 		}
 	},
 	extensions: ['.svelte', '.svx']
