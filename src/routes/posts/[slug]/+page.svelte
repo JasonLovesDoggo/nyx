@@ -40,3 +40,31 @@
 		<Content />
 	</div>
 </article>
+
+<style>
+	:global(html.latte .shiki),
+	:global(html.latte .shiki span) {
+		background-color: var(--shiki-latte-bg) !important;
+		color: var(--shiki-latte) !important;
+	}
+
+	:global(html.frappe .shiki),
+	:global(html.frappe .shiki span) {
+		background-color: var(--shiki-frappe-bg) !important;
+		color: var(--shiki-frappe) !important;
+	}
+
+	:global(html.macchiato .shiki),
+	:global(html.macchiato .shiki span) {
+		background-color: var(--shiki-macchiato-bg) !important;
+		color: var(--shiki-macchiato) !important;
+	}
+
+	:global(html.mocha .shiki),
+	:global(html.mocha .shiki span),
+	:global(.shiki),
+	:global(.shiki span) {
+		background-color: var(--shiki-mocha-bg) !important;
+		color: var(--shiki-mocha) !important;
+	}
+</style>

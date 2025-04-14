@@ -5,7 +5,7 @@ import {
 	IconBrandInstagram,
 	IconBrandLinkedin
 } from '@tabler/icons-svelte';
-
+import { dev } from '$app/environment';
 interface SocialLink {
 	url: string;
 	label: string;
@@ -14,6 +14,7 @@ interface SocialLink {
 
 interface Site {
 	name: string;
+	url: string;
 	description: string;
 	abacus: { instance: string; namespace: string; key: string };
 	out: {
@@ -28,6 +29,7 @@ interface Site {
 
 const Site: Site = {
 	name: 'Portfolio',
+	url: dev ? 'http://localhost:5173' : 'https://nyx.jasoncameron.dev',
 	description: "Jason Cameron's Portfolio",
 	abacus: {
 		instance: 'https://abacus.jasoncameron.dev',

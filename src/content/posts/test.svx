@@ -17,3 +17,14 @@ function greet(name: string) {
 	console.log(`Hey ${name}! 👋`)
 }
 ```
+
+
+```go
+package main
+import (
+	"fmt"
+)
+func main() {
+	fmt.Println("Hello, world!")
+}
+```

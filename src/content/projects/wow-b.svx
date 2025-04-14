@@ -16,3 +16,10 @@ imageAlt: Network diagram illustrating the infrastructure of Awesome Project B
 # Awesome Project B
 
 Details about project B...
+
+
+```ts
+const greet = (name: string) => {
+	console.log(`Hey ${name}! 👋`)
+}
+```

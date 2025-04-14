@@ -57,6 +57,9 @@ importers:
       '@neoconfetti/svelte':
         specifier: ^2.2.2
         version: 2.2.2(svelte@5.26.2)
+      '@shikijs/colorized-brackets':
+        specifier: ^3.2.2
+        version: 3.2.2
       '@sveltejs/adapter-cloudflare':
         specifier: ^5.1.0
         version: 5.1.0(@sveltejs/kit@2.20.5(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.26.2)(vite@6.2.6(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(yaml@2.7.1)))(svelte@5.26.2)(vite@6.2.6(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(yaml@2.7.1)))(wrangler@4.5.0(@cloudflare/workers-types@4.20250412.0))
@@ -835,6 +838,9 @@ packages:
     resolution: {integrity: sha512-lpPE1cLfP5oPzVjKMx10pgBmKELQnFJXHgvtHCtuJWOv8MxqdEIMNtgHgBFf7Ea2/7EuVwa9fodWUfXAlXZLZQ==}
     cpu: [x64]
     os: [win32]
+
+  '@shikijs/colorized-brackets@3.2.2':
+    resolution: {integrity: sha512-dht9W2Kp4Wr3fJTmNPHgLM1920kZRF92nV89QcwyeDfAB9HIGg6OK8GRTnrxPcLYUkyGSWjTs9c2WpIZOUP8pg==}
 
   '@shikijs/core@3.2.2':
     resolution: {integrity: sha512-yvlSKVMLjddAGBa2Yu+vUZxuu3sClOWW1AG+UtJkvejYuGM5BVL35s6Ijiwb75O9QdEx6IkMxinHZSi8ZyrBaA==}
@@ -2755,6 +2761,10 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.40.0':
     optional: true
+
+  '@shikijs/colorized-brackets@3.2.2':
+    dependencies:
+      shiki: 3.2.2
 
   '@shikijs/core@3.2.2':
     dependencies:
