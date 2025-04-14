@@ -1,5 +1,5 @@
 ---
-title: Awesome Project B
+title: Wow title
 description: Building robust infrastructure using Go and modern DevOps practices.
 date: 2024-02-20
 published: true
@@ -13,7 +13,7 @@ imageUrl: /projects/test.jpeg
 imageAlt: Network diagram illustrating the infrastructure of Awesome Project B
 ---
 
-# Awesome Project B
+## Awesome Project B
 
 Details about project B...
 

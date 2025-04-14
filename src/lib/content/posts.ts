@@ -21,7 +21,7 @@ export interface PostPageData extends PostEntry {
 }
 
 // Eager‑glob at build time
-const postModules = import.meta.glob('/src/content/posts/*.svx', { eager: true });
+const postModules = import.meta.glob('/content/posts/*.svx', { eager: true });
 
 // Helpers
 function slugFrom(path: string) {
@@ -51,7 +51,7 @@ export function getFeaturedPosts(): PostEntry[] {
 }
 
 export function getPostBySlug(slug: string): PostPageData {
-	const path = `/src/content/posts/${slug}.svx`;
+	const path = `/content/posts/${slug}.svx`;
 	const mod = (postModules as Record<string, SvelteComponent>)[path];
 	if (!mod || !mod.metadata.published) throw error(404, `Post not found: ${slug}`);
 	return { slug, metadata: mod.metadata, content: mod.default } satisfies PostPageData;

@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 import type { ProjectMetadata, ProjectEntry, ProjectPageData } from '$types/projects';
 import type { SvelteComponent } from 'svelte';
 
-const projectModules = import.meta.glob('/src/content/projects/*.svx', { eager: true });
+const projectModules = import.meta.glob('/content/projects/*.svx', { eager: true });
 
 function slugFrom(path: string) {
 	return path.split('/').pop()!.replace('.svx', '');
@@ -31,7 +31,7 @@ export function getFeaturedProjects(): ProjectEntry[] {
 }
 
 export function getProjectBySlug(slug: string): ProjectPageData {
-	const path = `/src/content/projects/${slug}.svx`;
+	const path = `/content/projects/${slug}.svx`;
 	const mod = (projectModules as Record<string, SvelteComponent>)[path];
 	if (!mod || !mod.metadata?.published) throw error(404, `Project not found: ${slug}`);
 	return { slug, metadata: mod.metadata, content: mod.default } satisfies ProjectPageData;
