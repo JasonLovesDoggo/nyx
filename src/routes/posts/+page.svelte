@@ -19,13 +19,14 @@
 				<a
 					href={`/posts/${post.slug}`}
 					class="
-        group focus-visible:ring-accent after:bg-accent relative block
-        py-3 no-underline after:absolute
-        after:bottom-0 after:left-0 after:h-px after:w-0
-        after:transition-[width] after:duration-300 after:ease-out
-        after:content-[''] hover:after:w-full focus:outline-none
-        focus-visible:ring-2
-      "
+  group focus-visible:ring-accent after:bg-accent relative block
+  py-3 no-underline after:absolute
+  after:bottom-0 after:left-1/2 after:h-px
+  after:w-0 after:-translate-x-1/2
+  after:transition-[width] after:duration-300
+  after:ease-out
+  after:content-[''] hover:after:w-full focus:outline-none
+  focus-visible:ring-2"
 				>
 					<div class="flex items-baseline justify-between gap-4">
 						<h2
