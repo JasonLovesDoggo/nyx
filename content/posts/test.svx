@@ -1,6 +1,6 @@
 ---
 title: First post
-description: First post.
+description: Lorum ipsum dolor sit amet. Another post. Another post. Yay Yay Yay when you do this
 published_at: '2023-4-14'
 categories:
   - sveltekit
