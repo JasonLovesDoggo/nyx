@@ -12,9 +12,9 @@
 </script>
 
 <footer
-	class="bg-crust text-subtext0 m-auto mx-5 mb-5 flex h-auto flex-wrap items-center justify-between gap-y-3 rounded-lg p-5 text-sm"
+	class="bg-crust text-subtext0 m-auto mx-5 mb-5 flex h-auto flex-col items-center justify-center gap-y-3 rounded-lg p-5 text-sm md:flex-row md:justify-between md:gap-y-0"
 >
-	<div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+	<div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 md:justify-start">
 		<span class="whitespace-nowrap">© {year} Jason Cameron</span>
 
 		<span class="text-surface0 hidden md:inline">-</span>
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 
-	<div class="flex flex-wrap items-center justify-end gap-x-3 gap-y-2">
+	<div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 md:justify-end">
 		<a
 			href="https://abacus.jasoncameron.dev"
 			target="_blank"
