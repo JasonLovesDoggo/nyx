@@ -2,7 +2,7 @@
 	import { IconArrowRight, IconStar } from '@tabler/icons-svelte';
 	import type { ProjectMetadata } from '$types/projects';
 
-	interface FeaturedProject {
+	export interface FeaturedProject {
 		slug: string;
 		metadata: ProjectMetadata;
 	}
