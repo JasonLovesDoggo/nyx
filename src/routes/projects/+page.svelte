@@ -27,19 +27,14 @@
 				<a
 					href={`/projects/${project.slug}`}
 					class="border-surface0 bg-base hover:border-accent group block space-y-3 rounded-xl border p-5 shadow-lg transition-colors duration-200"
-					style:view-transition-name="project-card-{project.slug}"
 				>
 					<img
 						src={project.metadata.imageUrl}
 						alt={project.metadata.imageAlt}
 						class="mb-4 aspect-video w-full rounded-md object-cover"
-						style:view-transition-name="project-image-{project.slug}"
 					/>
 
-					<h2
-						class="text-text group-hover:text-accent text-xl font-semibold"
-						style:view-transition-name="project-title-{project.slug}"
-					>
+					<h2 class="text-text group-hover:text-accent text-xl font-semibold">
 						{project.metadata.title}
 					</h2>
 					<p class="text-subtext0 text-sm">{project.metadata.description}</p>

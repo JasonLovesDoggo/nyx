@@ -43,17 +43,13 @@
 				src={data.metadata.imageUrl}
 				alt={data.metadata.imageAlt}
 				class="aspect-[16/7] w-full object-cover"
-				style:view-transition-name="project-banner-{data.slug}"
 			/>
 		</div>
 	{/if}
 
 	<!-- Header Section -->
 	<header class="mb-8 space-y-4">
-		<h1
-			class="text-3xl font-bold md:text-4xl"
-			style:view-transition-name="project-title-{data.slug}"
-		>
+		<h1 class="text-3xl font-bold md:text-4xl">
 			{data.metadata.title}
 		</h1>
 

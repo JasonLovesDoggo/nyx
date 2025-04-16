@@ -38,7 +38,6 @@
 				<a
 					href={`/projects/${project.slug}`}
 					class="border-surface0 bg-mantle hover:border-accent focus-visible:border-accent group block overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl focus:outline-none"
-					style:view-transition-name="project-card-{project.slug}"
 				>
 					{#if project.metadata.imageUrl}
 						<div class="overflow-hidden">
@@ -46,16 +45,12 @@
 								src={project.metadata.imageUrl}
 								alt={project.metadata.imageAlt}
 								class="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
-								style:view-transition-name="project-banner-{project.slug}"
 							/>
 						</div>
 					{/if}
 
 					<div class="space-y-3 p-5">
-						<h3
-							class="text-text group-hover:text-accent text-xl font-semibold transition-colors"
-							style:view-transition-name="project-title-{project.slug}"
-						>
+						<h3 class="text-text group-hover:text-accent text-xl font-semibold transition-colors">
 							{project.metadata.title}
 						</h3>
 						<p class="text-subtext0 line-clamp-2 text-sm">{project.metadata.description}</p>
