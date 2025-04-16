@@ -27,13 +27,15 @@
 							<img
 								src={item.logoUrl}
 								alt={item.logoAlt}
-								class="flex max-h-8 min-h-6 w-auto min-w-6 grow-9 object-contain"
+								class="flex max-h-8 min-h-7 w-auto min-w-6 grow-9 object-contain"
 							/>
 							<span class="text-subtext1 group-hover:text-text group-focus-visible:text-text">
-								<span class={past ? '' : 'text-text font-medium'}>{item.company}</span>
-								{#if past}
-									<span class="text-overlay0 text-xs"> (Past)</span>
-								{/if}
+								<span class="whitespace-nowrap">
+									<span class={past ? '' : 'text-text font-medium'}>{item.company}</span>
+									{#if past}
+										<span class="text-overlay0 text-xs"> (Past)</span>
+									{/if}
+								</span>
 							</span>
 						</button>
 					{/snippet}
