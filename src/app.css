@@ -32,11 +32,6 @@
 	}
 }
 
-@utility bg-* {
-	/*apply transitions on everything that overrides the bg*/
-	@apply transition-colors duration-600 ease-in-out;
-}
-
 @theme static {
 	--color-accent: var(--current-accent-color);
 }
@@ -56,6 +51,24 @@
 }
 
 /*View Transitions */
+
+/* for firefox */
+@utility bg-* {
+	@apply transition-colors duration-600 ease-in-out;
+}
+
+@utility text-* {
+	@apply transition-colors duration-600 ease-in-out;
+}
+
+@utility border-* {
+	@apply transition-colors duration-600 ease-in-out;
+}
+
+@utility ring-* {
+	@apply transition-colors duration-600 ease-in-out;
+}
+/*for chrome*/
 ::view-transition-old(root),
 ::view-transition-new(root) {
 	animation: none;
@@ -67,9 +80,11 @@
 }
 
 ::view-transition-new(root) {
-	z-index: 1;
+	z-index: 9999;
+	animation: reveal 0.7s linear forwards;
 }
 
+/* Circle Reveal Keyframe */
 @keyframes reveal {
 	from {
 		clip-path: circle(
@@ -81,8 +96,4 @@
 		clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
 		opacity: 1;
 	}
-}
-
-::view-transition-new(root) {
-	animation: reveal 0.7s linear forwards;
 }
