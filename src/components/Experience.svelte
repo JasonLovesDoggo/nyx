@@ -24,7 +24,11 @@
 								: 'hover:opacity-80 focus-visible:opacity-100'}"
 							aria-label={`View details for ${item.role} at ${item.company}`}
 						>
-							<img src={item.logoUrl} alt="" class="max-w-9 min-w-7 object-fill" />
+							<img
+								src={item.logoUrl}
+								alt={item.logoAlt}
+								class="flex max-h-8 min-h-6 w-auto min-w-6 grow-9 object-contain"
+							/>
 							<span class="text-subtext1 group-hover:text-text group-focus-visible:text-text">
 								<span class={past ? '' : 'text-text font-medium'}>{item.company}</span>
 								{#if past}
@@ -47,7 +51,7 @@
 								<img
 									src={item.logoUrl}
 									alt={item.logoAlt}
-									class="bg-surface0 h-10 w-auto max-w-[4rem] flex-shrink-0 rounded-md object-contain p-1"
+									class="h-10 w-auto max-w-[4rem] flex-shrink-0 rounded-md object-contain p-1"
 								/>
 								<div>
 									<h4 class="text-text group-hover:text-accent font-semibold transition-colors">
