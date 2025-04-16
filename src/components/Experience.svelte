@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Popover } from 'bits-ui';
-	import { experienceTimeline } from '$lib/config/pages.js';
-	import { IconX, IconExternalLink } from '@tabler/icons-svelte';
+	import { experienceTimeline, type ExperienceTimelineItem } from '$lib/config/pages.js';
+	import { IconX, IconExternalLink, IconCalendarEvent } from '@tabler/icons-svelte';
+	import { formatDate } from '$lib/utils/date';
 
-	function isPast(item: (typeof experienceTimeline)[number]): boolean {
+	function isPast(item: ExperienceTimelineItem): boolean {
 		return !!item.endDate;
 	}
 </script>
@@ -45,7 +46,7 @@
 							<div class="flex items-center gap-3">
 								<img
 									src={item.logoUrl}
-									alt=""
+									alt={item.logoAlt}
 									class="bg-surface0 h-10 w-auto max-w-[4rem] flex-shrink-0 rounded-md object-contain p-1"
 								/>
 								<div>
@@ -67,9 +68,16 @@
 							<p class="text-subtext1 mb-3 text-sm">{item.details}</p>
 						{/if}
 
-						{#if item.endDate}
-							<p class="text-overlay0 mb-3 text-xs">Ended: {item.endDate}</p>
-						{/if}
+						<div class="text-overlay0 mb-3 flex items-center gap-1.5 text-xs">
+							<IconCalendarEvent size={14} class="flex-shrink-0" />
+							<span>{formatDate(item.startDate, { yearMonthOnly: true })}</span>
+							<span>-</span>
+							{#if item.endDate}
+								<span>{formatDate(item.endDate, { yearMonthOnly: true })}</span>
+							{:else}
+								<span>Present</span>
+							{/if}
+						</div>
 
 						<a
 							href={item.url}
