@@ -17,13 +17,14 @@ export const Home = {
 	]
 };
 
-interface ExperienceTimelineItem {
+export interface ExperienceTimelineItem {
 	company: string;
 	role: string;
 	url: string;
 	logoUrl: string;
 	logoAlt: string;
-	endDate?: string; // Use optional endDate. If present, it's a past role.
+	startDate: string;
+	endDate?: string; // optional endDate. If present, it's a past role.
 	details?: string; // Optional details for expansion
 }
 
@@ -34,8 +35,8 @@ export const experienceTimeline: ExperienceTimelineItem[] = [
 		url: 'https://www.rbc.com',
 		logoUrl: '/logos/rbc.svg',
 		logoAlt: 'RBC Logo',
-		details:
-			'I will be joining RBC as an intern in the summer of 2024. I am excited to work with a team that is at the forefront of innovation in the financial services industry.'
+		startDate: '2025-07-02',
+		details: 'I will be joining RBC as an intern in the summer of 2025.'
 	},
 	{
 		company: 'StorageBox',
@@ -43,8 +44,9 @@ export const experienceTimeline: ExperienceTimelineItem[] = [
 		url: 'https://storagebox.app/',
 		logoUrl: '/logos/storagebox.svg',
 		logoAlt: 'StorageBox Logo',
+		startDate: '2024-09-01',
 		details:
-			'As CTO, I lead the technical vision and development of StorageBox, a platform that simplifies file management and sharing.'
+			'As CTO, I lead the development of StorageBox, an innovative startup revolutionizing eco-friendly Shopify fulfillment with edge based sustainable warehousing technology and seamless logistics integrations.'
 	},
 	{
 		company: 'Hack Canada',
@@ -52,8 +54,9 @@ export const experienceTimeline: ExperienceTimelineItem[] = [
 		url: 'https://hackcanada.org/',
 		logoUrl: '/logos/hackcanada.svg',
 		logoAlt: 'Hack Canada Logo',
+		startDate: '2024-09-01',
 		endDate: '2025-05-01',
 		details:
-			'Hack Canada is a national hackathon series that brings together students from across Canada to innovate and create impactful projects. As a cofounder, I am involved in organizing events and fostering a community of young developers.'
+			"Co-launched Hack Canada, Hackathons Canada's premier national hackathon series. Organized the inaugural event (February 21–23, 2025), secured partnerships with Google, WarpDev, and Microsoft and more, oversaw all development, workshops, and mentorship sessions for 400+ participants."
 	}
 ];
