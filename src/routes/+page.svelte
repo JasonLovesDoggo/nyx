@@ -12,7 +12,7 @@
 		IconSchool
 	} from '@tabler/icons-svelte';
 	import Site from '$lib/config/common';
-	import { Home } from '$lib/config/pages';
+	import { experienceTimeline, Home } from '$lib/config/pages';
 	import {
 		codingStats,
 		latestCommits,
@@ -102,6 +102,25 @@
 			</a>
 		</div>
 	</section>
+
+	<div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:justify-start">
+		{#each experienceTimeline as item, i (item.company)}
+			<a
+				href={item.url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group flex items-center gap-3 text-sm transition-opacity hover:opacity-80"
+			>
+				<img src={item.logoUrl} alt={item.logoAlt} class="h-8 w-auto" />
+				<span class="text-subtext1 group-hover:text-text"
+					>{item.role} @ <span class="text-text font-medium">{item.company}</span></span
+				>
+			</a>
+			{#if i < experienceTimeline.length - 1}
+				<span class="text-accent hidden md:inline">/</span>
+			{/if}
+		{/each}
+	</div>
 
 	<!-- Section 2: Featured Projects (using the component) -->
 	<Featured projects={data.featuredProjects} />
