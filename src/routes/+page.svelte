@@ -1,6 +1,6 @@
 <script lang="ts">
 	import LinkWithIcon from '$components/LinkWithIcon.svelte';
-	import Featured from '$components/layout/Featured.svelte';
+	import Featured, { type FeaturedProject } from '$components/layout/Featured.svelte';
 	import {
 		IconArrowRight,
 		IconExternalLink,
@@ -12,36 +12,18 @@
 		IconSchool
 	} from '@tabler/icons-svelte';
 	import Site from '$lib/config/common';
-	import { experienceTimeline, Home } from '$lib/config/pages';
+	import { Home } from '$lib/config/pages';
 	import { codingStats, latestCommits, latestPosts, organizations } from '$lib/config/about';
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
+	import Experience from '$components/Experience.svelte';
 
-	interface ProjectMetadata {
-		title: string;
-		description: string;
-		date: string;
-		published: boolean;
-		featured?: boolean;
-		tags?: string[];
-		imageUrl?: string;
-		imageAlt?: string;
-	}
-	interface FeaturedProject {
-		slug: string;
-		metadata: ProjectMetadata;
-	}
 	type PageData = {
 		featuredProjects: FeaturedProject[];
 	};
 
 	let { data }: { data: PageData } = $props();
 	let isNameHovered = $state(false);
-
-	// Helper to check if past based on endDate
-	function isPast(item: (typeof experienceTimeline)[number]): boolean {
-		return !!item.endDate;
-	}
 </script>
 
 <div class="mx-auto max-w-6xl space-y-12 px-0 py-8 md:space-y-16 md:px-4 md:py-12">
@@ -101,35 +83,7 @@
 	</section>
 
 	<!-- Section: Minimal Experience Row -->
-	<section class="px-4 md:px-0">
-		<div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 md:justify-start">
-			{#each experienceTimeline as item, i (item.company)}
-				{@const past = isPast(item)}
-				<a
-					href={item.url}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group flex items-center gap-2 text-sm transition-opacity duration-200 {past
-						? 'opacity-60 hover:opacity-80' /* Dim past items slightly */
-						: 'hover:opacity-80'}"
-					title={past
-						? `${item.role} @ ${item.company} (Ended ${item.endDate})`
-						: `${item.role} @ ${item.company}`}
-				>
-					<img src={item.logoUrl} alt="" class="max-h-6 w-auto object-contain" />
-					<span class="text-subtext1 group-hover:text-text">
-						<span class={past ? '' : 'text-text font-medium'}>{item.company}</span>
-						{#if past}
-							<span class="text-overlay0 text-xs"> (Past)</span>
-						{/if}
-					</span>
-				</a>
-				{#if i < experienceTimeline.length - 1}
-					<span class="text-accent hidden md:inline">/</span>
-				{/if}
-			{/each}
-		</div>
-	</section>
+	<Experience />
 
 	<!-- Section: Featured Projects -->
 	<Featured projects={data.featuredProjects} />
