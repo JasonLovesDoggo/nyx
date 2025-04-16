@@ -11,5 +11,10 @@ export default defineConfig({
 			emitFile: true,
 			filename: 'stats.html'
 		})
-	]
+	],
+	server: {
+		fs: {
+			allow: ['.']
+		}
+	}
 });

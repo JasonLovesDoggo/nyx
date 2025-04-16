@@ -53,8 +53,8 @@ export const featuredProjects = [
 ];
 export const latestPosts = [
 	// todo: fetch dynamically
-	{ title: 'Understanding Web Scraper Tactics & Defenses', href: '/blog/scraper-tactics' },
-	{ title: 'My First CVE Discovery Journey', href: '/blog/first-cve' }
+	{ title: 'Understanding Web Scraper Tactics & Defenses', href: '/posts/scraper-tactics' },
+	{ title: 'My First CVE Discovery Journey', href: '/posts/first-cve' }
 ];
 export const codingStats = { language: 'golang', hours: '1,200+' }; // todo: wakatime api based :pray:
 export const latestCommits = [

@@ -1,0 +1,14 @@
+---
+title: Second
+description: Second post.
+published_at: '2023-4-16'
+categories:
+  - sveltekit
+  - svelte
+---
+
+## Svelte
+
+Media inside the **static** folder is served from `/`.
+
+![Svelte](/projects/test.jpeg)

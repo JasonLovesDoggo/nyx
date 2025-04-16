@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import { formatDate } from '$utils/date';
 
+	import '$static/css/syntax.css';
 	type PageData = ProjectPageData;
 
 	let { data }: { data: PageData } = $props();
@@ -34,7 +35,7 @@
 	{/if}
 </svelte:head>
 
-<article class="mx-auto max-w-4xl">
+<article class="prose prose-invert prose-headings:text-accent mx-auto max-w-4xl">
 	<!-- Banner Image -->
 	{#if data.metadata.imageUrl}
 		<div class="mb-8 overflow-hidden rounded-lg shadow-lg md:rounded-xl">
@@ -42,17 +43,13 @@
 				src={data.metadata.imageUrl}
 				alt={data.metadata.imageAlt}
 				class="aspect-[16/7] w-full object-cover"
-				style:view-transition-name="project-banner-{data.slug}"
 			/>
 		</div>
 	{/if}
 
 	<!-- Header Section -->
 	<header class="mb-8 space-y-4">
-		<h1
-			class="text-3xl font-bold md:text-4xl"
-			style:view-transition-name="project-title-{data.slug}"
-		>
+		<h1 class="text-3xl font-bold md:text-4xl">
 			{data.metadata.title}
 		</h1>
 
@@ -76,25 +73,26 @@
 					</div>
 				</div>
 			{/if}
-			<!-- Optional: Add Project/GitHub Links here if defined in metadata -->
-			<!--
 			{#if data.metadata.githubUrl}
-				 <a href={data.metadata.githubUrl} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-accent transition-colors">...GitHub Icon...</a>
+				<a
+					href={data.metadata.githubUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:text-accent flex items-center gap-1 transition-colors">...GitHub Icon...</a
+				>
 			{/if}
 			{#if data.metadata.projectUrl}
-					<a href={data.metadata.projectUrl} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-accent transition-colors">...Link Icon...</a>
+				<a
+					href={data.metadata.projectUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:text-accent flex items-center gap-1 transition-colors">...Link Icon...</a
+				>
 			{/if}
-			-->
 		</div>
 	</header>
 
 	<hr class="border-surface1 mb-8" />
 
-	<!-- Main Content -->
-	<div
-		class="prose prose-invert prose-headings:text-accent prose-a:text-accent prose-strong:text-text prose-img:rounded-md
-                prose-img:shadow-md prose-code:bg-surface0 prose-code:p-0.5 prose-code:rounded max-w-none"
-	>
-		<Content />
-	</div>
+	<Content />
 </article>

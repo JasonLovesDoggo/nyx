@@ -1,6 +1,6 @@
 <script lang="ts">
 	import LinkWithIcon from '$components/LinkWithIcon.svelte';
-	import Featured from '$components/layout/Featured.svelte'; // <--- Import Featured component
+	import Featured, { type FeaturedProject } from '$components/layout/Featured.svelte';
 	import {
 		IconArrowRight,
 		IconExternalLink,
@@ -13,43 +13,22 @@
 	} from '@tabler/icons-svelte';
 	import Site from '$lib/config/common';
 	import { Home } from '$lib/config/pages';
-	import {
-		codingStats,
-		latestCommits,
-		latestPosts,
-		organizations,
-		workExperience
-	} from '$lib/config/about';
+	import { codingStats, latestCommits, latestPosts, organizations } from '$lib/config/about';
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
+	import Experience from '$components/Experience.svelte';
 
-	// Define the type for the data coming from the load function
-	interface ProjectMetadata {
-		title: string;
-		description: string;
-		date: string;
-		published: boolean;
-		featured?: boolean;
-		tags?: string[];
-		// Add other expected fields
-	}
-	interface FeaturedProject {
-		slug: string;
-		metadata: ProjectMetadata;
-	}
 	type PageData = {
 		featuredProjects: FeaturedProject[];
 	};
 
 	let { data }: { data: PageData } = $props();
-
 	let isNameHovered = $state(false);
 </script>
 
 <div class="mx-auto max-w-6xl space-y-12 px-0 py-8 md:space-y-16 md:px-4 md:py-12">
 	<!-- Section 1: Hero / Introduction -->
 	<section class="space-y-5 px-4 md:px-0">
-		<!-- ... existing hero content ... -->
 		<h1 class="text-3xl font-bold md:text-4xl">
 			Hey! I'm
 			<span class="text-accent">
@@ -103,14 +82,16 @@
 		</div>
 	</section>
 
-	<!-- Section 2: Featured Projects (using the component) -->
+	<!-- Section: Minimal Experience Row -->
+	<Experience />
+
+	<!-- Section: Featured Projects -->
 	<Featured projects={data.featuredProjects} />
 
-	<!-- Section 3: Bento Grid Container -->
+	<!-- Section: Bento Grid Container -->
 	<section class="px-4 md:px-0">
 		<h2 class="sr-only">Dashboard / Highlights</h2>
 		<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
-			<!-- ... your existing bento boxes ... -->
 			<!-- Box 2: Theme Selector -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<ThemeSelector />
@@ -139,7 +120,7 @@
 					<p class="text-subtext1 text-sm italic">No posts yet.</p>
 				{/if}
 				<a
-					href="/blog"
+					href="/posts"
 					class="group text-accent mt-3 inline-flex items-center gap-1 text-sm hover:underline"
 				>
 					<span>All posts</span>
@@ -175,13 +156,14 @@
 			</div>
 
 			<!-- Box 5: Book a chat -->
-
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
 					<IconCalendarEvent size={16} class="text-accent" />
 					Let's Connect
 				</h3>
-				<p class="text-subtext0 mb-4 text-sm">todo: ASPOLKFED? think of quirky line here</p>
+				<p class="text-subtext0 mb-4 text-sm">
+					Always open to interesting projects and conversations.
+				</p>
 				<a
 					href={Site.out.calcom}
 					target="_blank"
@@ -230,29 +212,17 @@
 				</a>
 			</div>
 
-			<!-- Box 7: Roles / Affiliations -->
+			<!-- Box 7: Roles / Affiliations (Simplified/Redundant?) -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
 					<IconBriefcase size={16} class="text-accent" />
-					Roles & Affiliations
+					Quick Roles
 				</h3>
 				<div class="space-y-2 text-sm">
 					<div class="text-subtext0 flex items-center gap-2">
 						<IconSchool size={18} class="text-sky flex-shrink-0" />
 						<span>Student @ High School</span>
 					</div>
-					{#if workExperience.length > 0}
-						{#each workExperience as exp (exp.company)}
-							{@const ExpIcon = exp.icon}
-							<div class="text-subtext0 flex items-center gap-2">
-								<ExpIcon size={18} class="text-green flex-shrink-0" />
-								<span title={exp.role + ' @ ' + exp.company}
-									>{exp.company}
-									({exp.role.includes('Incoming') ? 'Incoming' : 'Past'})</span
-								>
-							</div>
-						{/each}
-					{/if}
 					{#if organizations.length > 0}
 						{#each organizations as org (org.name)}
 							{@const OrgIcon = org.icon}

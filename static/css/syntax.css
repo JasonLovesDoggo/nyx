@@ -1,0 +1,25 @@
+html.latte .shiki,
+html.latte .shiki span {
+	background-color: var(--shiki-latte-bg) !important;
+	color: var(--shiki-latte) !important;
+}
+
+html.frappe .shiki,
+html.frappe .shiki span {
+	background-color: var(--shiki-frappe-bg) !important;
+	color: var(--shiki-frappe) !important;
+}
+
+html.macchiato .shiki,
+html.macchiato .shiki span {
+	background-color: var(--shiki-macchiato-bg) !important;
+	color: var(--shiki-macchiato) !important;
+}
+
+html.mocha .shiki,
+html.mocha .shiki span,
+.shiki, /*mocha is the default. prevents page transitions on load*/
+.shiki span {
+	background-color: var(--shiki-mocha-bg) !important;
+	color: var(--shiki-mocha) !important;
+}
