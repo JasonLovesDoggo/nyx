@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Accent, accentColorNames } from '$lib/stores/theme';
 	import { mainNavItems, moreNavItems } from '$lib/config/navItems';
 	import { IconX } from '@tabler/icons-svelte';
 	import { page } from '$app/state';
