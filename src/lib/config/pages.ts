@@ -32,7 +32,7 @@ export const experienceTimeline: ExperienceTimelineItem[] = [
 		company: 'RBC',
 		role: 'Incoming Intern',
 		url: 'https://www.rbc.com',
-		logoUrl: '/logos/rbc.png',
+		logoUrl: '/logos/rbc.svg',
 		logoAlt: 'RBC Logo',
 		details:
 			'I will be joining RBC as an intern in the summer of 2024. I am excited to work with a team that is at the forefront of innovation in the financial services industry.'
