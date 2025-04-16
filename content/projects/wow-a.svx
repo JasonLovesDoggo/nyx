@@ -15,3 +15,8 @@ imageAlt: Abstract visualization representing Cool Project A
 # Cool Project A
 
 Details about project A...
+
+
+```javascript
+console.log('This is a cool project!');
+```

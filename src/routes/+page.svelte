@@ -1,6 +1,6 @@
 <script lang="ts">
 	import LinkWithIcon from '$components/LinkWithIcon.svelte';
-	import Featured from '$components/layout/Featured.svelte'; // <--- Import Featured component
+	import Featured from '$components/layout/Featured.svelte';
 	import {
 		IconArrowRight,
 		IconExternalLink,
@@ -13,17 +13,10 @@
 	} from '@tabler/icons-svelte';
 	import Site from '$lib/config/common';
 	import { experienceTimeline, Home } from '$lib/config/pages';
-	import {
-		codingStats,
-		latestCommits,
-		latestPosts,
-		organizations,
-		workExperience
-	} from '$lib/config/about';
+	import { codingStats, latestCommits, latestPosts, organizations } from '$lib/config/about';
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
 
-	// Define the type for the data coming from the load function
 	interface ProjectMetadata {
 		title: string;
 		description: string;
@@ -31,7 +24,8 @@
 		published: boolean;
 		featured?: boolean;
 		tags?: string[];
-		// Add other expected fields
+		imageUrl?: string;
+		imageAlt?: string;
 	}
 	interface FeaturedProject {
 		slug: string;
@@ -42,14 +36,17 @@
 	};
 
 	let { data }: { data: PageData } = $props();
-
 	let isNameHovered = $state(false);
+
+	// Helper to check if past based on endDate
+	function isPast(item: (typeof experienceTimeline)[number]): boolean {
+		return !!item.endDate;
+	}
 </script>
 
 <div class="mx-auto max-w-6xl space-y-12 px-0 py-8 md:space-y-16 md:px-4 md:py-12">
 	<!-- Section 1: Hero / Introduction -->
 	<section class="space-y-5 px-4 md:px-0">
-		<!-- ... existing hero content ... -->
 		<h1 class="text-3xl font-bold md:text-4xl">
 			Hey! I'm
 			<span class="text-accent">
@@ -103,33 +100,44 @@
 		</div>
 	</section>
 
-	<div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:justify-start">
-		{#each experienceTimeline as item, i (item.company)}
-			<a
-				href={item.url}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="group flex items-center gap-3 text-sm transition-opacity hover:opacity-80"
-			>
-				<img src={item.logoUrl} alt={item.logoAlt} class="h-8 w-auto" />
-				<span class="text-subtext1 group-hover:text-text"
-					>{item.role} @ <span class="text-text font-medium">{item.company}</span></span
+	<!-- Section: Minimal Experience Row -->
+	<section class="px-4 md:px-0">
+		<div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 md:justify-start">
+			{#each experienceTimeline as item, i (item.company)}
+				{@const past = isPast(item)}
+				<a
+					href={item.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group flex items-center gap-2 text-sm transition-opacity duration-200 {past
+						? 'opacity-60 hover:opacity-80' /* Dim past items slightly */
+						: 'hover:opacity-80'}"
+					title={past
+						? `${item.role} @ ${item.company} (Ended ${item.endDate})`
+						: `${item.role} @ ${item.company}`}
 				>
-			</a>
-			{#if i < experienceTimeline.length - 1}
-				<span class="text-accent hidden md:inline">/</span>
-			{/if}
-		{/each}
-	</div>
+					<img src={item.logoUrl} alt="" class="max-h-6 w-auto object-contain" />
+					<span class="text-subtext1 group-hover:text-text">
+						<span class={past ? '' : 'text-text font-medium'}>{item.company}</span>
+						{#if past}
+							<span class="text-overlay0 text-xs"> (Past)</span>
+						{/if}
+					</span>
+				</a>
+				{#if i < experienceTimeline.length - 1}
+					<span class="text-accent hidden md:inline">/</span>
+				{/if}
+			{/each}
+		</div>
+	</section>
 
-	<!-- Section 2: Featured Projects (using the component) -->
+	<!-- Section: Featured Projects -->
 	<Featured projects={data.featuredProjects} />
 
-	<!-- Section 3: Bento Grid Container -->
+	<!-- Section: Bento Grid Container -->
 	<section class="px-4 md:px-0">
 		<h2 class="sr-only">Dashboard / Highlights</h2>
 		<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
-			<!-- ... your existing bento boxes ... -->
 			<!-- Box 2: Theme Selector -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<ThemeSelector />
@@ -194,13 +202,14 @@
 			</div>
 
 			<!-- Box 5: Book a chat -->
-
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
 					<IconCalendarEvent size={16} class="text-accent" />
 					Let's Connect
 				</h3>
-				<p class="text-subtext0 mb-4 text-sm">todo: ASPOLKFED? think of quirky line here</p>
+				<p class="text-subtext0 mb-4 text-sm">
+					Always open to interesting projects and conversations.
+				</p>
 				<a
 					href={Site.out.calcom}
 					target="_blank"
@@ -249,29 +258,17 @@
 				</a>
 			</div>
 
-			<!-- Box 7: Roles / Affiliations -->
+			<!-- Box 7: Roles / Affiliations (Simplified/Redundant?) -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
 					<IconBriefcase size={16} class="text-accent" />
-					Roles & Affiliations
+					Quick Roles
 				</h3>
 				<div class="space-y-2 text-sm">
 					<div class="text-subtext0 flex items-center gap-2">
 						<IconSchool size={18} class="text-sky flex-shrink-0" />
 						<span>Student @ High School</span>
 					</div>
-					{#if workExperience.length > 0}
-						{#each workExperience as exp (exp.company)}
-							{@const ExpIcon = exp.icon}
-							<div class="text-subtext0 flex items-center gap-2">
-								<ExpIcon size={18} class="text-green flex-shrink-0" />
-								<span title={exp.role + ' @ ' + exp.company}
-									>{exp.company}
-									({exp.role.includes('Incoming') ? 'Incoming' : 'Past'})</span
-								>
-							</div>
-						{/each}
-					{/if}
 					{#if organizations.length > 0}
 						{#each organizations as org (org.name)}
 							{@const OrgIcon = org.icon}
