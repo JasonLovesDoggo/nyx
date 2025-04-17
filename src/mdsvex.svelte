@@ -1,6 +1,6 @@
 <script lang="ts">
 	let props = $props();
-	import '$static/css/syntax.css';
+	import '$lib/styles/syntax.css';
 </script>
 
 {@render props.children?.()}

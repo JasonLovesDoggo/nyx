@@ -3,7 +3,7 @@
 	import type { PostPageData } from '$lib/content/posts';
 
 	export let data: PostPageData;
-	import '$static/css/markdown.css';
+	import '$lib/styles/syntax.css';
 
 	// Component generated from mdsvex
 	const Content = data.content;
@@ -17,7 +17,7 @@
 	{/if}
 </svelte:head>
 
-<article class="prose mx-auto max-w-4xl">
+<article class="prose mx-auto mb-6 max-w-4xl">
 	<header class="mb-8 space-y-2">
 		<h1 class="text-3xl font-bold">{data.metadata.title}</h1>
 		<p class="text-subtext0 text-sm">

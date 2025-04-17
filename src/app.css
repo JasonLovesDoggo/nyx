@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import '@fontsource/jetbrains-mono/latin-400.css'; /* Regular weight, Latin only */
 @import '@fontsource/jetbrains-mono/latin-700.css'; /* Bold weight, Latin only */
+@plugin "@tailwindcss/typography";
+@config './lib/styles/tailwind.config.js'; /*see https://github.com/tailwindlabs/tailwindcss-typography?tab=readme-ov-file#adding-custom-color-themes*/
 
 @theme {
 	--color-*: initial;
@@ -8,7 +10,6 @@
 @import '../static/css/catppuccin.css'; /*noqa: this line is supposed to be after the above @theme */
 @import '../static/css/colors.css'; /*contains the static colors needed for the color selector*/
 @plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
 /*@plugin "@catppuccin/tailwindcss";*/ /*See https://github.com/catppuccin/tailwindcss/pull/22*/
 
 :root {
