@@ -4,7 +4,7 @@
 	import { page } from '$app/state';
 	import { formatDate } from '$utils/date';
 
-	import '$static/css/syntax.css';
+	import '$static/css/markdown.css';
 	type PageData = ProjectPageData;
 
 	let { data }: { data: PageData } = $props();
@@ -35,7 +35,7 @@
 	{/if}
 </svelte:head>
 
-<article class="prose prose-invert prose-headings:text-accent mx-auto max-w-4xl">
+<article class="prose mx-auto max-w-4xl">
 	<!-- Banner Image -->
 	{#if data.metadata.imageUrl}
 		<div class="mb-8 overflow-hidden rounded-lg shadow-lg md:rounded-xl">
