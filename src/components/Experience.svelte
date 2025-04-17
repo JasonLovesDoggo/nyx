@@ -76,10 +76,17 @@
 
 						<div class="text-overlay0 mb-3 flex items-center gap-1.5 text-xs">
 							<IconCalendarEvent size={14} class="flex-shrink-0" />
+
 							<span>{formatDate(item.startDate, { yearMonthOnly: true })}</span>
 							<span>-</span>
 							{#if item.endDate}
-								<span>{formatDate(item.endDate, { yearMonthOnly: true })}</span>
+								{#if new Date(item.endDate) > new Date()}
+									<span>{formatDate(item.endDate, { yearMonthOnly: true })}</span>
+								{:else}
+									<span>{formatDate(item.endDate, { yearMonthOnly: true })}</span>
+								{/if}
+							{:else if new Date(item.startDate) > new Date()}
+								<span class="text-accent">Incoming</span>
 							{:else}
 								<span>Present</span>
 							{/if}
