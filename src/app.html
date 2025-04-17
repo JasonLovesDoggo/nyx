@@ -7,6 +7,28 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			(function () {
+				try {
+					// get stored palette or fallback to system preference
+					const storedPalette = localStorage.getItem('palette');
+					const palette =
+						storedPalette ||
+						(window.matchMedia('(prefers-color-scheme: light)').matches ? 'latte' : 'mocha');
+					document.documentElement.classList.add(palette);
+
+					// get stored accent or default
+					const accent = localStorage.getItem('accent') || 'peach';
+					document.documentElement.style.setProperty(
+						'--current-accent-color',
+						`var(--color-${accent})`
+					);
+				} catch (e) {
+					// in case localStorage or matchMedia is unavailable
+					console.warn('Theme bootstrapping failed', e);
+				}
+			})();
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

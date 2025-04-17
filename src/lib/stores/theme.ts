@@ -1,37 +1,10 @@
-import { writable, type Writable } from 'svelte/store';
+/*
+ * Copyright (c) 2025. Jason Cameron
+ * All Rights Reserved
+ */
+
 import { browser } from '$app/environment';
-
-// --- Helpers ---
-function persistentWritable<T extends string>(
-	key: string,
-	options: {
-		defaultValue: T;
-		validValues: readonly T[];
-		onUpdate?: (value: T) => void;
-	}
-): Writable<T> {
-	const { defaultValue, validValues, onUpdate } = options;
-
-	let initial = defaultValue;
-
-	if (browser) {
-		const stored = localStorage.getItem(key) as T | null;
-		if (stored && validValues.includes(stored)) {
-			initial = stored;
-		}
-	}
-
-	const store = writable<T>(initial);
-
-	if (browser) {
-		store.subscribe((value) => {
-			localStorage.setItem(key, value);
-			onUpdate?.(value);
-		});
-	}
-
-	return store;
-}
+import { persistentWritable } from './persistance';
 
 function handleTransition(callback: () => void) {
 	if (!browser) return;
@@ -42,7 +15,7 @@ function handleTransition(callback: () => void) {
 	}
 }
 
-// --- Accent ---
+// --- Accent Colors ---
 export const accentColorNames = [
 	'rosewater',
 	'flamingo',
@@ -65,13 +38,18 @@ export type AccentColorName = (typeof accentColorNames)[number];
 export const Accent = persistentWritable<AccentColorName>('accent', {
 	defaultValue: 'peach',
 	validValues: accentColorNames,
-	onUpdate: (value) =>
-		handleTransition(() => {
+	onUpdate: (value, isFirstLoad) => {
+		const apply = () =>
 			document.documentElement.style.setProperty('--current-accent-color', `var(--color-${value})`);
-		})
+		if (isFirstLoad) {
+			apply();
+		} else {
+			handleTransition(apply);
+		}
+	}
 });
 
-// --- Palette ---
+// --- Palettes ---
 export const paletteNames = ['latte', 'frappe', 'macchiato', 'mocha'] as const;
 export type PaletteName = (typeof paletteNames)[number];
 
@@ -83,11 +61,17 @@ function getDefaultPalette(): PaletteName {
 }
 
 export const Palette = persistentWritable<PaletteName>('palette', {
-	defaultValue: getDefaultPalette(),
+	defaultValue: getDefaultPalette,
 	validValues: paletteNames,
-	onUpdate: (value) =>
-		handleTransition(() => {
+	onUpdate: (value, isFirstLoad) => {
+		const apply = () => {
 			document.documentElement.classList.remove(...paletteNames);
 			document.documentElement.classList.add(value);
-		})
+		};
+		if (isFirstLoad) {
+			apply();
+		} else {
+			handleTransition(apply);
+		}
+	}
 });
