@@ -13,10 +13,11 @@
 	} from '@tabler/icons-svelte';
 	import Site from '$lib/config/common';
 	import { Home } from '$lib/config/pages';
-	import { codingStats, latestCommits, latestPosts, organizations } from '$lib/config/about';
+	import { codingStats, latestCommits, organizations } from '$lib/config/about';
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
 	import Experience from '$components/Experience.svelte';
+	import { getLatestPosts } from '$lib/content/posts';
 
 	type PageData = {
 		featuredProjects: FeaturedProject[];
@@ -104,14 +105,14 @@
 					<IconArticle size={16} class="text-accent" />
 					Latest Posts
 				</h3>
-				{#if latestPosts.length > 0}
+				{#if getLatestPosts().length > 0}
 					<ul class="space-y-2 text-sm">
-						{#each latestPosts as post (post.href)}
+						{#each getLatestPosts() as post (post.slug)}
 							<li>
 								<a
-									href={post.href}
+									href={'/posts/' + post.slug}
 									class="text-subtext0 hover:text-accent line-clamp-1 hover:underline"
-									>{post.title}</a
+									>{post.metadata.title}</a
 								>
 							</li>
 						{/each}

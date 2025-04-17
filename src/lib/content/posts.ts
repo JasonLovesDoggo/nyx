@@ -6,7 +6,6 @@ export interface PostMetadata {
 	description: string;
 	updated_at?: string;
 	published_at?: string; // if it's not set, it won't be published
-	featured?: boolean;
 	tags?: string[];
 }
 
@@ -44,17 +43,18 @@ export function getAllPosts(): PostEntry[] {
 	return _allPosts;
 }
 
-let _featuredPosts: PostEntry[];
-export function getFeaturedPosts(): PostEntry[] {
-	if (!_featuredPosts) {
-		_featuredPosts = getAllPosts().filter((p) => p.metadata.featured);
-	}
-	return _featuredPosts;
-}
-
 export function getPostBySlug(slug: string): PostPageData {
 	const path = `/content/posts/${slug}.svx`;
 	const mod = (postModules as Record<string, SvelteComponent>)[path];
 	if (!mod || !mod.metadata.published_at) throw error(404, `Post not found: ${slug}`);
 	return { slug, metadata: mod.metadata, content: mod.default } satisfies PostPageData;
+}
+
+let _latestPosts: PostEntry[];
+const postcount = 2;
+export function getLatestPosts(): PostEntry[] {
+	if (!_latestPosts) {
+		_latestPosts = getAllPosts().slice(0, postcount);
+	}
+	return _latestPosts;
 }
