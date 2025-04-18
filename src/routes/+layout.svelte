@@ -24,6 +24,25 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={Site.description} />
+
+	<!-- Open Graph (OG) Tags -->
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={Site.description} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={Site.url} />
+	<meta property="og:image" content={`${Site.url}/og-image.png`} />
+	<meta property="og:site_name" content={Site.name} />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={Site.description} />
+	<meta name="twitter:image" content={`${Site.url}/og-image.png`} />
+
+	<!-- Additional Meta Tags -->
+	<meta name="author" content={Site.name} />
+	<meta name="keywords" content={Site.tags.join(', ')} />
+	<link rel="canonical" href={Site.url} />
 </svelte:head>
 
 <div class="text-text mx-auto flex min-h-screen max-w-[90%] flex-col md:max-w-[80%]">

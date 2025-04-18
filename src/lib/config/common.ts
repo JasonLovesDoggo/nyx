@@ -16,6 +16,7 @@ interface Site {
 	name: string;
 	url: string;
 	description: string;
+	tags: string[];
 	abacus: { instance: string; namespace: string; key: string };
 	out: {
 		github: string;
@@ -31,6 +32,19 @@ const Site: Site = {
 	name: 'Portfolio',
 	url: dev ? 'http://localhost:5173' : 'https://nyx.jasoncameron.dev',
 	description: "Jason Cameron's Portfolio",
+	tags: [
+		'Jason Cameron',
+		'Portfolio',
+		'Software Engineer',
+		'Toronto',
+		'Canada',
+		'Golang',
+		'Python',
+		'DevOps',
+		'Hackathon',
+		'Anubis',
+		'Developer'
+	],
 	abacus: {
 		instance: 'https://abacus.jasoncameron.dev',
 		namespace: 'jasoncameron',

@@ -11,7 +11,6 @@
 </script>
 
 <svelte:head>
-	<title>Projects</title>
 	<meta name="description" content="A collection of projects by Jason Cameron." />
 </svelte:head>
 

@@ -24,7 +24,6 @@
 		<meta property="og:image" content={new URL(data.metadata.imageUrl, page.url.origin).href} />
 	{/if}
 	<meta property="og:type" content="article" />
-	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={data.metadata.title} />
 	<meta name="twitter:description" content={data.metadata.description} />
 	{#if data.metadata.imageUrl}
