@@ -3,15 +3,13 @@ title: Abacus
 description: Abacus at it's core is a simple counter. However, it was designed from the ground up to be scalable, secure and easy to use. It was build using Golang, Gin, Docker, Redis. In fact it's currently powereing the page view counter on this site.
 date: 2023-10-01
 published: true
-featured: true
+featured: false
 tags:
   - golang
   - gin
   - docker
   - redis
   - analytics
-imageUrl: /projects/abacus.png
-imageAlt: Screenshot of Abacus analytics dashboard
 links:
   - text: GitHub
     url: https://github.com/jasonlovesdoggo/abacus

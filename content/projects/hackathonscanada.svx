@@ -3,7 +3,7 @@ title: Hackathons Canada
 description: Hackathons Canada is a platform that connects students to hackathons across Canada (and beyond). It was built using Django, Caddy, Flower, Postgres, ValKey & Docker. I personally lead the backend team and personally handle DevOps and site administration.
 date: 2023-11-01
 published: true
-featured: true
+featured: false
 tags:
   - django
   - caddy
@@ -12,8 +12,6 @@ tags:
   - valkey
   - docker
   - hackathons
-imageUrl: /projects/hackathonscanada.png
-imageAlt: Screenshot of Hackathons Canada platform
 links:
   - text: GitHub
     url: https://github.com/Hackathons-Canada/HackathonsCanada

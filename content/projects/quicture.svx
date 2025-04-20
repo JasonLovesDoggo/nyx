@@ -3,15 +3,13 @@ title: Quicture
 description: A privacy-first photo sharing platform built to prioritize speed and lossless quality while ensuring total user anonymity. Leveraging peer-to-peer connections whenever possible, Quicture also offers temporary, encrypted cloud storage for situations where a direct connection isn't available.
 date: 2023-12-01
 published: true
-featured: true
+featured: false
 tags:
   - privacy
   - p2p
   - encryption
   - photo-sharing
   - web-development
-imageUrl: /projects/quicture.png
-imageAlt: Screenshot of Quicture photo sharing platform
 links:
   - text: GitHub
     url: https://github.com/JasonLovesDoggo/quicture
