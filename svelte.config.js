@@ -7,6 +7,9 @@ import { bundledLanguages, createHighlighter } from 'shiki';
 import { transformerColorizedBrackets } from '@shikijs/colorized-brackets';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex-svelte';
+import remarkGfm from 'remark-gfm';
+import remarkAbbr from 'remark-abbr';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 const highlighter = await createHighlighter({
 	langs: Object.keys(bundledLanguages),
@@ -36,8 +39,20 @@ const mdsvexOptions = {
 			return `{@html \`${html}\` }`;
 		}
 	},
-	remarkPlugins: [remarkToc, remarkMath],
-	rehypePlugins: [rehypeSlug, rehypeKatex]
+	remarkPlugins: [remarkToc, remarkMath, remarkAbbr, remarkGfm],
+	rehypePlugins: [
+		rehypeSlug,
+		[
+			rehypeAutolinkHeadings,
+			{
+				behavior: 'wrap',
+				properties: {
+					className: ['sec-anchor']
+				}
+			}
+		],
+		rehypeKatex
+	]
 };
 
 /** @type {import('@sveltejs/kit').Config} */

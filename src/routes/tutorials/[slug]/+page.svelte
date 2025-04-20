@@ -1,14 +1,9 @@
-<!--
-  - Copyright (c) 2025. Jason Cameron
-  - All Rights Reserved
-  -->
-
 <script lang="ts">
 	import { formatDate } from '$lib/utils/date';
 	import type { TutorialPageData } from '$lib/content/tutorials';
 
 	export let data: TutorialPageData;
-	import '$lib/styles/syntax.css';
+	import '$lib/styles/content.css';
 	import { page } from '$app/state';
 
 	// Component generated from mdsvex

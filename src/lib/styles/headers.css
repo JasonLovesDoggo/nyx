@@ -1,0 +1,21 @@
+/*
+ * Copyright (c) 2025. Jason Cameron
+ * All Rights Reserved
+ */
+
+.sec-anchor {
+	position: relative;
+	text-decoration: none;
+}
+
+.sec-anchor::after {
+	content: '#';
+	position: absolute;
+	right: -1em;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.sec-anchor:hover::after {
+	opacity: 1;
+}

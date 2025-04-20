@@ -3,7 +3,7 @@
 	import type { PostPageData } from '$lib/content/posts';
 
 	export let data: PostPageData;
-	import '$lib/styles/syntax.css';
+	import '$lib/styles/content.css';
 	import { page } from '$app/state';
 
 	// Component generated from mdsvex

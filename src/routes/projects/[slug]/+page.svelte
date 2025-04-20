@@ -4,7 +4,7 @@
 	import { page } from '$app/state';
 	import { formatDate } from '$utils/date';
 
-	import '$lib/styles/syntax.css';
+	import '$lib/styles/content.css';
 	type PageData = ProjectPageData;
 
 	let { data }: { data: PageData } = $props();
