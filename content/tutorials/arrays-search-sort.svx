@@ -1,7 +1,7 @@
 ---
 title: Arrays, ArrayLists, and Searching in Java
 description: A practical tutorial on arrays, ArrayLists, and searching algorithms in Java, with implementation examples.
-published_at: '2023-10-20'
+published_at: '2025-04-20'
 tags:
   - java
   - arrays
@@ -65,7 +65,7 @@ for (int num : numbers) {
 ```
 
 <div class="flex justify-center my-8">
-    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-lg">
+    <div class="bg-base p-6 rounded-lg shadow-lg max-w-lg">
         <h3 class="text-center text-xl font-bold mb-4">Array Visualization</h3>
         <div class="flex flex-col items-center">
             <div class="flex mb-2">
@@ -144,12 +144,12 @@ for (Integer num : numbers) {
 ### ArrayList vs Array
 
 <div class="flex justify-center my-8">
-    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-xl">
+    <div class="bg-base px-6 py-2 rounded-lg shadow-lg max-w-xl">
         <h3 class="text-center text-xl font-bold mb-4">Array vs ArrayList Comparison</h3>
         <div class="overflow-x-auto">
                     <table class="min-w-full border-2 border-accent">
                         <thead>
-                            <tr class="bg-surface2">
+                            <tr class="bg-surface1">
                                 <th class="border-2 border-accent p-2">Feature</th>
                                 <th class="border-2 border-accent p-2">Array</th>
                                 <th class="border-2 border-accent p-2">ArrayList</th>
@@ -235,14 +235,14 @@ public static int binarySearch(int[] arr, int target) {
 ```
 
 <div class="flex justify-center my-8">
-    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-lg">
+    <div class="bg-base p-6 rounded-lg shadow-lg max-w-lg">
         <h3 class="text-center text-xl font-bold mb-4">Binary Search Visualization</h3>
         <div class="flex flex-col items-center">
             <div class="flex mb-4">
                 <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">10</div>
                 <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">20</div>
                 <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">30</div>
-                <div class="w-10 h-10 border-2 border-accent flex items-center justify-center bg-surface2">40</div>
+                <div class="w-10 h-10 border-2 border-accent flex items-center justify-center bg-accent/20">40</div>
                 <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">50</div>
                 <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">60</div>
                 <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">70</div>
