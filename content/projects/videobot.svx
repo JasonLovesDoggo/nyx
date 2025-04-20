@@ -1,0 +1,26 @@
+---
+title: RedditVideoMakerBot
+description: A completely automated video creation bot for reddit videos typically catered to TikTok and youtube shorts It was built using Python, PRAW, Playwright & ffmpeg. As of writing this, videos created by the bot have gained over 350,000,000 views.
+date: 2023-02-01
+published: true
+featured: true
+tags:
+  - python
+  - praw
+  - playwright
+  - ffmpeg
+  - automation
+imageUrl: /projects/videobot.png
+imageAlt: Screenshot of RedditVideoMakerBot in action
+links:
+  - text: GitHub
+    url: https://github.com/elebumm/RedditVideoMakerBot
+  - text: Demo
+    url: https://www.youtube.com/watch?v=3gjcY_00U1w
+---
+
+# RedditVideoMakerBot
+
+A completely automated video creation bot for Reddit videos typically catered to TikTok and YouTube Shorts. The bot streamlines the entire process of creating viral social media content from Reddit threads.
+
+Built using Python, PRAW, Playwright & ffmpeg, this tool has had a significant impact on content creation. As of writing this, videos created by the bot have gained over 350,000,000 views across various platforms.

@@ -1,0 +1,32 @@
+---
+title: Screentime Showdown
+description: A platform to challenge your friends to a no-social-media showdown by staking money for a prize pool, won Hack the Valley's Best Financial Hack. Built with React, Express, and interfaces with Cohere's generative AI.
+date: 2023-07-01
+published: true
+featured: true
+tags:
+  - react
+  - express
+  - ai
+  - cohere
+  - hackathon
+  - fintech
+imageUrl: /projects/screentimeshowdown.png
+imageAlt: Screenshot of Screentime Showdown application
+links:
+  - text: GitHub
+    url: https://github.com/JasonLovesDoggo/screentimeshowdown
+  - text: Devpost
+    url: https://devpost.com/software/screentime-showdown
+    icon: devpost
+---
+
+# Screentime Showdown
+
+Screentime Showdown is an innovative platform that allows users to challenge their friends to reduce social media usage by creating competitive "showdowns" with financial incentives.
+
+The concept is simple yet effective: users stake money in a prize pool and compete to see who can best reduce their screen time on social media applications. This gamified approach to digital wellness combines financial motivation with social accountability to help users break unhealthy screen habits.
+
+Built with React for the frontend and Express for the backend, the platform also incorporates Cohere's generative AI to provide personalized insights and recommendations based on users' screen time patterns.
+
+The project was recognized at Hack the Valley hackathon, winning the "Best Financial Hack" award for its creative approach to using financial incentives to promote digital wellbeing.

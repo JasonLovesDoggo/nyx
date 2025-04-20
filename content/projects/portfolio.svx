@@ -1,0 +1,28 @@
+---
+title: Portfolio Site
+description: My personal portfolio site to showcase some of my creations. The site showcases some of my programming projects, photography & has a contact form. It was built using React.js, react-bootstrap along with a couple other libraries and is hosted on github pages and managed using Cloudflare.
+date: 2023-05-01
+published: true
+featured: true
+tags:
+  - react
+  - react-bootstrap
+  - github-pages
+  - cloudflare
+  - portfolio
+imageUrl: /projects/portfolio.png
+imageAlt: Screenshot of my personal portfolio website
+links:
+  - text: GitHub
+    url: https://github.com/JasonLovesDoggo/JasonLovesDoggo.github.io
+  - text: Demo
+    url: https://jasoncameron.dev
+---
+
+# Portfolio Site
+
+My personal portfolio website designed to showcase my various creative projects and professional work. The site features sections for my programming projects, photography portfolio, and includes a contact form for professional inquiries.
+
+Built using React.js and React Bootstrap for responsive design, the site incorporates several additional libraries to enhance functionality and user experience. The portfolio is hosted on GitHub Pages for reliable delivery and managed through Cloudflare for performance optimization and security.
+
+This project serves as both a practical demonstration of my web development skills and a central hub for displaying my work to potential collaborators and employers.

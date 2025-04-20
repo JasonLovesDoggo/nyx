@@ -1,0 +1,31 @@
+---
+title: mCTF
+description: mCTF, an online judge for cybersecurity challenge problems and school-wide and provincial contests, hosting over 200 problems, 1500 users & 20000 submissions. Extensively scaled using Docker, Kubernetes, K3s & Django.
+date: 2023-09-01
+published: true
+featured: true
+tags:
+  - django
+  - docker
+  - kubernetes
+  - k3s
+  - cybersecurity
+  - ctf
+imageUrl: /projects/mctf.png
+imageAlt: Screenshot of mCTF platform interface
+links:
+  - text: GitHub
+    url: https://github.com/mcpt/ctf
+  - text: Site
+    url: https://ctf.mcpt.ca
+---
+
+# mCTF
+
+mCTF is a comprehensive online judge system specifically designed for cybersecurity challenge problems, supporting both school-wide and provincial contests in the field of cybersecurity education.
+
+The platform has grown significantly since its inception, now hosting an impressive collection of over 200 cybersecurity problems, serving more than 1,500 registered users, and processing upwards of 20,000 challenge submissions.
+
+From a technical perspective, mCTF represents a sophisticated implementation of modern infrastructure technologies. The system is extensively scaled using Docker for containerization, Kubernetes for orchestration, K3s for lightweight Kubernetes deployment, and Django as the core web framework.
+
+This robust architecture ensures that the platform can handle concurrent contests, maintain security isolation between challenge environments, and provide a responsive experience even during peak usage periods such as during live competitions.

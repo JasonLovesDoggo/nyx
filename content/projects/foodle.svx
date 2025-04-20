@@ -1,0 +1,29 @@
+---
+title: Foodle
+description: Foodle | The Wordle for food. Its my own twist on wordle, It was built using Svelte, SCSS, Typescript and managed using Cloudflare, Github Pages & Google Analytics. When I built it I never expected it to get well over 5,000,000 page visits. Foodle was really the first time I dipped my toes into web dev, let's just say I enjoyed it.
+date: 2023-03-01
+published: true
+featured: true
+tags:
+  - svelte
+  - scss
+  - typescript
+  - cloudflare
+  - github-pages
+  - analytics
+imageUrl: /projects/foodle.png
+imageAlt: Screenshot of Foodle game interface
+links:
+  - text: GitHub
+    url: https://github.com/JasonLovesDoggo/JasonLovesDoggo.github.io/tree/master/foodle
+  - text: Demo
+    url: https://jasoncameron.dev/foodle
+---
+
+# Foodle
+
+Foodle | The Wordle for food. It's my own twist on the popular word-guessing game, specifically themed around food vocabulary.
+
+Built using Svelte, SCSS, and TypeScript, this project was my first serious venture into web development. The site is managed using Cloudflare, GitHub Pages, and Google Analytics for performance monitoring.
+
+What started as a learning project unexpectedly gained significant traction, receiving over 5,000,000 page visits. This success confirmed my interest in web development and encouraged me to pursue more projects in this field.

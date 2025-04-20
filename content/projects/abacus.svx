@@ -1,0 +1,31 @@
+---
+title: Abacus
+description: Abacus at it's core is a simple counter. However, it was designed from the ground up to be scalable, secure and easy to use. It was build using Golang, Gin, Docker, Redis. In fact it's currently powereing the page view counter on this site.
+date: 2023-10-01
+published: true
+featured: true
+tags:
+  - golang
+  - gin
+  - docker
+  - redis
+  - analytics
+imageUrl: /projects/abacus.png
+imageAlt: Screenshot of Abacus analytics dashboard
+links:
+  - text: GitHub
+    url: https://github.com/jasonlovesdoggo/abacus
+  - text: Docs
+    url: https://abacus.jasoncameron.dev
+    icon: docs
+---
+
+# Abacus
+
+Abacus is a lightweight yet powerful analytics and counting system. While at its core it functions as a simple counter, it was designed from the ground up with scalability, security, and ease of use as primary considerations.
+
+The system is built using a modern technology stack including Golang for performance, Gin as the web framework, Docker for containerization, and Redis for fast and reliable data storage. This combination provides exceptional performance even under high load conditions.
+
+Abacus serves as a privacy-focused alternative to traditional analytics platforms, offering basic page view counting without the overhead of complex tracking mechanisms. Its simplicity and efficiency make it ideal for developers who need basic analytics without compromising on performance or user privacy.
+
+In fact, Abacus is currently powering the page view counter on this very website, demonstrating its practical application in real-world scenarios.

@@ -1,0 +1,27 @@
+---
+title: Scavenger
+description: A scavenger hunt platform engineered to prevent any form of cheating or RNG-based finds while ensuring fairness and integrity. It was created in Django uses a Oauth 2.0 system with the main mld (metropolis) site to handle authentication. Then, in 2023 I made complete rewrite of the app to allow for dyanmic contest along with the ability to run any number of contests concurrently.
+date: 2023-04-01
+published: true
+featured: true
+tags:
+  - django
+  - oauth
+  - python
+  - web-development
+imageUrl: /projects/scavenger.png
+imageAlt: Screenshot of Scavenger platform interface
+links:
+  - text: GitHub
+    url: https://github.com/wlmac/scavenger/tree/main
+  - text: Demo
+    url: https://scavenger.maclyonsden.com
+---
+
+# Scavenger
+
+A scavenger hunt platform engineered to prevent any form of cheating or RNG-based finds while ensuring fairness and integrity in digital scavenger hunts.
+
+The platform was originally created using Django and implements an OAuth 2.0 system with the main Metropolis (mld) site to handle user authentication securely.
+
+In 2023, I completed a comprehensive rewrite of the application to introduce dynamic contest capabilities along with the ability to run any number of contests concurrently. This significant upgrade enhanced the platform's flexibility and scalability for hosting multiple simultaneous events.

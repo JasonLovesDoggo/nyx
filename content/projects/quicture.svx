@@ -1,0 +1,30 @@
+---
+title: Quicture
+description: A privacy-first photo sharing platform built to prioritize speed and lossless quality while ensuring total user anonymity. Leveraging peer-to-peer connections whenever possible, Quicture also offers temporary, encrypted cloud storage for situations where a direct connection isn't available.
+date: 2023-12-01
+published: true
+featured: true
+tags:
+  - privacy
+  - p2p
+  - encryption
+  - photo-sharing
+  - web-development
+imageUrl: /projects/quicture.png
+imageAlt: Screenshot of Quicture photo sharing platform
+links:
+  - text: GitHub
+    url: https://github.com/JasonLovesDoggo/quicture
+  - text: Demo
+    url: https://share.jasoncameron.dev
+---
+
+# Quicture
+
+Quicture is a privacy-first photo sharing platform meticulously designed to prioritize three key aspects: speed, lossless quality, and complete user anonymity.
+
+The platform takes a unique approach to file sharing by leveraging peer-to-peer connections whenever possible, creating direct links between users for the fastest possible transfer speeds and eliminating the need for intermediary servers that could potentially compromise privacy.
+
+For situations where direct peer-to-peer connections aren't feasible, Quicture offers a fallback solution in the form of temporary, encrypted cloud storage. This ensures that files can still be shared securely even when users aren't online simultaneously, with all data being automatically purged after transfer to maintain privacy.
+
+By focusing on both technical performance and privacy protection, Quicture provides a compelling alternative to conventional photo sharing services that often compress images, collect user data, or retain copies of shared content indefinitely.
