@@ -1,7 +1,7 @@
 ---
 title: Object-Oriented Programming in Java
 description: A concise tutorial on Object-Oriented Programming concepts in Java, including classes, objects, inheritance, polymorphism, and encapsulation.
-published_at: '2023-10-15'
+published_at: '2025-04-20'
 tags:
   - java
   - oop
@@ -50,10 +50,10 @@ System.out.println(myCar.getInfo());
 ```
 
 <div class="flex justify-center my-8">
-    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-md">
-        <h3 class="text-center text-xl font-bold mb-4">Class vs Object Visualization</h3>
+    <div class="bg-base p-6 rounded-lg shadow-lg max-w-md">
+        <h3 class="text-center text-xl font-bold mb-4">Class vs Object</h3>
         <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
-            <div class="border-2 border-accent p-4 rounded-md">
+            <div class="border-2 border-accent p-4 rounded-md bg-accent/20">
                 <h4 class="text-center font-bold">Class</h4>
                 <p class="text-center italic">Blueprint</p>
                 <ul class="list-disc pl-5 mt-2">
@@ -63,7 +63,7 @@ System.out.println(myCar.getInfo());
                 </ul>
             </div>
             <div class="text-center">→</div>
-            <div class="border-2 border-accent p-4 rounded-md">
+            <div class="border-2 border-accent p-4 rounded-md bg-accent/20">
                 <h4 class="text-center font-bold">Object</h4>
                 <p class="text-center italic">Instance</p>
                 <ul class="list-disc pl-5 mt-2">
@@ -154,25 +154,41 @@ public class Dog extends Animal {
     }
 }
 ```
+```mermaid
+classDiagram
+    class Animal {
+        +eat()
+    }
+    class Dog {
+        +bark()
+    }
+    class Cat {
+        +meow()
+    }
+
+    Animal <|-- Dog
+    Animal <|-- Cat
+
+```
 
 <div class="flex justify-center my-8">
-    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-lg">
+    <div class="bg-base p-6 rounded-lg shadow-lg max-w-lg">
         <h3 class="text-center text-xl font-bold mb-4">Inheritance Hierarchy</h3>
         <div class="flex flex-col items-center">
-            <div class="border-2 border-accent p-3 rounded-md w-40 text-center mb-4">
+            <div class="border-2 border-accent p-3 rounded-md w-40 text-center mb-4 bg-accent/20">
                 Animal
             </div>
             <div class="h-6 border-l-2 border-accent"></div>
             <div class="flex justify-center gap-8 w-full">
                 <div class="flex flex-col items-center">
                     <div class="h-6 border-l-2 border-accent"></div>
-                    <div class="border-2 border-accent p-3 rounded-md w-40 text-center">
+                    <div class="border-2 border-accent p-3 rounded-md w-40 text-center bg-accent/20">
                         Dog
                     </div>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="h-6 border-l-2 border-accent"></div>
-                    <div class="border-2 border-accent p-3 rounded-md w-40 text-center">
+                    <div class="border-2 border-accent p-3 rounded-md w-40 text-center bg-accent/20">
                         Cat
                     </div>
                 </div>

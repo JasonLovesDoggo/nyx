@@ -1,7 +1,7 @@
 ---
 title: Recursion in Java
 description: A practical tutorial on recursion in Java, covering basic concepts, implementation techniques, and common recursive algorithms.
-published_at: '2023-10-25'
+published_at: '2025-04-19'
 tags:
   - java
   - recursion
@@ -115,19 +115,19 @@ public static int fibonacci(int n) {
             <div class="border-2 border-accent p-2 rounded-md text-center mb-2">
                 F(4) = F(3) + F(2)
             </div>
-            <div class="flex justify-center gap-12 w-full">
+            <div class="flex justify-center gap-20 w-full">
                 <div class="flex flex-col items-center">
                     <div class="h-6 border-l-2 border-accent"></div>
                     <div class="border-2 border-accent p-2 rounded-md text-center mb-2">
                         F(3) = F(2) + F(1)
                     </div>
-                    <div class="flex justify-center gap-8">
+                    <div class="flex justify-center gap-12">
                         <div class="flex flex-col items-center">
                             <div class="h-6 border-l-2 border-accent"></div>
                             <div class="border-2 border-accent p-2 rounded-md text-center mb-2">
                                 F(2) = F(1) + F(0)
                             </div>
-                            <div class="flex justify-center gap-4">
+                            <div class="flex justify-center gap-8">
                                 <div class="flex flex-col items-center">
                                     <div class="h-6 border-l-2 border-accent"></div>
                                     <div class="border-2 border-accent p-2 rounded-md text-center bg-accent/20">
@@ -155,7 +155,7 @@ public static int fibonacci(int n) {
                     <div class="border-2 border-accent p-2 rounded-md text-center mb-2">
                         F(2) = F(1) + F(0)
                     </div>
-                    <div class="flex justify-center gap-4">
+                    <div class="flex justify-center gap-8">
                         <div class="flex flex-col items-center">
                             <div class="h-6 border-l-2 border-accent"></div>
                             <div class="border-2 border-accent p-2 rounded-md text-center bg-accent/20">
