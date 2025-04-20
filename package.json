@@ -38,6 +38,8 @@
 		"prettier": "^3.5.3",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
+		"rehype-katex-svelte": "^1.2.0",
+		"remark-math": "2",
 		"rollup-plugin-visualizer": "^5.14.0",
 		"svelte": "^5.27.0",
 		"svelte-check": "^4.1.6",
