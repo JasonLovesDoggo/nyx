@@ -1,6 +1,6 @@
 ---
 title: Object-Oriented Programming in Java
-description: A comprehensive tutorial on Object-Oriented Programming concepts in Java, including classes, objects, inheritance, polymorphism, and encapsulation.
+description: A concise tutorial on Object-Oriented Programming concepts in Java, including classes, objects, inheritance, polymorphism, and encapsulation.
 published_at: '2023-10-15'
 tags:
   - java
@@ -10,7 +10,7 @@ tags:
 
 # Object-Oriented Programming in Java
 
-Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code. The data is in the form of fields (often known as attributes or properties), and the code is in the form of procedures (often known as methods).
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which contain data (attributes) and code (methods).
 
 ## Core OOP Concepts
 
@@ -25,19 +25,19 @@ public class Car {
     private String make;
     private String model;
     private int year;
-    
+
     // Constructor
     public Car(String make, String model, int year) {
         this.make = make;
         this.model = model;
         this.year = year;
     }
-    
+
     // Methods
     public void startEngine() {
         System.out.println("Engine started!");
     }
-    
+
     public String getInfo() {
         return year + " " + make + " " + model;
     }
@@ -78,29 +78,29 @@ System.out.println(myCar.getInfo());
 
 ### 2. Encapsulation
 
-Encapsulation is the bundling of data and methods that operate on that data within a single unit (class), and restricting access to some of the object's components.
+Encapsulation is the bundling of data and methods within a single unit (class), and restricting access to some of the object's components.
 
 ```java
 public class BankAccount {
     // Private fields - encapsulated
     private String accountNumber;
     private double balance;
-    
+
     // Public methods to access and modify the private fields
     public String getAccountNumber() {
         return accountNumber;
     }
-    
+
     public double getBalance() {
         return balance;
     }
-    
+
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
         }
     }
-    
+
     public boolean withdraw(double amount) {
         if (amount > 0 && balance >= amount) {
             balance -= amount;
@@ -111,46 +111,42 @@ public class BankAccount {
 }
 ```
 
-Encapsulation provides several benefits:
-- **Data hiding**: The internal representation of an object is hidden from the outside.
-- **Increased flexibility**: We can change the implementation without affecting the code that uses the class.
-- **Reusability**: Encapsulated code can be reused in different parts of the program.
+Benefits of encapsulation:
+- **Data hiding**: Internal representation is hidden
+- **Increased flexibility**: Implementation can change without affecting client code
+- **Reusability**: Encapsulated code can be reused
 
 ### 3. Inheritance
 
-Inheritance is a mechanism where a new class (subclass) is derived from an existing class (superclass). The subclass inherits fields and methods from the superclass.
+Inheritance is a mechanism where a new class (subclass) is derived from an existing class (superclass).
 
 ```java
 // Superclass
 public class Animal {
     protected String name;
-    
+
     public Animal(String name) {
         this.name = name;
     }
-    
+
     public void eat() {
         System.out.println(name + " is eating");
-    }
-    
-    public void sleep() {
-        System.out.println(name + " is sleeping");
     }
 }
 
 // Subclass
 public class Dog extends Animal {
     private String breed;
-    
+
     public Dog(String name, String breed) {
         super(name); // Call superclass constructor
         this.breed = breed;
     }
-    
+
     public void bark() {
         System.out.println(name + " is barking");
     }
-    
+
     // Override superclass method
     @Override
     public void eat() {
@@ -187,19 +183,15 @@ public class Dog extends Animal {
 
 ### 4. Polymorphism
 
-Polymorphism allows objects of different classes to be treated as objects of a common superclass. It enables a single interface to represent different underlying forms (data types).
+Polymorphism allows objects of different classes to be treated as objects of a common superclass.
 
 ```java
-// Using the Animal and Dog classes from above
+// Using the Animal class from above
 public class Cat extends Animal {
     public Cat(String name) {
         super(name);
     }
-    
-    public void meow() {
-        System.out.println(name + " is meowing");
-    }
-    
+
     @Override
     public void eat() {
         System.out.println(name + " is eating cat food");
@@ -216,13 +208,12 @@ animal2.eat(); // Calls Cat's eat method
 // Array of Animals can contain Dogs and Cats
 Animal[] animals = {
     new Dog("Rex", "German Shepherd"),
-    new Cat("Felix"),
-    new Dog("Max", "Beagle")
+    new Cat("Felix")
 };
 
 // Polymorphic loop
 for (Animal animal : animals) {
-    animal.eat(); // Calls the appropriate eat method based on the actual object type
+    animal.eat(); // Calls the appropriate eat method
 }
 ```
 
@@ -230,59 +221,38 @@ for (Animal animal : animals) {
 
 ### Abstract Classes
 
-An abstract class is a class that cannot be instantiated and is meant to be subclassed. It may contain abstract methods (methods without a body) that must be implemented by subclasses.
+An abstract class cannot be instantiated and may contain abstract methods that must be implemented by subclasses.
 
 ```java
 public abstract class Shape {
     protected String color;
-    
+
     public Shape(String color) {
         this.color = color;
     }
-    
+
     // Abstract method - no implementation
     public abstract double calculateArea();
-    
-    // Concrete method with implementation
-    public String getColor() {
-        return color;
-    }
 }
 
 public class Circle extends Shape {
     private double radius;
-    
+
     public Circle(String color, double radius) {
         super(color);
         this.radius = radius;
     }
-    
+
     @Override
     public double calculateArea() {
         return Math.PI * radius * radius;
-    }
-}
-
-public class Rectangle extends Shape {
-    private double width;
-    private double height;
-    
-    public Rectangle(String color, double width, double height) {
-        super(color);
-        this.width = width;
-        this.height = height;
-    }
-    
-    @Override
-    public double calculateArea() {
-        return width * height;
     }
 }
 ```
 
 ### Interfaces
 
-An interface is a completely abstract class that contains only abstract methods and constants. It provides a way to achieve multiple inheritance in Java.
+An interface contains only abstract methods and constants, allowing a class to implement multiple interfaces.
 
 ```java
 public interface Drawable {
@@ -296,29 +266,29 @@ public interface Resizable {
 // A class can implement multiple interfaces
 public class Square extends Shape implements Drawable, Resizable {
     private double side;
-    
+
     public Square(String color, double side) {
         super(color);
         this.side = side;
     }
-    
+
     @Override
     public double calculateArea() {
         return side * side;
     }
-    
+
     @Override
     public void draw() {
         System.out.println("Drawing a " + color + " square");
     }
-    
+
     @Override
     public void resize(double factor) {
         side *= factor;
     }
 }
 ```
-s
+
 ## Conclusion
 
 Object-Oriented Programming in Java provides a powerful way to structure code, making it more modular, reusable, and easier to maintain. By understanding and applying the core concepts of OOP—classes and objects, encapsulation, inheritance, and polymorphism—you can write more efficient and organized Java programs.
@@ -329,5 +299,3 @@ Remember that good OOP design follows the SOLID principles:
 - **L**iskov Substitution Principle
 - **I**nterface Segregation Principle
 - **D**ependency Inversion Principle
-
-These principles help create code that is robust, maintainable, and adaptable to change.
