@@ -10,6 +10,7 @@ import rehypeKatex from 'rehype-katex-svelte';
 import remarkGfm from 'remark-gfm';
 import remarkAbbr from 'remark-abbr';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
 
 const highlighter = await createHighlighter({
 	langs: Object.keys(bundledLanguages),
@@ -51,7 +52,8 @@ const mdsvexOptions = {
 				}
 			}
 		],
-		rehypeKatex
+		rehypeKatex,
+		rehypeUnwrapImages
 	]
 };
 
