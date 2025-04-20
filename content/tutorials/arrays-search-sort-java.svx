@@ -1,0 +1,560 @@
+---
+title: Arrays, ArrayLists, Searching and Sorting in Java
+description: A comprehensive tutorial on arrays, ArrayLists, and various searching and sorting algorithms in Java, with implementation examples and complexity analysis.
+published_at: '2023-10-20'
+tags:
+  - java
+  - arrays
+  - data structures
+  - algorithms
+  - searching
+  - sorting
+---
+
+# Arrays, ArrayLists, Searching and Sorting in Java
+
+This tutorial covers fundamental data structures and algorithms in Java: arrays, ArrayLists, searching techniques, and sorting algorithms. Understanding these concepts is essential for efficient data manipulation and problem-solving in programming.
+
+## Arrays in Java
+
+An array is a fixed-size collection of elements of the same type. Arrays provide a convenient way to store and access multiple values using a single variable name.
+
+### Declaring and Initializing Arrays
+
+```java
+// Declaration
+int[] numbers;            // Preferred syntax
+int scores[];             // Alternative syntax
+
+// Initialization
+numbers = new int[5];     // Creates an array of 5 integers with default values (0)
+
+// Declaration and initialization in one line
+int[] values = new int[3];
+
+// Declaration and initialization with specific values
+int[] primes = {2, 3, 5, 7, 11};
+
+// Multi-dimensional arrays
+int[][] matrix = new int[3][4];  // 3 rows, 4 columns
+int[][] irregular = {
+    {1, 2, 3},
+    {4, 5},
+    {6, 7, 8, 9}
+};
+```
+
+### Accessing and Modifying Array Elements
+
+```java
+int[] numbers = {10, 20, 30, 40, 50};
+
+// Accessing elements (zero-based indexing)
+int firstElement = numbers[0];   // 10
+int thirdElement = numbers[2];   // 30
+
+// Modifying elements
+numbers[1] = 25;                 // Changes 20 to 25
+
+// Array length
+int length = numbers.length;     // 5
+
+// Iterating through an array
+for (int i = 0; i < numbers.length; i++) {
+    System.out.println(numbers[i]);
+}
+
+// Enhanced for loop (for-each)
+for (int num : numbers) {
+    System.out.println(num);
+}
+```
+
+<div class="flex justify-center my-8">
+    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-lg">
+        <h3 class="text-center text-xl font-bold mb-4">Array Visualization</h3>
+        <div class="flex flex-col items-center">
+            <div class="flex mb-2">
+                <div class="w-12 h-12 border-2 border-accent flex items-center justify-center font-bold">10</div>
+                <div class="w-12 h-12 border-2 border-accent flex items-center justify-center font-bold">25</div>
+                <div class="w-12 h-12 border-2 border-accent flex items-center justify-center font-bold">30</div>
+                <div class="w-12 h-12 border-2 border-accent flex items-center justify-center font-bold">40</div>
+                <div class="w-12 h-12 border-2 border-accent flex items-center justify-center font-bold">50</div>
+            </div>
+            <div class="flex">
+                <div class="w-12 text-center text-sm">0</div>
+                <div class="w-12 text-center text-sm">1</div>
+                <div class="w-12 text-center text-sm">2</div>
+                <div class="w-12 text-center text-sm">3</div>
+                <div class="w-12 text-center text-sm">4</div>
+            </div>
+            <div class="mt-4 text-center text-sm">
+                <p>Array indices (zero-based)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+### Limitations of Arrays
+
+1. **Fixed size**: Once created, the size of an array cannot be changed.
+2. **Homogeneous elements**: All elements must be of the same type.
+3. **Manual resizing**: To add more elements than the initial capacity, you need to create a new, larger array and copy the elements.
+
+## ArrayList in Java
+
+ArrayList is a part of Java's Collection Framework and provides a dynamic array implementation. Unlike arrays, ArrayLists can grow or shrink in size.
+
+### Creating and Using ArrayLists
+
+```java
+import java.util.ArrayList;
+
+// Creating an ArrayList
+ArrayList<Integer> numbers = new ArrayList<>();  // Empty ArrayList
+ArrayList<String> names = new ArrayList<>(20);   // Initial capacity of 20
+
+// Adding elements
+numbers.add(10);                  // Adds 10 to the end
+numbers.add(20);                  // Adds 20 to the end
+numbers.add(0, 5);                // Adds 5 at index 0, shifting other elements
+
+// Accessing elements
+int first = numbers.get(0);       // 5
+int second = numbers.get(1);      // 10
+
+// Modifying elements
+numbers.set(1, 15);               // Changes 10 to 15
+
+// Removing elements
+numbers.remove(0);                // Removes element at index 0
+numbers.remove(Integer.valueOf(20)); // Removes the first occurrence of 20
+
+// Size of ArrayList
+int size = numbers.size();        // Number of elements
+
+// Checking if an element exists
+boolean contains = numbers.contains(15);  // true
+
+// Iterating through an ArrayList
+for (int i = 0; i < numbers.size(); i++) {
+    System.out.println(numbers.get(i));
+}
+
+// Enhanced for loop
+for (Integer num : numbers) {
+    System.out.println(num);
+}
+```
+
+### ArrayList vs Array
+
+<div class="flex justify-center my-8">
+    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-xl">
+        <h3 class="text-center text-xl font-bold mb-4">Array vs ArrayList Comparison</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full border-2 border-accent">
+                <thead>
+                    <tr class="bg-surface2">
+                        <th class="border-2 border-accent p-2">Feature</th>
+                        <th class="border-2 border-accent p-2">Array</th>
+                        <th class="border-2 border-accent p-2">ArrayList</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border-2 border-accent p-2">Size</td>
+                        <td class="border-2 border-accent p-2">Fixed</td>
+                        <td class="border-2 border-accent p-2">Dynamic</td>
+                    </tr>
+                    <tr>
+                        <td class="border-2 border-accent p-2">Type</td>
+                        <td class="border-2 border-accent p-2">Primitive & Objects</td>
+                        <td class="border-2 border-accent p-2">Objects only</td>
+                    </tr>
+                    <tr>
+                        <td class="border-2 border-accent p-2">Performance</td>
+                        <td class="border-2 border-accent p-2">Faster</td>
+                        <td class="border-2 border-accent p-2">Slower</td>
+                    </tr>
+                    <tr>
+                        <td class="border-2 border-accent p-2">Functionality</td>
+                        <td class="border-2 border-accent p-2">Basic</td>
+                        <td class="border-2 border-accent p-2">Rich methods</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+## Searching Algorithms
+
+Searching is the process of finding a specific element in a collection of elements. Let's explore two common searching algorithms.
+
+### Linear Search
+
+Linear search is the simplest searching algorithm that checks each element in the collection sequentially until the target element is found or the collection is exhausted.
+
+```java
+public static int linearSearch(int[] arr, int target) {
+    for (int i = 0; i < arr.length; i++) {
+        if (arr[i] == target) {
+            return i;  // Return the index of the found element
+        }
+    }
+    return -1;  // Element not found
+}
+```
+
+**Time Complexity**: $O(n)$ - In the worst case, we need to check all elements.
+
+### Binary Search
+
+Binary search is an efficient algorithm for finding an element in a sorted array. It works by repeatedly dividing the search interval in half.
+
+```java
+public static int binarySearch(int[] arr, int target) {
+    int left = 0;
+    int right = arr.length - 1;
+    
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        
+        // Check if target is present at mid
+        if (arr[mid] == target) {
+            return mid;
+        }
+        
+        // If target is greater, ignore left half
+        if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        // If target is smaller, ignore right half
+        else {
+            right = mid - 1;
+        }
+    }
+    
+    return -1;  // Element not found
+}
+```
+
+**Time Complexity**: $O(\log n)$ - Each step eliminates half of the remaining elements.
+
+<div class="flex justify-center my-8">
+    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-lg">
+        <h3 class="text-center text-xl font-bold mb-4">Binary Search Visualization</h3>
+        <div class="flex flex-col items-center">
+            <div class="flex mb-4">
+                <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">10</div>
+                <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">20</div>
+                <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">30</div>
+                <div class="w-10 h-10 border-2 border-accent flex items-center justify-center bg-surface2">40</div>
+                <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">50</div>
+                <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">60</div>
+                <div class="w-10 h-10 border-2 border-accent flex items-center justify-center">70</div>
+            </div>
+            <div class="flex mb-2">
+                <div class="w-10 text-center text-xs">left</div>
+                <div class="w-10"></div>
+                <div class="w-10"></div>
+                <div class="w-10 text-center text-xs">mid</div>
+                <div class="w-10"></div>
+                <div class="w-10"></div>
+                <div class="w-10 text-center text-xs">right</div>
+            </div>
+            <div class="mt-2 text-center text-sm">
+                <p>Searching for 40: Found at mid position!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+## Sorting Algorithms
+
+Sorting is the process of arranging elements in a specific order (usually ascending or descending). Let's explore some common sorting algorithms.
+
+### Bubble Sort
+
+Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
+
+```java
+public static void bubbleSort(int[] arr) {
+    int n = arr.length;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap arr[j] and arr[j+1]
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+```
+
+**Time Complexity**: 
+- Worst case: $O(n^2)$
+- Average case: $O(n^2)$
+- Best case: $O(n)$ (with optimization)
+
+### Selection Sort
+
+Selection sort is an in-place comparison sorting algorithm. It divides the input list into two parts: the sorted sublist and the unsorted sublist. It repeatedly finds the minimum element from the unsorted sublist and moves it to the beginning of the unsorted sublist.
+
+```java
+public static void selectionSort(int[] arr) {
+    int n = arr.length;
+    
+    for (int i = 0; i < n - 1; i++) {
+        // Find the minimum element in unsorted array
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        
+        // Swap the found minimum element with the first element
+        int temp = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = temp;
+    }
+}
+```
+
+**Time Complexity**: $O(n^2)$ for all cases.
+
+### Insertion Sort
+
+Insertion sort builds the final sorted array one item at a time. It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort, but it has advantages for small data sets.
+
+```java
+public static void insertionSort(int[] arr) {
+    int n = arr.length;
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        
+        // Move elements of arr[0..i-1] that are greater than key
+        // to one position ahead of their current position
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+```
+
+**Time Complexity**:
+- Worst case: $O(n^2)$
+- Average case: $O(n^2)$
+- Best case: $O(n)$ (when the array is already sorted)
+
+### Quick Sort
+
+Quick sort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot.
+
+```java
+public static void quickSort(int[] arr, int low, int high) {
+    if (low < high) {
+        // pi is partitioning index, arr[pi] is now at right place
+        int pi = partition(arr, low, high);
+        
+        // Recursively sort elements before and after partition
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+private static int partition(int[] arr, int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1); // index of smaller element
+    
+    for (int j = low; j < high; j++) {
+        // If current element is smaller than the pivot
+        if (arr[j] < pivot) {
+            i++;
+            
+            // Swap arr[i] and arr[j]
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    
+    // Swap arr[i+1] and arr[high] (or pivot)
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    
+    return i + 1;
+}
+```
+
+**Time Complexity**:
+- Worst case: $O(n^2)$ (when the array is already sorted)
+- Average case: $O(n \log n)$
+- Best case: $O(n \log n)$
+
+### Merge Sort
+
+Merge sort is a divide-and-conquer algorithm that divides the input array into two halves, recursively sorts them, and then merges the sorted halves.
+
+```java
+public static void mergeSort(int[] arr, int left, int right) {
+    if (left < right) {
+        // Find the middle point
+        int mid = left + (right - left) / 2;
+        
+        // Sort first and second halves
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        
+        // Merge the sorted halves
+        merge(arr, left, mid, right);
+    }
+}
+
+private static void merge(int[] arr, int left, int mid, int right) {
+    // Find sizes of two subarrays to be merged
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    
+    // Create temp arrays
+    int[] L = new int[n1];
+    int[] R = new int[n2];
+    
+    // Copy data to temp arrays
+    for (int i = 0; i < n1; i++) {
+        L[i] = arr[left + i];
+    }
+    for (int j = 0; j < n2; j++) {
+        R[j] = arr[mid + 1 + j];
+    }
+    
+    // Merge the temp arrays
+    int i = 0, j = 0;
+    int k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    
+    // Copy remaining elements of L[] if any
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    
+    // Copy remaining elements of R[] if any
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+```
+
+**Time Complexity**: $O(n \log n)$ for all cases.
+
+## Sorting Algorithm Comparison
+
+<div class="flex justify-center my-8">
+    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-xl">
+        <h3 class="text-center text-xl font-bold mb-4">Sorting Algorithm Complexity</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full border-2 border-accent">
+                <thead>
+                    <tr class="bg-surface2">
+                        <th class="border-2 border-accent p-2">Algorithm</th>
+                        <th class="border-2 border-accent p-2">Best Case</th>
+                        <th class="border-2 border-accent p-2">Average Case</th>
+                        <th class="border-2 border-accent p-2">Worst Case</th>
+                        <th class="border-2 border-accent p-2">Space</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border-2 border-accent p-2">Bubble Sort</td>
+                        <td class="border-2 border-accent p-2">$O(n)$</td>
+                        <td class="border-2 border-accent p-2">$O(n^2)$</td>
+                        <td class="border-2 border-accent p-2">$O(n^2)$</td>
+                        <td class="border-2 border-accent p-2">$O(1)$</td>
+                    </tr>
+                    <tr>
+                        <td class="border-2 border-accent p-2">Selection Sort</td>
+                        <td class="border-2 border-accent p-2">$O(n^2)$</td>
+                        <td class="border-2 border-accent p-2">$O(n^2)$</td>
+                        <td class="border-2 border-accent p-2">$O(n^2)$</td>
+                        <td class="border-2 border-accent p-2">$O(1)$</td>
+                    </tr>
+                    <tr>
+                        <td class="border-2 border-accent p-2">Insertion Sort</td>
+                        <td class="border-2 border-accent p-2">$O(n)$</td>
+                        <td class="border-2 border-accent p-2">$O(n^2)$</td>
+                        <td class="border-2 border-accent p-2">$O(n^2)$</td>
+                        <td class="border-2 border-accent p-2">$O(1)$</td>
+                    </tr>
+                    <tr>
+                        <td class="border-2 border-accent p-2">Quick Sort</td>
+                        <td class="border-2 border-accent p-2">$O(n \log n)$</td>
+                        <td class="border-2 border-accent p-2">$O(n \log n)$</td>
+                        <td class="border-2 border-accent p-2">$O(n^2)$</td>
+                        <td class="border-2 border-accent p-2">$O(\log n)$</td>
+                    </tr>
+                    <tr>
+                        <td class="border-2 border-accent p-2">Merge Sort</td>
+                        <td class="border-2 border-accent p-2">$O(n \log n)$</td>
+                        <td class="border-2 border-accent p-2">$O(n \log n)$</td>
+                        <td class="border-2 border-accent p-2">$O(n \log n)$</td>
+                        <td class="border-2 border-accent p-2">$O(n)$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+## Mathematical Analysis
+
+### Time Complexity
+
+The time complexity of an algorithm quantifies the amount of time taken by an algorithm to run as a function of the length of the input. For example, if we have an array of length $n$:
+
+- **Linear search**: $O(n)$ - We might need to check all $n$ elements.
+- **Binary search**: $O(\log n)$ - Each step eliminates half of the remaining elements.
+
+For sorting algorithms, if we denote the number of comparisons as $C(n)$ for an array of length $n$:
+
+- **Bubble sort**: $C(n) = \frac{n(n-1)}{2} = O(n^2)$
+- **Merge sort**: $C(n) = n\log n + O(n) = O(n\log n)$
+
+### Space Complexity
+
+Space complexity quantifies the amount of memory used by an algorithm as a function of the input size:
+
+- **In-place algorithms** (like bubble sort): $O(1)$ extra space
+- **Merge sort**: $O(n)$ extra space for the temporary arrays
+
+## Conclusion
+
+Arrays and ArrayLists are fundamental data structures in Java, each with its own advantages and use cases. Understanding searching and sorting algorithms is crucial for efficient data manipulation and problem-solving.
+
+When choosing a sorting algorithm, consider:
+1. The size of the data
+2. Whether the data is partially sorted
+3. Memory constraints
+4. Stability requirements (whether equal elements maintain their relative order)
+
+For most general-purpose sorting needs, Java's built-in `Arrays.sort()` and `Collections.sort()` methods are optimized implementations that perform well in practice.

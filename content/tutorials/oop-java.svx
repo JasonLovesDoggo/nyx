@@ -1,0 +1,333 @@
+---
+title: Object-Oriented Programming in Java
+description: A comprehensive tutorial on Object-Oriented Programming concepts in Java, including classes, objects, inheritance, polymorphism, and encapsulation.
+published_at: '2023-10-15'
+tags:
+  - java
+  - oop
+  - programming
+---
+
+# Object-Oriented Programming in Java
+
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code. The data is in the form of fields (often known as attributes or properties), and the code is in the form of procedures (often known as methods).
+
+## Core OOP Concepts
+
+### 1. Classes and Objects
+
+A class is a blueprint for creating objects. It defines a datatype by bundling data and methods that work on that data.
+
+```java
+// Class definition
+public class Car {
+    // Fields (attributes)
+    private String make;
+    private String model;
+    private int year;
+    
+    // Constructor
+    public Car(String make, String model, int year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+    
+    // Methods
+    public void startEngine() {
+        System.out.println("Engine started!");
+    }
+    
+    public String getInfo() {
+        return year + " " + make + " " + model;
+    }
+}
+
+// Creating objects (instances of the class)
+Car myCar = new Car("Toyota", "Corolla", 2020);
+myCar.startEngine();
+System.out.println(myCar.getInfo());
+```
+
+<div class="flex justify-center my-8">
+    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-md">
+        <h3 class="text-center text-xl font-bold mb-4">Class vs Object Visualization</h3>
+        <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <div class="border-2 border-accent p-4 rounded-md">
+                <h4 class="text-center font-bold">Class</h4>
+                <p class="text-center italic">Blueprint</p>
+                <ul class="list-disc pl-5 mt-2">
+                    <li>Fields</li>
+                    <li>Constructors</li>
+                    <li>Methods</li>
+                </ul>
+            </div>
+            <div class="text-center">→</div>
+            <div class="border-2 border-accent p-4 rounded-md">
+                <h4 class="text-center font-bold">Object</h4>
+                <p class="text-center italic">Instance</p>
+                <ul class="list-disc pl-5 mt-2">
+                    <li>Actual data</li>
+                    <li>State</li>
+                    <li>Behavior</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+### 2. Encapsulation
+
+Encapsulation is the bundling of data and methods that operate on that data within a single unit (class), and restricting access to some of the object's components.
+
+```java
+public class BankAccount {
+    // Private fields - encapsulated
+    private String accountNumber;
+    private double balance;
+    
+    // Public methods to access and modify the private fields
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+    
+    public double getBalance() {
+        return balance;
+    }
+    
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+    
+    public boolean withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+}
+```
+
+Encapsulation provides several benefits:
+- **Data hiding**: The internal representation of an object is hidden from the outside.
+- **Increased flexibility**: We can change the implementation without affecting the code that uses the class.
+- **Reusability**: Encapsulated code can be reused in different parts of the program.
+
+### 3. Inheritance
+
+Inheritance is a mechanism where a new class (subclass) is derived from an existing class (superclass). The subclass inherits fields and methods from the superclass.
+
+```java
+// Superclass
+public class Animal {
+    protected String name;
+    
+    public Animal(String name) {
+        this.name = name;
+    }
+    
+    public void eat() {
+        System.out.println(name + " is eating");
+    }
+    
+    public void sleep() {
+        System.out.println(name + " is sleeping");
+    }
+}
+
+// Subclass
+public class Dog extends Animal {
+    private String breed;
+    
+    public Dog(String name, String breed) {
+        super(name); // Call superclass constructor
+        this.breed = breed;
+    }
+    
+    public void bark() {
+        System.out.println(name + " is barking");
+    }
+    
+    // Override superclass method
+    @Override
+    public void eat() {
+        System.out.println(name + " the " + breed + " is eating dog food");
+    }
+}
+```
+
+<div class="flex justify-center my-8">
+    <div class="bg-surface1 p-6 rounded-lg shadow-lg max-w-lg">
+        <h3 class="text-center text-xl font-bold mb-4">Inheritance Hierarchy</h3>
+        <div class="flex flex-col items-center">
+            <div class="border-2 border-accent p-3 rounded-md w-40 text-center mb-4">
+                Animal
+            </div>
+            <div class="h-6 border-l-2 border-accent"></div>
+            <div class="flex justify-center gap-8 w-full">
+                <div class="flex flex-col items-center">
+                    <div class="h-6 border-l-2 border-accent"></div>
+                    <div class="border-2 border-accent p-3 rounded-md w-40 text-center">
+                        Dog
+                    </div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="h-6 border-l-2 border-accent"></div>
+                    <div class="border-2 border-accent p-3 rounded-md w-40 text-center">
+                        Cat
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+### 4. Polymorphism
+
+Polymorphism allows objects of different classes to be treated as objects of a common superclass. It enables a single interface to represent different underlying forms (data types).
+
+```java
+// Using the Animal and Dog classes from above
+public class Cat extends Animal {
+    public Cat(String name) {
+        super(name);
+    }
+    
+    public void meow() {
+        System.out.println(name + " is meowing");
+    }
+    
+    @Override
+    public void eat() {
+        System.out.println(name + " is eating cat food");
+    }
+}
+
+// Polymorphic behavior
+Animal animal1 = new Dog("Buddy", "Golden Retriever");
+Animal animal2 = new Cat("Whiskers");
+
+animal1.eat(); // Calls Dog's eat method
+animal2.eat(); // Calls Cat's eat method
+
+// Array of Animals can contain Dogs and Cats
+Animal[] animals = {
+    new Dog("Rex", "German Shepherd"),
+    new Cat("Felix"),
+    new Dog("Max", "Beagle")
+};
+
+// Polymorphic loop
+for (Animal animal : animals) {
+    animal.eat(); // Calls the appropriate eat method based on the actual object type
+}
+```
+
+## Abstract Classes and Interfaces
+
+### Abstract Classes
+
+An abstract class is a class that cannot be instantiated and is meant to be subclassed. It may contain abstract methods (methods without a body) that must be implemented by subclasses.
+
+```java
+public abstract class Shape {
+    protected String color;
+    
+    public Shape(String color) {
+        this.color = color;
+    }
+    
+    // Abstract method - no implementation
+    public abstract double calculateArea();
+    
+    // Concrete method with implementation
+    public String getColor() {
+        return color;
+    }
+}
+
+public class Circle extends Shape {
+    private double radius;
+    
+    public Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Rectangle extends Shape {
+    private double width;
+    private double height;
+    
+    public Rectangle(String color, double width, double height) {
+        super(color);
+        this.width = width;
+        this.height = height;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+}
+```
+
+### Interfaces
+
+An interface is a completely abstract class that contains only abstract methods and constants. It provides a way to achieve multiple inheritance in Java.
+
+```java
+public interface Drawable {
+    void draw(); // Abstract method
+}
+
+public interface Resizable {
+    void resize(double factor); // Abstract method
+}
+
+// A class can implement multiple interfaces
+public class Square extends Shape implements Drawable, Resizable {
+    private double side;
+    
+    public Square(String color, double side) {
+        super(color);
+        this.side = side;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return side * side;
+    }
+    
+    @Override
+    public void draw() {
+        System.out.println("Drawing a " + color + " square");
+    }
+    
+    @Override
+    public void resize(double factor) {
+        side *= factor;
+    }
+}
+```
+s
+## Conclusion
+
+Object-Oriented Programming in Java provides a powerful way to structure code, making it more modular, reusable, and easier to maintain. By understanding and applying the core concepts of OOP—classes and objects, encapsulation, inheritance, and polymorphism—you can write more efficient and organized Java programs.
+
+Remember that good OOP design follows the SOLID principles:
+- **S**ingle Responsibility Principle
+- **O**pen/Closed Principle
+- **L**iskov Substitution Principle
+- **I**nterface Segregation Principle
+- **D**ependency Inversion Principle
+
+These principles help create code that is robust, maintainable, and adaptable to change.
