@@ -1,0 +1,33 @@
+---
+title: Anubis
+description: Weighs the soul of incoming HTTP requests using proof-of-work to stop AI crawlers and other malicious bots.
+date: 2025-03-01
+published: true
+featured: true
+tags:
+  - golang
+  - security
+  - ai
+  - anti-bot
+  - defense
+  - proof-of-work
+links:
+  - text: GitHub
+    url: https://github.com/TecharoHQ/anubis
+  - text: Docs & Demo
+    url: https://anubis.techaro.lol
+    icon: docs
+---
+# Anubis
+
+Anubis is a security middleware designed to protect web services by implementing a Proof-of-Work (PoW) challenge. It effectively "weighs the soul" of incoming HTTP requests, deterring automated bots, AI crawlers, and scrapers while allowing legitimate users through.
+
+Built with Go, Anubis integrates into web applications to present a computational challenge that is trivial for human users but resource-intensive for bots attempting to access the service at scale. This acts as a significant barrier against unwanted automated traffic.
+
+Key features include:
+*   **Proof-of-Work Defense:** Utilizes computational challenges to verify clients.
+*   **Bot Mitigation:** Effectively stops common bots, scrapers, and AI crawlers.
+*   **Configurable:** Allows tuning of difficulty and other parameters.
+*   **Integration:** Designed to work as middleware in Go web applications.
+
+For detailed usage, configuration options, and a live demo, please refer to the official [Anubis Documentation](https://anubis.techaro.lol/).
