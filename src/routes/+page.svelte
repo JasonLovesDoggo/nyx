@@ -61,7 +61,7 @@
 			>,
 			<a
 				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
-				href="https://www.mozilla.org">Arch Linux</a
+				href="https://wiki.archlinux.org">Arch Linux</a
 			>,
 			<a
 				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"

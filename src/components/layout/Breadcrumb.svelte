@@ -14,6 +14,7 @@
 	</li>
 {/snippet}
 
+<!--todo: add a blinking square after the last / (like a cursor)-->
 <nav aria-label="Breadcrumbs">
 	<ul class="text-md flex items-center">
 		<li class="inline-flex items-center">

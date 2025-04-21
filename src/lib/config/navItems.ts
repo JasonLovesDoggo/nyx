@@ -11,7 +11,7 @@ interface NavItem {
 export const mainNavItems: NavItem[] = [
 	{ title: 'About', href: '/about' },
 	{ title: 'Projects', href: '/projects' },
-	{ title: 'Resume', href: 'https://jasoncameron.dev/resume.pdf', external: true }
+	{ title: 'Resume', href: '/resume.pdf', external: true }
 ];
 
 export const moreNavItems: NavItem[] = [
