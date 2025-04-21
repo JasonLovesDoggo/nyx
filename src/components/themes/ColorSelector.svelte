@@ -12,7 +12,7 @@
 				onclick={() => ($Accent = colorName)}
 				style:background-color={`var(--color-${colorName})`}
 				style:color={`var(--color-${colorName})`}
-				class={`aspect-square min-h-5 w-full min-w-5 rounded-md shadow-sm transition-all duration-150 ${isSelected ? 'ring-offset-base scale-105 ring-2 ring-current ring-offset-2' : 'opacity-80 hover:scale-110 hover:opacity-100'}`}
+				class={`aspect-square min-h-5 w-full min-w-5 cursor-pointer rounded-md shadow-sm transition-all duration-150 ${isSelected ? 'ring-offset-base scale-105 ring-2 ring-current ring-offset-2' : 'opacity-80 hover:scale-110 hover:opacity-100'}`}
 			>
 				<span class="sr-only">{colorName}</span>
 			</button>
