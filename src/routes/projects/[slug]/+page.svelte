@@ -1,6 +1,11 @@
 <script lang="ts">
-	import { IconCalendarEvent, IconTag } from '@tabler/icons-svelte';
-	import type { ProjectPageData } from '$types/projects'; // Add relevant icons
+	import {
+		IconCalendarEvent,
+		IconTag,
+		IconBrandGithub,
+		IconExternalLink
+	} from '@tabler/icons-svelte';
+	import type { ProjectPageData } from '$types/projects';
 	import { page } from '$app/state';
 	import { formatDate } from '$utils/date';
 
@@ -77,16 +82,51 @@
 					href={data.metadata.githubUrl}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="hover:text-accent flex items-center gap-1 transition-colors">...GitHub Icon...</a
+					class="group hover:text-accent flex items-center gap-1.5 transition-colors"
 				>
+					<IconBrandGithub
+						size={16}
+						class="transition-transform duration-200 group-hover:scale-110"
+					/>
+					<span>GitHub</span>
+				</a>
 			{/if}
 			{#if data.metadata.projectUrl}
 				<a
 					href={data.metadata.projectUrl}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="hover:text-accent flex items-center gap-1 transition-colors">...Link Icon...</a
+					class="group hover:text-accent flex items-center gap-1.5 transition-colors"
 				>
+					<IconExternalLink
+						size={16}
+						class="transition-transform duration-200 group-hover:scale-110"
+					/>
+					<span>Live Project</span>
+				</a>
+			{/if}
+			{#if data.metadata.links && data.metadata.links.length > 0}
+				{#each data.metadata.links as link (data.slug + link.text)}
+					<a
+						href={link.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="group hover:text-accent flex items-center gap-1.5 transition-colors"
+					>
+						{#if link.text.toLowerCase().includes('github')}
+							<IconBrandGithub
+								size={16}
+								class="transition-transform duration-200 group-hover:scale-110"
+							/>
+						{:else}
+							<IconExternalLink
+								size={16}
+								class="transition-transform duration-200 group-hover:scale-110"
+							/>
+						{/if}
+						<span>{link.text}</span>
+					</a>
+				{/each}
 			{/if}
 		</div>
 	</header>
