@@ -11,4 +11,4 @@ categories:
 
 Media inside the **static** folder is served from `/`.
 
-![Svelte](/projects/test.jpeg)
+![Svelte](/projects/abacus.webp)
