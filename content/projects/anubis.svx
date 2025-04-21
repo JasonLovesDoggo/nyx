@@ -4,6 +4,8 @@ description: Weighs the soul of incoming HTTP requests using proof-of-work to st
 date: 2025-03-01
 published: true
 featured: true
+imageUrl: projects/anubis.webp
+imageAlt: The Anubis GitHub repository
 tags:
   - golang
   - security
