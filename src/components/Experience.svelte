@@ -102,7 +102,7 @@
 							<IconExternalLink size={16} stroke={1.5} />
 						</a>
 
-						<Popover.Arrow class="fill-surface0" width={12} height={6} />
+						<Popover.Arrow class="text-accent" width={12} height={6} />
 					</Popover.Content>
 				</Popover.Portal>
 			</Popover.Root>
