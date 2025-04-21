@@ -24,10 +24,52 @@ Anubis is a security middleware designed to protect web services by implementing
 
 Built with Go, Anubis integrates into web applications to present a computational challenge that is trivial for human users but resource-intensive for bots attempting to access the service at scale. This acts as a significant barrier against unwanted automated traffic.
 
-Key features include:
+## Key Features
+
 *   **Proof-of-Work Defense:** Utilizes computational challenges to verify clients.
 *   **Bot Mitigation:** Effectively stops common bots, scrapers, and AI crawlers.
 *   **Configurable:** Allows tuning of difficulty and other parameters.
 *   **Integration:** Designed to work as middleware in Go web applications.
+*   **Open Graph Passthrough:** Enables social previews of protected resources without exempting each scraper individually.
+*   **Customizable Policies:** Define rules to allow, deny, or challenge incoming requests based on path and user agent.
+
+## Implementation Options
+
+Anubis can be deployed in various ways:
+
+- **Native Packages:** Available for Debian-based (apt), Red Hat-based (rpm), and as a tarball for other systems.
+- **Docker:** Ready-to-use container images for quick deployment.
+- **Kubernetes:** Helm charts for orchestrated environments.
+
+## Algorithm Selection
+
+Anubis offers two proof-of-work algorithms:
+
+- **Fast:** Highly optimized JavaScript that runs as efficiently as possible.
+- **Slow:** Intentionally inefficient JavaScript that wastes time and memory, perfect for known malicious clients.
+
+## Real-World Applications
+
+Anubis is particularly effective for protecting:
+
+- Git repositories (Gitea/Forgejo)
+- Content management systems
+- Any web application vulnerable to scraping or automated attacks
 
 For detailed usage, configuration options, and a live demo, please refer to the official [Anubis Documentation](https://anubis.techaro.lol/).
+
+
+### Notable Installations
+  - https://gitlab.gnome.org
+  - https://scioly.org
+  - https://bugs.winehq.org
+  - https://svnweb.freebsd.org
+  - https://trac.ffmpeg.org
+  - https://git.sr.ht
+  - https://git.enlightenment.org
+  - https://dev.haiku-os.org
+######  The United Nations
+  - https://policytoolbox.iiep.unesco.org
+###### The Linux Foundation
+- https://git.kernel.org
+- https://lore.kernel.org
