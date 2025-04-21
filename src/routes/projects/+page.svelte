@@ -32,7 +32,7 @@
 						<img
 							src={project.metadata.imageUrl}
 							alt={project.metadata.imageAlt}
-							class="mb-4 aspect-video w-full rounded-md object-cover"
+							class="mb-4 aspect-video w-full rounded-md"
 						/>
 					{:else}
 						<div class="bg-surface2 mb-4 aspect-video w-full rounded-md"></div>

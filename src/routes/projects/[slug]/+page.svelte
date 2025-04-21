@@ -40,11 +40,11 @@
 <article class="prose mx-auto mb-6 max-w-4xl">
 	<!-- Banner Image -->
 	{#if data.metadata.imageUrl}
-		<div class="max-h-content bg-red mb-8 overflow-hidden rounded-lg md:rounded-xl">
+		<div class=" bg-red mb-8 rounded-lg md:rounded-xl">
 			<img
 				src={data.metadata.imageUrl}
 				alt={data.metadata.imageAlt}
-				class="h-full min-h-full w-full min-w-full"
+				class="aspect-video rounded-lg md:rounded-xl"
 			/>
 		</div>
 	{/if}

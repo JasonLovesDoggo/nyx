@@ -45,7 +45,7 @@
 							<img
 								src={project.metadata.imageUrl}
 								alt={project.metadata.imageAlt}
-								class="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
+								class="aspect-video w-full transition-transform duration-300 group-hover:scale-105"
 							/>
 						</div>
 					{/if}
