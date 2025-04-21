@@ -6,7 +6,7 @@ export const load: LayoutServerLoad = async () => {
 	let footerData;
 	try {
 		footerData = await fetch(`${instance}/hit/${namespace}/${key}`, {
-			signal: AbortSignal.timeout(2500) // 2.5 second timeout
+			signal: AbortSignal.timeout(2000) // 2 second timeout
 		}).then((res) => res.json());
 		footerData.value = footerData.value.toLocaleString();
 	} catch (error) {
