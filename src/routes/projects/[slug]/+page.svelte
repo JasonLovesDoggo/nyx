@@ -1,15 +1,13 @@
 <script lang="ts">
-	import {
-		IconCalendarEvent,
-		IconTag,
-		IconBrandGithub,
-		IconExternalLink
-	} from '@tabler/icons-svelte';
+	import { IconCalendarEvent } from '@tabler/icons-svelte';
 	import type { ProjectPageData } from '$types/projects';
 	import { page } from '$app/state';
 	import { formatDate } from '$utils/date';
+	import { getIconByName } from '$lib/content/projects';
 
 	import '$lib/styles/content.css';
+	import ProjectTags from '$components/projects/ProjectTags.svelte';
+
 	type PageData = ProjectPageData;
 
 	let { data }: { data: PageData } = $props();
@@ -42,11 +40,11 @@
 <article class="prose mx-auto mb-6 max-w-4xl">
 	<!-- Banner Image -->
 	{#if data.metadata.imageUrl}
-		<div class="mb-8 overflow-hidden rounded-lg shadow-lg md:rounded-xl">
+		<div class="max-h-content bg-red mb-8 overflow-hidden rounded-lg md:rounded-xl">
 			<img
 				src={data.metadata.imageUrl}
 				alt={data.metadata.imageAlt}
-				class="aspect-[16/7] w-full object-cover"
+				class="h-full min-h-full w-full min-w-full"
 			/>
 		</div>
 	{/if}
@@ -64,70 +62,27 @@
 					<span>{formatDate(data.metadata.date)}</span>
 				</div>
 			{/if}
-
-			{#if data.metadata.tags && data.metadata.tags.length > 0}
-				<div class="flex items-center gap-1.5">
-					<IconTag size={16} />
-					<div class="flex flex-wrap gap-1.5">
-						{#each data.metadata.tags as tag ('root' + tag)}
-							<span class="bg-surface0 text-subtext1 rounded px-1.5 py-0.5 text-xs font-medium"
-								>{tag}</span
-							>
-						{/each}
-					</div>
-				</div>
-			{/if}
-			{#if data.metadata.githubUrl}
-				<a
-					href={data.metadata.githubUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group hover:text-accent flex items-center gap-1.5 transition-colors"
-				>
-					<IconBrandGithub
-						size={16}
-						class="transition-transform duration-200 group-hover:scale-110"
-					/>
-					<span>GitHub</span>
-				</a>
-			{/if}
-			{#if data.metadata.projectUrl}
-				<a
-					href={data.metadata.projectUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group hover:text-accent flex items-center gap-1.5 transition-colors"
-				>
-					<IconExternalLink
-						size={16}
-						class="transition-transform duration-200 group-hover:scale-110"
-					/>
-					<span>Live Project</span>
-				</a>
-			{/if}
 			{#if data.metadata.links && data.metadata.links.length > 0}
 				{#each data.metadata.links as link (data.slug + link.text)}
+					{@const Icon = getIconByName(
+						link.icon || (link.text.toLowerCase().includes('github') ? 'github' : 'external')
+					)}
 					<a
 						href={link.url}
+						title={link.text}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="group hover:text-accent flex items-center gap-1.5 transition-colors"
 					>
-						{#if link.text.toLowerCase().includes('github')}
-							<IconBrandGithub
-								size={16}
-								class="transition-transform duration-200 group-hover:scale-110"
-							/>
-						{:else}
-							<IconExternalLink
-								size={16}
-								class="transition-transform duration-200 group-hover:scale-110"
-							/>
-						{/if}
-						<span>{link.text}</span>
+						<Icon size={16} class="transition-transform duration-200 group-hover:scale-120" />
 					</a>
 				{/each}
 			{/if}
+		</div>
+
+		<!-- Tags on a new line -->
+		<div class="text-subtext0 mt-2 flex items-center gap-x-2 text-sm">
+			<ProjectTags project={data} />
 		</div>
 	</header>
 

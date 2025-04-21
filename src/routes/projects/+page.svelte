@@ -2,6 +2,7 @@
 	import { IconFolders } from '@tabler/icons-svelte';
 	import type { ProjectEntry } from '$types/projects';
 	import { formatDate } from '$utils/date';
+	import ProjectTags from '$components/projects/ProjectTags.svelte';
 
 	type PageData = {
 		projects: ProjectEntry[];
@@ -36,25 +37,17 @@
 					{:else}
 						<div class="bg-surface2 mb-4 aspect-video w-full rounded-md"></div>
 					{/if}
+					<div class="flex justify-between pe-3">
+						<h2 class="text-text group-hover:text-accent text-xl font-semibold">
+							{project.metadata.title}
+						</h2>
+						<p class="text-overlay1 content-center text-xs">
+							{formatDate(project.metadata.date)}
+						</p>
+					</div>
+					<p class="text-subtext0 line-clamp-3 text-sm">{project.metadata.description}</p>
 
-					<h2 class="text-text group-hover:text-accent text-xl font-semibold">
-						{project.metadata.title}
-					</h2>
-					<p class="text-subtext0 text-sm">{project.metadata.description}</p>
-
-					{#if project.metadata.tags && project.metadata.tags.length > 0}
-						<div class="flex flex-wrap gap-2 pt-2">
-							{#each project.metadata.tags as tag (project.slug + tag)}
-								<span class="bg-surface1 text-subtext1 rounded px-2 py-0.5 text-xs font-medium"
-									>{tag}</span
-								>
-							{/each}
-						</div>
-					{/if}
-
-					<p class="text-overlay0 pt-2 text-xs">
-						{formatDate(project.metadata.date)}
-					</p>
+					<ProjectTags {project} />
 				</a>
 			{/each}
 		</div>

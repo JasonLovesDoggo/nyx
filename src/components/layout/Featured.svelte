@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { IconArrowRight, IconStar } from '@tabler/icons-svelte';
+	import { IconArrowRight, IconStar, IconTag } from '@tabler/icons-svelte';
 	import type { ProjectMetadata } from '$types/projects';
+	import ProjectTags from '$components/projects/ProjectTags.svelte';
 
 	export interface FeaturedProject {
 		slug: string;
@@ -56,12 +57,8 @@
 						<p class="text-subtext0 line-clamp-2 text-sm">{project.metadata.description}</p>
 
 						{#if project.metadata.tags && project.metadata.tags.length > 0}
-							<div class="flex flex-wrap gap-2 pt-1">
-								{#each project.metadata.tags as tag ('feat' + project.slug + tag)}
-									<span class="bg-surface0 text-subtext1 rounded px-2 py-0.5 text-xs font-medium"
-										>{tag}</span
-									>
-								{/each}
+							<div class="flex items-center gap-x-2 pt-1 text-xs">
+								<ProjectTags {project} />
 							</div>
 						{/if}
 					</div>
