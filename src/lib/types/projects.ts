@@ -1,3 +1,9 @@
+export interface ProjectLink {
+	text: string;
+	url: string;
+	icon?: string;
+}
+
 export interface ProjectMetadata {
 	title: string;
 	description: string;
@@ -7,8 +13,7 @@ export interface ProjectMetadata {
 	tags?: string[];
 	imageUrl?: string; // <-- Add image URL
 	imageAlt?: string; // <-- Add alt text for image
-	projectUrl?: string;
-	githubUrl?: string;
+	links?: ProjectLink[];
 }
 
 export interface WithMetadata {

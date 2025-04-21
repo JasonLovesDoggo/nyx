@@ -1,6 +1,27 @@
 import { error } from '@sveltejs/kit';
 import type { ProjectMetadata, ProjectEntry, ProjectPageData } from '$types/projects';
 import type { SvelteComponent } from 'svelte';
+import { IconBrandGithub, IconExternalLink, IconFileText, IconCode } from '@tabler/icons-svelte';
+
+const DevpostIcon = () => import('$lib/icons/Devpost.svelte');
+
+// Type-safe function to get icon component by name
+export function getIconByName(name?: string) {
+	switch (name) {
+		case 'github':
+			return IconBrandGithub;
+		case 'external':
+			return IconExternalLink;
+		case 'docs':
+			return IconFileText;
+		case 'code':
+			return IconCode;
+		case 'devpost':
+			return DevpostIcon;
+		default:
+			return IconExternalLink;
+	}
+}
 
 const projectModules = import.meta.glob('/content/projects/*.svx', { eager: true });
 
