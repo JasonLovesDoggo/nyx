@@ -27,11 +27,15 @@
 					href={`/projects/${project.slug}`}
 					class="border-surface0 bg-base hover:border-accent group block space-y-3 rounded-xl border p-5 shadow-lg transition-colors duration-200"
 				>
-					<img
-						src={project.metadata.imageUrl}
-						alt={project.metadata.imageAlt}
-						class="mb-4 aspect-video w-full rounded-md object-cover"
-					/>
+					{#if project.metadata.imageUrl}
+						<img
+							src={project.metadata.imageUrl}
+							alt={project.metadata.imageAlt}
+							class="mb-4 aspect-video w-full rounded-md object-cover"
+						/>
+					{:else}
+						<div class="bg-surface2 mb-4 aspect-video w-full rounded-md"></div>
+					{/if}
 
 					<h2 class="text-text group-hover:text-accent text-xl font-semibold">
 						{project.metadata.title}
