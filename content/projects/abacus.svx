@@ -4,7 +4,7 @@ description: Abacus at it's core is a simple counter. However, it was designed f
 date: 2023-10-01
 published: true
 featured: true
-imageUrl: projects/abacus.webp
+imageUrl: /projects/abacus.webp
 imageAlt: The Abacus GitHub repository
 tags:
   - golang
