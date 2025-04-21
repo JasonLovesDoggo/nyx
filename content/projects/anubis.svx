@@ -63,6 +63,7 @@ For detailed usage, configuration options, and a live demo, please refer to the 
 
 ### Notable Installations
   - https://gitlab.gnome.org
+  - https://wiki.archlinux.org
   - https://scioly.org
   - https://bugs.winehq.org
   - https://svnweb.freebsd.org
