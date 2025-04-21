@@ -49,12 +49,33 @@
 			</span>
 		</h1>
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
-			A high school student building and securing web infrastructure. I focus on
-			<strong class="text-text font-medium">backend systems</strong>,
-			<strong class="text-text font-medium">DevOps</strong>, and
-			<strong class="text-text font-medium">cybersecurity</strong>, especially crafting defenses
-			against automated threats. I enjoy leading initiatives and tackling complex technical
-			challenges.
+			A high school student building and securing web infrastructure. I've written software that is
+			trusted by
+			<a
+				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
+				href="https://policytoolbox.iiep.unesco.org">The United Nations</a
+			>,
+			<a
+				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
+				href="https://git.kernel.org">The Linux Foundation</a
+			>,
+			<a
+				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
+				href="https://gitlab.gnome.org">GNOME</a
+			>,
+			<a
+				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
+				href="https://bugs.winehq.com">Wine</a
+			>,
+			<a
+				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
+				href="https://trac.ffmpeg.org">FFmpeg</a
+			>, and many more. My code has been used by
+			<b class="text-accent">millions</b> of people worldwide. I focus on
+			<b class="text-text">backend systems</b>,
+			<b class="text-text">DevOps</b>, and
+			<b class="text-text">cybersecurity</b>, especially crafting defenses against automated
+			threats. I enjoy leading initiatives and tackling complex technical challenges.
 		</p>
 		<div class="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2">
 			{#each Home.socialLinks as link (link.href)}
