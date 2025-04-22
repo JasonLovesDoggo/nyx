@@ -13,6 +13,7 @@
 		IconArrowRight
 	} from '@tabler/icons-svelte';
 	import { professionalAchievements, academicAchievements } from '$lib/config/about';
+	import Site from '$lib/config/common';
 
 	// Counter animation for Google Maps views
 	let mapViewCount = 0;
@@ -62,34 +63,25 @@
 
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
-					I'm a high school student with an <span class="text-accent font-medium">ENFP</span> personality
-					type, passionate about building and securing web infrastructure. My journey in technology started
-					with a curiosity about how websites work, which quickly evolved into a deep interest in backend
-					systems, DevOps, and cybersecurity.
+					[Introduction paragraph - Brief overview of who i am and i do] Feel free to <a
+						href={Site.out.calcom}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-accent hover:underline">book a chat</a
+					> if you'd like to connect.
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					I've written software that is trusted by organizations like The United Nations, The Linux
-					Foundation, Arch Linux, GNOME, Wine, FFmpeg, and many others. My code has been used by <span
-						class="text-accent font-semibold">millions</span
-					>
-					of people worldwide.
+					[Technical background - my expertise, skills, and notable projects]
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					I specialize in crafting defenses against automated threats and enjoy leading initiatives
-					that tackle complex technical challenges. When I'm not coding, you'll find me playing
-					ultimate frisbee, taking photos, or spending time with my dog.
-				</p>
-
-				<p class="text-subtext0 text-base leading-relaxed">
-					[Additional text about me will go here. Feel free to add more details about your
-					background, interests, or anything else you'd like to share.]
+					[Personal interests - What i enjoy outside of work]
 				</p>
 
 				<div class="flex flex-wrap gap-3 pt-2">
 					<a
-						href="https://github.com/jasonlovesdoggo"
+						href={Site.out.github}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="hover:text-accent inline-flex items-center gap-1.5 text-sm transition-colors"
@@ -98,10 +90,10 @@
 						GitHub
 					</a>
 
-					<span class="text-surface1">•</span>
+					<span class="text-surface1">*</span>
 
 					<a
-						href="https://linkedin.com/in/jasoncameron"
+						href={Site.out.linkedin}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="hover:text-accent inline-flex items-center gap-1.5 text-sm transition-colors"
@@ -110,15 +102,14 @@
 						LinkedIn
 					</a>
 
-					<span class="text-surface1">•</span>
+					<span class="text-surface1">*</span>
 
-					<a
-						href="mailto:contact@jasoncameron.dev"
+					<span
 						class="hover:text-accent inline-flex items-center gap-1.5 text-sm transition-colors"
 					>
 						<IconMail size={16} />
-						Email
-					</a>
+						contact[at][thisdomain]
+					</span>
 				</div>
 			</div>
 		</div>
@@ -146,7 +137,21 @@
 							class="text-subtext0 hover:text-text flex items-start gap-2 transition-colors duration-200"
 						>
 							<span class="text-accent font-medium">—</span>
-							<span>{achievement}</span>
+							{#if typeof achievement === 'string'}
+								<span>{achievement}</span>
+							{:else}
+								<a
+									href={achievement.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="hover:text-accent transition-colors"
+								>
+									<span class="font-medium">{achievement.title}</span>
+									{#if achievement.description}
+										<span class="text-subtext0 block text-xs">{achievement.description}</span>
+									{/if}
+								</a>
+							{/if}
 						</div>
 					{/each}
 				</div>
@@ -165,7 +170,21 @@
 							class="text-subtext0 hover:text-text flex items-start gap-2 transition-colors duration-200"
 						>
 							<span class="text-accent font-medium">—</span>
-							<span>{achievement}</span>
+							{#if typeof achievement === 'string'}
+								<span>{achievement}</span>
+							{:else}
+								<a
+									href={achievement.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="hover:text-accent transition-colors"
+								>
+									<span class="font-medium">{achievement.title}</span>
+									{#if achievement.description}
+										<span class="text-subtext0 block text-xs">{achievement.description}</span>
+									{/if}
+								</a>
+							{/if}
 						</div>
 					{/each}
 				</div>
@@ -264,66 +283,6 @@
 				My dog is my constant companion and brings joy to my life every day. We enjoy going on
 				hikes, playing fetch, and just relaxing together after a long day of coding.
 			</p>
-		</div>
-	</section>
-
-	<!-- Connect Section -->
-	<section class="bg-base mt-10 rounded-lg p-8 text-center shadow-sm">
-		<h2 class="mb-4 text-2xl font-bold">Let's Connect</h2>
-		<p class="text-subtext0 mx-auto mb-6 max-w-2xl leading-relaxed">
-			I'm always interested in connecting with fellow developers, potential collaborators, or anyone
-			who shares my interests. Feel free to reach out!
-		</p>
-		<div class="flex flex-wrap justify-center gap-4">
-			<a
-				href="https://github.com/jasonlovesdoggo"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="hover:text-accent inline-flex items-center gap-2 text-sm transition-colors duration-300"
-			>
-				<IconBrandGithub size={18} />
-				GitHub
-			</a>
-
-			<span class="text-surface1">•</span>
-
-			<a
-				href="https://linkedin.com/in/jasoncameron"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="hover:text-accent inline-flex items-center gap-2 text-sm transition-colors duration-300"
-			>
-				<IconBrandLinkedin size={18} />
-				LinkedIn
-			</a>
-
-			<span class="text-surface1">•</span>
-
-			<a
-				href="mailto:contact@jasoncameron.dev"
-				class="hover:text-accent inline-flex items-center gap-2 text-sm transition-colors duration-300"
-			>
-				<IconMail size={18} />
-				Email
-			</a>
-
-			<span class="text-surface1">•</span>
-
-			<a
-				href="/projects"
-				class="hover:text-accent inline-flex items-center gap-2 text-sm transition-colors duration-300"
-			>
-				Projects
-			</a>
-
-			<span class="text-surface1">•</span>
-
-			<a
-				href="/photos"
-				class="hover:text-accent inline-flex items-center gap-2 text-sm transition-colors duration-300"
-			>
-				Photos
-			</a>
 		</div>
 	</section>
 </div>

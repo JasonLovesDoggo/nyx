@@ -1,5 +1,13 @@
 import { IconBuildingFactory2 } from '@tabler/icons-svelte';
 
+type AchievementItem =
+	| string
+	| {
+			title: string;
+			description?: string;
+			href: string;
+	  };
+
 export const organizations = [
 	{ name: 'JAMHacks Lead', href: 'https://jamhacks.ca', icon: IconBuildingFactory2, external: true } // Example Link
 ];
@@ -7,26 +15,46 @@ export const organizations = [
 export const codingStats = { language: 'golang', hours: '1,200+' }; // todo: wakatime api based :pray:
 
 // Achievements for the about page
-export const professionalAchievements = [
+export const professionalAchievements: AchievementItem[] = [
 	'Hack Canada Co-Founder',
 	'StorageBox CTO',
-	'RBC Incoming Intern',
+	{
+		title: 'RBC Incoming Intern',
+		description: 'Summer 2023 internship at Royal Bank of Canada',
+		href: 'https://rbc.com'
+	},
 	'Anubis Lead Developer',
-	'Anubis Hackathon Winner',
+	{
+		title: 'Anubis Hackathon Winner',
+		description: 'First place at the Anubis Hackathon 2022',
+		href: 'https://anubis.com/hackathon'
+	},
 	'Anubis Hackathon Finalist',
 	'Anubis Hackathon Participant'
 ];
 
-export const academicAchievements = [
+export const academicAchievements: AchievementItem[] = [
 	'University of Toronto Computer Science Student',
-	'University of Toronto Engineering Student',
+	{
+		title: 'University of Toronto Engineering Student',
+		description: 'Specializing in Software Engineering',
+		href: 'https://engineering.utoronto.ca'
+	},
 	'University of Toronto Hackathon Participant',
-	'University of Toronto Hackathon Winner',
+	{
+		title: 'University of Toronto Hackathon Winner',
+		description: 'First place at UofT Hacks 2023',
+		href: 'https://uofthacks.com'
+	},
 	'University of Toronto Hackathon Finalist',
 	"Dean's List Scholar",
 	'Academic Excellence Award',
 	'Computer Science Society Member',
-	'Research Assistant - AI Lab',
+	{
+		title: 'Research Assistant - AI Lab',
+		description: 'Working on machine learning algorithms for computer vision',
+		href: 'https://ai.utoronto.ca'
+	},
 	'Teaching Assistant - Data Structures',
 	'Programming Competition Finalist',
 	'Undergraduate Research Symposium Presenter',
