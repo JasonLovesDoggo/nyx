@@ -13,6 +13,7 @@ export interface TutorialMetadata {
 	updated_at?: string;
 	published_at?: string; // if it's not set, it won't be published
 	tags?: string[];
+	sources?: { title: string; url: string }[]; // sources or references for the tutorial
 }
 
 export interface TutorialEntry {

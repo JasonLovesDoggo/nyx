@@ -7,6 +7,13 @@ tags:
   - recursion
   - algorithms
   - programming
+sources:
+  - title: "Oracle. (n.d.). The Java Tutorials"
+    url: "https://docs.oracle.com/javase/tutorial/"
+  - title: "GeeksforGeeks. (n.d.). Java Programming Language"
+    url: "https://www.geeksforgeeks.org/java/"
+  - title: "GeeksforGeeks. (n.d.). Types of Recursion"
+    url: "https://www.geeksforgeeks.org/types-of-recursions/"
 ---
 
 # Recursion in Java

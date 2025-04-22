@@ -52,6 +52,25 @@
 				{/each}
 			</div>
 		{/if}
+		{#if data.metadata.sources && data.metadata.sources.length > 0}
+			<div class="mt-4">
+				<h3 class="text-lg font-semibold">Sources</h3>
+				<ul class="mt-2 list-disc pl-5">
+					{#each data.metadata.sources as source (data.slug + source.title)}
+						<li>
+							<a
+								href={source.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="text-accent hover:underline"
+							>
+								{source.title}
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</div>
+		{/if}
 	</header>
 
 	<hr />

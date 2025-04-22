@@ -8,6 +8,13 @@ tags:
   - data structures
   - algorithms
   - searching
+sources:
+  - title: "Oracle. (n.d.). The Java Tutorials"
+    url: "https://docs.oracle.com/javase/tutorial/"
+  - title: "W3Schools. (n.d.). Java Tutorial"
+    url: "https://www.w3schools.com/java/"
+  - title: "Tutorialspoint. (n.d.). Java Tutorial"
+    url: "https://www.tutorialspoint.com/java/"
 ---
 
 # Arrays, ArrayLists, and Searching in Java
