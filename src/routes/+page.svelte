@@ -75,7 +75,7 @@
 				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
 				href="https://trac.ffmpeg.org">FFmpeg</a
 			>
-			and many others. My code has been used by
+			and many others. My code is used by
 			<b class="text-accent">millions</b> of people worldwide. I focus on
 			<b class="text-text">backend systems</b>,
 			<b class="text-text">DevOps</b>, and
