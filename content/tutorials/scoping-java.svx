@@ -33,10 +33,10 @@ Access controls in Java determine the visibility of classes, methods, and variab
 
 | Modifier   | Class | Package | Subclass | World |
 |------------|-------|---------|----------|-------|
-| **Default**| Yes   | Yes     | No       | No    |
-| **Public** | Yes   | Yes     | Yes      | Yes   |
-| **Protected** | Yes | Yes     | Yes      | No    |
-| **Private** | Yes  | No      | No       | No    |
+| **Default**| [x]    | [x]     | [ ]        | [ ]     |
+| **Public** | [x]    | [x]      | [x]      | [x]    |
+| **Protected** | [x] | [x]      | [x]       | [ ]     |
+| **Private** | [x]   | [ ]       | [ ]        | [ ]     |
 
 ### Examples
 
@@ -179,7 +179,7 @@ Variable scoping in Java determines the visibility and lifetime of variables wit
 
 1. **Local Variables**: Declared inside a method or block and accessible only within that method or block.
 2. **Instance Variables**: Declared inside a class but outside any method, and accessible by all methods of the class.
-3. **Class Variables (Static Variables)**: Declared with the `static` keyword inside a class but outside any method, and accessible by all methods of the class.
+3. **Class Variables (Static Variables)**: Declared with the `static` keyword inside a class but outside any method, and are accessible by all methods of the class.
 
 ### Local Variables
 
