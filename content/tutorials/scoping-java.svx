@@ -18,29 +18,35 @@ sources:
 
 # Scoping in Java
 
-Scoping in Java refers to the visibility and lifetime of variables and methods within a program. Understanding scoping is crucial for writing clean, maintainable, and bug-free code. This tutorial covers access controls and variable scoping in Java.
+Scoping in Java refers to the visibility and lifetime of variables and methods within a program. Understanding scoping is crucial for writing clean, maintainable, and bug-free code. This tutorial covers both **access control** and **variable scoping** in Java, providing examples for better understanding.
 
 ## Access Controls
 
 Access controls in Java determine the visibility of classes, methods, and variables. There are four levels of access control:
 
-1. **Default**: Accessible only within the same package.
-2. **Public**: Accessible from any other class.
-3. **Protected**: Accessible within the same package and by subclasses.
-4. **Private**: Accessible only within the same class.
+- **Default**: Accessible only within the same package.
+- **Public**: Accessible from any other class.
+- **Protected**: Accessible within the same package and by subclasses.
+- **Private**: Accessible only within the same class.
 
 ### Access Control Table
 
-| Modifier   | Class | Package | Subclass | World |
-|------------|-------|---------|----------|-------|
-| **Default**| [x]    | [x]     | [ ]        | [ ]     |
-| **Public** | [x]    | [x]      | [x]      | [x]    |
-| **Protected** | [x] | [x]      | [x]       | [ ]     |
-| **Private** | [x]   | [ ]       | [ ]        | [ ]     |
+The following table summarizes the visibility of each access modifier:
+
+| Modifier      | Class                                      | Package                                    | Subclass                                   | World                                      |
+|---------------|--------------------------------------------|--------------------------------------------|--------------------------------------------|--------------------------------------------|
+| **Default**   | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" disabled />         | <input type="checkbox" disabled />         |
+| **Public**    | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> |
+| **Protected** | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" disabled />         |
+| **Private**   | <input type="checkbox" checked disabled /> | <input type="checkbox" disabled />         | <input type="checkbox" disabled />         | <input type="checkbox" disabled />         |
+
+> **Note:** The checkboxes in the table are for illustrative purposes only and are not interactive.
 
 ### Examples
 
 #### Default Access
+
+Default access allows visibility only within the same package. Here's an example:
 
 ```java
 // File: package1/DefaultClass.java
@@ -77,6 +83,8 @@ public class Other {
 
 #### Public Access
 
+The `public` modifier makes a class or method accessible from any other class.
+
 ```java
 // File: package1/PublicClass.java
 package package1;
@@ -111,6 +119,8 @@ public class Other {
 ```
 
 #### Protected Access
+
+The `protected` modifier allows access within the same package and by subclasses.
 
 ```java
 // File: package1/ProtectedClass.java
@@ -147,6 +157,8 @@ public class Other extends ProtectedClass {
 
 #### Private Access
 
+The `private` modifier restricts access to the same class only.
+
 ```java
 // File: package1/PrivateClass.java
 package package1;
@@ -177,9 +189,9 @@ public class Main {
 
 Variable scoping in Java determines the visibility and lifetime of variables within a program. There are three main types of variable scoping:
 
-1. **Local Variables**: Declared inside a method or block and accessible only within that method or block.
-2. **Instance Variables**: Declared inside a class but outside any method, and accessible by all methods of the class.
-3. **Class Variables (Static Variables)**: Declared with the `static` keyword inside a class but outside any method, and are accessible by all methods of the class.
+- **Local Variables**: Declared inside a method or block and accessible only within that method or block.
+- **Instance Variables**: Declared inside a class but outside any method, and accessible by all methods of the class.
+- **Class Variables (Static Variables)**: Declared with the `static` keyword inside a class but outside any method, and are accessible by all methods of the class.
 
 ### Local Variables
 
@@ -202,7 +214,7 @@ public class LocalVariableExample {
 
 ### Instance Variables
 
-Instance variables are declared inside a class but outside any method, and are accessible by all methods of the class.
+Instance variables are declared inside a class but outside methods, and are accessible by all methods of the class.
 
 ```java
 public class InstanceVariableExample {
@@ -223,7 +235,7 @@ public class InstanceVariableExample {
 
 ### Class Variables (Static Variables)
 
-Class variables are declared with the `static` keyword inside a class but outside any method, and are accessible by all methods of the class.
+Static variables are declared with the `static` keyword and are shared across all instances of a class.
 
 ```java
 public class StaticVariableExample {
@@ -244,4 +256,4 @@ public class StaticVariableExample {
 
 ## Conclusion
 
-Understanding scoping in Java is essential for writing clean, maintainable, and bug-free code. By mastering access controls and variable scoping, you can ensure that your code is well-structured and easy to understand.
+Understanding scoping in Java is crucial for writing clean, maintainable, and bug-free code. By mastering access controls and variable scoping, you ensure your code is well-structured and less prone to errors. The examples above cover the key concepts, and by practicing them, you will improve your grasp of Java scoping.
