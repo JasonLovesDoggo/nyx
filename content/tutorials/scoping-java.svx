@@ -1,0 +1,257 @@
+---
+title: Scoping in Java
+description: A comprehensive tutorial on scoping in Java, including access controls and variable scoping with code examples and explanations.
+published_at: '2025-04-25'
+tags:
+  - java
+  - scoping
+  - access controls
+  - variable scoping
+sources:
+  - title: "Oracle. (n.d.). The Java Tutorials"
+    url: "https://docs.oracle.com/javase/tutorial/"
+  - title: "GeeksforGeeks. (n.d.). Java Programming Language"
+    url: "https://www.geeksforgeeks.org/java/"
+  - title: "W3Schools. (n.d.). Java Tutorial"
+    url: "https://www.w3schools.com/java/"
+---
+
+# Scoping in Java
+
+Scoping in Java refers to the visibility and lifetime of variables and methods within a program. Understanding scoping is crucial for writing clean, maintainable, and bug-free code. This tutorial covers both **access control** and **variable scoping** in Java, providing examples for better understanding.
+
+## Access Controls
+
+Access controls in Java determine the visibility of classes, methods, and variables. There are four levels of access control:
+
+- **Default**: Accessible only within the same package.
+- **Public**: Accessible from any other class.
+- **Protected**: Accessible within the same package and by subclasses.
+- **Private**: Accessible only within the same class.
+
+### Access Control Table
+
+The following table summarizes the visibility of each access modifier:
+
+| Modifier      | Class                                      | Package                                    | Subclass                                   | World                                      |
+|---------------|--------------------------------------------|--------------------------------------------|--------------------------------------------|--------------------------------------------|
+| **Default**   | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" disabled />         | <input type="checkbox" disabled />         |
+| **Public**    | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> |
+| **Protected** | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" disabled />         |
+| **Private**   | <input type="checkbox" checked disabled /> | <input type="checkbox" disabled />         | <input type="checkbox" disabled />         | <input type="checkbox" disabled />         |
+
+### Examples
+
+#### Default Access
+
+Default access allows visibility only within the same package. Here's an example:
+
+```java
+// File: package1/DefaultClass.java
+package package1;
+
+class DefaultClass {
+    void display() {
+        System.out.println("Default access");
+    }
+}
+
+// File: package1/Main.java
+package package1;
+
+public class Main {
+    public static void main(String[] args) {
+        DefaultClass obj = new DefaultClass();
+        obj.display(); // Works fine
+    }
+}
+
+// File: package2/Other.java
+package package2;
+
+import package1.DefaultClass;
+
+public class Other {
+    public static void main(String[] args) {
+        DefaultClass obj = new DefaultClass();
+        obj.display(); // Compile-time error
+    }
+}
+```
+
+#### Public Access
+
+The `public` modifier makes a class or method accessible from any other class.
+
+```java
+// File: package1/PublicClass.java
+package package1;
+
+public class PublicClass {
+    public void display() {
+        System.out.println("Public access");
+    }
+}
+
+// File: package1/Main.java
+package package1;
+
+public class Main {
+    public static void main(String[] args) {
+        PublicClass obj = new PublicClass();
+        obj.display(); // Works fine
+    }
+}
+
+// File: package2/Other.java
+package package2;
+
+import package1.PublicClass;
+
+public class Other {
+    public static void main(String[] args) {
+        PublicClass obj = new PublicClass();
+        obj.display(); // Works fine
+    }
+}
+```
+
+#### Protected Access
+
+The `protected` modifier allows access within the same package and by subclasses.
+
+```java
+// File: package1/ProtectedClass.java
+package package1;
+
+public class ProtectedClass {
+    protected void display() {
+        System.out.println("Protected access");
+    }
+}
+
+// File: package1/Main.java
+package package1;
+
+public class Main {
+    public static void main(String[] args) {
+        ProtectedClass obj = new ProtectedClass();
+        obj.display(); // Works fine
+    }
+}
+
+// File: package2/Other.java
+package package2;
+
+import package1.ProtectedClass;
+
+public class Other extends ProtectedClass {
+    public static void main(String[] args) {
+        Other obj = new Other();
+        obj.display(); // Works fine
+    }
+}
+```
+
+#### Private Access
+
+The `private` modifier restricts access to the same class only.
+
+```java
+// File: package1/PrivateClass.java
+package package1;
+
+public class PrivateClass {
+    private void display() {
+        System.out.println("Private access");
+    }
+
+    public void show() {
+        display(); // Works fine
+    }
+}
+
+// File: package1/Main.java
+package package1;
+
+public class Main {
+    public static void main(String[] args) {
+        PrivateClass obj = new PrivateClass();
+        obj.show(); // Works fine
+        obj.display(); // Compile-time error
+    }
+}
+```
+
+## Variable Scoping
+
+Variable scoping in Java determines the visibility and lifetime of variables within a program. There are three main types of variable scoping:
+
+- **Local Variables**: Declared inside a method or block and accessible only within that method or block.
+- **Instance Variables**: Declared inside a class but outside any method, and accessible by all methods of the class.
+- **Class Variables (Static Variables)**: Declared with the `static` keyword inside a class but outside any method, and are accessible by all methods of the class.
+
+### Local Variables
+
+Local variables are declared inside a method or block and are accessible only within that method or block.
+
+```java
+public class LocalVariableExample {
+    public void display() {
+        int localVar = 10; // Local variable
+        System.out.println("Local variable: " + localVar);
+    }
+
+    public static void main(String[] args) {
+        LocalVariableExample obj = new LocalVariableExample();
+        obj.display();
+        // System.out.println(localVar); // Compile-time error
+    }
+}
+```
+
+### Instance Variables
+
+Instance variables are declared inside a class but outside methods, and are accessible by all methods of the class.
+
+```java
+public class InstanceVariableExample {
+    int instanceVar; // Instance variable
+
+    public void display() {
+        instanceVar = 20;
+        System.out.println("Instance variable: " + instanceVar);
+    }
+
+    public static void main(String[] args) {
+        InstanceVariableExample obj = new InstanceVariableExample();
+        obj.display();
+        System.out.println("Instance variable: " + obj.instanceVar);
+    }
+}
+```
+
+### Class Variables (Static Variables)
+
+Static variables are declared with the `static` keyword and are shared across all instances of a class.
+
+```java
+public class StaticVariableExample {
+    static int staticVar; // Static variable
+
+    public void display() {
+        staticVar = 30;
+        System.out.println("Static variable: " + staticVar);
+    }
+
+    public static void main(String[] args) {
+        StaticVariableExample obj = new StaticVariableExample();
+        obj.display();
+        System.out.println("Static variable: " + StaticVariableExample.staticVar);
+    }
+}
+```
+
+## Conclusion
+
+Understanding scoping in Java is crucial for writing clean, maintainable, and bug-free code. By mastering access controls and variable scoping, you ensure your code is well-structured and less prone to errors. The examples above cover the key concepts, and by practicing them, you will improve your grasp of Java scoping.

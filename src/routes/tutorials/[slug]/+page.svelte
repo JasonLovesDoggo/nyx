@@ -5,9 +5,19 @@
 	export let data: TutorialPageData;
 	import '$lib/styles/content.css';
 	import { page } from '$app/state';
+	import { getRandomAccentColor } from '$lib/stores/theme';
 
-	// Component generated from mdsvex
 	const Content = data.content;
+
+	// Assign a random color to each tag
+	let tagColors =
+		data.metadata.tags?.reduce(
+			(acc, tag) => {
+				acc[tag] = getRandomAccentColor();
+				return acc;
+			},
+			{} as Record<string, string>
+		) || {};
 </script>
 
 <svelte:head>
@@ -48,7 +58,14 @@
 		{#if data.metadata.tags}
 			<div class="flex flex-wrap gap-2">
 				{#each data.metadata.tags as tag (data.slug + tag)}
-					<span class="bg-surface1 rounded px-2 py-1 text-xs">{tag}</span>
+					{#if tagColors[tag]}
+						<span
+							class="rounded px-2 py-1 text-xs font-semibold"
+							style="background-color: var(--color-surface0); color: var(--color-{tagColors[tag]})"
+						>
+							{tag}
+						</span>
+					{/if}
 				{/each}
 			</div>
 		{/if}
