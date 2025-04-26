@@ -1,15 +1,9 @@
 <script lang="ts">
 	import type { ProjectEntry } from '$types/projects';
-	import { accentColorNames } from '$lib/stores/theme';
+	import { getRandomAccentColor } from '$lib/stores/theme';
 	import { IconTag } from '@tabler/icons-svelte';
 
 	export let project: ProjectEntry;
-
-	// Function to get a random accent color
-	function getRandomAccentColor() {
-		const randomIndex = Math.floor(Math.random() * accentColorNames.length);
-		return accentColorNames[randomIndex];
-	}
 
 	// Assign a random color to each tag
 	const tagColors =

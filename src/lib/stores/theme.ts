@@ -75,3 +75,9 @@ export const Palette = persistentWritable<PaletteName>('palette', {
 		}
 	}
 });
+
+// Function to get a random accent color
+export function getRandomAccentColor() {
+	const randomIndex = Math.floor(Math.random() * accentColorNames.length);
+	return accentColorNames[randomIndex];
+}

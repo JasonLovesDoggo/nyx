@@ -40,8 +40,6 @@ The following table summarizes the visibility of each access modifier:
 | **Protected** | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" checked disabled /> | <input type="checkbox" disabled />         |
 | **Private**   | <input type="checkbox" checked disabled /> | <input type="checkbox" disabled />         | <input type="checkbox" disabled />         | <input type="checkbox" disabled />         |
 
-> **Note:** The checkboxes in the table are for illustrative purposes only and are not interactive.
-
 ### Examples
 
 #### Default Access
