@@ -34,6 +34,11 @@
 			}
 		}, interval);
 	});
+
+	const handleEmailClick = () => {
+		const email = atob('Y29udGFjdEA=') + window.location.hostname;
+		window.location.href = `mailto:${email}`;
+	};
 </script>
 
 <svelte:head>
@@ -103,9 +108,17 @@
 					</a>
 
 					<span class="text-surface1">*</span>
-
 					<span
+						role="button"
+						aria-label="Send an email to contact"
 						class="hover:text-accent inline-flex items-center gap-1.5 text-sm transition-colors"
+						tabindex="0"
+						onclick={handleEmailClick}
+						onkeydown={(e) => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								handleEmailClick();
+							}
+						}}
 					>
 						<IconMail size={16} />
 						contact[at][thisdomain]
