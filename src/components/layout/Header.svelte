@@ -6,7 +6,7 @@
 	let { toggleSidebar } = $props<{ toggleSidebar: () => void }>();
 </script>
 
-<div class="flex h-16 items-center justify-between p-5 select-none">
+<div class="header sticky top-0 z-10 flex h-24 items-center justify-between p-5 pb-10 select-none">
 	<Breadcrumb />
 	<button
 		onclick={toggleSidebar}
@@ -37,3 +37,11 @@
 		</button>
 	</nav>
 </div>
+
+<style>
+	.header {
+		mask: linear-gradient(black, black, transparent);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+	}
+</style>
