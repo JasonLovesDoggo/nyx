@@ -6,11 +6,13 @@
 		IconBrandGithub,
 		IconBrandLinkedin,
 		IconMail,
+		IconBriefcase,
+		IconSchool,
 		IconHeart,
 		IconDog,
 		IconArrowRight
 	} from '@tabler/icons-svelte';
-	import { Achievements } from '$lib/config/about';
+	import { professionalAchievements, academicAchievements } from '$lib/config/about';
 	import Site from '$lib/config/common';
 
 	// Counter animation for Google Maps views
@@ -34,7 +36,6 @@
 	});
 
 	const handleEmailClick = () => {
-		// boo scrapers. Decodes to contact[at]
 		const email = atob('Y29udGFjdEA=') + window.location.hostname;
 		window.location.href = `mailto:${email}`;
 	};
@@ -134,34 +135,75 @@
 			<span>Achievements</span>
 		</h2>
 
-		<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
-			<h3 class="mb-4 text-xl font-semibold">Achievements</h3>
+		<!-- Two side-by-side achievement lists -->
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+			<!-- Professional Achievements -->
+			<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
+				<h3 class="mb-4 flex items-center gap-2 text-xl font-semibold">
+					<IconBriefcase size={24} class="text-accent" />
+					Professional
+				</h3>
 
-			<div class="custom-scrollbar max-h-60 space-y-2 overflow-y-auto pl-2 text-sm">
-				{#each Achievements as achievement (achievement)}
-					<div
-						class="text-subtext0 hover:text-text flex items-start gap-2 transition-colors duration-200"
-					>
-						<span class="text-accent font-medium">—</span>
-						{#if typeof achievement === 'string'}
-							<span>{achievement}</span>
-						{:else}
-							<a
-								href={achievement.href}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="hover:text-accent transition-colors"
-							>
-								<span class="font-medium">{achievement.title}</span>
-								{#if achievement.description}
-									<span class="text-subtext0 block text-xs">{achievement.description}</span>
-								{/if}
-							</a>
-						{/if}
-					</div>
-				{/each}
+				<div class="custom-scrollbar max-h-60 space-y-2 overflow-y-auto pl-2 text-sm">
+					{#each professionalAchievements as achievement (achievement)}
+						<div
+							class="text-subtext0 hover:text-text flex items-start gap-2 transition-colors duration-200"
+						>
+							<span class="text-accent font-medium">—</span>
+							{#if typeof achievement === 'string'}
+								<span>{achievement}</span>
+							{:else}
+								<a
+									href={achievement.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="hover:text-accent transition-colors"
+								>
+									<span class="font-medium">{achievement.title}</span>
+									{#if achievement.description}
+										<span class="text-subtext0 block text-xs">{achievement.description}</span>
+									{/if}
+								</a>
+							{/if}
+						</div>
+					{/each}
+				</div>
+			</div>
+
+			<!-- Academic Achievements -->
+			<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
+				<h3 class="mb-4 flex items-center gap-2 text-xl font-semibold">
+					<IconSchool size={24} class="text-accent" />
+					Academic
+				</h3>
+
+				<div class="custom-scrollbar max-h-60 space-y-2 overflow-y-auto pl-2 text-sm">
+					{#each academicAchievements as achievement (achievement)}
+						<div
+							class="text-subtext0 hover:text-text flex items-start gap-2 transition-colors duration-200"
+						>
+							<span class="text-accent font-medium">—</span>
+							{#if typeof achievement === 'string'}
+								<span>{achievement}</span>
+							{:else}
+								<a
+									href={achievement.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="hover:text-accent transition-colors"
+								>
+									<span class="font-medium">{achievement.title}</span>
+									{#if achievement.description}
+										<span class="text-subtext0 block text-xs">{achievement.description}</span>
+									{/if}
+								</a>
+							{/if}
+						</div>
+					{/each}
+				</div>
 			</div>
 		</div>
+
 		<div class="flex justify-center pt-4">
 			<a
 				href="/projects"

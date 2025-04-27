@@ -14,7 +14,26 @@ export const organizations = [
 
 export const codingStats = { language: 'golang', hours: '1,200+' }; // todo: wakatime api based :pray:
 
-export const Achievements: AchievementItem[] = [
+// Achievements for the about page
+export const professionalAchievements: AchievementItem[] = [
+	'Hack Canada Co-Founder',
+	'StorageBox CTO',
+	{
+		title: 'RBC Incoming Intern',
+		description: 'Summer 2023 internship at Royal Bank of Canada',
+		href: 'https://rbc.com'
+	},
+	'Anubis Lead Developer',
+	{
+		title: 'Anubis Hackathon Winner',
+		description: 'First place at the Anubis Hackathon 2022',
+		href: 'https://anubis.com/hackathon'
+	},
+	'Anubis Hackathon Finalist',
+	'Anubis Hackathon Participant'
+];
+
+export const academicAchievements: AchievementItem[] = [
 	'University of Toronto Computer Science Student',
 	{
 		title: 'University of Toronto Engineering Student',
