@@ -14,7 +14,6 @@
 	</li>
 {/snippet}
 
-<!--todo: add a blinking square after the last / (like a cursor)-->
 <nav aria-label="Breadcrumbs">
 	<ul class="text-md flex items-center">
 		<li class="inline-flex items-center">
@@ -22,7 +21,7 @@
 		</li>
 
 		{#each breadcrumbs as text, i ('Bred' + i)}
-			<li class="mx-0.5">/</li>
+			<li class="mx-0.5 inline-flex items-center">/</li>
 			{@const href = '/' + breadcrumbs.slice(0, i + 1).join('/')}
 
 			{#if i === breadcrumbs.length - 1}
@@ -31,5 +30,26 @@
 				{@render breadcrumb({ text, href })}
 			{/if}
 		{/each}
+		<li class="mx-0.5 inline-flex items-center" aria-hidden="true">/</li>
+
+		<li class="ml-1 inline-flex items-center">
+			<span class="cursor-blink bg-accent h-4 w-2" aria-hidden="true"></span>
+		</li>
 	</ul>
 </nav>
+
+<style>
+	@keyframes blink {
+		0%,
+		100% {
+			opacity: 1; /* Fully visible */
+		}
+		20% {
+			opacity: 0; /* Invisible */
+		}
+	}
+
+	.cursor-blink {
+		animation: blink 3s cubic-bezier(0.2, 1, 0.8, 1) infinite;
+	}
+</style>

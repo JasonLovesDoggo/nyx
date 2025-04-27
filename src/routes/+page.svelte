@@ -7,13 +7,11 @@
 		IconArticle,
 		IconCode,
 		IconCalendarEvent,
-		IconActivity,
-		IconBriefcase,
-		IconSchool
+		IconActivity
 	} from '@tabler/icons-svelte';
 	import Site from '$lib/config/common';
 	import { Home } from '$lib/config/pages';
-	import { codingStats, latestCommits, organizations } from '$lib/config/about';
+	import { codingStats, latestCommits } from '$lib/config/about';
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
 	import Experience from '$components/Experience.svelte';
@@ -237,34 +235,6 @@
 					<span>View GitHub</span>
 					<IconExternalLink size={14} class="inline-block" />
 				</a>
-			</div>
-
-			<!-- Box 7: Roles / Affiliations (Simplified/Redundant?) -->
-			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
-				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
-					<IconBriefcase size={16} class="text-accent" />
-					Quick Roles
-				</h3>
-				<div class="space-y-2 text-sm">
-					<div class="text-subtext0 flex items-center gap-2">
-						<IconSchool size={18} class="text-sky flex-shrink-0" />
-						<span>Student @ High School</span>
-					</div>
-					{#if organizations.length > 0}
-						{#each organizations as org (org.name)}
-							{@const OrgIcon = org.icon}
-							<div class="text-subtext0 flex items-center gap-2">
-								<OrgIcon size={18} class="text-mauve flex-shrink-0" />
-								<a
-									href={org.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="hover:text-accent hover:underline">Leading @ {org.name}</a
-								>
-							</div>
-						{/each}
-					{/if}
-				</div>
 			</div>
 		</div>
 	</section>
