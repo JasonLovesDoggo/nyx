@@ -6,13 +6,12 @@
 		IconBrandGithub,
 		IconBrandLinkedin,
 		IconMail,
-		IconBriefcase,
-		IconSchool,
 		IconHeart,
 		IconDog,
-		IconArrowRight
+		IconArrowRight,
+		IconCookieManFilled
 	} from '@tabler/icons-svelte';
-	import { professionalAchievements, academicAchievements } from '$lib/config/about';
+	import { coolStuff, achievements, type AchievementItem } from '$lib/config/about';
 	import Site from '$lib/config/common';
 
 	// Counter animation for Google Maps views
@@ -39,6 +38,9 @@
 		const email = atob('Y29udGFjdEA=') + window.location.hostname;
 		window.location.href = `mailto:${email}`;
 	};
+
+	type Items = AchievementItem[];
+	type str = string;
 </script>
 
 <svelte:head>
@@ -48,6 +50,40 @@
 		content="Learn more about Jason Cameron, a high school student building and securing web infrastructure."
 	/>
 </svelte:head>
+
+{#snippet Listem(items: Items, text: str, Icon: typeof IconTrophy)}
+	<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
+		<h3 class="mb-4 flex items-center gap-2 text-xl font-semibold">
+			<Icon size={24} class="text-accent" />
+			{text}
+		</h3>
+
+		<div class="custom-scrollbar max-h-60 space-y-2 overflow-y-auto pl-2 text-sm">
+			{#each items as thing (thing)}
+				<div
+					class="text-subtext0 hover:text-text flex items-start gap-2 transition-colors duration-200"
+				>
+					<span class="text-accent font-medium">—</span>
+					{#if typeof thing === 'string'}
+						<span>{thing}</span>
+					{:else}
+						<a
+							href={thing.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover:text-accent transition-colors"
+						>
+							<span class="font-medium">{thing.title}</span>
+							{#if thing.description}
+								<span class="text-subtext0 block text-xs">{thing.description}</span>
+							{/if}
+						</a>
+					{/if}
+				</div>
+			{/each}
+		</div>
+	</div>
+{/snippet}
 
 <div class="mx-auto max-w-6xl space-y-8 px-4 py-8 md:px-6">
 	<!-- About Me Section -->
@@ -130,78 +166,10 @@
 
 	<!-- Achievements Section -->
 	<section id="achievements-section" class="space-y-6">
-		<h2 class="flex items-center gap-3 text-2xl font-bold md:text-3xl">
-			<IconTrophy size={30} class="text-accent" />
-			<span>Achievements</span>
-		</h2>
-
 		<!-- Two side-by-side achievement lists -->
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-			<!-- Professional Achievements -->
-			<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
-				<h3 class="mb-4 flex items-center gap-2 text-xl font-semibold">
-					<IconBriefcase size={24} class="text-accent" />
-					Professional
-				</h3>
-
-				<div class="custom-scrollbar max-h-60 space-y-2 overflow-y-auto pl-2 text-sm">
-					{#each professionalAchievements as achievement (achievement)}
-						<div
-							class="text-subtext0 hover:text-text flex items-start gap-2 transition-colors duration-200"
-						>
-							<span class="text-accent font-medium">—</span>
-							{#if typeof achievement === 'string'}
-								<span>{achievement}</span>
-							{:else}
-								<a
-									href={achievement.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="hover:text-accent transition-colors"
-								>
-									<span class="font-medium">{achievement.title}</span>
-									{#if achievement.description}
-										<span class="text-subtext0 block text-xs">{achievement.description}</span>
-									{/if}
-								</a>
-							{/if}
-						</div>
-					{/each}
-				</div>
-			</div>
-
-			<!-- Academic Achievements -->
-			<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
-				<h3 class="mb-4 flex items-center gap-2 text-xl font-semibold">
-					<IconSchool size={24} class="text-accent" />
-					Academic
-				</h3>
-
-				<div class="custom-scrollbar max-h-60 space-y-2 overflow-y-auto pl-2 text-sm">
-					{#each academicAchievements as achievement (achievement)}
-						<div
-							class="text-subtext0 hover:text-text flex items-start gap-2 transition-colors duration-200"
-						>
-							<span class="text-accent font-medium">—</span>
-							{#if typeof achievement === 'string'}
-								<span>{achievement}</span>
-							{:else}
-								<a
-									href={achievement.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="hover:text-accent transition-colors"
-								>
-									<span class="font-medium">{achievement.title}</span>
-									{#if achievement.description}
-										<span class="text-subtext0 block text-xs">{achievement.description}</span>
-									{/if}
-								</a>
-							{/if}
-						</div>
-					{/each}
-				</div>
-			</div>
+			{@render Listem(achievements, 'Achievements', IconTrophy)}
+			{@render Listem(coolStuff, "Cool Stuff I've Done", IconCookieManFilled)}
 		</div>
 
 		<div class="flex justify-center pt-4">
