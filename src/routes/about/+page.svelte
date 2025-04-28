@@ -105,27 +105,23 @@
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
 					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a>, a high school
-					developer with a passion for building secure, reliable systems that scale. My journey in
-					tech started when I was 12, teaching myself to code by building small projects and
-					gradually tackling more complex challenges. Feel free to
+					developer with a passion for building secure, reliable systems that scale... yap yap...
+					Feel free to
 					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
 						>book a chat</a
 					> if you'd like to connect.
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					Beyond what's visible on the surface, I specialize in hardening infrastructure against
-					automated threats and optimizing backend performance. I'm particularly interested in
-					distributed systems and content delivery networks. My current focus is on developing
-					zero-trust authentication systems and exploring the intersection of AI and cybersecurity.
-					I'm always looking for challenging problems that others consider "impossible."
+					[mention 1-2 notable projects briefly, maybe link them if applicable]. I'm particularly
+					interested in [mention specific niche interests like penetration testing, distributed
+					systems, UI/UX design, etc.].
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					When I'm not coding, you'll find me playing ultimate frisbee, exploring nature with my
-					dog, or experimenting with film photography. I'm an avid hiker and have recently gotten
-					into brewing my own cold brew coffee. These activities help me maintain perspective and
-					bring fresh energy to my technical work.
+					Outside of technology, I enjoy [mention hobbies like ultimate frisbee, photography -
+					transition to Hobbies section below]. I believe in [mention a value like continuous
+					learning, open-source contribution, collaboration, etc.].
 				</p>
 
 				<div class="flex flex-wrap gap-3 pt-2">
