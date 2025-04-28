@@ -75,12 +75,7 @@
 				<ul class="mt-2 list-disc pl-5">
 					{#each data.metadata.sources as source (data.slug + source.title)}
 						<li>
-							<a
-								href={source.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="text-accent hover:underline"
-							>
+							<a href={source.url} target="_blank" rel="noopener noreferrer" class="link">
 								{source.title}
 							</a>
 						</li>

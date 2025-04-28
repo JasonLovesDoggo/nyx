@@ -6,6 +6,7 @@ import {
 	IconBrandLinkedin
 } from '@tabler/icons-svelte';
 import { dev } from '$app/environment';
+import Wakatime from '$lib/icons/Wakatime.svelte';
 interface SocialLink {
 	url: string;
 	label: string;
@@ -85,3 +86,27 @@ const Site: Site = {
 };
 
 export default Site;
+
+interface SocialEntry {
+	url: string;
+	label: string;
+	icon: Icon;
+}
+
+export const Socials: SocialEntry[] = [
+	{
+		url: Site.out.github,
+		label: 'GitHub',
+		icon: IconBrandGithub
+	},
+	{
+		url: Site.out.linkedin,
+		label: 'LinkedIn',
+		icon: IconBrandLinkedin
+	},
+	{
+		url: Site.out.wakatime,
+		label: 'WakaTime',
+		icon: Wakatime as unknown as Icon
+	}
+];

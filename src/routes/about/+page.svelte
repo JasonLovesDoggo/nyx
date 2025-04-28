@@ -40,7 +40,7 @@
 	};
 
 	type Items = AchievementItem[];
-	type str = string;
+	type str = string; // my IDE yells at me if i use string in the snippet. :shrug:
 </script>
 
 <svelte:head>
@@ -104,20 +104,28 @@
 
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
-					[Introduction paragraph - Brief overview of who i am and i do] Feel free to <a
-						href={Site.out.calcom}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-accent hover:underline">book a chat</a
+					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a>, a high school
+					developer with a passion for building secure, reliable systems that scale. My journey in
+					tech started when I was 12, teaching myself to code by building small projects and
+					gradually tackling more complex challenges. Feel free to
+					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
+						>book a chat</a
 					> if you'd like to connect.
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					[Technical background - my expertise, skills, and notable projects]
+					Beyond what's visible on the surface, I specialize in hardening infrastructure against
+					automated threats and optimizing backend performance. I'm particularly interested in
+					distributed systems and content delivery networks. My current focus is on developing
+					zero-trust authentication systems and exploring the intersection of AI and cybersecurity.
+					I'm always looking for challenging problems that others consider "impossible."
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					[Personal interests - What i enjoy outside of work]
+					When I'm not coding, you'll find me playing ultimate frisbee, exploring nature with my
+					dog, or experimenting with film photography. I'm an avid hiker and have recently gotten
+					into brewing my own cold brew coffee. These activities help me maintain perspective and
+					bring fresh energy to my technical work.
 				</p>
 
 				<div class="flex flex-wrap gap-3 pt-2">
@@ -193,47 +201,47 @@
 			<span>Hobbies & Interests</span>
 		</h2>
 
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-			<!-- Ultimate Frisbee -->
-			<div
-				class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md"
-				style="transition-delay: 0ms;"
-			>
-				<img
-					src="https://placehold.co/600x400?text=Ultimate+Frisbee"
-					alt="Ultimate Frisbee"
-					class="mb-4 h-48 w-full rounded-md object-cover shadow-sm transition-transform duration-300 hover:scale-[1.02]"
-				/>
-				<h3 class="mb-3 text-xl font-semibold">Ultimate Frisbee</h3>
-				<p class="text-subtext0 leading-relaxed">
-					I'm an avid ultimate frisbee player and enjoy both casual games and competitive matches.
-					The sport combines athleticism, strategy, and teamwork in a way that I find incredibly
-					engaging.
-				</p>
-			</div>
+		<!--		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">-->
+		<!--			&lt;!&ndash; Ultimate Frisbee &ndash;&gt;-->
+		<!--			<div-->
+		<!--				class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md"-->
+		<!--				style="transition-delay: 0ms;"-->
+		<!--			>-->
+		<!--				<img-->
+		<!--					src="https://placehold.co/600x400?text=Ultimate+Frisbee"-->
+		<!--					alt="Ultimate Frisbee"-->
+		<!--					class="mb-4 h-48 w-full rounded-md object-cover shadow-sm transition-transform duration-300 hover:scale-[1.02]"-->
+		<!--				/>-->
+		<!--				<h3 class="mb-3 text-xl font-semibold">Ultimate Frisbee</h3>-->
+		<!--				<p class="text-subtext0 leading-relaxed">-->
+		<!--					I'm an avid ultimate frisbee player and enjoy both casual games and competitive matches.-->
+		<!--					The sport combines athleticism, strategy, and teamwork in a way that I find incredibly-->
+		<!--					engaging.-->
+		<!--				</p>-->
+		<!--			</div>-->
 
-			<!-- Photography -->
-			<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
-				<img
-					src="https://placehold.co/600x400?text=Photography"
-					alt="Photography"
-					class="mb-4 h-48 w-full rounded-md object-cover shadow-sm transition-transform duration-300 hover:scale-[1.02]"
-				/>
-				<h3 class="mb-3 text-xl font-semibold">Photography</h3>
-				<p class="text-subtext0 mb-3 leading-relaxed">
-					I love capturing moments through photography, especially landscapes and street scenes. My
-					photos on Google Maps have garnered over 350,000 views, which encourages me to keep
-					exploring and sharing my perspective.
-				</p>
-				<a href="/photos" class="group text-accent inline-flex items-center gap-1 hover:underline">
-					View my photo gallery
-					<IconArrowRight
-						size={14}
-						class="transition-transform duration-200 group-hover:translate-x-0.5"
-					/>
-				</a>
-			</div>
-		</div>
+		<!--			&lt;!&ndash; Photography &ndash;&gt;-->
+		<!--			<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">-->
+		<!--				<img-->
+		<!--					src="https://placehold.co/600x400?text=Photography"-->
+		<!--					alt="Photography"-->
+		<!--					class="mb-4 h-48 w-full rounded-md object-cover shadow-sm transition-transform duration-300 hover:scale-[1.02]"-->
+		<!--				/>-->
+		<!--				<h3 class="mb-3 text-xl font-semibold">Photography</h3>-->
+		<!--				<p class="text-subtext0 mb-3 leading-relaxed">-->
+		<!--					I love capturing moments through photography, especially landscapes and street scenes. My-->
+		<!--					photos on Google Maps have garnered over 350,000 views, which encourages me to keep-->
+		<!--					exploring and sharing my perspective.-->
+		<!--				</p>-->
+		<!--				<a href="/photos" class="group text-accent inline-flex items-center gap-1 hover:underline">-->
+		<!--					View my photo gallery-->
+		<!--					<IconArrowRight-->
+		<!--						size={14}-->
+		<!--						class="transition-transform duration-200 group-hover:translate-x-0.5"-->
+		<!--					/>-->
+		<!--				</a>-->
+		<!--			</div>-->
+		<!--		</div>-->
 
 		<!-- My Dog -->
 		<div class="bg-base rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md">

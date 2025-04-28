@@ -25,7 +25,6 @@ export const achievements: AchievementItem[] = [
 		href: 'https://anubis.com/hackathon',
 		date: '2022'
 	},
-	'Anubis Hackathon Finalist',
 	'Anubis Hackathon Participant',
 
 	// Academic Achievements
@@ -36,7 +35,6 @@ export const achievements: AchievementItem[] = [
 		href: 'https://engineering.utoronto.ca',
 		date: '2022-present'
 	},
-	'University of Toronto Hackathon Participant',
 	{
 		title: 'University of Toronto Hackathon Winner',
 		description: 'First place at UofT Hacks 2023',

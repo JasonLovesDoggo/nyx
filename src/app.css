@@ -98,3 +98,7 @@
 		opacity: 1;
 	}
 }
+
+@utility link {
+	@apply text-accent hover:underline;
+}
