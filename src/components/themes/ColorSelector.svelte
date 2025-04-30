@@ -2,7 +2,7 @@
 	import { Accent, accentColorNames } from '$lib/stores/theme.js';
 </script>
 
-<div class="grid grid-cols-7 gap-2.5">
+<div class="grid grid-cols-7 gap-2.5 md:gap-1.5">
 	{#key $Accent}
 		{#each accentColorNames as colorName (colorName)}
 			{@const isSelected = $Accent === colorName}

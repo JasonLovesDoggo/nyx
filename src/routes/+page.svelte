@@ -115,11 +115,13 @@
 	<Featured projects={data.featuredProjects} />
 
 	<!-- Section: Bento Grid Container -->
-	<section class="px-4 md:px-0">
+	<section class="mx-auto w-[90%] px-4 md:px-0">
 		<h2 class="sr-only">Dashboard / Highlights</h2>
-		<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
+		<div class="grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
 			<!-- Box 2: Theme Selector -->
-			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+			<div
+				class="border-surface0 bg-base rounded-xl border p-4 shadow-lg sm:col-span-2 xl:col-span-1"
+			>
 				<ThemeSelector />
 				<ColorSelector />
 			</div>
@@ -148,8 +150,28 @@
 				</a>
 			</div>
 
-			<!-- Box 6: Latest Commits -->
+			<!-- Box 5: Book a chat -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
+					<IconCalendarEvent size={16} class="text-accent" />
+					Let's Connect
+				</h3>
+				<p class="text-subtext0 mb-4 text-sm">
+					Always open to interesting projects and conversations.
+				</p>
+				<a
+					href={Site.out.calcom}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="bg-surface0 text-text hover:bg-accent/80 focus:ring-accent/50 focus:ring-offset-base inline-flex w-full items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium shadow-sm transition-colors hover:text-base focus:ring-2 focus:ring-offset-2 focus:outline-none"
+				>
+					<IconCalendarEvent size={16} />
+					Book a Chat
+				</a>
+			</div>
+
+			<!-- Box 6: Latest Commits -->
+			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg md:col-span-2">
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
 					<IconActivity size={16} class="text-accent" />
 					Recent Commits
@@ -180,34 +202,17 @@
 					rel="noopener noreferrer"
 					class="group text-accent mt-3 inline-flex items-center gap-1 text-sm hover:underline"
 				>
-					<span>View GitHub</span>
-					<IconExternalLink size={14} class="inline-block" />
+					<span>View on GitHub</span>
+					<IconExternalLink
+						size={14}
+						class="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+					/>
 				</a>
 			</div>
 
-			<br />
-			<!-- Box 5: Book a chat -->
-			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
-				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
-					<IconCalendarEvent size={16} class="text-accent" />
-					Let's Connect
-				</h3>
-				<p class="text-subtext0 mb-4 text-sm">
-					Always open to interesting projects and conversations.
-				</p>
-				<a
-					href={Site.out.calcom}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="bg-surface0 text-text hover:bg-accent/80 focus:ring-accent/50 focus:ring-offset-base inline-flex w-full items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium shadow-sm transition-colors hover:text-base focus:ring-2 focus:ring-offset-2 focus:outline-none"
-				>
-					<IconCalendarEvent size={16} />
-					Book a Chat
-				</a>
-			</div>
 			<!-- Box 6: Latest Posts -->
 			<div
-				class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1 lg:w-[150%]"
+				class="border-surface0 bg-base rounded-xl border p-4 shadow-lg sm:col-span-2 @xs:col-span-2"
 			>
 				<div class="text-text mb-3 flex items-center justify-between gap-2 text-sm">
 					<h3 class="flex items-center gap-2 font-semibold">
@@ -227,7 +232,7 @@
 									href={'/posts/' + post.slug}
 									class="text-subtext0 text-s hover:text-accent flex items-baseline gap-2"
 								>
-									<span class="flex-shrink-0 truncate" style="max-width: calc(150% - 22em);">
+									<span class="flex-shrink-0 truncate" style="max-width: calc(100% - 10em);">
 										{post.metadata.title}
 									</span>
 
