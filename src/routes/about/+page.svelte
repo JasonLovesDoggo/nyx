@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import {
 		IconUser,
 		IconTrophy,
@@ -9,30 +8,11 @@
 		IconHeart,
 		IconDog,
 		IconArrowRight,
-		IconCookieManFilled
+		IconCookieManFilled,
+		IconStar
 	} from '@tabler/icons-svelte';
 	import { coolStuff, achievements, type AchievementItem } from '$lib/config/about';
 	import Site from '$lib/config/common';
-
-	// Counter animation for Google Maps views
-	let mapViewCount = 0;
-	const targetMapViews = 350000;
-
-	onMount(() => {
-		// Animate map view counter
-		const duration = 2000; // 2 seconds
-		const interval = 10; // Update every 10ms
-		const steps = duration / interval;
-		const increment = targetMapViews / steps;
-
-		const counter = setInterval(() => {
-			mapViewCount += increment;
-			if (mapViewCount >= targetMapViews) {
-				mapViewCount = targetMapViews;
-				clearInterval(counter);
-			}
-		}, interval);
-	});
 
 	const handleEmailClick = () => {
 		const email = atob('Y29udGFjdEA=') + window.location.hostname;
@@ -41,11 +21,18 @@
 
 	type Items = AchievementItem[];
 	type str = string; // my IDE yells at me if i use string in the snippet. :shrug:
+	type num = number; // my IDE yells at me if i use string in the snippet. :shrug:
 </script>
 
 <svelte:head>
 	<title>About Me | Jason Cameron</title>
 </svelte:head>
+
+{#snippet ExternalLink(href: str, text: str)}
+	<a {href} target="_blank" rel="noopener noreferrer" class="link">
+		{text}
+	</a>
+{/snippet}
 
 {#snippet Listem(items: Items, text: str, Icon: typeof IconTrophy)}
 	<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
@@ -81,6 +68,18 @@
 	</div>
 {/snippet}
 
+{#snippet GithubProject(title: str, href: str, stars: num)}
+	<a {href} id={title.toLowerCase()} target="_blank" rel="noopener noreferrer" class="link">
+		{title}
+	</a>
+
+	<span class="inline-flex items-center space-x-1 text-sm">
+		<!--  <CountUp duration={300} value={stars} />-->
+		{stars}
+		<IconStar class="ml-1" size={14} />
+	</span>
+{/snippet}
+
 <div class="mx-auto max-w-6xl space-y-8 px-4 py-8 md:px-6">
 	<!-- About Me Section -->
 	<section class="space-y-6">
@@ -108,16 +107,31 @@
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					[mention 1-2 notable projects briefly, maybe link them if applicable]. I'm particularly
-					interested in [mention specific niche interests like penetration testing, distributed
-					systems, UI/UX design, etc.]. I run some sites like metropolis, mCTF, MCPT foodle and more
-					lol
+					Some of my more notable projects are {@render GithubProject(
+						'RedditVideoMakerBot',
+						'https://github.com/elebumm/RedditVideoMakerBot',
+						6862
+					)} where I reverse engineered TikTok's TTS API and <!--todo: blogpost!?-->
+					{@render GithubProject('Anubis', '/projects/anubis', 5415)}, an anti AI scraper tool which
+					is currently being used by organizations such as The Linux Foundation or the UN. Most of
+					my work is centered around backend development or system administration. I run some sites
+					like {@render ExternalLink('https://maclyonsden.com/', 'metropolis')},
+					{@render ExternalLink('https://ctf.mcpt.ca', 'mCTF')},
+					{@render ExternalLink('https://mcpt.ca', 'MCPT')}, {@render ExternalLink(
+						'https://jasoncameron.dev/foodle/',
+						'foodle'
+					)} and others.
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					Outside of technology, I enjoy [mention hobbies like ultimate frisbee, photography -
-					transition to Hobbies section below]. I believe in [mention a value like continuous
-					learning, open-source contribution, collaboration, etc.].
+					Outside of software, I enjoy playing Ultimate frisbee, <a
+						href="/photos"
+						class="link"
+						target="_blank">photography</a
+					>, organizing/participating at/mentoring hackathons and spending time with my dog, Bella (<a
+						href="#bella"
+						class="link">see below</a
+					>). I also have a passion for exploring in general!
 				</p>
 
 				<div class="flex flex-wrap gap-3 pt-2">
@@ -188,11 +202,6 @@
 
 	<!-- Hobbies Section -->
 	<section id="hobbies-section" class="space-y-8">
-		<h2 class="flex items-center gap-3 text-2xl font-bold md:text-3xl">
-			<IconHeart size={30} class="text-accent" />
-			<span>Hobbies & Interests</span>
-		</h2>
-
 		<!--		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">-->
 		<!--			&lt;!&ndash; Ultimate Frisbee &ndash;&gt;-->
 		<!--			<div-->
@@ -237,7 +246,7 @@
 
 		<!-- My Dog -->
 		<div class="bg-base rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md">
-			<h3 class="mb-5 flex items-center gap-2 text-xl font-semibold">
+			<h3 id="bella" class="mb-5 flex items-center gap-2 text-xl font-semibold">
 				<IconDog size={24} class="text-accent" />
 				My Dog
 			</h3>
@@ -255,7 +264,7 @@
 				/>
 				<img
 					src="/images/bella/bella-portrait-2024.webp"
-					alt="Landscape photo of Bella lying next to a stick looking at the sky"
+					alt="Landscape of Bella lying next to a stick looking at the sky"
 					class="h-40 w-full rounded-md object-cover shadow-sm transition-transform duration-300 hover:scale-[1.03]"
 				/>
 			</div>
