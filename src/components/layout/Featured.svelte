@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { IconArrowRight, IconStar, IconTag } from '@tabler/icons-svelte';
+	import { IconArrowRight, IconStar } from '@tabler/icons-svelte';
 	import type { ProjectMetadata } from '$types/projects';
 	import ProjectTags from '$components/projects/ProjectTags.svelte';
 
@@ -24,7 +24,7 @@
 			</h2>
 			<a
 				href="/projects"
-				class="group text-accent hidden items-center gap-1 text-sm hover:underline sm:inline-flex"
+				class="group text-accent/90 link hidden items-center gap-1 text-sm sm:inline-flex"
 			>
 				<span>View all</span>
 				<IconArrowRight

@@ -50,30 +50,14 @@
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
 			A high school student building and securing web infrastructure. I've written software that is
 			trusted by
-			<a
-				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
-				href="https://policytoolbox.iiep.unesco.org">The United Nations</a
+			<a class="link text-accent/85" href="https://policytoolbox.iiep.unesco.org"
+				>The United Nations</a
 			>,
-			<a
-				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
-				href="https://git.kernel.org">The Linux Foundation</a
-			>,
-			<a
-				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
-				href="https://wiki.archlinux.org">Arch Linux</a
-			>,
-			<a
-				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
-				href="https://gitlab.gnome.org">GNOME</a
-			>,
-			<a
-				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
-				href="https://bugs.winehq.com">Wine</a
-			>,
-			<a
-				class="hover:text-accent text-accent/85 underline decoration-dashed underline-offset-4"
-				href="https://trac.ffmpeg.org">FFmpeg</a
-			>
+			<a class="link text-accent/85" href="https://git.kernel.org">The Linux Foundation</a>,
+			<a class="link text-accent/85" href="https://wiki.archlinux.org">Arch Linux</a>,
+			<a class="link text-accent/85" href="https://gitlab.gnome.org">GNOME</a>,
+			<a class="link text-accent/85" href="https://bugs.winehq.com">Wine</a>,
+			<a class="link text-accent/85" href="https://trac.ffmpeg.org">FFmpeg</a>
 			and many others. My code is used by
 			<b class="text-accent">millions</b> of people worldwide. I focus on
 			<b class="text-text">backend systems</b>,
@@ -115,7 +99,7 @@
 	<Featured projects={data.featuredProjects} />
 
 	<!-- Section: Bento Grid Container -->
-	<section class="mx-auto w-[90%] px-4 md:px-0">
+	<section class="px-4 md:px-0">
 		<h2 class="sr-only">Dashboard / Highlights</h2>
 		<div class="grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
 			<!-- Box 2: Theme Selector -->
@@ -143,7 +127,7 @@
 					href={Site.out.wakatime}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="group text-accent mt-3 inline-flex items-center gap-1 text-sm hover:underline"
+					class="group text-accent link mt-3 inline-flex items-center gap-1 text-sm"
 				>
 					<span>View stats</span>
 					<IconExternalLink size={14} class="inline-block" />
@@ -219,7 +203,11 @@
 						<IconArticle size={14} class="text-accent" />
 						<span>Latest Posts</span>
 					</h3>
-					<a href="/posts" aria-label="View all posts" class="text-subtext1 hover:text-accent">
+					<a
+						href="/posts"
+						aria-label="View all posts"
+						class=" text-accent/80 transition-transform duration-500 ease-in hover:translate-x-0.5 hover:-translate-y-0.5"
+					>
 						<IconExternalLink size={18} />
 					</a>
 				</div>
@@ -230,7 +218,7 @@
 							<li>
 								<a
 									href={'/posts/' + post.slug}
-									class="text-subtext0 text-s hover:text-accent flex items-baseline gap-2"
+									class="text-subtext0 hover:text-accent flex items-baseline gap-2 text-sm"
 								>
 									<span class="flex-shrink-0 truncate" style="max-width: calc(100% - 10em);">
 										{post.metadata.title}
