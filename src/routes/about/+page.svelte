@@ -248,7 +248,7 @@
 		<div class="bg-base rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md">
 			<h3 id="bella" class="mb-5 flex items-center gap-2 text-xl font-semibold">
 				<IconDog size={24} class="text-accent" />
-				My Dog
+				My Dog (Bella!)
 			</h3>
 
 			<div class="mb-5 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -270,8 +270,9 @@
 			</div>
 
 			<p class="text-subtext0 leading-relaxed">
-				My dog is my constant companion and brings joy to my life every day. We enjoy going on
-				hikes, playing fetch, and just relaxing together after a long day of coding.
+				Bella is a <span class="font-medium">4-year-old</span> goldendoodle who loves to play with
+				her soccer ball, go on walks/runs and explore <b>everything</b>. Whenever we go on a walk we
+				both know we have an adventure ahead of us. <!--todo make auto-->
 			</p>
 		</div>
 	</section>
