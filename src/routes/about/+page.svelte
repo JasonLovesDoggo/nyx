@@ -45,10 +45,6 @@
 
 <svelte:head>
 	<title>About Me | Jason Cameron</title>
-	<meta
-		name="description"
-		content="Learn more about Jason Cameron, a high school student building and securing web infrastructure."
-	/>
 </svelte:head>
 
 {#snippet Listem(items: Items, text: str, Icon: typeof IconTrophy)}
@@ -104,9 +100,8 @@
 
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
-					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a>, a high school
-					developer with a passion for building secure, reliable systems that scale... yap yap...
-					Feel free to
+					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a student,
+					programmer and (TODO). I work on a couple of projects in my spare time and Feel free to
 					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
 						>book a chat</a
 					> if you'd like to connect.
@@ -115,7 +110,8 @@
 				<p class="text-subtext0 text-base leading-relaxed">
 					[mention 1-2 notable projects briefly, maybe link them if applicable]. I'm particularly
 					interested in [mention specific niche interests like penetration testing, distributed
-					systems, UI/UX design, etc.].
+					systems, UI/UX design, etc.]. I run some sites like metropolis, mCTF, MCPT foodle and more
+					lol
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
@@ -248,18 +244,18 @@
 
 			<div class="mb-5 grid grid-cols-1 gap-4 md:grid-cols-3">
 				<img
-					src="https://placehold.co/600x400?text=My+Dog+1"
-					alt="My dog playing"
+					src="/images/bella/bella-autumn-2022.webp"
+					alt="A landscape of Bella in the autumn by a pond"
 					class="h-40 w-full rounded-md object-cover shadow-sm transition-transform duration-300 hover:scale-[1.03]"
 				/>
 				<img
-					src="https://placehold.co/600x400?text=My+Dog+2"
-					alt="My dog sleeping"
+					src="/images/bella/bella-portrait-2022.webp"
+					alt="Portrait of Bella taken playing with a tennis ball"
 					class="h-40 w-full rounded-md object-cover shadow-sm transition-transform duration-300 hover:scale-[1.03]"
 				/>
 				<img
-					src="https://placehold.co/600x400?text=My+Dog+3"
-					alt="My dog hiking"
+					src="/images/bella/bella-portrait-2024.webp"
+					alt="Landscape photo of Bella lying next to a stick looking at the sky"
 					class="h-40 w-full rounded-md object-cover shadow-sm transition-transform duration-300 hover:scale-[1.03]"
 				/>
 			</div>
