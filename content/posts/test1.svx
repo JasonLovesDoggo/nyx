@@ -1,5 +1,5 @@
 ---
-title: Second
+title: Very long title which is a test on title stuff
 description: Second post.
 published_at: '2023-4-16'
 categories:

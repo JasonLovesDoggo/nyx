@@ -16,6 +16,7 @@
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
 	import Experience from '$components/Experience.svelte';
 	import { getLatestPosts } from '$lib/content/posts';
+	import { formatDate } from '$utils/date';
 
 	type PageData = {
 		featuredProjects: FeaturedProject[];
@@ -123,39 +124,6 @@
 				<ColorSelector />
 			</div>
 
-			<!-- Box 3: Latest Blog Posts -->
-			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
-				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
-					<IconArticle size={16} class="text-accent" />
-					Latest Posts
-				</h3>
-				{#if getLatestPosts().length > 0}
-					<ul class="space-y-2 text-sm">
-						{#each getLatestPosts() as post (post.slug)}
-							<li>
-								<a
-									href={'/posts/' + post.slug}
-									class="text-subtext0 hover:text-accent line-clamp-1 hover:underline"
-									>{post.metadata.title}</a
-								>
-							</li>
-						{/each}
-					</ul>
-				{:else}
-					<p class="text-subtext1 text-sm italic">No posts yet.</p>
-				{/if}
-				<a
-					href="/posts"
-					class="group text-accent mt-3 inline-flex items-center gap-1 text-sm hover:underline"
-				>
-					<span>All posts</span>
-					<IconArrowRight
-						size={14}
-						class="transition-transform duration-200 group-hover:translate-x-0.5"
-					/>
-				</a>
-			</div>
-
 			<!-- Box 4: Coding Stats -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
@@ -177,26 +145,6 @@
 				>
 					<span>View stats</span>
 					<IconExternalLink size={14} class="inline-block" />
-				</a>
-			</div>
-
-			<!-- Box 5: Book a chat -->
-			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
-				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
-					<IconCalendarEvent size={16} class="text-accent" />
-					Let's Connect
-				</h3>
-				<p class="text-subtext0 mb-4 text-sm">
-					Always open to interesting projects and conversations.
-				</p>
-				<a
-					href={Site.out.calcom}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="bg-surface0 text-text hover:bg-accent/80 focus:ring-accent/50 focus:ring-offset-base inline-flex w-full items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium shadow-sm transition-colors hover:text-base focus:ring-2 focus:ring-offset-2 focus:outline-none"
-				>
-					<IconCalendarEvent size={16} />
-					Book a Chat
 				</a>
 			</div>
 
@@ -235,6 +183,69 @@
 					<span>View GitHub</span>
 					<IconExternalLink size={14} class="inline-block" />
 				</a>
+			</div>
+
+			<br />
+			<!-- Box 5: Book a chat -->
+			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
+					<IconCalendarEvent size={16} class="text-accent" />
+					Let's Connect
+				</h3>
+				<p class="text-subtext0 mb-4 text-sm">
+					Always open to interesting projects and conversations.
+				</p>
+				<a
+					href={Site.out.calcom}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="bg-surface0 text-text hover:bg-accent/80 focus:ring-accent/50 focus:ring-offset-base inline-flex w-full items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium shadow-sm transition-colors hover:text-base focus:ring-2 focus:ring-offset-2 focus:outline-none"
+				>
+					<IconCalendarEvent size={16} />
+					Book a Chat
+				</a>
+			</div>
+			<!-- Box 6: Latest Posts -->
+			<div
+				class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1 lg:w-[150%]"
+			>
+				<div class="text-text mb-3 flex items-center justify-between gap-2 text-sm">
+					<h3 class="flex items-center gap-2 font-semibold">
+						<IconArticle size={14} class="text-accent" />
+						<span>Latest Posts</span>
+					</h3>
+					<a href="/posts" aria-label="View all posts" class="text-subtext1 hover:text-accent">
+						<IconExternalLink size={18} />
+					</a>
+				</div>
+
+				{#if getLatestPosts().length > 0}
+					<ul class="list-none space-y-2">
+						{#each getLatestPosts() as post (post.slug)}
+							<li>
+								<a
+									href={'/posts/' + post.slug}
+									class="text-subtext0 text-s hover:text-accent flex items-baseline gap-2"
+								>
+									<span class="flex-shrink-0 truncate" style="max-width: calc(150% - 22em);">
+										{post.metadata.title}
+									</span>
+
+									<span class="border-surface1 mx-1 flex-grow self-center border-b border-dotted"
+									></span>
+
+									{#if post.metadata.published_at}
+										<span class="text-subtext1 flex-shrink-0 whitespace-nowrap">
+											{formatDate(post.metadata.published_at)}
+										</span>
+									{/if}
+								</a>
+							</li>
+						{/each}
+					</ul>
+				{:else}
+					<p class="text-subtext1 text-xs italic">No posts yet.</p>
+				{/if}
 			</div>
 		</div>
 	</section>
