@@ -7,10 +7,9 @@
 		IconMail,
 		IconDog,
 		IconArrowRight,
-		IconCookieManFilled,
 		IconStar
 	} from '@tabler/icons-svelte';
-	import { coolStuff, achievements, type AchievementItem } from '$lib/config/about';
+	import { achievements, type AchievementItem } from '$lib/config/about';
 	import Site from '$lib/config/common';
 
 	const handleEmailClick = () => {
@@ -87,23 +86,11 @@
 			<span>About Me</span>
 		</h1>
 
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-			<div class="md:col-span-1">
-				<img
-					src="/images/avatar.webp"
-					alt="Jason Cameron"
-					class="h-full w-full rounded-md object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02]"
-				/>
-			</div>
-
-			<div class="space-y-4 md:col-span-2">
+		<div class="grid grid-cols-1 gap-6">
+			<div class="space-y-4">
 				<p class="text-subtext0 text-base leading-relaxed">
 					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a student and
 					programmer with 5+ YoE based out of Toronto, Canada. I make cool projects when i'm bored. <!--todo: make toronto canada something cool-->
-					Feel free to
-					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
-						>book a chat</a
-					> if you'd like to connect.
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
@@ -131,7 +118,10 @@
 					>, organizing/participating at/mentoring hackathons and spending time with my dog, Bella (<a
 						href="#bella"
 						class="link">see below</a
-					>). I also have a passion for exploring the world in general!
+					>). I also have a passion for exploring the world in general! Feel free to
+					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
+						>book a chat</a
+					> if you'd like to connect.
 				</p>
 
 				<div class="flex flex-wrap gap-3 pt-2">
@@ -180,10 +170,9 @@
 
 	<!-- Achievements Section -->
 	<section id="achievements-section" class="space-y-6">
-		<!-- Two side-by-side achievement lists -->
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+		<!-- Achievements list -->
+		<div class="grid grid-cols-1 gap-6">
 			{@render Listem(achievements, 'Achievements', IconTrophy)}
-			{@render Listem(coolStuff, "Cool Stuff I've Done", IconCookieManFilled)}
 		</div>
 
 		<div class="flex justify-center pt-4">
