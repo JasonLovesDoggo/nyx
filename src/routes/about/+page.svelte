@@ -237,19 +237,6 @@
 			{@render Listem(achievements, 'Achievements', IconTrophy)}
 			{@render ExperienceTimeline(experienceTimeline, 'Employment History', IconBriefcase)}
 		</div>
-
-		<div class="flex justify-center pt-4">
-			<a
-				href="/projects"
-				class="group bg-surface0 hover:bg-accent/80 text-text inline-flex items-center gap-2 rounded-md px-5 py-2 text-sm font-medium shadow-sm transition-colors hover:text-base hover:shadow-md"
-			>
-				View My Projects
-				<IconArrowRight
-					size={16}
-					class="transition-transform duration-200 group-hover:translate-x-0.5"
-				/>
-			</a>
-		</div>
 	</section>
 
 	<!-- Hobbies Section -->
