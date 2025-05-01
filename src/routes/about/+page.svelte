@@ -86,11 +86,21 @@
 			<span>About Me</span>
 		</h1>
 
-		<div class="grid grid-cols-1 gap-6">
-			<div class="space-y-4">
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+			<div class="md:col-span-1">
+				<img
+					src="/images/avatar.webp"
+					alt="Jason Cameron"
+					class="h-full w-full rounded-md object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02]"
+				/>
+			</div>
+
+			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
 					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a student and
-					programmer with 5+ YoE based out of Toronto, Canada. I make cool projects when i'm bored. <!--todo: make toronto canada something cool-->
+					programmer with 5+ YoE based out of Toronto, Canada. I like to make
+					<a href="/projects" class="link">cool projects</a>
+					when i'm bored. <!--todo: make toronto canada something cool-->
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
@@ -171,8 +181,9 @@
 	<!-- Achievements Section -->
 	<section id="achievements-section" class="space-y-6">
 		<!-- Achievements list -->
-		<div class="grid grid-cols-1 gap-6">
+		<div class="grid grid-cols-2 gap-6">
 			{@render Listem(achievements, 'Achievements', IconTrophy)}
+			<!--	ADD EMPLOYEMENT HISTORY HERE-->
 		</div>
 
 		<div class="flex justify-center pt-4">

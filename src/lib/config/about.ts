@@ -23,8 +23,6 @@ export const achievements: AchievementItem[] = [
 	'11x Hackathon Winner'
 ];
 
-export const coolStuff: AchievementItem[] = ['highschool hackathon winner'];
-
 export const latestCommits = [
 	// todo: fetch using katib
 	{
