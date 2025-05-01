@@ -99,8 +99,8 @@
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
 					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a student,
-					programmer with 5+ YoE based out of Toronto, Canada. I work on a couple of projects in my <!--todo: make toronto canada something cool-->
-					spare time and Feel free to
+					programmer with 5+ YoE based out of Toronto, Canada. I enjoy working on complex problems. <!--todo: make toronto canada something cool-->
+					Feel free to
 					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
 						>book a chat</a
 					> if you'd like to connect.
