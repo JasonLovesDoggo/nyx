@@ -12,35 +12,15 @@ export const achievements: AchievementItem[] = [
 	// Professional Achievements
 	'Hack Canada Co-Founder',
 	'StorageBox CTO',
+	'Lab Assistant @ York University',
+	{ title: 'Medici Grant Recipient', href: 'https://www.1517fund.com/medici-project' },
 	{
 		title: 'RBC Incoming Intern',
 		description: 'Summer 2023 internship at Royal Bank of Canada',
 		href: 'https://rbc.com',
 		date: '2023'
 	},
-	'Anubis Lead Developer',
-	{
-		title: 'Anubis Hackathon Winner',
-		description: 'First place at the Anubis Hackathon 2022',
-		href: 'https://anubis.com/hackathon',
-		date: '2022'
-	},
-	'Anubis Hackathon Participant',
-
-	// Academic Achievements
-	'University of Toronto Computer Science Student',
-	{
-		title: 'University of Toronto Engineering Student',
-		description: 'Specializing in Software Engineering',
-		href: 'https://engineering.utoronto.ca',
-		date: '2022-present'
-	},
-	{
-		title: 'University of Toronto Hackathon Winner',
-		description: 'First place at UofT Hacks 2023',
-		href: 'https://uofthacks.com',
-		date: '2023'
-	}
+	'11x Hackathon Winner'
 ];
 
 export const coolStuff: AchievementItem[] = ['highschool hackathon winner'];
