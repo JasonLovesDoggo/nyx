@@ -7,10 +7,12 @@
 		IconMail,
 		IconDog,
 		IconArrowRight,
-		IconStar
+		IconStar,
+		IconBriefcase
 	} from '@tabler/icons-svelte';
 	import { achievements, type AchievementItem } from '$lib/config/about';
 	import Site from '$lib/config/common';
+	import { experienceTimeline, type ExperienceTimelineItem } from '$lib/config/pages';
 
 	const handleEmailClick = () => {
 		const email = atob('Y29udGFjdEA=') + window.location.hostname;
@@ -18,6 +20,7 @@
 	};
 
 	type Items = AchievementItem[];
+	type TimelineItems = ExperienceTimelineItem[];
 	type str = string; // my IDE yells at me if i use string in the snippet. :shrug:
 	type num = number; // my IDE yells at me if i use string in the snippet. :shrug:
 </script>
@@ -76,6 +79,55 @@
 		{stars}
 		<IconStar class="ml-1" size={14} />
 	</span>
+{/snippet}
+
+{#snippet ExperienceTimeline(items: TimelineItems, text: str, Icon: typeof IconTrophy)}
+	<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
+		<h3 class="mb-4 flex items-center gap-2 text-xl font-semibold">
+			<Icon size={24} class="text-accent" />
+			{text}
+		</h3>
+
+		<div class="custom-scrollbar max-h-60 space-y-4 overflow-y-auto pl-2">
+			{#each items as job (job.company + job.startDate)}
+				<div class="border-accent border-l-2 pb-4 pl-4">
+					<div class="flex items-center gap-2">
+						{#if job.logoUrl}
+							<img src={job.logoUrl} alt={job.logoAlt} class="h-6 w-6 rounded-sm" />
+						{/if}
+						<a
+							href={job.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover:text-accent font-medium transition-colors"
+						>
+							{job.company}
+						</a>
+					</div>
+					<div class="text-subtext0 mt-1 text-sm">
+						<div class="font-medium">{job.role}</div>
+						<div class="text-xs">
+							{new Date(job.startDate).toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: 'short'
+							})}
+							{#if job.endDate}
+								- {new Date(job.endDate).toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: 'short'
+								})}
+							{:else}
+								- Present
+							{/if}
+						</div>
+						{#if job.details}
+							<div class="mt-1">{job.details}</div>
+						{/if}
+					</div>
+				</div>
+			{/each}
+		</div>
+	</div>
 {/snippet}
 
 <div class="mx-auto max-w-6xl space-y-8 px-4 py-8 md:px-6">
@@ -181,9 +233,9 @@
 	<!-- Achievements Section -->
 	<section id="achievements-section" class="space-y-6">
 		<!-- Achievements list -->
-		<div class="grid grid-cols-2 gap-6">
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 			{@render Listem(achievements, 'Achievements', IconTrophy)}
-			<!--	ADD EMPLOYEMENT HISTORY HERE-->
+			{@render ExperienceTimeline(experienceTimeline, 'Employment History', IconBriefcase)}
 		</div>
 
 		<div class="flex justify-center pt-4">
