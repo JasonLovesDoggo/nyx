@@ -50,14 +50,30 @@
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
 			A high school student building and securing web infrastructure. I've written software that is
 			trusted by
-			<a class="link text-accent/85" href="https://policytoolbox.iiep.unesco.org"
-				>The United Nations</a
+			<a
+				class="link text-accent/85"
+				target="_blank"
+				rel="noopener"
+				href="https://policytoolbox.iiep.unesco.org">The United Nations</a
 			>,
-			<a class="link text-accent/85" href="https://git.kernel.org">The Linux Foundation</a>,
-			<a class="link text-accent/85" href="https://wiki.archlinux.org">Arch Linux</a>,
-			<a class="link text-accent/85" href="https://gitlab.gnome.org">GNOME</a>,
-			<a class="link text-accent/85" href="https://bugs.winehq.com">Wine</a>,
-			<a class="link text-accent/85" href="https://trac.ffmpeg.org">FFmpeg</a>
+			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://git.kernel.org"
+				>The Linux Foundation</a
+			>,
+			<a
+				class="link text-accent/85"
+				target="_blank"
+				rel="noopener"
+				href="https://wiki.archlinux.org">Arch Linux</a
+			>,
+			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://gitlab.gnome.org"
+				>GNOME</a
+			>,
+			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://bugs.winehq.com"
+				>Wine</a
+			>,
+			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://trac.ffmpeg.org"
+				>FFmpeg</a
+			>
 			and many others. My code is used by
 			<b class="text-accent">millions</b> of people worldwide. I focus on
 			<b class="text-text">backend systems</b>,
