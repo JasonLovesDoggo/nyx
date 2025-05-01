@@ -32,16 +32,17 @@
 		<h1 class="text-3xl font-bold md:text-4xl">
 			Hey! I'm
 			<span class="text-accent">
-				<span
-					onmouseenter={() => (isNameHovered = true)}
-					onmouseleave={() => (isNameHovered = false)}
-					onfocus={() => (isNameHovered = true)}
-					onblur={() => (isNameHovered = false)}
-					tabindex="0"
-					role="button"
-					aria-label="Jason Cameron - Hover or focus to see a fun fact"
-				>
-					<span>Jason</span>
+				<span>
+					<span>J</span><span
+						class="opacity-65"
+						onmouseenter={() => (isNameHovered = true)}
+						onmouseleave={() => (isNameHovered = false)}
+						onfocus={() => (isNameHovered = true)}
+						onblur={() => (isNameHovered = false)}
+						tabindex="0"
+						role="button"
+						aria-label="Jason Cameron - Hover or focus to see a fun fact">a</span
+					><span>son</span>
 					<span class:hidden={!isNameHovered}>'JSON'</span>
 				</span>
 				<span>Cameron</span>
