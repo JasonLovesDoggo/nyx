@@ -5,7 +5,6 @@
 		IconBrandGithub,
 		IconBrandLinkedin,
 		IconMail,
-		IconHeart,
 		IconDog,
 		IconArrowRight,
 		IconCookieManFilled,
@@ -100,7 +99,8 @@
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
 					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a student,
-					programmer and (TODO). I work on a couple of projects in my spare time and Feel free to
+					programmer with 5+ YoE based out of Toronto, Canada. I work on a couple of projects in my <!--todo: make toronto canada something cool-->
+					spare time and Feel free to
 					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
 						>book a chat</a
 					> if you'd like to connect.
@@ -114,13 +114,13 @@
 					)} where I reverse engineered TikTok's TTS API and <!--todo: blogpost!?-->
 					{@render GithubProject('Anubis', '/projects/anubis', 5415)}, an anti AI scraper tool which
 					is currently being used by organizations such as The Linux Foundation or the UN. Most of
-					my work is centered around backend development or system administration. I run some sites
-					like {@render ExternalLink('https://maclyonsden.com/', 'metropolis')},
+					my work is centered around backend development or system administration. Some sites that I
+					run include {@render ExternalLink('https://maclyonsden.com/', 'metropolis')},
 					{@render ExternalLink('https://ctf.mcpt.ca', 'mCTF')},
 					{@render ExternalLink('https://mcpt.ca', 'MCPT')}, {@render ExternalLink(
 						'https://jasoncameron.dev/foodle/',
 						'foodle'
-					)} and others.
+					)} as well as a bunch of others.
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
@@ -131,7 +131,7 @@
 					>, organizing/participating at/mentoring hackathons and spending time with my dog, Bella (<a
 						href="#bella"
 						class="link">see below</a
-					>). I also have a passion for exploring in general!
+					>). I also have a passion for exploring the world in general!
 				</p>
 
 				<div class="flex flex-wrap gap-3 pt-2">
