@@ -16,7 +16,7 @@
 </script>
 
 {#if projects.length > 0}
-	<section class="px-0 py-8 md:px-4">
+	<section class="px-4 py-8 md:px-0">
 		<div class="mb-8 flex items-center justify-between">
 			<h2 class="flex items-center gap-3 text-2xl font-semibold md:text-3xl">
 				<IconStar size={28} class="text-accent" />
