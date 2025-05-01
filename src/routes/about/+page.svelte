@@ -90,7 +90,7 @@
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 			<div class="md:col-span-1">
 				<img
-					src="https://placehold.co/600x800?text=Jason+Cameron"
+					src="/images/avatar.webp"
 					alt="Jason Cameron"
 					class="h-full w-full rounded-md object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02]"
 				/>
@@ -98,8 +98,8 @@
 
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
-					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a student,
-					programmer with 5+ YoE based out of Toronto, Canada. I enjoy working on complex problems. <!--todo: make toronto canada something cool-->
+					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a student and
+					programmer with 5+ YoE based out of Toronto, Canada. I make cool projects when i'm bored. <!--todo: make toronto canada something cool-->
 					Feel free to
 					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
 						>book a chat</a
