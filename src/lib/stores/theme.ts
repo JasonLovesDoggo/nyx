@@ -55,9 +55,19 @@ export type PaletteName = (typeof paletteNames)[number];
 
 function getDefaultPalette(): PaletteName {
 	if (!browser) return 'mocha';
+
 	const stored = localStorage.getItem('palette') as PaletteName | null;
 	if (stored && paletteNames.includes(stored)) return stored;
-	return window.matchMedia('(prefers-color-scheme: light)').matches ? 'latte' : 'mocha';
+	if (window.matchMedia)
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+			// setup an auto update loop
+			if (event.matches) {
+				Palette.set('mocha');
+			} else {
+				Palette.set('latte');
+			}
+		});
+	return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'mocha' : 'latte';
 }
 
 export const Palette = persistentWritable<PaletteName>('palette', {
