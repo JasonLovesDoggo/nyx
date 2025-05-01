@@ -69,6 +69,11 @@
 @utility ring-* {
 	@apply transition-colors duration-600 ease-in-out;
 }
+
+@utility text-normal {
+	font-size: var(--text-base); /* 1rem (16px) */
+	line-height: var(--text-base--line-height); /* calc(1.5 / 1) */
+}
 /*for chrome*/
 ::view-transition-old(root),
 ::view-transition-new(root) {
