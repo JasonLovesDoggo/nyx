@@ -2,6 +2,8 @@
 title: mCTF
 description: mCTF, an online judge for cybersecurity challenge problems and school-wide and provincial contests, hosting over 200 problems, 1500 users & 20000 submissions. Extensively scaled using Docker, Kubernetes, K3s & Django.
 date: 2023-09-01
+imageUrl: /projects/mctf.webp
+imageAlt: The mCTF GitHub repository
 published: true
 featured: false
 tags:

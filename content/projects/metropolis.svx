@@ -2,6 +2,8 @@
 title: Metropolis
 description: Metropolis, our school's student-run data hub, offers club info, event updates, and student essentials. Built using Django, React & React Native, our team of 45 developers, artists, and creators collaborates on this platform. I handle backend maintenance, feature implementation, DevOps, and site management.
 date: 2023-01-01
+imageUrl: /projects/metropolis.webp
+imageAlt: The Metropolis Main GitHub repository
 published: true
 featured: false
 tags:

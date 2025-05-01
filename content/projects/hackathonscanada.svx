@@ -4,6 +4,8 @@ description: Hackathons Canada is a platform that connects students to hackathon
 date: 2023-11-01
 published: true
 featured: false
+imageUrl: /projects/hackathonscanada.webp
+imageAlt: The Hackathons Canada Website GitHub repository
 tags:
   - django
   - caddy

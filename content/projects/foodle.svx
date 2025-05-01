@@ -4,6 +4,8 @@ description: Foodle | The Wordle for food. Its my own twist on wordle, It was bu
 date: 2023-03-01
 published: true
 featured: false
+imageUrl: /projects/foodle.webp
+imageAlt: The foodle website
 tags:
   - svelte
   - scss
