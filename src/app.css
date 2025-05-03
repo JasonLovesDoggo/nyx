@@ -105,5 +105,5 @@
 }
 
 @utility link {
-	@apply text-accent hover:bg-accent hover:text-mantle decoration-dashed underline-offset-3 duration-200 not-hover:underline;
+	@apply text-accent hover:bg-accent hover:text-mantle decoration-dashed underline-offset-4 duration-200 not-hover:underline;
 }
