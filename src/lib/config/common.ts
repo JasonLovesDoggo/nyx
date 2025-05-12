@@ -24,6 +24,7 @@ interface Site {
 		linkedin: string;
 		calcom: string;
 		wakatime: string;
+		bluesky: string;
 	};
 	socials: SocialLink[];
 	repo: { url: string; commitBaseUrl: string };
@@ -55,7 +56,8 @@ const Site: Site = {
 		github: 'https://github.com/JasonLovesDoggo',
 		linkedin: 'https://www.linkedin.com/in/jsoncameron/',
 		calcom: 'https://cal.com/jsoncam/15min',
-		wakatime: 'https://wakatime.com/@jasonlovesdoggo'
+		wakatime: 'https://wakatime.com/@jasonlovesdoggo',
+		bluesky: 'https://bsky.app/profile/jsn.cam'
 	},
 	socials: [
 		{
