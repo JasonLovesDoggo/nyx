@@ -91,3 +91,7 @@ export function getRandomAccentColor() {
 	const randomIndex = Math.floor(Math.random() * accentColorNames.length);
 	return accentColorNames[randomIndex];
 }
+
+export const RainbowBackend = persistentWritable<boolean>('rainbow-backend', {
+	defaultValue: true
+});
