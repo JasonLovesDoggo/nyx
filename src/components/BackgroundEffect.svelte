@@ -33,7 +33,7 @@
 		const hoveredChild = gridElement.children[cellIndex] as HTMLElement;
 
 		// Directly use the store's value. Svelte's reactivity handles updates.
-		const isRainbowActive = RainbowBackend;
+		const isRainbowActive = $RainbowBackend;
 
 		if (cellIndex >= 0 && hoveredChild) {
 			if (!prevDown[cellIndex] && (isMouseDown || isRainbowActive)) {
