@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { accentColorNames, RainbowBackend } from '$lib/stores/theme';
+	import { accentColorNames, greyScaleColorNames, RainbowBackend } from '$lib/stores/theme';
 
 	let gridElement = $state<HTMLElement | null>(null);
 	const rows = 5;
@@ -33,42 +33,46 @@
 		const hoveredChild = gridElement.children[cellIndex] as HTMLElement;
 
 		// Directly use the store's value. Svelte's reactivity handles updates.
-		const isRainbowActive = $RainbowBackend;
 
 		if (cellIndex >= 0 && hoveredChild) {
-			if (!prevDown[cellIndex] && (isMouseDown || isRainbowActive)) {
+			if (!prevDown[cellIndex]) {
 				let clickBgValue = '';
-				if (isRainbowActive) {
-					const currentAccentName = accentColorNames[lastAccentIndex];
+				let currentColorName;
+				if ($RainbowBackend) {
+					// Rainbow mode - use colorful accent colors
+					currentColorName = accentColorNames[lastAccentIndex];
 					lastAccentIndex = (lastAccentIndex + 1) % accentColorNames.length; // Prepare for next
-					clickBgValue = `color-mix(in srgb, var(--color-${currentAccentName}) 50%, transparent)`;
 				} else {
-					// Not rainbow mode, use crust color
-					// Assumes --theme-crust is defined globally
-					clickBgValue = `color-mix(in srgb, var(--theme-crust) 50%, transparent)`;
+					currentColorName = greyScaleColorNames[lastAccentIndex];
+					lastAccentIndex = (lastAccentIndex + 1) % greyScaleColorNames.length; // Prepare for next
 				}
+				clickBgValue = `color-mix(in srgb, var(--color-${currentColorName}) 40%, transparent)`;
+
 				hoveredChild.style.setProperty('background', clickBgValue);
 			}
 
 			hoveredChild.classList.add('hovered');
 			// hoveredChild.classList.toggle('clicked', isMouseDown || (isRainbowActive as unknown as boolean));
-			hoveredChild.classList.toggle(
-				'hovered-fast-trans',
-				!prevDown[cellIndex] && !(isMouseDown || isRainbowActive)
-			);
 		}
 
 		if (lastHovered >= 0 && lastHovered !== cellIndex) {
 			const lastHoveredChild = gridElement.children[lastHovered] as HTMLElement;
 			if (lastHoveredChild) {
-				lastHoveredChild.classList.remove('hovered', 'hovered-fast-trans', 'clicked');
+				lastHoveredChild.classList.remove('hovered', 'clicked');
+				lastHoveredChild.classList.add('fade-out');
+				// Remove the fade-out class after animation completes to reset the element
+				// setTimeout(() => {
+				// 	if (lastHoveredChild) {
+				// 		lastHoveredChild.classList.remove('fade-out');
+				// 	}
+				// }, 1000);
 			}
 			prevDown[lastHovered] = false;
 		}
 
 		lastHovered = cellIndex;
 		if (cellIndex >= 0) {
-			prevDown[cellIndex] = isMouseDown || isRainbowActive;
+			prevDown[cellIndex] = trues;
 		}
 	};
 
@@ -120,26 +124,32 @@
 		display: grid;
 		z-index: -2;
 		pointer-events: none;
-		filter: blur(10px);
+		filter: blur(12px);
 		grid-template-columns: repeat(var(--grid-columns, 5), 1fr);
 		transform: scale(1.05);
 	}
 
 	#bg-grid div {
 		background: var(--color-bg);
-		transition: 800ms background linear;
+		transition:
+			800ms background linear,
+			100ms opacity ease-out;
+		opacity: 1;
 	}
 
-	#bg-grid div.hovered {
-		background: var(--color-base);
+	#bg-grid div:not(.hovered) {
+		animation: fadeAway 3000ms forwards;
 	}
 
-	#bg-grid div.hovered-fast-trans {
-		transition: 100ms background linear;
-	}
-
-	/* --click-bg is set dynamically by the script and should include opacity */
-	#bg-grid div.hovered {
-		transition: 10ms background linear;
+	@keyframes fadeAway {
+		0% {
+			opacity: 1;
+		}
+		60% {
+			opacity: 0.9;
+		}
+		100% {
+			opacity: 0;
+		}
 	}
 </style>
