@@ -35,7 +35,7 @@
 		// Directly use the store's value. Svelte's reactivity handles updates.
 
 		if (cellIndex >= 0 && hoveredChild) {
-			if (!prevDown[cellIndex]) {
+			if (!prevDown[cellIndex] && isMouseDown) {
 				let clickBgValue = '';
 				let currentColorName;
 				if ($RainbowBackend) {
@@ -61,22 +61,23 @@
 				lastHoveredChild.classList.remove('hovered', 'clicked');
 				lastHoveredChild.classList.add('fade-out');
 				// Remove the fade-out class after animation completes to reset the element
-				// setTimeout(() => {
-				// 	if (lastHoveredChild) {
-				// 		lastHoveredChild.classList.remove('fade-out');
-				// 	}
-				// }, 1000);
+				setTimeout(() => {
+					if (lastHoveredChild) {
+						lastHoveredChild.classList.remove('fade-out');
+					}
+				}, 1000);
 			}
 			prevDown[lastHovered] = false;
 		}
 
 		lastHovered = cellIndex;
 		if (cellIndex >= 0) {
-			prevDown[cellIndex] = trues;
+			prevDown[cellIndex] = isMouseDown;
 		}
 	};
 
 	$effect(() => {
+		console.log(isMouseDown);
 		const handleMouseMove = (event: MouseEvent) => render(event);
 		const handleMouseLeave = () => render({ clientX: -1, clientY: -1 });
 		const handleMouseDown = (event: MouseEvent) => {
@@ -138,7 +139,7 @@
 	}
 
 	#bg-grid div:not(.hovered) {
-		animation: fadeAway 3000ms forwards;
+		animation: fadeAway 1800ms forwards;
 	}
 
 	@keyframes fadeAway {
