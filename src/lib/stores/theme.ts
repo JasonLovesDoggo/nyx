@@ -108,6 +108,6 @@ export function getRandomAccentColor() {
 	return accentColorNames[randomIndex];
 }
 
-export const RainbowBackend = persistentWritable<boolean>('rainbow-backend', {
+export const BackgroundEnabled = persistentWritable<boolean>('background-enabled', {
 	defaultValue: true
 });

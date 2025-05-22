@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { accentColorNames, greyScaleColorNames, RainbowBackend } from '$lib/stores/theme';
+	import { accentColorNames } from '$lib/stores/theme';
 
 	let gridElement = $state<HTMLElement | null>(null);
 	const rows = 5;
@@ -8,7 +8,7 @@
 	let lastHovered = $state(-1);
 	let isMouseDown = $state(false);
 	let prevDown = $state<{ [key: number]: boolean }>({});
-	let lastAccentIndex = $state(0); // For cycling through accent colors in rainbow mode
+	let lastAccentIndex = $state(0);
 
 	const render = (event: MouseEvent | { clientX: number; clientY: number }) => {
 		if (!gridElement) return;
@@ -38,14 +38,8 @@
 			if (!prevDown[cellIndex] && isMouseDown) {
 				let clickBgValue = '';
 				let currentColorName;
-				if ($RainbowBackend) {
-					// Rainbow mode - use colorful accent colors
-					currentColorName = accentColorNames[lastAccentIndex];
-					lastAccentIndex = (lastAccentIndex + 1) % accentColorNames.length; // Prepare for next
-				} else {
-					currentColorName = greyScaleColorNames[lastAccentIndex];
-					lastAccentIndex = (lastAccentIndex + 1) % greyScaleColorNames.length; // Prepare for next
-				}
+				currentColorName = accentColorNames[lastAccentIndex];
+				lastAccentIndex = (lastAccentIndex + 1) % accentColorNames.length; // Prepare for next
 				clickBgValue = `color-mix(in srgb, var(--color-${currentColorName}) 40%, transparent)`;
 
 				hoveredChild.style.setProperty('background', clickBgValue);

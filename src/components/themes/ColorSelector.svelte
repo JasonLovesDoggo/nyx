@@ -1,5 +1,5 @@
 <script>
-	import { Accent, accentColorNames, RainbowBackend } from '$lib/stores/theme.js';
+	import { Accent, accentColorNames, BackgroundEnabled } from '$lib/stores/theme';
 </script>
 
 <div class="grid grid-cols-7 gap-2.5 md:gap-1.5">
@@ -25,12 +25,12 @@
 	<label class="flex cursor-pointer items-center">
 		<input
 			type="checkbox"
-			bind:checked={$RainbowBackend}
+			bind:checked={$BackgroundEnabled}
 			class="form-checkbox h-4 w-4 rounded text-current"
-			aria-label="Toggle between grayscale and colorful background"
+			aria-label="Toggle the colorful background on/off"
 		/>
 		<span class="text-subtext0 ml-2 text-sm"
-			>{$RainbowBackend ? 'Colorful background' : 'Grayscale background'}</span
+			>Background effect: <span class="text-accent">{$BackgroundEnabled ? 'on' : 'off'}</span></span
 		>
 	</label>
 </div>
