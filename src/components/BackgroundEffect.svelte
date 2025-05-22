@@ -51,21 +51,15 @@
 				hoveredChild.style.setProperty('background', clickBgValue);
 			}
 
-			hoveredChild.classList.add('hovered');
-			// hoveredChild.classList.toggle('clicked', isMouseDown || (isRainbowActive as unknown as boolean));
+			if (isMouseDown) {
+				hoveredChild.classList.add('hovered');
+			}
 		}
 
 		if (lastHovered >= 0 && lastHovered !== cellIndex) {
 			const lastHoveredChild = gridElement.children[lastHovered] as HTMLElement;
 			if (lastHoveredChild) {
 				lastHoveredChild.classList.remove('hovered', 'clicked');
-				lastHoveredChild.classList.add('fade-out');
-				// Remove the fade-out class after animation completes to reset the element
-				setTimeout(() => {
-					if (lastHoveredChild) {
-						lastHoveredChild.classList.remove('fade-out');
-					}
-				}, 1000);
 			}
 			prevDown[lastHovered] = false;
 		}
