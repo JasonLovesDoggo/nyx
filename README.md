@@ -1,4 +1,4 @@
-# Nyx - Portfolio v3
+# Nyx
 
 Nyx is my personal digital playground and the third iteration of my portfolio, designed to showcase my projects, experiments, and journey in web development.
 
@@ -17,4 +17,4 @@ Nyx draws inspiration from various innovative websites and projects. To view my 
 
 ---
 
-Thank you for visiting.
+Thank you for visiting — and please leave a ⭐ if you likey!
