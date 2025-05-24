@@ -2,6 +2,10 @@
 
 Nyx is my personal digital playground and the third iteration of my portfolio, designed to showcase my projects, experiments, and journey in web development.
 
+<a href="https://nyx.jasoncameron.dev" target="_blank">
+  <img src=".github/homepage.jpg" alt="Nyx - Jason Cameron's Playground" width="100%" />
+</a>
+
 <div align="center">
   <a href="https://abacus.jasoncameron.dev" target="_blank">
     <img height="20px" src="https://abacus.jasoncameron.dev/hit/jasoncameron/github-nyx/shield?font=jetbrains-mono&text=visits&bgcolor=e59b4f&color=48ACF0&style=flat-square" alt="Visitor Count"/>
