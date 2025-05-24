@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { accentColorNames } from '$lib/stores/theme';
-
 	let gridElement = $state<HTMLElement | null>(null);
 	const rows = 5;
 	const columns = 5;
@@ -32,16 +31,14 @@
 
 		const hoveredChild = gridElement.children[cellIndex] as HTMLElement;
 
-		// Directly use the store's value. Svelte's reactivity handles updates.
-
 		if (cellIndex >= 0 && hoveredChild) {
 			if (!prevDown[cellIndex] && isMouseDown) {
 				let clickBgValue = '';
 				let currentColorName;
 				currentColorName = accentColorNames[lastAccentIndex];
 				lastAccentIndex = (lastAccentIndex + 1) % accentColorNames.length; // Prepare for next
-				clickBgValue = `color-mix(in srgb, var(--color-${currentColorName}) 40%, transparent)`;
-
+				// clickBgValue = `color-mix(in srgb, var(--color-${currentColorName}) 60%, transparent)`;
+				clickBgValue = `var(--color-${currentColorName})`;
 				hoveredChild.style.setProperty('background', clickBgValue);
 			}
 
@@ -65,7 +62,6 @@
 	};
 
 	$effect(() => {
-		console.log(isMouseDown);
 		const handleMouseMove = (event: MouseEvent) => render(event);
 		const handleMouseLeave = () => render({ clientX: -1, clientY: -1 });
 		const handleMouseDown = (event: MouseEvent) => {
@@ -113,7 +109,7 @@
 		display: grid;
 		z-index: -2;
 		pointer-events: none;
-		filter: blur(12px);
+		filter: blur(16px) brightness(0.6);
 		grid-template-columns: repeat(var(--grid-columns, 5), 1fr);
 		transform: scale(1.05);
 	}
@@ -121,13 +117,13 @@
 	#bg-grid div {
 		background: var(--color-bg);
 		transition:
-			800ms background linear,
-			100ms opacity ease-out;
+			75ms background linear,
+			/* fades between colors */ 100ms opacity ease-out;
 		opacity: 1;
 	}
 
 	#bg-grid div:not(.hovered) {
-		animation: fadeAway 1800ms forwards;
+		animation: fadeAway 2200ms forwards;
 	}
 
 	@keyframes fadeAway {
