@@ -34,7 +34,7 @@
 			<span class="text-accent">
 				<span>
 					<span>J</span><span
-						class="opacity-70"
+						class="decoration-accent/30 underline decoration-dashed opacity-70"
 						onmouseenter={() => (isNameHovered = true)}
 						onmouseleave={() => (isNameHovered = false)}
 						onfocus={() => (isNameHovered = true)}

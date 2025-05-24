@@ -32,8 +32,24 @@ export const accentColorNames = [
 	'blue',
 	'lavender'
 ] as const;
-
 export type AccentColorName = (typeof accentColorNames)[number];
+
+export const greyScaleColorNames = [
+	'text',
+	'subtext1',
+	'subtext0',
+	'overlay2',
+	'overlay1',
+	'overlay0',
+	'surface2',
+	'surface1',
+	'surface0',
+	'base',
+	// "mantle",
+	'crust'
+] as const;
+
+export type greyScaleColorName = (typeof greyScaleColorNames)[number];
 
 export const Accent = persistentWritable<AccentColorName>('accent', {
 	defaultValue: 'peach',
@@ -91,3 +107,7 @@ export function getRandomAccentColor() {
 	const randomIndex = Math.floor(Math.random() * accentColorNames.length);
 	return accentColorNames[randomIndex];
 }
+
+export const BackgroundEnabled = persistentWritable<boolean>('background-enabled', {
+	defaultValue: true
+});

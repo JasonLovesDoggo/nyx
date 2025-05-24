@@ -20,9 +20,9 @@ const highlighter = await createHighlighter({
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.svx'],
-	layout: {
-		_: './src/mdsvex.svelte'
-	},
+	// layout: {
+	// 	_: 'src/mdsvex.svelte'
+	// },
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
 			let rawcode = highlighter.codeToHtml(code, {
