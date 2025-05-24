@@ -117,8 +117,8 @@
 	#bg-grid div {
 		background: var(--color-bg);
 		transition:
-			75ms background linear,
-			/* fades between colors */ 100ms opacity ease-out;
+			75ms background linear /* fades between colors */,
+			100ms opacity ease-out;
 		opacity: 1;
 	}
 
