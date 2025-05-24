@@ -1,6 +1,7 @@
 # Nyx
 
-Nyx is my personal digital playground and the third iteration of my portfolio, designed to showcase my projects, experiments, and journey in web development.
+Nyx is my personal digital playground and the third iteration of my portfolio, designed to showcase my projects,
+experiments, and journey in web development.
 
 <a href="https://nyx.jasoncameron.dev" target="_blank">
   <img src=".github/homepage.jpg" alt="Nyx - Jason Cameron's Playground" width="100%" />
@@ -17,7 +18,8 @@ Nyx is my personal digital playground and the third iteration of my portfolio, d
 
 ## Inspirations
 
-Nyx draws inspiration from various innovative websites and projects. To view my wild brainstorming process, check out the [Ideas board](https://notes.jasoncameron.dev/Website).
+Nyx draws inspiration from various innovative websites and projects. To view my wild brainstorming process, check out
+the <a target="_blank" href="https://notes.jasoncameron.dev/Website">Ideas Board</a>.
 
 ---
 
