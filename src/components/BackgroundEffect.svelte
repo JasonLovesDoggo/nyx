@@ -31,6 +31,8 @@
 
 		const hoveredChild = gridElement.children[cellIndex] as HTMLElement;
 
+		// hoveredChild.classList.add('hovered');
+
 		if (cellIndex >= 0 && hoveredChild) {
 			if (!prevDown[cellIndex] && isMouseDown) {
 				let clickBgValue = '';
@@ -43,17 +45,15 @@
 			}
 
 			if (isMouseDown) {
-				hoveredChild.classList.add('hovered');
+				hoveredChild.classList.add('clicked');
 			}
 		}
 
-		if (lastHovered >= 0 && lastHovered !== cellIndex) {
-			const lastHoveredChild = gridElement.children[lastHovered] as HTMLElement;
-			if (lastHoveredChild) {
-				lastHoveredChild.classList.remove('hovered', 'clicked');
-			}
-			prevDown[lastHovered] = false;
+		const lastHoveredChild = gridElement.children[lastHovered] as HTMLElement;
+		if (lastHoveredChild) {
+			lastHoveredChild.classList.remove('hovered', 'clicked');
 		}
+		prevDown[lastHovered] = false;
 
 		lastHovered = cellIndex;
 		if (cellIndex >= 0) {
@@ -122,8 +122,8 @@
 		opacity: 1;
 	}
 
-	#bg-grid div:not(.hovered) {
-		animation: fadeAway 2200ms forwards;
+	#bg-grid div:not(.clicked) {
+		animation: fadeAway 1400ms forwards;
 	}
 
 	@keyframes fadeAway {
