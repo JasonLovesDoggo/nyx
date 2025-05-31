@@ -20,7 +20,6 @@
 	{/key}
 </div>
 
-<!-- Grayscale/Color toggle checkbox placed separately below the grid -->
 <div class="mt-4 flex items-center">
 	<label class="flex cursor-pointer items-center">
 		<input
