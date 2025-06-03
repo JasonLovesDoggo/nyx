@@ -75,9 +75,13 @@
 			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://trac.ffmpeg.org"
 				>FFmpeg</a
 			>
-			and many others. My code is used by
-			<b class="text-accent">millions</b> of people worldwide. I focus on
-			<b class="text-text">backend systems</b>,
+			and many others<a
+				href="/projects/anubis"
+				class="hover:text-accent ml-0.5 align-super text-xs font-semibold">[1]</a
+			>. My code is used by
+			<b class="text-accent">millions</b> of people worldwide. <br />I focus on
+			<b class="text-text">backend web development</b>,
+			<b class="text-text">scalable and distributed systems</b>,
 			<b class="text-text">DevOps</b>, and
 			<b class="text-text">cybersecurity</b>, especially crafting defenses against automated
 			threats. I enjoy leading initiatives and tackling complex technical challenges.
