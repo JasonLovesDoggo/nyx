@@ -32,7 +32,7 @@ interface Site {
 
 const Site: Site = {
 	name: 'Portfolio',
-	url: dev ? 'http://localhost:5173' : 'https://nyx.jasoncameron.dev',
+	url: dev ? 'http://localhost:5173' : 'https://jasoncameron.dev',
 	description: "Jason Cameron's Portfolio",
 	tags: [
 		'Jason Cameron',

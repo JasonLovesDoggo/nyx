@@ -44,7 +44,7 @@
 	<!-- Additional Meta Tags -->
 	<meta name="author" content={Site.name} />
 	<meta name="keywords" content={Site.tags.join(', ')} />
-	<link rel="canonical" href={Site.url} />
+	<link rel="canonical" href={Site.url + page.url.pathname} />
 </svelte:head>
 
 <div class="text-text mx-auto flex min-h-screen max-w-[90%] flex-col md:max-w-[80%]">
