@@ -9,7 +9,7 @@ const redirects = createRedirects([
 	{ paths: ['/github', '/gh'], url: Site.out.github },
 	{ paths: ['/linkedin', '/li'], url: Site.out.linkedin },
 	{ paths: ['/bluesky'], url: Site.out.bluesky },
-	{ paths: ['/cal'], url: Site.out.calcom },
+	{ paths: ['/cal', '/chat'], url: Site.out.calcom },
 	{ paths: '/resume', url: '/resume.pdf' },
 	{ paths: '/foodle', url: 'https://foodle.jasoncameron.dev' },
 	{ paths: '/random-color', url: 'https://pickacolor.jasoncameron.dev' }
