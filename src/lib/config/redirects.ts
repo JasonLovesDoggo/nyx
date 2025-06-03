@@ -10,7 +10,9 @@ const redirects: Record<string, string> = {
 	'/github': Site.out.github,
 	'/linkedin': Site.out.linkedin,
 	'/bluesky': Site.out.bluesky,
-	'/resume': '/resume.pdf'
+	'/resume': '/resume.pdf',
+	'/foodle': 'https://foodle.jasoncameron.dev',
+	'/random-color': 'https://pickacolor.jasoncameron.dev'
 };
 
 export default redirects;
