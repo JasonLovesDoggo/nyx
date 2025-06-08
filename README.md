@@ -1,7 +1,7 @@
 # Nyx
 
 Nyx is my personal digital playground and the third iteration of my portfolio, designed to showcase my projects,
-experiments, and journey in web development.
+experiments, and journey in the world of software development.
 
 <a href="https://nyx.jasoncameron.dev" target="_blank">
   <img src=".github/homepage.jpg" alt="Nyx - Jason Cameron's Playground" width="100%" />
