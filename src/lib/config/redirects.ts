@@ -11,6 +11,7 @@ const redirects = createRedirects([
 	{ paths: ['/bluesky'], url: Site.out.bluesky },
 	{ paths: ['/cal', '/chat'], url: Site.out.calcom },
 	{ paths: '/repo', url: Site.repo.url },
+	{ paths: '/abacus', url: 'https://v2.jasoncameron.dev/abacus' },
 	{ paths: '/resume', url: '/resume.pdf' },
 	{ paths: '/foodle', url: 'https://foodle.jasoncameron.dev' },
 	{ paths: '/random-color', url: 'https://pickacolor.jasoncameron.dev' }
