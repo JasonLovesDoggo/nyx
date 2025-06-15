@@ -63,31 +63,29 @@ For detailed usage, configuration options, and a live demo, please refer to the 
 
 ### Notable Installations
 
-
-- https://gitlab.gnome.org/
-- https://scioly.org/
-- https://bugs.winehq.org/
+- https://wiki.archlinux.org/
+- https://hydra.nixos.org/
 - https://svnweb.freebsd.org/
-- https://trac.ffmpeg.org/
-- https://xeiaso.net/
+- https://dev.haiku-os.org
+- https://openwrt.org/
+- https://gitlab.postmarketos.org/
+- https://gitlab.gnome.org/
 - https://source.puri.sm/
 - https://git.enlightenment.org/
 - https://git.lupancham.net/
-- https://dev.haiku-os.org
-- http://code.hackerspace.pl/
-- https://wiki.archlinux.org/
-- https://hydra.nixos.org/
 - https://codeberg.org/
-- https://www.cfaarchive.org/
 - https://gitlab.freedesktop.org/
-- https://bugzilla.proxmox.com
-- https://reddit.nerdvpn.de/
-- https://hosted.weblate.org/
 - https://gitea.com/
-- https://openwrt.org/
+- https://bugzilla.proxmox.com
+- https://hosted.weblate.org/
+- http://code.hackerspace.pl/
+- https://trac.ffmpeg.org/
+- https://bugs.winehq.org/
 - https://wiki.dolphin-emu.org/
+- https://xeiaso.net/
+- https://scioly.org/
+- https://www.cfaarchive.org/
 - https://squirreljme.cc/
-- https://gitlab.postmarketos.org/
 
 ### The United Nations
 	- https://policytoolbox.iiep.unesco.org/
