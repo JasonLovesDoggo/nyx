@@ -15,10 +15,10 @@ tags:
   - proof-of-work
 links:
   - text: GitHub
-url: https://github.com/TecharoHQ/anubis
+    url: https://github.com/TecharoHQ/anubis
   - text: Docs & Demo
-url: https://anubis.techaro.lol
-icon: docs
+    url: https://anubis.techaro.lol
+    icon: docs
 ---
 # Anubis
 
