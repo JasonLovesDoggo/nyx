@@ -15,10 +15,10 @@ tags:
   - proof-of-work
 links:
   - text: GitHub
-    url: https://github.com/TecharoHQ/anubis
+url: https://github.com/TecharoHQ/anubis
   - text: Docs & Demo
-    url: https://anubis.techaro.lol
-    icon: docs
+url: https://anubis.techaro.lol
+icon: docs
 ---
 # Anubis
 
@@ -62,17 +62,59 @@ For detailed usage, configuration options, and a live demo, please refer to the 
 
 
 ### Notable Installations
-  - https://gitlab.gnome.org
-  - https://wiki.archlinux.org
-  - https://scioly.org
-  - https://bugs.winehq.org
-  - https://svnweb.freebsd.org
-  - https://trac.ffmpeg.org
-  - https://git.sr.ht
-  - https://git.enlightenment.org
-  - https://dev.haiku-os.org
-######  The United Nations
-- https://policytoolbox.iiep.unesco.org
-###### The Linux Foundation
-- https://git.kernel.org
-- https://lore.kernel.org
+
+
+- https://gitlab.gnome.org/
+- https://scioly.org/
+- https://bugs.winehq.org/
+- https://svnweb.freebsd.org/
+- https://trac.ffmpeg.org/
+- https://xeiaso.net/
+- https://source.puri.sm/
+- https://git.enlightenment.org/
+- https://git.lupancham.net/
+- https://dev.haiku-os.org
+- http://code.hackerspace.pl/
+- https://wiki.archlinux.org/
+- https://hydra.nixos.org/
+- https://codeberg.org/
+- https://www.cfaarchive.org/
+- https://gitlab.freedesktop.org/
+- https://bugzilla.proxmox.com
+- https://reddit.nerdvpn.de/
+- https://hosted.weblate.org/
+- https://gitea.com/
+- https://openwrt.org/
+- https://wiki.dolphin-emu.org/
+- https://squirreljme.cc/
+- https://gitlab.postmarketos.org/
+
+### The United Nations
+	- https://policytoolbox.iiep.unesco.org/
+
+### The Linux Foundation
+	- https://git.kernel.org/
+	- https://lore.kernel.org/
+
+### Sourceware
+	- https://sourceware.org/cgit
+	- https://sourceware.org/glibc/wiki
+	- https://builder.sourceware.org/testruns/
+	- https://patchwork.sourceware.org/
+	- https://gcc.gnu.org/bugzilla/
+	- https://gcc.gnu.org/cgit
+
+### hebis (Alliance of Hessian Libraries)
+	- https://ubmr.hds.hebis.de/
+	- https://tufind.hds.hebis.de/
+	- https://karla.hds.hebis.de/
+	- and many more (see https://www.hebis.de/dienste/hebis-discovery-system/)
+
+### FreeCAD
+	- https://forum.freecad.org/
+	- https://wiki.freecad.org/
+
+### ScummVM
+	- https://bugs.scummvm.org/
+	- https://forums.scummvm.org/
+	- https://wiki.scummvm.org/
