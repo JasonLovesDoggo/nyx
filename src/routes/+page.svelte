@@ -49,8 +49,7 @@
 			</span>
 		</h1>
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
-			A high school student building and securing web infrastructure. I've written software that is
-			trusted by
+			A student building and securing web infrastructure. I've written software that is trusted by
 			<a
 				class="link text-accent/85"
 				target="_blank"
