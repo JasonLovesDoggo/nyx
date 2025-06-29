@@ -15,10 +15,10 @@ export const achievements: AchievementItem[] = [
 	'Lab Assistant @ York University',
 	{ title: 'Medici Grant Recipient', href: 'https://www.1517fund.com/medici-project' },
 	{
-		title: 'RBC Incoming Intern',
-		description: 'Summer 2023 internship at Royal Bank of Canada',
-		href: 'https://rbc.com',
-		date: '2023'
+		title: 'Stan Sr Full Stack Engineer',
+		description: 'Senior Full Stack Engineer at Stan',
+		href: 'https://stan.store',
+		date: '2025'
 	},
 	'11x Hackathon Winner'
 ];

@@ -28,6 +28,7 @@
 								src={item.logoUrl}
 								alt={item.logoAlt}
 								class="flex max-h-8 min-h-7 w-auto min-w-6 grow-9 object-contain"
+								style={item.logoScale ? `transform: scale(${item.logoScale})` : ''}
 							/>
 							<span class="text-subtext1 group-hover:text-text group-focus-visible:text-text">
 								<span class="whitespace-nowrap">
@@ -54,6 +55,7 @@
 									src={item.logoUrl}
 									alt={item.logoAlt}
 									class="h-10 w-auto max-w-[4rem] flex-shrink-0 rounded-md object-contain p-1"
+									style={item.logoScale ? `transform: scale(${item.logoScale})` : ''}
 								/>
 								<div>
 									<h4 class="text-text group-hover:text-accent font-semibold transition-colors">

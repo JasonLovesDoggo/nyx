@@ -26,17 +26,19 @@ export interface ExperienceTimelineItem {
 	startDate: string;
 	endDate?: string; // optional endDate. If present, it's a past role.
 	details?: string; // Optional details for expansion
+	logoScale?: number; // Optional logo scale multiplier
 }
 
 export const experienceTimeline: ExperienceTimelineItem[] = [
 	{
-		company: 'RBC',
-		role: 'Incoming Intern',
-		url: 'https://www.rbc.com/about-rbc.html',
-		logoUrl: '/logos/rbc.svg',
-		logoAlt: 'RBC Logo',
-		startDate: '2025-07-02',
-		details: 'I will be joining RBC as an intern in the summer of 2025.'
+		company: 'Stan',
+		role: 'Sr Full Stack Engineer',
+		url: 'https://stan.store',
+		logoUrl: '/logos/stan.svg',
+		logoAlt: 'Stan Logo',
+		startDate: '2025-06-01',
+		details: 'Senior Full Stack Engineer at Stan, building tools for creators and entrepreneurs.',
+		logoScale: 1.15
 	},
 	{
 		company: 'StorageBox',
@@ -45,8 +47,9 @@ export const experienceTimeline: ExperienceTimelineItem[] = [
 		logoUrl: '/logos/storagebox.svg',
 		logoAlt: 'StorageBox Logo',
 		startDate: '2024-09-01',
+		endDate: '2025-06-01',
 		details:
-			'As CTO, I lead the development of StorageBox, an innovative startup revolutionizing eco-friendly Shopify fulfillment with edge based sustainable warehousing technology and seamless logistics integrations.'
+			'As CTO, I led the development of StorageBox, an innovative startup revolutionizing eco-friendly Shopify fulfillment with edge based sustainable warehousing technology and seamless logistics integrations.'
 	},
 	{
 		company: 'Hack Canada',
