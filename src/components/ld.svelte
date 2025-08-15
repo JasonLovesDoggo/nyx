@@ -15,13 +15,39 @@
 		},
 		sameAs: [Site.out.github, Site.out.linkedin, Site.out.bluesky, Site.out.instagram],
 		knowsAbout: [
+			'anti-bot defenses',
 			'AI security',
 			'backend systems',
 			'AWS',
-			'anti-bot defenses',
 			'Golang',
 			'Python',
-			'DevOps'
+			'DevOps',
+			'RedditVideoMakerBot',
+			'Anubis',
+			'Hackathons Canada',
+			'Caddy Defender'
+		],
+		memberOf: [
+			{
+				'@type': 'Organization',
+				name: 'Hack Canada',
+				url: 'https://hackcanada.org'
+			},
+			{
+				'@type': 'Organization',
+				name: 'StorageBox',
+				url: 'https://storagebox.app'
+			},
+			{
+				'@type': 'Organization',
+				name: 'Stan Store',
+				url: 'https://www.stan.store'
+			},
+			{
+				'@type': 'Organization',
+				name: 'Techaro',
+				url: 'https://techaro.lol'
+			}
 		]
 	};
 
