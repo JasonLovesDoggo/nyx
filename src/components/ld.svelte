@@ -51,10 +51,13 @@
 		]
 	};
 
-	const ldJson = `<script type="application/ld+json">${JSON.stringify(person)}<` + `/script>`;
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const personJson = JSON.stringify(person);
 </script>
 
 <svelte:head>
-	<!-- svelte-ignore svelte/no-at-html-tags -->
-	{@html ldJson}
+	<script type="application/ld+json">
+		<!-- prettier-ignore -->
+		{@html personJson}
+	</script>
 </svelte:head>
