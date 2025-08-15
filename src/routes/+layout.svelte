@@ -7,6 +7,7 @@
 	import Site from '$lib/config/common';
 	import BackgroundEffect from '$components/BackgroundEffect.svelte';
 	import { BackgroundEnabled } from '$lib/stores/theme';
+	import Ld from '$components/ld.svelte';
 
 	const { data, children } = $props();
 
@@ -22,6 +23,8 @@
 		isSidebarOpen = false;
 	}
 </script>
+
+<Ld />
 
 <svelte:head>
 	<title>{title}</title>
