@@ -42,9 +42,60 @@
 	<meta name="twitter:image" content={`${Site.url}/og-image.png`} />
 
 	<!-- Additional Meta Tags -->
-	<meta name="author" content={Site.name} />
+	<meta name="author" content={Site.seo.author} />
 	<meta name="keywords" content={Site.tags.join(', ')} />
+	<meta name="robots" content="index, follow" />
+	<meta name="geo.region" content="CA-ON" />
+	<meta name="geo.placename" content={Site.seo.location.city} />
 	<link rel="canonical" href={Site.url + page.url.pathname} />
+
+	<!-- JSON-LD Person Schema -->
+	{@html `<script type="application/ld+json">
+		${JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': ['Person', 'ProfilePage'],
+			name: Site.seo.author,
+			givenName: 'Jason',
+			familyName: 'Cameron',
+			alternateName: ['jsoncam', 'jasonlovesdoggo', 'json'],
+			url: Site.url,
+			description:
+				'Senior Software Engineer based in Toronto, Canada. Expert in Golang, Python, DevOps, and hackathon development.',
+			jobTitle: 'Senior Software Engineer',
+			birthDate: Site.seo.birthDate,
+			worksFor: {
+				'@type': 'Organization',
+				name: Site.seo.worksFor.name,
+				url: Site.seo.worksFor.url
+			},
+			address: {
+				'@type': 'PostalAddress',
+				addressLocality: Site.seo.location.city,
+				addressRegion: Site.seo.location.region,
+				addressCountry: 'CA'
+			},
+			sameAs: [
+				Site.out.github,
+				Site.out.linkedin,
+				Site.out.instagram,
+				Site.out.bluesky,
+				Site.out.wakatime
+			],
+			knowsAbout: [
+				'Software Engineering',
+				'DevOps',
+				'Golang',
+				'Python',
+				'Web Development',
+				'Backend Development'
+			],
+			mainEntity: {
+				'@type': 'Person',
+				name: Site.seo.author
+			},
+			identifier: Site.url
+		})}
+	</script>`}
 </svelte:head>
 
 <div class="text-text mx-auto flex min-h-screen max-w-[90%] flex-col md:max-w-[80%]">

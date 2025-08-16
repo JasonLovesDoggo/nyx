@@ -18,6 +18,19 @@ interface Site {
 	url: string;
 	description: string;
 	tags: string[];
+	seo: {
+		author: string;
+		birthDate: string;
+		worksFor: {
+			name: string;
+			url: string;
+		};
+		location: {
+			city: string;
+			region: string;
+			country: string;
+		};
+	};
 	abacus: { instance: string; namespace: string; key: string };
 	out: {
 		github: string;
@@ -32,22 +45,42 @@ interface Site {
 }
 
 const Site: Site = {
-	name: 'Portfolio',
+	name: 'Jason Cameron',
 	url: dev ? 'http://localhost:5173' : 'https://jasoncameron.dev',
-	description: "Jason Cameron's Portfolio",
+	description:
+		'Jason Cameron - Senior Software Engineer in Toronto, Canada. Expert in Golang, Python, DevOps, and hackathon development. Building innovative solutions at scale.',
 	tags: [
 		'Jason Cameron',
-		'Portfolio',
-		'Software Engineer',
-		'Toronto',
+		'Senior Software Engineer',
+		'Toronto Software Developer',
 		'Canada',
-		'Golang',
-		'Python',
-		'DevOps',
-		'Hackathon',
-		'Anubis',
-		'Developer'
+		'Golang Developer',
+		'Python Developer',
+		'DevOps Engineer',
+		'Software Engineering',
+		'Backend Developer',
+		'Full Stack Developer',
+		'Hackathon Developer',
+		'Toronto Tech',
+		'Canadian Developer',
+		'Web Development',
+		'Cloud Computing',
+		'API Development',
+		'Software Architecture'
 	],
+	seo: {
+		author: 'Jason Cameron',
+		birthDate: '2006-04-19',
+		worksFor: {
+			name: 'Stan',
+			url: 'https://stan.store'
+		},
+		location: {
+			city: 'Toronto',
+			region: 'Ontario',
+			country: 'Canada'
+		}
+	},
 	abacus: {
 		instance: 'https://abacus.jasoncameron.dev',
 		namespace: 'jasoncameron',
