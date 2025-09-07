@@ -139,7 +139,8 @@
 	// Mode-specific initialization
 	function initializeMode() {
 		switch (terminalMode) {
-			case 0: // Matrix Scanner
+			case 0: {
+				// Matrix Scanner
 				const scannerInterval = addInterval(
 					setInterval(() => {
 						if (scanProgress < 100) {
@@ -152,6 +153,7 @@
 					}, CONFIG.SCAN_UPDATE_RATE)
 				);
 				break;
+			}
 
 			case 1: // Glitchy Terminal
 				processTerminalLines(TERMINAL_CONTENT.glitchy, 400);
@@ -307,7 +309,7 @@
 			<div class="mb-6 font-mono text-xs">
 				<div class="border-overlay0 bg-crust/80 overflow-hidden rounded border p-4">
 					<div class="text-text mb-2">traceroute to {page.url.pathname}:</div>
-					{#each traceRouteOutput as trace}
+					{#each traceRouteOutput as trace (trace.hop)}
 						<div class={trace.color}>
 							{trace.hop}. {trace.host} ({trace.ip}) {trace.time}
 						</div>

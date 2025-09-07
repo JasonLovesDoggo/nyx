@@ -94,7 +94,8 @@
 </script>
 
 <div id="bg-grid" aria-hidden="true" bind:this={gridElement}>
-	{#each Array(rows * columns) as _unused, i (i)}
+	<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+	{#each Array(rows * columns) as _, i (i)}
 		<div></div>
 	{/each}
 </div>
