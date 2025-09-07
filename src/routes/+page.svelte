@@ -185,7 +185,7 @@
 				</h3>
 				{#if data.commitData?.commits?.length > 0}
 					<ul class="space-y-1.5 text-sm">
-						{#each data.commitData.commits.slice(0, 5) as commit (commit.sha)}
+						{#each data.commitData.commits.slice(0, 4) as commit (commit.sha)}
 							<li>
 								<a
 									href={commit.href}
