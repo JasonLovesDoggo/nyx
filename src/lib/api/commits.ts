@@ -4,15 +4,7 @@ export interface CommitLanguage {
 	color: string;
 }
 
-export interface ParentCommit {
-	additions: number;
-	deletions: number;
-	commitUrl: string;
-	committedDate: string;
-	messageHeadline: string;
-}
-
-export interface KatibCommitResponse {
+export interface V2CommitItem {
 	repo: string;
 	additions: number;
 	deletions: number;
@@ -21,8 +13,12 @@ export interface KatibCommitResponse {
 	oid: string;
 	messageHeadline: string;
 	messageBody: string;
+}
+
+export interface KatibV2Response {
+	commits: V2CommitItem[];
 	languages: CommitLanguage[];
-	parentCommits: ParentCommit[];
+	stats: { totalAdditions: number; totalDeletions: number; totalCommits: number };
 }
 
 export interface ProcessedCommit {
@@ -46,85 +42,71 @@ export interface CommitData {
 let CACHE: { data: CommitData; ts: number } | null = null;
 const TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
 
-// Fallback data as provided
-const FALLBACK_RAW: KatibCommitResponse = {
-	repo: 'TecharoHQ/anubis',
-	additions: 207,
-	deletions: 57,
-	commitUrl: 'https://github.com/TecharoHQ/anubis/commit/82099d9e05d154277c3121675968ea20d2b182b4',
-	committedDate: '2025-09-07T02:35:19Z',
-	oid: '82099d9',
-	messageHeadline: 'fix(robots2policy): handle multiple user agents under one block (#925)',
-	messageBody: '',
-	languages: [
-		{ size: 101, name: 'Ruby', color: '#701516' },
-		{ size: 385752, name: 'Go', color: '#00ADD8' },
-		{ size: 9141, name: 'templ', color: '#66D0DD' },
-		{ size: 28663, name: 'JavaScript', color: '#f1e05a' },
-		{ size: 2814, name: 'CSS', color: '#663399' }
-	],
-	parentCommits: [
+// Fallback data as provided (v2 shape)
+const FALLBACK_RAW: KatibV2Response = {
+	commits: [
 		{
-			additions: 32,
-			deletions: 32,
+			repo: 'JasonLovesDoggo/nyx',
+			additions: 305,
+			deletions: 23,
 			commitUrl:
-				'https://github.com/TecharoHQ/anubis/commit/87c2f1e0e6919619d93cbaece2c954cc40f0b0a8',
-			committedDate: '2025-09-07T02:30:43Z',
-			messageHeadline: 'build(deps): bump the github-actions group across 1 directory with 8 …'
+				'https://github.com/JasonLovesDoggo/nyx/commit/d73346658330be57a5f34bf2391b5ad32b519341',
+			committedDate: '2025-09-07T05:24:05Z',
+			oid: 'd733466',
+			messageHeadline: 'feat: integrate latest commits fetching and display in project overview',
+			messageBody: ''
 		},
 		{
-			additions: 6,
-			deletions: 3,
+			repo: 'JasonLovesDoggo/Katib',
+			additions: 41,
+			deletions: 8,
 			commitUrl:
-				'https://github.com/TecharoHQ/anubis/commit/f0199d014f1af2f050e46cfb31975d73f55f4c0d',
-			committedDate: '2025-09-07T01:34:42Z',
-			messageHeadline: 'docs: document some missing env vars (#1087)'
+				'https://github.com/JasonLovesDoggo/Katib/commit/dca9afc8c1c732d9ccbf9391e77b1fe289e2e05c',
+			committedDate: '2025-09-07T05:19:28Z',
+			oid: 'dca9afc',
+			messageHeadline: 'Merge pull request #4 from JasonLovesDoggo/feature/github-streak-endp…',
+			messageBody: '…oint'
 		},
 		{
-			additions: 4,
-			deletions: 1,
+			repo: 'JasonLovesDoggo/Katib',
+			additions: 41,
+			deletions: 8,
 			commitUrl:
-				'https://github.com/TecharoHQ/anubis/commit/75109f6b737df65c4545302835000a0006adb171',
-			committedDate: '2025-09-07T00:59:02Z',
-			messageHeadline: 'docs(installation): add SLOG_LEVEL environment variable to configurat…'
-		},
-		{
-			additions: 90,
-			deletions: 0,
-			commitUrl:
-				'https://github.com/TecharoHQ/anubis/commit/c43d7ca68686c02f4a1a2629c51a57e381b6427e',
-			committedDate: '2025-09-06T23:42:23Z',
-			messageHeadline: 'docs(botstopper): add HTML templating support'
+				'https://github.com/JasonLovesDoggo/Katib/commit/e1e1d7df68e7c9e975d35f7394b7509ace215c80',
+			committedDate: '2025-09-07T05:17:01Z',
+			oid: 'e1e1d7d',
+			messageHeadline: 'Add author filtering to GetMostRecentCommit function',
+			messageBody: ''
 		}
-	]
+	],
+	languages: [
+		{ size: 776600, name: 'Go', color: '#00ADD8' },
+		{ size: 666900, name: 'HTML', color: '#e34c26' },
+		{ size: 281021, name: 'TypeScript', color: '#3178c6' },
+		{ size: 148482, name: 'Svelte', color: '#ff3e00' },
+		{ size: 99269, name: 'Shell', color: '#89e051' },
+		{ size: 66735, name: 'CSS', color: '#663399' },
+		{ size: 49218, name: 'JavaScript', color: '#f1e05a' },
+		{ size: 9141, name: 'templ', color: '#66D0DD' }
+	],
+	stats: { totalAdditions: 55150, totalDeletions: 23115, totalCommits: 55 }
 };
 
-function processResponse(data: KatibCommitResponse): CommitData {
-	const commits: ProcessedCommit[] = [];
-	commits.push({
-		repo: data.repo,
-		message: data.messageHeadline,
-		href: data.commitUrl,
-		sha: data.oid,
-		date: data.committedDate,
-		additions: data.additions,
-		deletions: data.deletions
-	});
+function processResponse(data: KatibV2Response): CommitData {
+	const commits: ProcessedCommit[] = (data.commits || []).map((c) => ({
+		repo: c.repo,
+		message: c.messageHeadline,
+		href: c.commitUrl,
+		sha: c.oid,
+		date: c.committedDate,
+		additions: c.additions,
+		deletions: c.deletions
+	}));
 
-	data.parentCommits.slice(0, 3).forEach((parent) => {
-		commits.push({
-			repo: data.repo,
-			message: parent.messageHeadline,
-			href: parent.commitUrl,
-			sha: parent.commitUrl.split('/').pop()?.substring(0, 7) || 'unknown',
-			date: parent.committedDate,
-			additions: parent.additions,
-			deletions: parent.deletions
-		});
-	});
-
-	const totalAdditions = commits.reduce((acc, c) => acc + (c.additions || 0), 0);
-	const totalDeletions = commits.reduce((acc, c) => acc + (c.deletions || 0), 0);
+	const totalAdditions =
+		data.stats?.totalAdditions ?? commits.reduce((acc, c) => acc + (c.additions || 0), 0);
+	const totalDeletions =
+		data.stats?.totalDeletions ?? commits.reduce((acc, c) => acc + (c.deletions || 0), 0);
 
 	return {
 		commits,
@@ -146,14 +128,14 @@ export async function fetchLatestCommits(): Promise<CommitData> {
 	try {
 		const controller = new AbortController();
 		const id = setTimeout(() => controller.abort(), 3000);
-		const response = await fetch('https://katib.jasoncameron.dev/commits/latest', {
+		const response = await fetch('http://localhost:8080/v2/commits/latest', {
 			headers: { Accept: 'application/json', 'User-Agent': 'nyx-website/1.0' },
 			signal: controller.signal
 		});
 		clearTimeout(id);
 
 		if (!response.ok) throw new Error(`HTTP ${response.status}`);
-		const json: KatibCommitResponse = await response.json();
+		const json: KatibV2Response = await response.json();
 		const data = processResponse(json);
 		CACHE = { data, ts: Date.now() };
 		return data;
