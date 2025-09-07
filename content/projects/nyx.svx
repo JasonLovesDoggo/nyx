@@ -1,0 +1,54 @@
+---
+title: Nyx
+description: The website you're currently browsing! My attempt at building the perfect portfolio site... or at least a decent one.
+date: 2024-08-16
+published: true
+imageUrl: /projects/nyx.webp
+imageAlt: The Nyx portfolio website GitHub repository
+tags:
+  - svelte
+  - sveltekit
+  - typescript
+  - portfolio
+  - blog
+  - web
+  - meta
+links:
+  - text: GitHub
+    url: https://github.com/JasonLovesDoggo/nyx
+  - text: Live Site
+    url: https://jasonamri.dev
+    icon: external
+  - text: Design Ideation
+    url: https://notes.jasoncameron.dev/Website
+    icon: external
+---
+# Nyx
+
+Welcome to the most meta project in my portfolio - the very website you're reading this on! Nyx is my personal portfolio and blog, built with an unhealthy obsession for pixel-perfect design and probably too many subtle animations.
+
+## The Journey
+
+What started as "I need a simple portfolio site" quickly spiraled into a months-long rabbit hole of design iterations, component refactoring, and endless tweaking of font weights. You can see the full chaotic evolution of my thoughts and bad ideas in my [design ideation notes](https://notes.jasoncameron.dev/Website).
+
+## Technical Stack (Because I Love Overengineering)
+
+- **Frontend:** SvelteKit with TypeScript because I enjoy type safety and compile-time tears
+- **Styling:** TailwindCSS for that perfect balance of utility classes and CSS bloat
+- **Content:** MDX/Svelte components for when regular markdown just isn't fancy enough
+- **Build Tools:** Custom scripts that generate project banner images because manually creating them is for peasants
+- **Performance:** Obsessively optimized for Core Web Vitals (but still probably slower than a static HTML file)
+
+## Features That Nobody Asked For
+
+- **Automated Banner Generation:** Scripts that fetch GitHub repo data and generate project images (because I'm definitely not making 13+ banner images by hand)
+- **Over-Engineered Navigation:** Smooth page transitions that definitely needed three rewrites
+- **Dark Mode:** Because it's 2024 and not having dark mode is a war crime
+- **Blog Platform:** Where I pretend I'll write consistently (spoiler: I won't)
+- **Responsive Everything:** Works on everything from your fridge to your calculator
+
+## The Reality Check
+
+This site probably took 10x longer to build than it should have. But hey, at least it looks nice and the code is clean enough that future me won't want to rewrite it from scratch... again.
+
+Built with love, caffeine, and an unreasonable number of `git commit --amend` commands.
