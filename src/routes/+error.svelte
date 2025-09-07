@@ -259,7 +259,7 @@
 				<div class="border-overlay0 bg-crust/80 overflow-hidden rounded border p-4">
 					<!-- Fixed height container to prevent cursor shift -->
 					<div class="min-h-[12rem]">
-						{#each terminalLines as line}
+						{#each terminalLines as line (line)}
 							<div
 								class="
 								{line.includes('Error') || line.includes('FATAL')
@@ -284,7 +284,7 @@
 				<div class="border-overlay0 bg-crust/80 overflow-hidden rounded border p-4">
 					<!-- Fixed height container to prevent cursor shift -->
 					<div class="min-h-[10rem]">
-						{#each terminalLines as line}
+						{#each terminalLines as line (line)}
 							<div
 								class={line.includes('bash:') || line.includes('ls:') ? 'text-red' : 'text-text'}
 							>
@@ -324,7 +324,7 @@
 				Return to Home
 			</a>
 			<button
-				onclick={(e) => history.back()}
+				onclick={() => history.back()}
 				class="border-overlay0 bg-surface0/50 text-text hover:bg-surface0 rounded-md border px-6 py-2 transition-all duration-300"
 			>
 				Go Back

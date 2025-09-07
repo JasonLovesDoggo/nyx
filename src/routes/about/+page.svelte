@@ -6,7 +6,6 @@
 		IconBrandLinkedin,
 		IconMail,
 		IconDog,
-		IconArrowRight,
 		IconStar,
 		IconBriefcase
 	} from '@tabler/icons-svelte';

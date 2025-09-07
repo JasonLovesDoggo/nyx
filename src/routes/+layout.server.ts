@@ -1,13 +1,17 @@
 import Site from '$lib/config/common';
 import type { LayoutServerLoad } from './$types';
+import { measurePerformance } from '$lib/utils/performance';
 
 export const load: LayoutServerLoad = async () => {
 	const { instance, namespace, key } = Site.abacus;
 	let footerData;
 	try {
-		footerData = await fetch(`${instance}/hit/${namespace}/${key}`, {
-			signal: AbortSignal.timeout(2000) // 2 second timeout
-		}).then((res) => res.json());
+		footerData = await measurePerformance('abacus-api-fetch', async () => {
+			const response = await fetch(`${instance}/hit/${namespace}/${key}`, {
+				signal: AbortSignal.timeout(1500) // 1.5 second timeout
+			});
+			return response.json();
+		});
 		footerData.value = footerData.value.toLocaleString();
 	} catch (error) {
 		console.error('Error fetching footer data:', error);

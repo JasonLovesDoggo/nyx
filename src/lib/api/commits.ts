@@ -1,3 +1,5 @@
+import { measurePerformance } from '$lib/utils/performance';
+
 export interface CommitLanguage {
 	size: number;
 	name: string;
@@ -124,30 +126,37 @@ export async function fetchLatestCommits(): Promise<CommitData> {
 	if (CACHE && Date.now() - CACHE.ts < TTL_MS) {
 		return CACHE.data;
 	}
-	console.log('Cache miss or stale, fetching latest commits from katib...');
+	console.log('[PERF] fetchLatestCommits: CACHE MISS - fetching from katib...');
 
-	try {
-		const controller = new AbortController();
-		const id = setTimeout(() => controller.abort(), 5e3);
-		const response = await fetch(
-			'https://katib.jasoncameron.dev/v2/commits/latest?username=JasonLovesDoggo&limit=5',
-			{
-				headers: { Accept: 'application/json', 'User-Agent': 'nyx-website/1.0' },
-				signal: controller.signal
+	return await measurePerformance('katib-api-fetch', async () => {
+		try {
+			const controller = new AbortController();
+			const id = setTimeout(() => controller.abort(), 5e3);
+			const response = await fetch(
+				'https://katib.jasoncameron.dev/v2/commits/latest?username=JasonLovesDoggo&limit=5',
+				{
+					headers: { Accept: 'application/json', 'User-Agent': 'nyx-website/1.0' },
+					signal: controller.signal
+				}
+			);
+			clearTimeout(id);
+
+			if (!response.ok) throw new Error(`HTTP ${response.status}`);
+			const json: KatibV2Response = await response.json();
+			console.log(`[PERF] katib-response-size: ${JSON.stringify(json).length} bytes`);
+			const data = processResponse(json);
+			CACHE = { data, ts: Date.now() };
+			return data;
+		} catch (err) {
+			console.warn('katib fetch failed, using fallback or cache:', err);
+			if (CACHE) {
+				console.log('Using stale cache after fetch failure');
+				return CACHE.data;
 			}
-		);
-		clearTimeout(id);
-
-		if (!response.ok) throw new Error(`HTTP ${response.status}`);
-		const json: KatibV2Response = await response.json();
-		const data = processResponse(json);
-		CACHE = { data, ts: Date.now() };
-		return data;
-	} catch (err) {
-		console.warn('katib fetch failed, using fallback or cache:', err);
-		if (CACHE) return CACHE.data; // stale cache if available
-		const data = processResponse(FALLBACK_RAW);
-		CACHE = { data, ts: Date.now() };
-		return data;
-	}
+			console.log('Using fallback data after fetch failure');
+			const data = processResponse(FALLBACK_RAW);
+			CACHE = { data, ts: Date.now() };
+			return data;
+		}
+	});
 }

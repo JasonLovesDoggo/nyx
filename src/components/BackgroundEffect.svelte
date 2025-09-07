@@ -94,7 +94,7 @@
 </script>
 
 <div id="bg-grid" aria-hidden="true" bind:this={gridElement}>
-	{#each Array(rows * columns) as _, i}
+	{#each Array(rows * columns) as _, i (i)}
 		<div></div>
 	{/each}
 </div>

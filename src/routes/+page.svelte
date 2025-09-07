@@ -15,13 +15,13 @@
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
 	import Experience from '$components/Experience.svelte';
-	import { getLatestPosts } from '$lib/content/posts';
 	import { formatDate } from '$utils/date';
 	import type { CommitData } from '$lib/api/commits';
 
 	type PageData = {
 		featuredProjects: FeaturedProject[];
 		commitData: CommitData;
+		latestPosts: { slug: string; metadata: { title: string; published_at?: string } | undefined }[];
 	};
 
 	let { data }: { data: PageData } = $props();
@@ -279,9 +279,9 @@
 					</a>
 				</div>
 
-				{#if getLatestPosts().length > 0}
+				{#if data.latestPosts.length > 0}
 					<ul class="list-none space-y-2">
-						{#each getLatestPosts() as post (post.slug)}
+						{#each data.latestPosts as post (post.slug)}
 							<li>
 								<a
 									href={'/posts/' + post.slug}
