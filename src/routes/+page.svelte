@@ -11,19 +11,22 @@
 	} from '@tabler/icons-svelte';
 	import Site from '$lib/config/common';
 	import { Home } from '$lib/config/pages';
-	import { codingStats, latestCommits } from '$lib/config/about';
+	import { codingStats } from '$lib/config/about';
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
 	import Experience from '$components/Experience.svelte';
 	import { getLatestPosts } from '$lib/content/posts';
 	import { formatDate } from '$utils/date';
+	import type { CommitData } from '$lib/api/commits';
 
 	type PageData = {
 		featuredProjects: FeaturedProject[];
+		commitData: CommitData;
 	};
 
 	let { data }: { data: PageData } = $props();
 	let isNameHovered = $state(false);
+	const langTotal = $derived((data.commitData?.languages || []).reduce((a, l) => a + l.size, 0));
 </script>
 
 <div class="mx-auto max-w-6xl space-y-12 px-0 py-8 md:space-y-16 md:px-4 md:py-12">
@@ -180,19 +183,28 @@
 					<IconActivity size={16} class="text-accent" />
 					Recent Commits
 				</h3>
-				{#if latestCommits.length > 0}
+				{#if data.commitData?.commits?.length > 0}
 					<ul class="space-y-1.5 text-sm">
-						{#each latestCommits as commit (commit.sha)}
+						{#each data.commitData.commits as commit (commit.sha)}
 							<li>
 								<a
 									href={commit.href}
 									target="_blank"
 									rel="noopener noreferrer"
-									class="text-subtext0 hover:text-accent block truncate"
+									class="text-subtext0 hover:text-accent flex min-w-0 items-center gap-2"
 									title={`${commit.repo}: ${commit.message}`}
 								>
-									<span class="text-text font-medium">{commit.repo.split('/')[1]}:</span>
-									{commit.message}
+									<span class="text-text flex-shrink-0 font-medium"
+										>{commit.repo.split('/')[1]}:</span
+									>
+									<span class="min-w-0 flex-1 truncate">{commit.message}</span>
+									{#if commit.additions !== undefined && commit.deletions !== undefined}
+										<span class="flex-shrink-0 text-xs whitespace-nowrap">
+											<span class="text-green">+{commit.additions}</span>
+											<span class="text-surface1">/</span>
+											<span class="text-red">-{commit.deletions}</span>
+										</span>
+									{/if}
 								</a>
 							</li>
 						{/each}
@@ -200,23 +212,58 @@
 				{:else}
 					<p class="text-subtext1 text-sm italic">No recent public commits.</p>
 				{/if}
-				<a
-					href="https://github.com/jasonlovesdoggo"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group text-accent mt-3 inline-flex items-center gap-1 text-sm hover:underline"
-				>
-					<span>View on GitHub</span>
-					<IconExternalLink
-						size={14}
-						class="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-					/>
-				</a>
+				<div class="mt-3 flex items-center gap-3">
+					<a
+						href="https://github.com/jasonlovesdoggo"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="group text-accent inline-flex items-center gap-1 text-sm hover:underline"
+					>
+						<span>View on GitHub</span>
+						<IconExternalLink
+							size={14}
+							class="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+						/>
+					</a>
+					{#if langTotal > 0}
+						<div
+							class="ml-auto max-w-xs flex-1 sm:max-w-sm md:max-w-md"
+							aria-label="Language breakdown"
+						>
+							<div class="bg-surface2 h-2 w-full">
+								<div class="flex h-full w-full">
+									{#each data.commitData.languages as lang (lang.name)}
+										<div
+											class="group relative h-full first:rounded-l-[2px] last:rounded-r-[2px]"
+											style={`width: clamp(8px, ${(lang.size / langTotal) * 100}%, ${(lang.size / langTotal) * 100}%); background-color: ${lang.color};`}
+										>
+											<!-- Tooltip -->
+											<div
+												class="border-surface1 bg-surface1 pointer-events-none absolute -top-7 left-1/2 z-10 -translate-x-1/2 rounded border px-2 py-0.5 text-xs whitespace-nowrap opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100"
+											>
+												<span class="inline-flex items-center gap-2">
+													<span
+														class="inline-block h-2 w-2 rounded"
+														style={`background-color: ${lang.color};`}
+													></span>
+													<span class="text-subtext0">{lang.name}</span>
+													<span class="text-surface1">•</span>
+													<span class="text-subtext1"
+														>{Math.round((lang.size / langTotal) * 100)}%</span
+													>
+												</span>
+											</div>
+										</div>
+									{/each}
+								</div>
+							</div>
+						</div>
+					{/if}
+				</div>
 			</div>
-
 			<!-- Box 6: Latest Posts -->
 			<div
-				class="border-surface0 bg-base rounded-xl border p-4 shadow-lg sm:col-span-2 @xs:col-span-2"
+				class="border-surface0 bg-base rounded-xl border p-4 shadow-lg sm:col-span-2 lg:col-span-2"
 			>
 				<div class="text-text mb-3 flex items-center justify-between gap-2 text-sm">
 					<h3 class="flex items-center gap-2 font-semibold">
