@@ -9,15 +9,15 @@ tags:
   - streaming
 ---
 
-## The Problem is Nasty
+## The Problem
 
-When a client disconnects from your FastAPI streaming endpoint, your server doesn't care. It keeps churning through CPU, maybe holding DB connections open, processing ML models - all for nobody. 
+Client disconnects from your streaming endpoint. Your server keeps processing anyway.
 
-Multiply that by 100 dead connections during a traffic spike, and you've got a resource graveyard. Your server is burning cycles on ghost requests while real users get slower responses.
+100 dead connections = wasted CPU + memory leaks + slower responses for everyone else.
 
-## The Solution: cancel_on_disconnect
+## Solution
 
-Here's a robust context manager that monitors HTTP connections and cancels tasks when clients disconnect:
+Context manager that kills tasks when clients disconnect:
 
 ```python
 import logging
@@ -54,17 +54,14 @@ async def cancel_on_disconnect(request: Request):
             tg.cancel_scope.cancel()
 ```
 
-## How It Works (And Why You Care)
+## How it works
 
-1. **Task Group = No Stray Tasks**: You don't want abandoned tasks leaking across your app. The task group ensures when one task dies (disconnect), the whole operation shuts down clean.
+1. **Task group** prevents abandoned tasks from leaking
+2. **Background watcher** monitors for `http.disconnect` messages
+3. **Cancel everything** when disconnect happens
+4. **Cleanup always runs** whether task finishes or gets killed
 
-2. **Background Watcher**: Spawns a task to monitor `http.disconnect` messages from the ASGI layer. This catches browser tab closes, network drops, impatient users.
-
-3. **Instant Kill Switch**: When disconnect hits, it cancels the entire task group. Your expensive ML inference stops immediately instead of running for another 30 seconds.
-
-4. **Guaranteed Cleanup**: Whether your task finishes normally or gets axed, cleanup always runs.
-
-⚠️ **Heads up**: `request.receive()` is specific to FastAPI's ASGI layer and not documented public API. Works great with uvicorn + FastAPI, but test in your actual deployment stack since proxies and load balancers handle disconnects differently.
+⚠️ `request.receive()` isn't public API. Works with uvicorn + FastAPI but test with your actual proxy setup.
 
 ## Real Usage Example
 
@@ -90,73 +87,60 @@ async def analyze_video(request: Request):
     return StreamingResponse(generate(), media_type="text/plain")
 ```
 
-## What Breaks Without This
+## What breaks without this
 
-**Memory Leaks**: Dead connections keep tasks alive, holding references to large objects. Your RAM usage creeps up until OOM kill.
+- Memory leaks from dead tasks holding references
+- DB locks from half-finished transactions  
+- Wasted CPU while dashboard shows "everything fine"
+- Cascading failures from resource contention
 
-**DB Lock Hell**: Half-finished transactions hold locks. Other requests timeout waiting for resources that'll never be released.
-
-**Silent Resource Waste**: Your beautiful monitoring dashboard shows "everything fine" while 40% of your CPU burns on work nobody wants.
-
-**Cascading Failures**: Slow responses from wasted cycles make healthy requests timeout, triggering circuit breakers.
-
-## The Fix In Action
+## Usage
 
 ```python
 async with cancel_on_disconnect(request):
-    # This expensive work stops immediately when client bails
     async for batch in process_million_rows():
         yield f"data: Processed batch {batch.id}\n"
 ```
 
-Without this pattern, that million-row job keeps running even after the user closed their browser. With it, disconnection kills the task instantly.
+Without this: million-row job runs after user closes browser.  
+With this: disconnection kills task instantly.
 
-## Impact: Before vs After
+## Impact
 
-In a real service processing ML workloads, this pattern reduced:
-- Orphaned streaming tasks from ~40/sec to zero during peak
-- Average CPU utilization by 15% 
-- P95 response times by 200ms (less resource contention)
-- Out-of-memory incidents from daily to never
+Real ML service results:
+- Orphaned tasks: ~40/sec → 0 during peak
+- CPU utilization: -15% 
+- P95 response times: -200ms
+- OOM incidents: daily → never
 
-## Integration with Database Operations
+## Database gotcha
 
-Shield critical database operations from cancellation:
+Shield critical DB operations:
 
 ```python
 async with cancel_on_disconnect(request):
-    # This can be cancelled
     async for chunk in ai_processing():
         yield chunk
         
-# Shield database saves from cancellation
-async def save_results():
-    async with database.transaction():
-        await save_data()
-        
+# Don't let this get cancelled mid-transaction
 await asyncio.shield(save_results())
 ```
 
-## Things You'll Get Wrong First Time
+## Common mistakes
 
-1. **Forgetting to shield DB commits**: Your transaction gets cancelled mid-commit, leaving corrupted state. Always wrap critical DB operations in `asyncio.shield()`.
+1. **Forgetting to shield DB commits** = corrupted state
+2. **Not testing with nginx** = works locally, breaks in prod
+3. **Ignoring partial state** = angry users restarting from 0%
+4. **Missing cleanup** = leaked file handles and connections
 
-2. **Not testing with real proxies**: Works perfect locally, breaks in production behind nginx because proxy buffering changes disconnect behavior.
-
-3. **Ignoring partial state**: User cancels after processing 90% of data. Save progress or they'll be pissed restarting from zero.
-
-4. **Missing cleanup on cancellation**: File handles, temp data, external service connections — they all leak if you don't handle the cancel path.
-
-## Test Your Disconnects
+## Testing
 
 ```bash
 # Start your stream, then kill the connection
 curl -X POST http://localhost:8000/analyze-video &
 PID=$!
-sleep 2  # Let it start processing 
+sleep 2
 kill $PID  # Simulate disconnect
 ```
 
-Check your logs for the disconnect message and verify your expensive work actually stops.
-
-This pattern isn't academic — it's the difference between a server that scales and one that melts under load.
+Check your logs for disconnect messages and verify the expensive work stops.
