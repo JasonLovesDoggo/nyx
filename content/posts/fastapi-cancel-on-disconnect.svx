@@ -1,6 +1,6 @@
 ---
-title: Stop Wasting CPU: Kill Dead FastAPI Streams When Clients Bail
-description: Monitor FastAPI client connections and auto-cancel abandoned streaming tasks with structured concurrency
+title: "Stop Wasting CPU: Kill Dead FastAPI Streams When Clients Bail"
+description: "Monitor FastAPI client connections and auto-cancel abandoned streaming tasks with structured concurrency"
 published_at: '2025-01-16'
 tags:
   - fastapi
@@ -11,7 +11,7 @@ tags:
 
 ## The Problem is Nasty
 
-When a client disconnects from your FastAPI streaming endpoint, your server doesn't care. It keeps churning through CPU, maybe holding DB connections open, processing ML models — all for nobody. 
+When a client disconnects from your FastAPI streaming endpoint, your server doesn't care. It keeps churning through CPU, maybe holding DB connections open, processing ML models - all for nobody. 
 
 Multiply that by 100 dead connections during a traffic spike, and you've got a resource graveyard. Your server is burning cycles on ghost requests while real users get slower responses.
 

@@ -34,8 +34,14 @@ export function getAllPosts(): { slug: string; metadata: PostMetadata | undefine
 			.map(([path, mod]) => {
 				const metadata = (mod as PostEntry)?.metadata as PostMetadata | undefined;
 
-				if (!metadata?.published_at) {
-					console.error('❌ Invalid post module (missing published_at):', { path, mod });
+				if (!metadata) {
+					console.error('❌ Invalid post module (YAML frontmatter failed to parse):', {
+						path,
+						suggestion:
+							'Check for unquoted colons, em-dashes, or invalid YAML syntax in frontmatter'
+					});
+				} else if (!metadata.published_at) {
+					console.error('❌ Invalid post module (missing published_at):', { path });
 				}
 
 				return {
