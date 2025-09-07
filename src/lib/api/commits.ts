@@ -124,6 +124,7 @@ export async function fetchLatestCommits(): Promise<CommitData> {
 	if (CACHE && Date.now() - CACHE.ts < TTL_MS) {
 		return CACHE.data;
 	}
+	console.log('Cache miss or stale, fetching latest commits from katib...');
 
 	try {
 		const controller = new AbortController();
