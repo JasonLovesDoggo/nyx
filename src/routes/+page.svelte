@@ -230,11 +230,11 @@
 							class="ml-auto max-w-xs flex-1 sm:max-w-sm md:max-w-md"
 							aria-label="Language breakdown"
 						>
-							<div class="bg-surface2 h-2 w-full">
+							<div class="bg-surface2 h-2 w-full rounded-[3px]">
 								<div class="flex h-full w-full">
 									{#each data.commitData.languages as lang (lang.name)}
 										<div
-											class="group relative h-full first:rounded-l-[2px] last:rounded-r-[2px]"
+											class="group relative h-full first:rounded-l-[3px] last:rounded-r-[3px]"
 											style={`width: clamp(8px, ${(lang.size / langTotal) * 100}%, ${(lang.size / langTotal) * 100}%); background-color: ${lang.color};`}
 										>
 											<!-- Tooltip -->
