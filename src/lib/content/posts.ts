@@ -27,19 +27,27 @@ function slugFrom(path: string) {
 	return path.split('/').pop()!.replace('.svx', '');
 }
 
-let _allPosts: PostEntry[];
-export function getAllPosts(): PostEntry[] {
+let _allPosts: { slug: string; metadata: PostMetadata | undefined }[];
+export function getAllPosts(): { slug: string; metadata: PostMetadata | undefined }[] {
 	if (!_allPosts) {
 		_allPosts = Object.entries(postModules)
-			.map(([path, mod]) => ({
-				slug: slugFrom(path),
-				metadata: (mod as PostEntry).metadata as PostMetadata
-			}))
+			.map(([path, mod]) => {
+				const metadata = (mod as PostEntry)?.metadata as PostMetadata | undefined;
+
+				if (!metadata?.published_at) {
+					console.error('❌ Invalid post module (missing published_at):', { path, mod });
+				}
+
+				return {
+					slug: slugFrom(path),
+					metadata
+				};
+			})
 			.filter((p) => {
-				const publishedAt = p.metadata.published_at;
+				const publishedAt = p.metadata?.published_at;
 				return publishedAt && !isNaN(new Date(publishedAt).getTime());
 			})
-			.sort((a, b) => +new Date(b.metadata.published_at!) - +new Date(a.metadata.published_at!));
+			.sort((a, b) => +new Date(b.metadata!.published_at!) - +new Date(a.metadata!.published_at!));
 	}
 	return _allPosts;
 }
@@ -51,9 +59,9 @@ export function getPostBySlug(slug: string): PostPageData {
 	return { slug, metadata: mod.metadata, content: mod.default } satisfies PostPageData;
 }
 
-let _latestPosts: PostEntry[];
+let _latestPosts: { slug: string; metadata: PostMetadata | undefined }[];
 const postcount = 2;
-export function getLatestPosts(): PostEntry[] {
+export function getLatestPosts(): { slug: string; metadata: PostMetadata | undefined }[] {
 	if (!_latestPosts) {
 		_latestPosts = getAllPosts().slice(0, postcount);
 	}
