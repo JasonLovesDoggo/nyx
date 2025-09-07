@@ -1,7 +1,7 @@
 ---
 title: "Stop Wasting CPU: Kill Dead FastAPI Streams When Clients Bail"
 description: "Monitor FastAPI client connections and auto-cancel abandoned streaming tasks with structured concurrency"
-published_at: '2025-01-16'
+published_at: '2025-07-06'
 tags:
   - fastapi
   - python
