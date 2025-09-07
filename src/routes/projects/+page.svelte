@@ -37,11 +37,13 @@
 					{:else}
 						<div class="bg-surface2 mb-4 aspect-video w-full rounded-md"></div>
 					{/if}
-					<div class="flex justify-between pe-3">
-						<h2 class="text-text group-hover:text-accent text-xl font-semibold">
+					<div class="flex items-center justify-between gap-3 pe-3">
+						<h2
+							class="text-text group-hover:text-accent min-w-0 flex-1 truncate text-xl font-semibold"
+						>
 							{project.metadata.title}
 						</h2>
-						<p class="text-overlay1 content-center text-xs">
+						<p class="text-overlay1 flex-shrink-0 text-xs whitespace-nowrap">
 							{formatDate(project.metadata.date)}
 						</p>
 					</div>
