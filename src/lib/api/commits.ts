@@ -128,10 +128,13 @@ export async function fetchLatestCommits(): Promise<CommitData> {
 	try {
 		const controller = new AbortController();
 		const id = setTimeout(() => controller.abort(), 5e3);
-		const response = await fetch('http://localhost:8080/v2/commits/latest', {
-			headers: { Accept: 'application/json', 'User-Agent': 'nyx-website/1.0' },
-			signal: controller.signal
-		});
+		const response = await fetch(
+			'https://katib.jasoncameron.dev/v2/commits/latest?username=JasonLovesDoggo',
+			{
+				headers: { Accept: 'application/json', 'User-Agent': 'nyx-website/1.0' },
+				signal: controller.signal
+			}
+		);
 		clearTimeout(id);
 
 		if (!response.ok) throw new Error(`HTTP ${response.status}`);
