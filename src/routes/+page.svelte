@@ -21,7 +21,7 @@
 	type PageData = {
 		featuredProjects: FeaturedProject[];
 		commitData: CommitData;
-		latestPosts: { slug: string; metadata: { title: string; published_at?: string } | undefined }[];
+		latestPosts: { slug: string; metadata: { title: string; published_at: string } }[];
 	};
 
 	let { data }: { data: PageData } = $props();
