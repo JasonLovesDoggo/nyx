@@ -238,17 +238,15 @@
 							<li>
 								<a
 									href={'/posts/' + post.slug}
-									class="text-subtext0 hover:text-accent flex items-baseline gap-2 text-sm"
+									class="text-subtext0 hover:text-accent flex min-w-0 items-center gap-2 text-sm"
 								>
-									<span class="flex-shrink-0 truncate" style="max-width: calc(100% - 10em);">
+									<span class="min-w-0 flex-1 truncate">
 										{post.metadata.title}
 									</span>
 
-									<span class="border-surface1 mx-1 flex-grow self-center border-b border-dotted"
-									></span>
-
 									{#if post.metadata.published_at}
-										<span class="text-subtext1 flex-shrink-0 whitespace-nowrap">
+										<span class="text-surface1 mx-2 flex-shrink-0 text-xs">–</span>
+										<span class="text-subtext1 flex-shrink-0 text-xs whitespace-nowrap">
 											{formatDate(post.metadata.published_at)}
 										</span>
 									{/if}
