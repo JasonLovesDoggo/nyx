@@ -128,7 +128,7 @@ export async function fetchLatestCommits(): Promise<CommitData> {
 	try {
 		const controller = new AbortController();
 		const id = setTimeout(() => controller.abort(), 3000);
-		const response = await fetch('http://localhost:8080/v2/commits/latest', {
+		const response = await fetch('https://katib.jasoncameron.dev/v2/commits/latest', {
 			headers: { Accept: 'application/json', 'User-Agent': 'nyx-website/1.0' },
 			signal: controller.signal
 		});
