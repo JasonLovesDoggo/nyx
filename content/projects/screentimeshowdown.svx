@@ -4,6 +4,8 @@ description: A platform to challenge your friends to a no-social-media showdown 
 date: 2023-07-01
 published: true
 featured: false
+imageUrl: /projects/screentimeshowdown.webp
+imageAlt: The Screentime Showdown GitHub repository
 tags:
   - react
   - express

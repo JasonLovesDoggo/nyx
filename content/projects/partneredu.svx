@@ -4,6 +4,8 @@ description: PartnerEdu is a platform that connects students to opportunities su
 date: 2023-08-01
 published: true
 featured: false
+imageUrl: /projects/partneredu.webp
+imageAlt: The PartnerEdu GitHub repository
 tags:
   - django
   - bootstrap

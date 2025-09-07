@@ -4,6 +4,8 @@ description: PhysioQuest uses AI to gamify physiotherapy exercises, encouraging 
 date: 2023-06-01
 published: true
 featured: false
+imageUrl: /projects/physioquest.webp
+imageAlt: The PhysioQuest GitHub repository
 tags:
   - python
   - opencv
