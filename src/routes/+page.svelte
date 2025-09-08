@@ -179,10 +179,21 @@
 
 			<!-- Box 6: Latest Commits -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg md:col-span-2">
-				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
-					<IconActivity size={16} class="text-accent" />
-					Recent Commits
-				</h3>
+				<div class="text-text mb-3 flex items-center justify-between gap-2 text-sm">
+					<h3 class="flex items-center gap-2 font-semibold">
+						<IconActivity size={16} class="text-accent" />
+						<span>Recent Commits</span>
+					</h3>
+					<a
+						href="https://katib.jsn.cam"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="See how this is calculated Katib"
+						class="text-accent/80 hover:text-accent text-xs font-medium transition-colors"
+					>
+						[info]
+					</a>
+				</div>
 				{#if data.commitData?.commits?.length > 0}
 					<ul class="space-y-1.5 text-sm">
 						{#each data.commitData.commits.slice(0, 4) as commit (commit.sha)}
