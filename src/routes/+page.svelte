@@ -126,10 +126,7 @@
 	<section class="px-4 md:px-0">
 		<h2 class="sr-only">Dashboard / Highlights</h2>
 		<div class="grid grid-cols-1 justify-center gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
-			<!-- Box 1: Location Map -->
-			<LocationMap />
-
-			<!-- Box 2: Theme Selector -->
+			<!-- Box 1: Theme Selector -->
 			<div
 				class="border-surface0 bg-base rounded-xl border p-4 shadow-lg sm:col-span-2 xl:col-span-1"
 			>
@@ -137,7 +134,7 @@
 				<ColorSelector />
 			</div>
 
-			<!-- Box 4: Coding Stats -->
+			<!-- Box 2: Coding Stats -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
 					<IconCode size={16} class="text-accent" />
@@ -182,7 +179,7 @@
 				</div>
 			</div>
 
-			<!-- Box 5: Book a chat -->
+			<!-- Box 3: Book a chat -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
 					<IconCalendarEvent size={16} class="text-accent" />
@@ -202,7 +199,10 @@
 				</a>
 			</div>
 
-			<!-- Box 6: Latest Commits -->
+			<!-- Box 4: Location Map -->
+			<LocationMap />
+
+			<!-- Box 5: Latest Commits -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg md:col-span-2">
 				<div class="text-text mb-3 flex items-center justify-between gap-2 text-sm">
 					<h3 class="flex items-center gap-2 font-semibold">

@@ -1,13 +1,35 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { IconMapPin } from '@tabler/icons-svelte';
+	import { IconMapPin, IconSun, IconMoon } from '@tabler/icons-svelte';
 	import { browser } from '$app/environment';
 
 	let mapContainer = $state<HTMLDivElement>();
 	let leafletLoaded = $state(false);
 	let mapInstance: any = null;
+	let currentTime = $state('');
+	let isDaytime = $state(true);
+
+	function updateTime() {
+		const now = new Date();
+		const torontoTime = new Intl.DateTimeFormat('en-US', {
+			timeZone: 'America/Toronto',
+			hour: '2-digit',
+			minute: '2-digit',
+			second: '2-digit',
+			hour12: false
+		}).format(now);
+		currentTime = torontoTime;
+
+		// Check if daytime (6 AM - 9 PM)
+		const hour = parseInt(torontoTime.split(':')[0]);
+		isDaytime = hour >= 6 && hour < 21;
+	}
 
 	onMount(async () => {
+		// Start clock
+		updateTime();
+		const interval = setInterval(updateTime, 1000);
+
 		if (browser && mapContainer) {
 			const L = (await import('leaflet')).default;
 			await import('leaflet/dist/leaflet.css');
@@ -32,6 +54,10 @@
 
 			leafletLoaded = true;
 		}
+
+		return () => {
+			clearInterval(interval);
+		};
 	});
 
 	function recenterMap() {
@@ -41,7 +67,7 @@
 	}
 </script>
 
-<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
+<div class="border-surface0 bg-base flex flex-col rounded-xl border p-4 shadow-lg lg:col-span-1">
 	<button
 		onclick={recenterMap}
 		class="text-text hover:text-accent mb-3 flex w-full cursor-pointer items-center gap-2 text-left text-sm font-semibold transition-colors"
@@ -49,7 +75,7 @@
 		<IconMapPin size={16} class="text-accent" />
 		Currently Based In 📍
 	</button>
-	<div class="bg-surface0 relative h-32 w-full overflow-hidden rounded-lg">
+	<div class="bg-surface0 relative w-full flex-1 overflow-hidden rounded-lg">
 		{#if browser}
 			<div bind:this={mapContainer} class="bg-surface0 h-full w-full"></div>
 			{#if !leafletLoaded}
@@ -63,12 +89,26 @@
 			</div>
 		{/if}
 	</div>
-	<button
-		onclick={recenterMap}
-		class="text-subtext0 hover:text-accent mt-2 cursor-pointer text-xs transition-colors"
-	>
-		Toronto, Ontario, Canada
-	</button>
+	<div class="mt-3 flex items-center justify-between gap-2">
+		<button
+			onclick={recenterMap}
+			class="text-subtext0 hover:text-accent cursor-pointer text-xs whitespace-nowrap transition-colors"
+		>
+			Toronto, ON
+		</button>
+		{#if currentTime}
+			<div class="flex items-center gap-1">
+				{#if isDaytime}
+					<IconSun size={12} class="text-yellow" />
+				{:else}
+					<IconMoon size={12} class="text-blue" />
+				{/if}
+				<span class="text-accent font-mono text-xs whitespace-nowrap">
+					{currentTime}
+				</span>
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>
