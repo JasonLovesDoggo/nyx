@@ -38,8 +38,27 @@
 			};
 			window.addEventListener('keydown', handleEscape);
 
+			// Handle tab visibility changes
+			const handleVisibilityChange = () => {
+				if (document.hidden) {
+					// Close SSE connection when tab is hidden
+					if (eventSource) {
+						eventSource.close();
+						eventSource = null;
+					}
+				} else {
+					// Tab became visible - reconnect
+					fetchCurrentCount();
+					if (!eventSource || eventSource.readyState === EventSource.CLOSED) {
+						eventSource = setupStream();
+					}
+				}
+			};
+			document.addEventListener('visibilitychange', handleVisibilityChange);
+
 			return () => {
 				window.removeEventListener('keydown', handleEscape);
+				document.removeEventListener('visibilitychange', handleVisibilityChange);
 				if (eventSource) {
 					eventSource.close();
 				}
