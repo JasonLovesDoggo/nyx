@@ -10,6 +10,7 @@
 	let sparkles = $state<Array<{ id: number; x: number; y: number }>>([]);
 	let buttonScale = $state(1);
 	let counterGlow = $state(false);
+	let showInfo = $state(false);
 
 	const KEY = 'collective-waste';
 	const STORAGE_KEY = 'waste-clicks';
@@ -33,8 +34,17 @@
 			};
 			window.addEventListener('storage', handleStorageChange);
 
+			// Listen for escape key to close info
+			const handleEscape = (e: KeyboardEvent) => {
+				if (e.key === 'Escape') {
+					showInfo = false;
+				}
+			};
+			window.addEventListener('keydown', handleEscape);
+
 			return () => {
 				window.removeEventListener('storage', handleStorageChange);
+				window.removeEventListener('keydown', handleEscape);
 			};
 		}
 	});
@@ -121,12 +131,18 @@
 	class="border-surface0 bg-base relative flex flex-col justify-between rounded-xl border p-4 shadow-lg lg:col-span-1"
 >
 	<div class="group absolute top-3 right-3">
-		<button class="text-subtext1 hover:text-accent transition-colors" aria-label="What is this?">
+		<button
+			class="text-subtext1 hover:text-accent transition-colors"
+			aria-label="What is this?"
+			onclick={() => (showInfo = !showInfo)}
+		>
 			<IconInfoCircle size={16} />
 		</button>
 
 		<div
-			class="bg-base/70 border-accent/20 text-subtext0 invisible absolute top-6 right-0 z-10 w-[14rem] rounded-lg border p-3 text-xs opacity-0 shadow-xl backdrop-blur-md transition-all duration-200 group-hover:visible group-hover:opacity-100"
+			class="bg-base/70 border-accent/20 text-subtext0 absolute top-6 right-0 z-10 w-[14rem] rounded-lg border p-3 text-xs shadow-xl backdrop-blur-md transition-all duration-200 {showInfo
+				? 'visible opacity-100'
+				: 'invisible opacity-0'} group-hover:visible group-hover:opacity-100"
 		>
 			A global counter tracking every click from everyone visiting this site. Completely pointless,
 			yet oddly satisfying.
