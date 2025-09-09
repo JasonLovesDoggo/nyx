@@ -144,8 +144,8 @@
 				? 'visible opacity-100'
 				: 'invisible opacity-0'} group-hover:visible group-hover:opacity-100"
 		>
-			A global counter tracking every click from everyone visiting this site. Completely pointless,
-			yet oddly satisfying.
+			A real-time global counter tracking every click from everyone visiting this site. Completely
+			pointless, yet oddly satisfying.
 		</div>
 	</div>
 
