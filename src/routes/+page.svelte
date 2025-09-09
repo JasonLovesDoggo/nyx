@@ -139,6 +139,7 @@
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
 					<IconCode size={16} class="text-accent" />
 					Coding Stats
+					<span class="text-subtext1 text-xs font-normal">(30d)</span>
 				</h3>
 				<p class="text-subtext0 text-sm">
 					Hours: <span class="text-text font-medium">{codingStats.hours}</span>
