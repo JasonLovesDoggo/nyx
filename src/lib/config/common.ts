@@ -92,7 +92,7 @@ const Site: Site = {
 		calcom: 'https://cal.com/jsoncam/15min',
 		wakatime: 'https://wakatime.com/@jasonlovesdoggo',
 		bluesky: 'https://bsky.app/profile/jsn.cam',
-		instagram: 'https://www.instagram.com/jasonlovesdoggo/'
+		instagram: 'https://www.instagram.com/jsn.cam/'
 	},
 	socials: [
 		{
@@ -111,7 +111,7 @@ const Site: Site = {
 			icon: IconBrandBluesky
 		},
 		{
-			url: 'https://www.instagram.com/jasonlovesdoggo/',
+			url: 'https://www.instagram.com/jsn.cam/',
 			label: 'Instagram Profile',
 			icon: IconBrandInstagram
 		}

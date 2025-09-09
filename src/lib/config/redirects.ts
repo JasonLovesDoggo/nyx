@@ -9,7 +9,7 @@ const redirects = createRedirects([
 	{ paths: ['/github', '/gh'], url: Site.out.github },
 	{ paths: ['/linkedin', '/li'], url: Site.out.linkedin },
 	{ paths: '/bluesky', url: Site.out.bluesky },
-	{ paths: '/insta', url: Site.out.instagram },
+	{ paths: ['/insta', '/ig'], url: Site.out.instagram },
 	{ paths: ['/cal', '/chat'], url: Site.out.calcom },
 	{ paths: '/repo', url: Site.repo.url },
 	{ paths: '/abacus', url: 'https://v2.jasoncameron.dev/abacus' },
