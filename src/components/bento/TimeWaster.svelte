@@ -19,16 +19,8 @@
 		defaultValue: 0
 	});
 
-	let personalCount = $state(0);
+	const personalCount = $derived($personalCountStore);
 	let eventSource: EventSource | null = null;
-
-	// Subscribe to store changes
-	$effect(() => {
-		const unsubscribe = personalCountStore.subscribe((value) => {
-			personalCount = value;
-		});
-		return unsubscribe;
-	});
 
 	onMount(() => {
 		if (browser) {
@@ -150,8 +142,18 @@
 				? 'visible opacity-100'
 				: 'invisible opacity-0'} group-hover:visible group-hover:opacity-100"
 		>
-			A real-time global counter tracking every click from everyone visiting this site. Completely
-			pointless, yet oddly satisfying.
+			<p class="mb-2">
+				A real-time global counter tracking every click from everyone visiting this site. Completely
+				pointless, yet oddly satisfying.
+			</p>
+			<p class="text-subtext1 text-[10px]">
+				Powered by <a
+					href="https://v2.jasoncameron.dev/abacus/"
+					target="_blank"
+					rel="noopener"
+					class="text-accent hover:underline">Abacus</a
+				>
+			</p>
 		</div>
 	</div>
 

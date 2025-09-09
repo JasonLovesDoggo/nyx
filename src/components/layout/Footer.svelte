@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import Site from '$lib/config/common';
-	import { IconGitCommit, IconClock } from '@tabler/icons-svelte';
+	import { IconClock, IconGitCommit } from '@tabler/icons-svelte';
 	import { persistentWritable } from '$lib/stores/persistance';
 
 	const { value } = $props();
@@ -18,15 +18,7 @@
 	});
 
 	let timeOnSite = $state('00:00');
-	let visitStart = $state(0);
-
-	// Subscribe to store
-	$effect(() => {
-		const unsubscribe = visitStartStore.subscribe((value) => {
-			visitStart = value;
-		});
-		return unsubscribe;
-	});
+	const visitStart = $derived($visitStartStore);
 
 	function formatTime(seconds: number): string {
 		const hours = Math.floor(seconds / 3600);
@@ -113,8 +105,8 @@
 
 		<div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 md:justify-end">
 			<div class="flex items-center gap-1.5" title="How long you have been surfing my site">
-				<IconClock size={16} class="text-accent" />
-				<span class="text-accent font-mono text-sm">{timeOnSite}</span>
+				<IconClock size={14} class="text-subtext1" />
+				<span class="text-accent font-mono text-xs">{timeOnSite}</span>
 			</div>
 
 			<span class="text-surface0 hidden sm:inline">-</span>
