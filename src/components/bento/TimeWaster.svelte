@@ -21,6 +21,8 @@
 
 	const personalCount = $derived($personalCountStore);
 	let eventSource: EventSource | null = null;
+	let lastAnimationTime = 0;
+	const ANIMATION_THROTTLE = 75; // Min 75ms between animations
 
 	onMount(() => {
 		if (browser) {
@@ -92,7 +94,13 @@
 				const data = JSON.parse(event.data);
 				if (data.value > globalCount) {
 					globalCount = data.value;
-					triggerStreamAnimation();
+
+					// Throttle animations to prevent freezing
+					const now = Date.now();
+					if (now - lastAnimationTime > ANIMATION_THROTTLE) {
+						triggerStreamAnimation();
+						lastAnimationTime = now;
+					}
 				}
 			} catch (error) {
 				console.error('Stream parse error:', error);
@@ -110,14 +118,17 @@
 		counterGlow = true;
 		setTimeout(() => (counterGlow = false), 600);
 
-		const id = Date.now();
-		const x = Math.random() * 100;
-		const y = Math.random() * 100;
-		sparkles = [...sparkles, { id, x, y }];
+		// Limit max sparkles to prevent DOM overload
+		if (sparkles.length < 10) {
+			const id = Date.now();
+			const x = Math.random() * 100;
+			const y = Math.random() * 100;
+			sparkles = [...sparkles, { id, x, y }];
 
-		setTimeout(() => {
-			sparkles = sparkles.filter((s) => s.id !== id);
-		}, 2000);
+			setTimeout(() => {
+				sparkles = sparkles.filter((s) => s.id !== id);
+			}, 2000);
+		}
 	}
 
 	async function handleClick() {
