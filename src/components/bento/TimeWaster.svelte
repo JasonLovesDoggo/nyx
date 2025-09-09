@@ -3,9 +3,9 @@
 	import { browser } from '$app/environment';
 	import Site from '$lib/config/common';
 	import { IconInfoCircle } from '@tabler/icons-svelte';
+	import { persistentWritable } from '$lib/stores/persistance';
 
 	let globalCount = $state(0);
-	let personalCount = $state(0);
 	let isLoading = $state(true);
 	let sparkles = $state<Array<{ id: number; x: number; y: number }>>([]);
 	let buttonScale = $state(1);
@@ -13,26 +13,28 @@
 	let showInfo = $state(false);
 
 	const KEY = 'collective-waste';
-	const STORAGE_KEY = 'waste-clicks';
 
-	// Load personal count from localStorage
+	// Use persistentWritable for personal count with cross-tab sync
+	const personalCountStore = persistentWritable<number>('waste-clicks', {
+		defaultValue: 0
+	});
+
+	let personalCount = $state(0);
+
+	// Subscribe to store changes
+	$effect(() => {
+		return personalCountStore.subscribe((value) => {
+			personalCount = value;
+		});
+	});
+
 	onMount(() => {
 		if (browser) {
-			personalCount = parseInt(localStorage.getItem(STORAGE_KEY) || '0');
-
 			// Get initial count
 			fetchCurrentCount();
 
 			// Set up SSE stream
 			setupStream();
-
-			// Listen for storage changes (cross-tab sync)
-			const handleStorageChange = (e: StorageEvent) => {
-				if (e.key === STORAGE_KEY && e.newValue) {
-					personalCount = parseInt(e.newValue);
-				}
-			};
-			window.addEventListener('storage', handleStorageChange);
 
 			// Listen for escape key to close info
 			const handleEscape = (e: KeyboardEvent) => {
@@ -43,7 +45,6 @@
 			window.addEventListener('keydown', handleEscape);
 
 			return () => {
-				window.removeEventListener('storage', handleStorageChange);
 				window.removeEventListener('keydown', handleEscape);
 			};
 		}
@@ -111,8 +112,7 @@
 
 		// Optimistic update
 		globalCount++;
-		personalCount++;
-		localStorage.setItem(STORAGE_KEY, personalCount.toString());
+		personalCountStore.update((n) => n + 1);
 
 		try {
 			await fetch(`${Site.abacus.instance}/hit/${Site.abacus.namespace}/${KEY}`);
