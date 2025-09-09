@@ -140,21 +140,42 @@
 					Coding Stats
 				</h3>
 				<p class="text-subtext0 text-sm">
-					Primary: <span class="text-text font-medium">{codingStats.language}</span>
-				</p>
-				<p class="text-subtext0 text-sm">
 					Hours: <span class="text-text font-medium">{codingStats.hours}</span>
 					<span class="text-overlay2 text-xs">(WakaTime)</span>
 				</p>
-				<a
-					href={Site.out.wakatime}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group text-accent link mt-3 inline-flex items-center gap-1 text-sm"
-				>
-					<span>View stats</span>
-					<IconExternalLink size={14} class="inline-block" />
-				</a>
+				<p class="text-subtext0 text-sm">
+					Commits: <span class="text-text font-medium">{data.commitData?.totalCommits ?? 0}</span>
+				</p>
+				<p class="text-subtext0 text-sm">
+					Lines: <span class="text-green font-medium"
+						>+{data.commitData?.totalAdditions?.toLocaleString() ?? 0}</span
+					>
+					<span class="text-surface1">/</span>
+					<span class="text-red font-medium"
+						>-{data.commitData?.totalDeletions?.toLocaleString() ?? 0}</span
+					>
+				</p>
+				<div class="mt-3 flex gap-3">
+					<a
+						href={Site.out.wakatime}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="group text-accent link inline-flex items-center gap-1 text-xs"
+					>
+						<span>WakaTime</span>
+						<IconExternalLink size={12} class="inline-block" />
+					</a>
+					<span class="text-surface1 text-xs">•</span>
+					<a
+						href="https://github.com/jasonlovesdoggo"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="group text-accent link inline-flex items-center gap-1 text-xs"
+					>
+						<span>GitHub</span>
+						<IconExternalLink size={12} class="inline-block" />
+					</a>
+				</div>
 			</div>
 
 			<!-- Box 5: Book a chat -->

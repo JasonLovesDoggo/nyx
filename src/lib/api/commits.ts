@@ -38,6 +38,7 @@ export interface CommitData {
 	languages: CommitLanguage[];
 	totalAdditions: number;
 	totalDeletions: number;
+	totalCommits: number;
 }
 
 // Simple in-memory cache with TTL
@@ -109,12 +110,14 @@ function processResponse(data: KatibV2Response): CommitData {
 		data.stats?.totalAdditions ?? commits.reduce((acc, c) => acc + (c.additions || 0), 0);
 	const totalDeletions =
 		data.stats?.totalDeletions ?? commits.reduce((acc, c) => acc + (c.deletions || 0), 0);
+	const totalCommits = data.stats?.totalCommits ?? commits.length;
 
 	return {
 		commits,
 		languages: data.languages || [],
 		totalAdditions,
-		totalDeletions
+		totalDeletions,
+		totalCommits
 	};
 }
 
