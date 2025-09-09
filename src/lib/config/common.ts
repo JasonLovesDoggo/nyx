@@ -48,7 +48,7 @@ const Site: Site = {
 	name: 'Jason Cameron',
 	url: dev ? 'http://localhost:5173' : 'https://jasoncameron.dev',
 	description:
-		'Jason Cameron - Senior Software Engineer in Toronto, Canada. Expert in Golang, Python, DevOps, and hackathon development. Building innovative solutions at scale.',
+		'Jason Cameron - Senior Software Engineer in Toronto, Canada. I occasionally like building cool shit',
 	tags: [
 		'Jason Cameron',
 		'Senior Software Engineer',
