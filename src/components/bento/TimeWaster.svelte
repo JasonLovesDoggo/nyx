@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import Site from '$lib/config/common';
+	import { IconInfoCircle } from '@tabler/icons-svelte';
 
 	let globalCount = $state(0);
 	let personalCount = $state(0);
@@ -117,50 +118,54 @@
 </script>
 
 <div
-	class="border-surface0 bg-base flex flex-col justify-between rounded-xl border p-4 shadow-lg lg:col-span-1"
+	class="border-surface0 bg-base relative flex flex-col justify-between rounded-xl border p-4 shadow-lg lg:col-span-1"
 >
-	<div class="text-center">
-		<h3 class="text-text mb-3 text-sm font-semibold">👆 The Button</h3>
+	<div class="group absolute top-3 right-3">
+		<button class="text-subtext1 hover:text-accent transition-colors" aria-label="What is this?">
+			<IconInfoCircle size={16} />
+		</button>
 
-		<div class="relative">
+		<div
+			class="bg-base/70 border-accent/20 text-subtext0 invisible absolute top-6 right-0 z-10 w-[14rem] rounded-lg border p-3 text-xs opacity-0 shadow-xl backdrop-blur-md transition-all duration-200 group-hover:visible group-hover:opacity-100"
+		>
+			A global counter tracking every click from everyone visiting this site. Completely pointless,
+			yet oddly satisfying.
+		</div>
+	</div>
+
+	<div class="flex h-full flex-col items-center justify-center">
+		<div class="text-accent mb-3 text-4xl font-bold">
 			{#if isLoading}
-				<div class="text-text text-3xl font-bold opacity-50">---</div>
+				<span class="opacity-50">---</span>
 			{:else}
-				<div
-					class="text-text text-3xl font-bold transition-all duration-300 {counterGlow
-						? 'text-accent scale-105'
-						: ''}"
-				>
-					{formatNumber(globalCount)}
+				<div class="relative inline-block">
+					<span class="transition-all duration-300 {counterGlow ? 'scale-110' : ''}">
+						{formatNumber(globalCount)}
+					</span>
+					{#each sparkles as sparkle (sparkle.id)}
+						<div
+							class="animate-sparkle text-accent pointer-events-none absolute text-sm font-bold"
+							style="left: {sparkle.x - 50}%; top: {sparkle.y - 50}%;"
+						>
+							+1
+						</div>
+					{/each}
 				</div>
 			{/if}
-
-			{#each sparkles as sparkle (sparkle.id)}
-				<div
-					class="animate-sparkle text-accent pointer-events-none absolute"
-					style="left: {sparkle.x}%; top: {sparkle.y}%;"
-				>
-					+1
-				</div>
-			{/each}
 		</div>
-
-		<p class="text-subtext0 mt-1 mb-4 text-xs">clicks wasted globally</p>
 
 		<button
 			onclick={handleClick}
 			disabled={isLoading}
-			class="bg-surface0 hover:bg-surface1 active:bg-surface2 text-text rounded-lg px-4 py-2 font-medium transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50"
+			class="bg-accent hover:bg-accent/90 active:bg-accent/80 rounded-xl px-6 py-3 text-base font-bold transition-all duration-150 hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
 			style="transform: scale({buttonScale})"
 		>
-			WASTE A CLICK
+			CLICK ME
 		</button>
 
-		{#if personalCount > 0}
-			<p class="text-subtext1 mt-3 text-xs">
-				you: {personalCount}
-			</p>
-		{/if}
+		<p class="text-subtext1 mt-6 text-xs">
+			you've clicked {personalCount} time{personalCount === 1 ? '' : 's'}
+		</p>
 	</div>
 </div>
 
