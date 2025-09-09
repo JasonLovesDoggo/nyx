@@ -20,12 +20,14 @@
 	});
 
 	let personalCount = $state(0);
+	let eventSource: EventSource | null = null;
 
 	// Subscribe to store changes
 	$effect(() => {
-		return personalCountStore.subscribe((value) => {
+		const unsubscribe = personalCountStore.subscribe((value) => {
 			personalCount = value;
 		});
+		return unsubscribe;
 	});
 
 	onMount(() => {
@@ -34,7 +36,7 @@
 			fetchCurrentCount();
 
 			// Set up SSE stream
-			setupStream();
+			eventSource = setupStream();
 
 			// Listen for escape key to close info
 			const handleEscape = (e: KeyboardEvent) => {
@@ -46,6 +48,9 @@
 
 			return () => {
 				window.removeEventListener('keydown', handleEscape);
+				if (eventSource) {
+					eventSource.close();
+				}
 			};
 		}
 	});
@@ -67,11 +72,11 @@
 	}
 
 	function setupStream() {
-		const eventSource = new EventSource(
+		const source = new EventSource(
 			`${Site.abacus.instance}/stream/${Site.abacus.namespace}/${KEY}`
 		);
 
-		eventSource.onmessage = (event) => {
+		source.onmessage = (event) => {
 			try {
 				const data = JSON.parse(event.data);
 				if (data.value > globalCount) {
@@ -83,13 +88,11 @@
 			}
 		};
 
-		eventSource.onerror = (error) => {
+		source.onerror = (error) => {
 			console.error('Stream error:', error);
 		};
 
-		return () => {
-			eventSource.close();
-		};
+		return source;
 	}
 
 	function triggerStreamAnimation() {
@@ -110,14 +113,17 @@
 		buttonScale = 0.95;
 		setTimeout(() => (buttonScale = 1), 150);
 
-		// Optimistic update
-		globalCount++;
+		// Update personal count through store
 		personalCountStore.update((n) => n + 1);
+
+		// Optimistic update for global count
+		globalCount++;
 
 		try {
 			await fetch(`${Site.abacus.instance}/hit/${Site.abacus.namespace}/${KEY}`);
 		} catch (error) {
 			console.error('Failed to register click:', error);
+			// Revert optimistic update
 			globalCount--;
 		}
 	}

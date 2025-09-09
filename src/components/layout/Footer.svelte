@@ -1,14 +1,55 @@
 <script lang="ts">
 	import { PUBLIC_COMMIT_SHA } from '$env/static/public';
-
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
 	import Site from '$lib/config/common';
-	import { IconGitCommit } from '@tabler/icons-svelte';
+	import { IconGitCommit, IconClock } from '@tabler/icons-svelte';
+	import { persistentWritable } from '$lib/stores/persistance';
 
 	const { value } = $props();
 
 	const year = new Date().getFullYear();
 	const shortSha = PUBLIC_COMMIT_SHA ? PUBLIC_COMMIT_SHA.substring(0, 7) : 'dev';
 	const commitLinkUrl = PUBLIC_COMMIT_SHA ? `${Site.repo.commitBaseUrl}${PUBLIC_COMMIT_SHA}` : '#';
+
+	// Store the initial visit timestamp
+	const visitStartStore = persistentWritable<number>('visit-start', {
+		defaultValue: () => Date.now()
+	});
+
+	let timeOnSite = $state('00:00');
+	let visitStart = $state(0);
+
+	// Subscribe to store
+	$effect(() => {
+		const unsubscribe = visitStartStore.subscribe((value) => {
+			visitStart = value;
+		});
+		return unsubscribe;
+	});
+
+	function formatTime(seconds: number): string {
+		const hours = Math.floor(seconds / 3600);
+		const minutes = Math.floor((seconds % 3600) / 60);
+		const secs = seconds % 60;
+
+		if (hours > 0) {
+			return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+		}
+		return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+	}
+
+	onMount(() => {
+		if (browser) {
+			// Update timer every second
+			const interval = setInterval(() => {
+				const elapsed = Math.floor((Date.now() - visitStart) / 1000);
+				timeOnSite = formatTime(elapsed);
+			}, 1000);
+
+			return () => clearInterval(interval);
+		}
+	});
 </script>
 
 <div class="relative m-auto mx-5 mb-5">
@@ -71,6 +112,13 @@
 		</div>
 
 		<div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 md:justify-end">
+			<div class="flex items-center gap-1.5" title="How long you have been surfing my site">
+				<IconClock size={16} class="text-accent" />
+				<span class="text-accent font-mono text-sm">{timeOnSite}</span>
+			</div>
+
+			<span class="text-surface0 hidden sm:inline">-</span>
+
 			<a
 				href="https://abacus.jasoncameron.dev"
 				target="_blank"
