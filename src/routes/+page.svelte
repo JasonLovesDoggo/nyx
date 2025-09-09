@@ -11,11 +11,11 @@
 	} from '@tabler/icons-svelte';
 	import Site from '$lib/config/common';
 	import { Home } from '$lib/config/pages';
-	import { codingStats } from '$lib/config/about';
 	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
 	import ColorSelector from '$components/themes/ColorSelector.svelte';
 	import Experience from '$components/Experience.svelte';
 	import LocationMap from '$components/bento/LocationMap.svelte';
+	import TimeWaster from '$components/bento/TimeWaster.svelte';
 	import { formatDate } from '$utils/date';
 	import type { CommitData } from '$lib/api/commits';
 
@@ -134,53 +134,7 @@
 				<ColorSelector />
 			</div>
 
-			<!-- Box 2: Coding Stats -->
-			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
-				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
-					<IconCode size={16} class="text-accent" />
-					Coding Stats
-					<span class="text-subtext1 text-xs font-normal">(30d)</span>
-				</h3>
-				<p class="text-subtext0 text-sm">
-					Hours: <span class="text-text font-medium">{codingStats.hours}</span>
-					<span class="text-overlay2 text-xs">(WakaTime)</span>
-				</p>
-				<p class="text-subtext0 text-sm">
-					Commits: <span class="text-text font-medium">{data.commitData?.totalCommits ?? 0}</span>
-				</p>
-				<p class="text-subtext0 text-sm">
-					Lines: <span class="text-green font-medium"
-						>+{data.commitData?.totalAdditions?.toLocaleString() ?? 0}</span
-					>
-					<span class="text-surface1">/</span>
-					<span class="text-red font-medium"
-						>-{data.commitData?.totalDeletions?.toLocaleString() ?? 0}</span
-					>
-				</p>
-				<div class="mt-3 flex gap-3">
-					<a
-						href={Site.out.wakatime}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="group text-accent link inline-flex items-center gap-1 text-xs"
-					>
-						<span>WakaTime</span>
-						<IconExternalLink size={12} class="inline-block" />
-					</a>
-					<span class="text-surface1 text-xs">•</span>
-					<a
-						href="https://github.com/jasonlovesdoggo"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="group text-accent link inline-flex items-center gap-1 text-xs"
-					>
-						<span>GitHub</span>
-						<IconExternalLink size={12} class="inline-block" />
-					</a>
-				</div>
-			</div>
-
-			<!-- Box 3: Book a chat -->
+			<!-- Box 2: Book a chat -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg lg:col-span-1">
 				<h3 class="text-text mb-3 flex items-center gap-2 text-sm font-semibold">
 					<IconCalendarEvent size={16} class="text-accent" />
@@ -200,8 +154,11 @@
 				</a>
 			</div>
 
-			<!-- Box 4: Location Map -->
+			<!-- Box 3: Location Map -->
 			<LocationMap />
+
+			<!-- Box 4: Time Waster -->
+			<TimeWaster />
 
 			<!-- Box 5: Latest Commits -->
 			<div class="border-surface0 bg-base rounded-xl border p-4 shadow-lg md:col-span-2">

@@ -7,7 +7,6 @@ export type AchievementItem =
 			date?: string;
 	  };
 
-export const codingStats = { language: 'golang', hours: '1,900+' }; // todo: wakatime api based :pray:
 export const achievements: AchievementItem[] = [
 	// Professional Achievements
 	'Hack Canada Co-Founder',

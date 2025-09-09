@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import Site from '$lib/config/common';
 
 	let globalCount = $state(0);
 	let personalCount = $state(0);
@@ -9,8 +10,6 @@
 	let buttonScale = $state(1);
 	let counterGlow = $state(false);
 
-	const ABACUS_BASE = 'https://abacus.jasoncameron.dev';
-	const NAMESPACE = 'jasoncameron.dev';
 	const KEY = 'collective-waste';
 	const STORAGE_KEY = 'waste-clicks';
 
@@ -41,12 +40,11 @@
 
 	async function fetchCurrentCount() {
 		try {
-			const response = await fetch(`${ABACUS_BASE}/get/${NAMESPACE}/${KEY}`);
+			const response = await fetch(`${Site.abacus.instance}/get/${Site.abacus.namespace}/${KEY}`);
 			if (response.ok) {
 				const data = await response.json();
 				globalCount = data.value || 0;
 			} else if (response.status === 404) {
-				// Counter doesn't exist yet, that's ok
 				globalCount = 0;
 			}
 		} catch (error) {
@@ -57,13 +55,14 @@
 	}
 
 	function setupStream() {
-		const eventSource = new EventSource(`${ABACUS_BASE}/stream/${NAMESPACE}/${KEY}`);
+		const eventSource = new EventSource(
+			`${Site.abacus.instance}/stream/${Site.abacus.namespace}/${KEY}`
+		);
 
 		eventSource.onmessage = (event) => {
 			try {
 				const data = JSON.parse(event.data);
 				if (data.value > globalCount) {
-					// Someone else clicked!
 					globalCount = data.value;
 					triggerStreamAnimation();
 				}
@@ -74,34 +73,28 @@
 
 		eventSource.onerror = (error) => {
 			console.error('Stream error:', error);
-			// Reconnect will happen automatically
 		};
 
-		// Cleanup on unmount
 		return () => {
 			eventSource.close();
 		};
 	}
 
 	function triggerStreamAnimation() {
-		// Add glow effect
 		counterGlow = true;
 		setTimeout(() => (counterGlow = false), 600);
 
-		// Add sparkle
 		const id = Date.now();
 		const x = Math.random() * 100;
 		const y = Math.random() * 100;
 		sparkles = [...sparkles, { id, x, y }];
 
-		// Remove sparkle after animation
 		setTimeout(() => {
 			sparkles = sparkles.filter((s) => s.id !== id);
 		}, 2000);
 	}
 
 	async function handleClick() {
-		// Immediate visual feedback
 		buttonScale = 0.95;
 		setTimeout(() => (buttonScale = 1), 150);
 
@@ -110,12 +103,10 @@
 		personalCount++;
 		localStorage.setItem(STORAGE_KEY, personalCount.toString());
 
-		// Send to API
 		try {
-			await fetch(`${ABACUS_BASE}/hit/${NAMESPACE}/${KEY}`);
+			await fetch(`${Site.abacus.instance}/hit/${Site.abacus.namespace}/${KEY}`);
 		} catch (error) {
 			console.error('Failed to register click:', error);
-			// Revert optimistic update
 			globalCount--;
 		}
 	}
@@ -144,7 +135,6 @@
 				</div>
 			{/if}
 
-			<!-- Sparkles -->
 			{#each sparkles as sparkle (sparkle.id)}
 				<div
 					class="animate-sparkle text-accent pointer-events-none absolute"
