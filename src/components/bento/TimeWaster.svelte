@@ -141,6 +141,9 @@
 		// Optimistic update for global count
 		globalCount++;
 
+		// Trigger animation for own click
+		triggerStreamAnimation();
+
 		try {
 			await fetch(`${Site.abacus.instance}/hit/${Site.abacus.namespace}/${KEY}`);
 		} catch (error) {

@@ -125,16 +125,27 @@ function processResponse(data: KatibV2Response): CommitData {
  * Fetches the latest commits from the katib API with timeout + cache (6h)
  */
 export async function fetchLatestCommits(): Promise<CommitData> {
-	// Serve from cache if fresh
-	if (CACHE && Date.now() - CACHE.ts < TTL_MS) {
+	// Return cached data immediately if available
+	if (CACHE) {
+		// Check if cache is stale
+		if (Date.now() - CACHE.ts >= TTL_MS) {
+			console.log('[PERF] fetchLatestCommits: STALE CACHE - triggering background refresh...');
+			// Trigger background refresh without awaiting
+			void refreshCache();
+		}
 		return CACHE.data;
 	}
-	console.log('[PERF] fetchLatestCommits: CACHE MISS - fetching from katib...');
 
+	// No cache available, must fetch synchronously
+	console.log('[PERF] fetchLatestCommits: NO CACHE - fetching from katib...');
+	return await refreshCache();
+}
+
+async function refreshCache(): Promise<CommitData> {
 	return await measurePerformance('katib-api-fetch', async () => {
 		try {
 			const controller = new AbortController();
-			const id = setTimeout(() => controller.abort(), 5e3);
+			const id = setTimeout(() => controller.abort(), 2500);
 			const response = await fetch(
 				'https://katib.jasoncameron.dev/v2/commits/latest?username=JasonLovesDoggo&limit=5',
 				{
