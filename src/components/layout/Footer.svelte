@@ -2,7 +2,7 @@
 	import { PUBLIC_COMMIT_SHA } from '$env/static/public';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
-	import Site from '$lib/config/common';
+	import Site, { Socials } from '$lib/config/common';
 	import { IconClock, IconGitCommit } from '@tabler/icons-svelte';
 	import { persistentWritable } from '$lib/stores/persistance';
 
@@ -144,7 +144,7 @@
 			<span class="text-surface0 hidden sm:inline">-</span>
 
 			<div class="flex items-center gap-x-3">
-				{#each Site.socials as item (item.url)}
+				{#each Socials.filter((item) => item.footer) as item (item.url)}
 					{@const Icon = item.icon}
 					<a
 						href={item.url}

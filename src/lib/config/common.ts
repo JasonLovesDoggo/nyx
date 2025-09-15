@@ -8,11 +8,6 @@ import {
 } from '@tabler/icons-svelte';
 import { dev } from '$app/environment';
 import Wakatime from '$lib/icons/Wakatime.svelte';
-interface SocialLink {
-	url: string;
-	label: string;
-	icon: Icon;
-}
 
 interface Site {
 	name: string;
@@ -42,7 +37,6 @@ interface Site {
 		instagram: string;
 		x: string;
 	};
-	socials: SocialLink[];
 	repo: { url: string; commitBaseUrl: string };
 }
 
@@ -97,28 +91,6 @@ const Site: Site = {
 		instagram: 'https://www.instagram.com/jsn.cam/',
 		x: 'https://x.com/tomlparser'
 	},
-	socials: [
-		{
-			url: 'https://github.com/jasonlovesdoggo',
-			label: 'GitHub Profile',
-			icon: IconBrandGithub
-		},
-		{
-			url: 'https://www.linkedin.com/in/jsoncameron/',
-			label: 'LinkedIn Profile',
-			icon: IconBrandLinkedin
-		},
-		{
-			url: 'https://bsky.app/profile/jsn.cam',
-			label: 'Bluesky Profile',
-			icon: IconBrandBluesky
-		},
-		{
-			url: 'https://www.instagram.com/jsn.cam/',
-			label: 'Instagram Profile',
-			icon: IconBrandInstagram
-		}
-	],
 	repo: {
 		url: 'https://github.com/JasonLovesDoggo/nyx',
 		commitBaseUrl: 'https://github.com/JasonLovesDoggo/nyx/commit/'
@@ -127,41 +99,41 @@ const Site: Site = {
 
 export default Site;
 
-interface SocialEntry {
-	url: string;
-	label: string;
-	icon: Icon;
-}
-
-export const Socials: SocialEntry[] = [
+export const Socials = [
 	{
 		url: Site.out.github,
 		label: 'GitHub',
-		icon: IconBrandGithub
+		icon: IconBrandGithub,
+		footer: true
 	},
 	{
 		url: Site.out.linkedin,
 		label: 'LinkedIn',
-		icon: IconBrandLinkedin
+		icon: IconBrandLinkedin,
+		footer: true
 	},
 	{
 		url: Site.out.x,
 		label: 'X',
-		icon: IconBrandX
+		icon: IconBrandX,
+		footer: true
 	},
 	{
 		url: Site.out.bluesky,
 		label: 'Bluesky',
-		icon: IconBrandBluesky
+		icon: IconBrandBluesky,
+		footer: false
 	},
 	{
 		url: Site.out.instagram,
 		label: 'Instagram',
-		icon: IconBrandInstagram
+		icon: IconBrandInstagram,
+		footer: true
 	},
 	{
 		url: Site.out.wakatime,
 		label: 'WakaTime',
-		icon: Wakatime as unknown as Icon
+		icon: Wakatime as unknown as Icon,
+		footer: false
 	}
 ];
