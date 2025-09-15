@@ -1,4 +1,4 @@
-import { IconBrandGithub, IconBrandLinkedin, IconFileCv } from '@tabler/icons-svelte';
+import { IconBrandGithub, IconBrandLinkedin, IconBrandX } from '@tabler/icons-svelte';
 import Site from '$lib/config/common';
 
 export const Home = {
@@ -13,7 +13,7 @@ export const Home = {
 			text: 'LinkedIn',
 			icon: IconBrandLinkedin
 		},
-		{ href: '/resume.pdf', text: 'Resume', icon: IconFileCv }
+		{ href: Site.out.x, text: '', icon: IconBrandX }
 	]
 };
 

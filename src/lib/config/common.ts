@@ -3,7 +3,8 @@ import {
 	IconBrandBluesky,
 	IconBrandGithub,
 	IconBrandInstagram,
-	IconBrandLinkedin
+	IconBrandLinkedin,
+	IconBrandX
 } from '@tabler/icons-svelte';
 import { dev } from '$app/environment';
 import Wakatime from '$lib/icons/Wakatime.svelte';
@@ -39,6 +40,7 @@ interface Site {
 		wakatime: string;
 		bluesky: string;
 		instagram: string;
+		x: string;
 	};
 	socials: SocialLink[];
 	repo: { url: string; commitBaseUrl: string };
@@ -92,7 +94,8 @@ const Site: Site = {
 		calcom: 'https://cal.com/jsoncam/15min',
 		wakatime: 'https://wakatime.com/@jasonlovesdoggo',
 		bluesky: 'https://bsky.app/profile/jsn.cam',
-		instagram: 'https://www.instagram.com/jsn.cam/'
+		instagram: 'https://www.instagram.com/jsn.cam/',
+		x: 'https://x.com/tomlparser'
 	},
 	socials: [
 		{
@@ -140,6 +143,21 @@ export const Socials: SocialEntry[] = [
 		url: Site.out.linkedin,
 		label: 'LinkedIn',
 		icon: IconBrandLinkedin
+	},
+	{
+		url: Site.out.x,
+		label: 'X',
+		icon: IconBrandX
+	},
+	{
+		url: Site.out.bluesky,
+		label: 'Bluesky',
+		icon: IconBrandBluesky
+	},
+	{
+		url: Site.out.instagram,
+		label: 'Instagram',
+		icon: IconBrandInstagram
 	},
 	{
 		url: Site.out.wakatime,
