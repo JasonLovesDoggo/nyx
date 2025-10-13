@@ -1,9 +1,14 @@
 import { createContentService, type ContentEntry } from './factory';
 
+export interface PostImage {
+	url: string;
+	alt: string;
+}
+
 export interface PostMetadata {
 	title: string;
 	description: string;
-	imageUrl?: string; // a header image
+	image?: PostImage;
 	updated_at?: string;
 	published_at?: string; // if it's not set, it won't be published
 	tags?: string[];

@@ -4,20 +4,21 @@ description = "Weighs the soul of incoming HTTP requests using proof-of-work to 
 date = "2025-03-01"
 published = true
 featured = true
-imageUrl = "/projects/anubis.webp"
-imageAlt = "The Anubis GitHub repository"
-tags = [
-  "golang",
-  "security",
-  "ai",
-  "anti-bot",
-  "defense",
-  "proof-of-work",
-]
-links = [
-  { text = "GitHub", url = "https://github.com/TecharoHQ/anubis" },
-  { text = "Docs & Demo", url = "https://anubis.techaro.lol", icon = "docs" },
-]
+
+[image]
+url = "/projects/anubis.webp"
+alt = "The Anubis GitHub repository"
+
+tags = ["golang", "security", "ai", "anti-bot", "defense", "proof-of-work"]
+
+[[links]]
+text = "GitHub"
+url = "https://github.com/TecharoHQ/anubis"
+
+[[links]]
+text = "Docs & Demo"
+url = "https://anubis.techaro.lol"
+icon = "docs"
 ~~~
 # Anubis
 

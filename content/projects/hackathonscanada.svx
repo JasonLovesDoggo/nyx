@@ -4,21 +4,20 @@ description = "Hackathons Canada is a platform that connects students to hackath
 date = "2023-11-01"
 published = true
 featured = false
-imageUrl = "/projects/hackathonscanada.webp"
-imageAlt = "The Hackathons Canada Website GitHub repository"
-tags = [
-  "django",
-  "caddy",
-  "flower",
-  "postgres",
-  "valkey",
-  "docker",
-  "hackathons",
-]
-links = [
-  { text = "GitHub", url = "https://github.com/Hackathons-Canada/HackathonsCanada" },
-  { text = "Site", url = "https://hackathonscanada.com" },
-]
+
+[image]
+url = "/projects/hackathonscanada.webp"
+alt = "The Hackathons Canada Website GitHub repository"
+
+tags = ["django", "caddy", "flower", "postgres", "valkey", "docker", "hackathons"]
+
+[[links]]
+text = "GitHub"
+url = "https://github.com/Hackathons-Canada/HackathonsCanada"
+
+[[links]]
+text = "Site"
+url = "https://hackathonscanada.com"
 ~~~
 
 # Hackathons Canada

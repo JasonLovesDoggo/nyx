@@ -3,22 +3,26 @@ title = "Nyx"
 description = "The website you're currently browsing! My attempt at building the perfect portfolio site... or at least a decent one."
 date = "2024-08-16"
 published = true
-imageUrl = "/projects/nyx.webp"
-imageAlt = "The Nyx portfolio website GitHub repository"
-tags = [
-  "svelte",
-  "sveltekit",
-  "typescript",
-  "portfolio",
-  "blog",
-  "web",
-  "meta",
-]
-links = [
-  { text = "GitHub", url = "https://github.com/JasonLovesDoggo/nyx" },
-  { text = "Live Site", url = "https://jasonamri.dev", icon = "external" },
-  { text = "Design Ideation", url = "https://notes.jasoncameron.dev/Website", icon = "external" },
-]
+
+[image]
+url = "/projects/nyx.webp"
+alt = "The Nyx portfolio website GitHub repository"
+
+tags = ["svelte", "sveltekit", "typescript", "portfolio", "blog", "web", "meta"]
+
+[[links]]
+text = "GitHub"
+url = "https://github.com/JasonLovesDoggo/nyx"
+
+[[links]]
+text = "Live Site"
+url = "https://jasonamri.dev"
+icon = "external"
+
+[[links]]
+text = "Design Ideation"
+url = "https://notes.jasoncameron.dev/Website"
+icon = "external"
 ~~~
 # Nyx
 

@@ -23,27 +23,27 @@
 	{/if}
 	<meta property="og:title" content={data.metadata.title} />
 	<meta property="og:description" content={data.metadata.description} />
-	{#if data.metadata.imageUrl}
-		<meta property="og:image" content={new URL(data.metadata.imageUrl, page.url.origin).href} />
+	{#if data.metadata.image}
+		<meta property="og:image" content={new URL(data.metadata.image.url, page.url.origin).href} />
 	{/if}
 	<meta property="og:type" content="article" />
 	<meta name="twitter:title" content={data.metadata.title} />
 	<meta name="twitter:description" content={data.metadata.description} />
-	{#if data.metadata.imageUrl}
+	{#if data.metadata.image}
 		<meta
 			name="twitter:image:src"
-			content={new URL(data.metadata.imageUrl, page.url.origin).href}
+			content={new URL(data.metadata.image.url, page.url.origin).href}
 		/>
 	{/if}
 </svelte:head>
 
 <article class="prose mx-auto mb-6 max-w-4xl">
 	<!-- Banner Image -->
-	{#if data.metadata.imageUrl}
+	{#if data.metadata.image}
 		<div class=" bg-red mb-8 rounded-lg md:rounded-xl">
 			<img
-				src={data.metadata.imageUrl}
-				alt={data.metadata.imageAlt}
+				src={data.metadata.image.url}
+				alt={data.metadata.image.alt}
 				class="aspect-video rounded-lg md:rounded-xl"
 			/>
 		</div>

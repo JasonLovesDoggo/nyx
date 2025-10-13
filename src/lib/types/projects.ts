@@ -4,6 +4,11 @@ export interface ProjectLink {
 	icon?: string;
 }
 
+export interface ProjectImage {
+	url: string;
+	alt: string;
+}
+
 export interface ProjectMetadata {
 	title: string;
 	description: string;
@@ -11,8 +16,7 @@ export interface ProjectMetadata {
 	published: boolean;
 	featured?: boolean;
 	tags?: string[];
-	imageUrl?: string; // <-- Add image URL
-	imageAlt?: string; // <-- Add alt text for image
+	image?: ProjectImage;
 	links?: ProjectLink[];
 }
 

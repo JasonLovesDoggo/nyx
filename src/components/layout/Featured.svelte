@@ -40,11 +40,11 @@
 					href={`/projects/${project.slug}`}
 					class="border-surface0 bg-mantle hover:border-accent focus-visible:border-accent group block overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl focus:outline-none"
 				>
-					{#if project.metadata.imageUrl}
+					{#if project.metadata.image}
 						<div class="overflow-hidden">
 							<img
-								src={project.metadata.imageUrl}
-								alt={project.metadata.imageAlt}
+								src={project.metadata.image.url}
+								alt={project.metadata.image.alt}
 								class="aspect-video w-full transition-transform duration-300 group-hover:scale-105"
 							/>
 						</div>

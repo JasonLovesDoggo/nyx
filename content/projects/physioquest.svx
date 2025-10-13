@@ -4,21 +4,21 @@ description = "PhysioQuest uses AI to gamify physiotherapy exercises, encouragin
 date = "2023-06-01"
 published = true
 featured = false
-imageUrl = "/projects/physioquest.webp"
-imageAlt = "The PhysioQuest GitHub repository"
-tags = [
-  "python",
-  "opencv",
-  "html",
-  "scss",
-  "django",
-  "ai",
-  "hackathon",
-]
-links = [
-  { text = "GitHub", url = "https://github.com/JasonLovesDoggo/jamhacks" },
-  { text = "Devpost", url = "https://devpost.com/software/physioquest", icon = "devpost" },
-]
+
+[image]
+url = "/projects/physioquest.webp"
+alt = "The PhysioQuest GitHub repository"
+
+tags = ["python", "opencv", "html", "scss", "django", "ai", "hackathon"]
+
+[[links]]
+text = "GitHub"
+url = "https://github.com/JasonLovesDoggo/jamhacks"
+
+[[links]]
+text = "Devpost"
+url = "https://devpost.com/software/physioquest"
+icon = "devpost"
 ~~~
 
 # PhysioQuest

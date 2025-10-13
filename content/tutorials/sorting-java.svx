@@ -2,17 +2,20 @@
 title = "Sorting Algorithms in Java"
 description = "A practical tutorial on various sorting algorithms in Java, with implementation examples and visual explanations."
 published_at = "2025-04-20"
-tags = [
-  "java",
-  "algorithms",
-  "sorting",
-  "data structures",
-]
-sources = [
-  { title = "Oracle. (n.d.). The Java Tutorials", url = "https://docs.oracle.com/javase/tutorial/" },
-  { title = "GeeksforGeeks. (n.d.). Java Programming Language", url = "https://www.geeksforgeeks.org/java/" },
-  { title = "Tutorialspoint. (n.d.). Java Tutorial", url = "https://www.tutorialspoint.com/java/" },
-]
+
+tags = ["java", "algorithms", "sorting", "data structures"]
+
+[[sources]]
+title = "Oracle. (n.d.). The Java Tutorials"
+url = "https://docs.oracle.com/javase/tutorial/"
+
+[[sources]]
+title = "GeeksforGeeks. (n.d.). Java Programming Language"
+url = "https://www.geeksforgeeks.org/java/"
+
+[[sources]]
+title = "Tutorialspoint. (n.d.). Java Tutorial"
+url = "https://www.tutorialspoint.com/java/"
 ~~~
 
 # Sorting Algorithms in Java

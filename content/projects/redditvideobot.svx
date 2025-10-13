@@ -2,21 +2,22 @@
 title = "RedditVideoMakerBot"
 description = "A completely automated video creation bot for reddit videos typically catered to TikTok and youtube shorts It was built using Python, PRAW, Playwright & ffmpeg. As of writing this, videos created by the bot have gained over 350,000,000 views."
 date = "2023-02-01"
-imageUrl = "/projects/redditvideomakerbot.webp"
-imageAlt = "The Reddit Video Maker Bot GitHub repository"
 published = true
 featured = false
-tags = [
-  "python",
-  "praw",
-  "playwright",
-  "ffmpeg",
-  "automation",
-]
-links = [
-  { text = "GitHub", url = "https://github.com/elebumm/RedditVideoMakerBot" },
-  { text = "Demo", url = "https://www.youtube.com/watch?v=3gjcY_00U1w" },
-]
+
+[image]
+url = "/projects/redditvideomakerbot.webp"
+alt = "The Reddit Video Maker Bot GitHub repository"
+
+tags = ["python", "praw", "playwright", "ffmpeg", "automation"]
+
+[[links]]
+text = "GitHub"
+url = "https://github.com/elebumm/RedditVideoMakerBot"
+
+[[links]]
+text = "Demo"
+url = "https://www.youtube.com/watch?v=3gjcY_00U1w"
 ~~~
 
 # RedditVideoMakerBot

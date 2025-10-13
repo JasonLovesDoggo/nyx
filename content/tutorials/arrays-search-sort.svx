@@ -2,18 +2,20 @@
 title = "Arrays, ArrayLists, and Searching in Java"
 description = "A practical tutorial on arrays, ArrayLists, and searching algorithms in Java, with implementation examples."
 published_at = "2025-04-20"
-tags = [
-  "java",
-  "arrays",
-  "data structures",
-  "algorithms",
-  "searching",
-]
-sources = [
-  { title = "Oracle. (n.d.). The Java Tutorials", url = "https://docs.oracle.com/javase/tutorial/" },
-  { title = "W3Schools. (n.d.). Java Tutorial", url = "https://www.w3schools.com/java/" },
-  { title = "Tutorialspoint. (n.d.). Java Tutorial", url = "https://www.tutorialspoint.com/java/" },
-]
+
+tags = ["java", "arrays", "data structures", "algorithms", "searching"]
+
+[[sources]]
+title = "Oracle. (n.d.). The Java Tutorials"
+url = "https://docs.oracle.com/javase/tutorial/"
+
+[[sources]]
+title = "W3Schools. (n.d.). Java Tutorial"
+url = "https://www.w3schools.com/java/"
+
+[[sources]]
+title = "Tutorialspoint. (n.d.). Java Tutorial"
+url = "https://www.tutorialspoint.com/java/"
 ~~~
 
 # Arrays, ArrayLists, and Searching in Java

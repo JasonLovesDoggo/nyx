@@ -5,14 +5,24 @@
 
 import { createContentService, type ContentEntry } from './factory';
 
+export interface TutorialImage {
+	url: string;
+	alt: string;
+}
+
+export interface TutorialSource {
+	title: string;
+	url: string;
+}
+
 export interface TutorialMetadata {
 	title: string;
 	description: string;
-	imageUrl?: string; // a header image
+	image?: TutorialImage;
 	updated_at?: string;
 	published_at?: string; // if it's not set, it won't be published
 	tags?: string[];
-	sources?: { title: string; url: string }[]; // sources or references for the tutorial
+	sources?: TutorialSource[];
 }
 
 export type TutorialEntry = ContentEntry<TutorialMetadata>;

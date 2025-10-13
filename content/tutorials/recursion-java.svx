@@ -2,17 +2,20 @@
 title = "Recursion in Java"
 description = "A practical tutorial on recursion in Java, covering basic concepts, implementation techniques, and common recursive algorithms."
 published_at = "2025-04-19"
-tags = [
-  "java",
-  "recursion",
-  "algorithms",
-  "programming",
-]
-sources = [
-  { title = "Oracle. (n.d.). The Java Tutorials", url = "https://docs.oracle.com/javase/tutorial/" },
-  { title = "GeeksforGeeks. (n.d.). Java Programming Language", url = "https://www.geeksforgeeks.org/java/" },
-  { title = "GeeksforGeeks. (n.d.). Types of Recursion", url = "https://www.geeksforgeeks.org/types-of-recursions/" },
-]
+
+tags = ["java", "recursion", "algorithms", "programming"]
+
+[[sources]]
+title = "Oracle. (n.d.). The Java Tutorials"
+url = "https://docs.oracle.com/javase/tutorial/"
+
+[[sources]]
+title = "GeeksforGeeks. (n.d.). Java Programming Language"
+url = "https://www.geeksforgeeks.org/java/"
+
+[[sources]]
+title = "GeeksforGeeks. (n.d.). Types of Recursion"
+url = "https://www.geeksforgeeks.org/types-of-recursions/"
 ~~~
 
 # Recursion in Java

@@ -2,22 +2,23 @@
 title = "mCTF"
 description = "mCTF, an online judge for cybersecurity challenge problems and school-wide and provincial contests, hosting over 200 problems, 1500 users & 20000 submissions. Extensively scaled using Docker, Kubernetes, K3s & Django."
 date = "2023-09-01"
-imageUrl = "/projects/mctf.webp"
-imageAlt = "The mCTF GitHub repository"
 published = true
 featured = false
-tags = [
-  "django",
-  "docker",
-  "kubernetes",
-  "k3s",
-  "cybersecurity",
-  "ctf",
-]
-links = [
-  { text = "GitHub", url = "https://github.com/mcpt/ctf" },
-  { text = "Site", url = "https://ctf.mcpt.ca" },
-]
+tags = ["django", "docker", "kubernetes", "k3s", "cybersecurity", "ctf"]
+
+
+[image]
+url = "/projects/mctf.webp"
+alt = "The mCTF GitHub repository"
+
+
+[[links]]
+text = "GitHub"
+url = "https://github.com/mcpt/ctf"
+
+[[links]]
+text = "Site"
+url = "https://ctf.mcpt.ca"
 ~~~
 
 # mCTF

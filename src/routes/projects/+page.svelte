@@ -28,10 +28,10 @@
 					href={`/projects/${project.slug}`}
 					class="border-surface0 bg-base hover:border-accent group block space-y-3 rounded-xl border p-5 shadow-lg transition-colors duration-200"
 				>
-					{#if project.metadata.imageUrl}
+					{#if project.metadata.image}
 						<img
-							src={project.metadata.imageUrl}
-							alt={project.metadata.imageAlt}
+							src={project.metadata.image.url}
+							alt={project.metadata.image.alt}
 							class="mb-4 aspect-video w-full rounded-md"
 						/>
 					{:else}
