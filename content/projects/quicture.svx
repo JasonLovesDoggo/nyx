@@ -4,12 +4,11 @@ description = "A privacy-first photo sharing platform built to prioritize speed 
 date = "2023-12-01"
 published = true
 featured = false
+tags = ["privacy", "p2p", "encryption", "photo-sharing", "web-development"]
 
 [image]
 url = "/projects/quicture.webp"
 alt = "The Quicture GitHub repository"
-
-tags = ["privacy", "p2p", "encryption", "photo-sharing", "web-development"]
 
 [[links]]
 text = "GitHub"

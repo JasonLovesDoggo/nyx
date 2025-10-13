@@ -4,12 +4,11 @@ description = "Foodle | The Wordle for food. Its my own twist on wordle, It was 
 date = "2022-02-15"
 published = true
 featured = false
+tags = ["svelte", "scss", "typescript", "cloudflare", "github-pages", "analytics"]
 
 [image]
 url = "/projects/foodle.webp"
 alt = "The Foodle GitHub repository"
-
-tags = ["svelte", "scss", "typescript", "cloudflare", "github-pages", "analytics"]
 
 [[links]]
 text = "GitHub"

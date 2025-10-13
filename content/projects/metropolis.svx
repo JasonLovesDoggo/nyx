@@ -4,12 +4,11 @@ description = "Metropolis, our school's student-run data hub, offers club info, 
 date = "2023-01-01"
 published = true
 featured = false
+tags = ["django", "react", "react-native", "devops"]
 
 [image]
 url = "/projects/metropolis.webp"
 alt = "The Metropolis Main GitHub repository"
-
-tags = ["django", "react", "react-native", "devops"]
 
 [[links]]
 text = "GitHub"

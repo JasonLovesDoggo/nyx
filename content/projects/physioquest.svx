@@ -4,12 +4,11 @@ description = "PhysioQuest uses AI to gamify physiotherapy exercises, encouragin
 date = "2023-06-01"
 published = true
 featured = false
+tags = ["python", "opencv", "html", "scss", "django", "ai", "hackathon"]
 
 [image]
 url = "/projects/physioquest.webp"
 alt = "The PhysioQuest GitHub repository"
-
-tags = ["python", "opencv", "html", "scss", "django", "ai", "hackathon"]
 
 [[links]]
 text = "GitHub"

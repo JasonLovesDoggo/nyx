@@ -4,12 +4,11 @@ description = "A platform to challenge your friends to a no-social-media showdow
 date = "2023-07-01"
 published = true
 featured = false
+tags = ["react", "express", "ai", "cohere", "hackathon", "fintech"]
 
 [image]
 url = "/projects/screentimeshowdown.webp"
 alt = "The Screentime Showdown GitHub repository"
-
-tags = ["react", "express", "ai", "cohere", "hackathon", "fintech"]
 
 [[links]]
 text = "GitHub"

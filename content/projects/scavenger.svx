@@ -4,12 +4,11 @@ description = "A scavenger hunt platform engineered to prevent any form of cheat
 date = "2023-04-01"
 published = true
 featured = false
+tags = ["django", "oauth", "python", "web-development"]
 
 [image]
 url = "/projects/scavenger.webp"
 alt = "The Metropolis Scavenger Hunt GitHub repository"
-
-tags = ["django", "oauth", "python", "web-development"]
 
 [[links]]
 text = "GitHub"

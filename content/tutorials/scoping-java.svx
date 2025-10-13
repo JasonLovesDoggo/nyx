@@ -2,7 +2,6 @@
 title = "Scoping in Java"
 description = "A comprehensive tutorial on scoping in Java, including access controls and variable scoping with code examples and explanations."
 published_at = "2025-04-25"
-
 tags = ["java", "scoping", "access controls", "variable scoping"]
 
 [[sources]]

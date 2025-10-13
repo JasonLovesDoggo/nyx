@@ -3,12 +3,11 @@ title = "Nyx"
 description = "The website you're currently browsing! My attempt at building the perfect portfolio site... or at least a decent one."
 date = "2024-08-16"
 published = true
+tags = ["svelte", "sveltekit", "typescript", "portfolio", "blog", "web", "meta"]
 
 [image]
 url = "/projects/nyx.webp"
 alt = "The Nyx portfolio website GitHub repository"
-
-tags = ["svelte", "sveltekit", "typescript", "portfolio", "blog", "web", "meta"]
 
 [[links]]
 text = "GitHub"

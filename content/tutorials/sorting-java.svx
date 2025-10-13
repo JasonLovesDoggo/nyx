@@ -2,7 +2,6 @@
 title = "Sorting Algorithms in Java"
 description = "A practical tutorial on various sorting algorithms in Java, with implementation examples and visual explanations."
 published_at = "2025-04-20"
-
 tags = ["java", "algorithms", "sorting", "data structures"]
 
 [[sources]]

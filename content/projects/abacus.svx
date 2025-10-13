@@ -4,12 +4,11 @@ description = "Abacus at it's core is a simple counter. However, it was designed
 date = "2023-10-01"
 published = true
 featured = true
+tags = ["golang", "gin", "docker", "redis", "analytics"]
 
 [image]
 url = "/projects/abacus.webp"
 alt = "The Abacus GitHub repository"
-
-tags = ["golang", "gin", "docker", "redis", "analytics"]
 
 [[links]]
 text = "GitHub"

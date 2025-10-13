@@ -2,7 +2,6 @@
 title = "Understanding References and Pass-by-Value in Java"
 description = "A comprehensive tutorial on how Java handles references, object passing, and the behavior of arrays and ArrayLists in method calls."
 published_at = "2025-05-01"
-
 tags = ["java", "references", "pointers", "arrays", "arraylist"]
 
 [[sources]]

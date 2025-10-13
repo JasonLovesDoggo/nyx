@@ -4,12 +4,11 @@ description = "A completely automated video creation bot for reddit videos typic
 date = "2023-02-01"
 published = true
 featured = false
+tags = ["python", "praw", "playwright", "ffmpeg", "automation"]
 
 [image]
 url = "/projects/redditvideomakerbot.webp"
 alt = "The Reddit Video Maker Bot GitHub repository"
-
-tags = ["python", "praw", "playwright", "ffmpeg", "automation"]
 
 [[links]]
 text = "GitHub"

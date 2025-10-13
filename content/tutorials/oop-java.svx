@@ -2,7 +2,6 @@
 title = "Object-Oriented Programming in Java"
 description = "A concise tutorial on Object-Oriented Programming concepts in Java, including classes, objects, inheritance, polymorphism, and encapsulation."
 published_at = "2025-04-20"
-
 tags = ["java", "oop", "programming"]
 
 [[sources]]

@@ -4,12 +4,11 @@ description = "PartnerEdu is a platform that connects students to opportunities 
 date = "2023-08-01"
 published = true
 featured = false
+tags = ["django", "bootstrap", "postgres", "redis", "docker", "education"]
 
 [image]
 url = "/projects/partneredu.webp"
 alt = "The PartnerEdu GitHub repository"
-
-tags = ["django", "bootstrap", "postgres", "redis", "docker", "education"]
 
 [[links]]
 text = "GitHub"
