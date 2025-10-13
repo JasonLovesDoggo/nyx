@@ -1,22 +1,23 @@
----
-title: PartnerEdu
-description: PartnerEdu is a platform that connects students to opportunities such as COOP placements in order to provide educational experiences for students. Highly scalable using Django, Bootstrap, Postgres, Redis & Docker. National Runner Up @ CNLC 2024.
-date: 2023-08-01
-published: true
-featured: false
-imageUrl: /projects/partneredu.webp
-imageAlt: The PartnerEdu GitHub repository
-tags:
-  - django
-  - bootstrap
-  - postgres
-  - redis
-  - docker
-  - education
-links:
-  - text: GitHub
-    url: https://github.com/JasonLovesDoggo/PartnerEdu
----
+~~~
+title = "PartnerEdu"
+description = "PartnerEdu is a platform that connects students to opportunities such as COOP placements in order to provide educational experiences for students. Highly scalable using Django, Bootstrap, Postgres, Redis & Docker. National Runner Up @ CNLC 2024."
+date = "2023-08-01"
+published = true
+featured = false
+imageUrl = "/projects/partneredu.webp"
+imageAlt = "The PartnerEdu GitHub repository"
+tags = [
+  "django",
+  "bootstrap",
+  "postgres",
+  "redis",
+  "docker",
+  "education",
+]
+links = [
+  { text = "GitHub", url = "https://github.com/JasonLovesDoggo/PartnerEdu" },
+]
+~~~
 
 # PartnerEdu
 

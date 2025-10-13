@@ -1,24 +1,24 @@
----
-title: Foodle
-description: Foodle | The Wordle for food. Its my own twist on wordle, It was built using Svelte, SCSS, Typescript and managed using Cloudflare, Github Pages & Google Analytics. When I built it I never expected it to get well over 5,000,000 page visits. Foodle was really the first time I dipped my toes into web dev, let's just say I enjoyed it.
-date: 2022-02-15
-published: true
-featured: false
-imageUrl: /projects/foodle.webp
-imageAlt: The Foodle GitHub repository
-tags:
-  - svelte
-  - scss
-  - typescript
-  - cloudflare
-  - github-pages
-  - analytics
-links:
-  - text: GitHub
-    url: https://github.com/JasonLovesDoggo/JasonLovesDoggo.github.io/tree/master/foodle
-  - text: Demo
-    url: https://jasoncameron.dev/foodle
----
+~~~
+title = "Foodle"
+description = "Foodle | The Wordle for food. Its my own twist on wordle, It was built using Svelte, SCSS, Typescript and managed using Cloudflare, Github Pages & Google Analytics. When I built it I never expected it to get well over 5,000,000 page visits. Foodle was really the first time I dipped my toes into web dev, let's just say I enjoyed it."
+date = "2022-02-15"
+published = true
+featured = false
+imageUrl = "/projects/foodle.webp"
+imageAlt = "The Foodle GitHub repository"
+tags = [
+  "svelte",
+  "scss",
+  "typescript",
+  "cloudflare",
+  "github-pages",
+  "analytics",
+]
+links = [
+  { text = "GitHub", url = "https://github.com/JasonLovesDoggo/JasonLovesDoggo.github.io/tree/master/foodle" },
+  { text = "Demo", url = "https://jasoncameron.dev/foodle" },
+]
+~~~
 
 # Foodle
 

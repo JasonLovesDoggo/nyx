@@ -1,25 +1,24 @@
----
-title: Screentime Showdown
-description: A platform to challenge your friends to a no-social-media showdown by staking money for a prize pool, won Hack the Valley's Best Financial Hack. Built with React, Express, and interfaces with Cohere's generative AI.
-date: 2023-07-01
-published: true
-featured: false
-imageUrl: /projects/screentimeshowdown.webp
-imageAlt: The Screentime Showdown GitHub repository
-tags:
-  - react
-  - express
-  - ai
-  - cohere
-  - hackathon
-  - fintech
-links:
-  - text: GitHub
-    url: https://github.com/JasonLovesDoggo/screentimeshowdown
-  - text: Devpost
-    url: https://devpost.com/software/screentime-showdown
-    icon: devpost
----
+~~~
+title = "Screentime Showdown"
+description = "A platform to challenge your friends to a no-social-media showdown by staking money for a prize pool, won Hack the Valley's Best Financial Hack. Built with React, Express, and interfaces with Cohere's generative AI."
+date = "2023-07-01"
+published = true
+featured = false
+imageUrl = "/projects/screentimeshowdown.webp"
+imageAlt = "The Screentime Showdown GitHub repository"
+tags = [
+  "react",
+  "express",
+  "ai",
+  "cohere",
+  "hackathon",
+  "fintech",
+]
+links = [
+  { text = "GitHub", url = "https://github.com/JasonLovesDoggo/screentimeshowdown" },
+  { text = "Devpost", url = "https://devpost.com/software/screentime-showdown", icon = "devpost" },
+]
+~~~
 
 # Screentime Showdown
 

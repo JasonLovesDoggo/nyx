@@ -1,19 +1,18 @@
----
-title: Object-Oriented Programming in Java
-description: A concise tutorial on Object-Oriented Programming concepts in Java, including classes, objects, inheritance, polymorphism, and encapsulation.
-published_at: '2025-04-20'
-tags:
-  - java
-  - oop
-  - programming
-sources:
-  - title: "Oracle. (n.d.). The Java Tutorials"
-    url: "https://docs.oracle.com/javase/tutorial/"
-  - title: "GeeksforGeeks. (n.d.). Java Programming Language"
-    url: "https://www.geeksforgeeks.org/java/"
-  - title: "W3Schools. (n.d.). Java Tutorial"
-    url: "https://www.w3schools.com/java/"
----
+~~~
+title = "Object-Oriented Programming in Java"
+description = "A concise tutorial on Object-Oriented Programming concepts in Java, including classes, objects, inheritance, polymorphism, and encapsulation."
+published_at = "2025-04-20"
+tags = [
+  "java",
+  "oop",
+  "programming",
+]
+sources = [
+  { title = "Oracle. (n.d.). The Java Tutorials", url = "https://docs.oracle.com/javase/tutorial/" },
+  { title = "GeeksforGeeks. (n.d.). Java Programming Language", url = "https://www.geeksforgeeks.org/java/" },
+  { title = "W3Schools. (n.d.). Java Tutorial", url = "https://www.w3schools.com/java/" },
+]
+~~~
 
 # Object-Oriented Programming in Java
 

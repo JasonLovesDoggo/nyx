@@ -1,14 +1,15 @@
----
-title: How to Stop AI Streams Without Breaking Everything
-description: Build reliable cancellation for Agno AI streaming with FastAPI, WebSockets, and Redis. 5 battle-tested patterns with real failure modes.
-published_at: '2025-07-05'
-tags:
-  - agno
-  - ai-streaming
-  - fastapi
-  - cancellation
-  - redis
----
+~~~
+title = "How to Stop AI Streams Without Breaking Everything"
+description = "Build reliable cancellation for Agno AI streaming with FastAPI, WebSockets, and Redis. 5 battle-tested patterns with real failure modes."
+published_at = "2025-07-05"
+tags = [
+  "agno",
+  "ai-streaming",
+  "fastapi",
+  "cancellation",
+  "redis",
+]
+~~~
 
 ## The Pain Point
 

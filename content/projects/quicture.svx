@@ -1,23 +1,23 @@
----
-title: Quicture
-description: A privacy-first photo sharing platform built to prioritize speed and lossless quality while ensuring total user anonymity. Leveraging peer-to-peer connections whenever possible, Quicture also offers temporary, encrypted cloud storage for situations where a direct connection isn't available.
-date: 2023-12-01
-published: true
-featured: false
-imageUrl: /projects/quicture.webp
-imageAlt: The Quicture GitHub repository
-tags:
-  - privacy
-  - p2p
-  - encryption
-  - photo-sharing
-  - web-development
-links:
-  - text: GitHub
-    url: https://github.com/JasonLovesDoggo/quicture
-  - text: Demo
-    url: https://share.jasoncameron.dev
----
+~~~
+title = "Quicture"
+description = "A privacy-first photo sharing platform built to prioritize speed and lossless quality while ensuring total user anonymity. Leveraging peer-to-peer connections whenever possible, Quicture also offers temporary, encrypted cloud storage for situations where a direct connection isn't available."
+date = "2023-12-01"
+published = true
+featured = false
+imageUrl = "/projects/quicture.webp"
+imageAlt = "The Quicture GitHub repository"
+tags = [
+  "privacy",
+  "p2p",
+  "encryption",
+  "photo-sharing",
+  "web-development",
+]
+links = [
+  { text = "GitHub", url = "https://github.com/JasonLovesDoggo/quicture" },
+  { text = "Demo", url = "https://share.jasoncameron.dev" },
+]
+~~~
 
 # Quicture
 

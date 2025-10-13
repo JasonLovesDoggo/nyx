@@ -20,6 +20,12 @@ interface CreateContentServiceOptions<T> {
 	sort?: (a: ContentEntry<T>, b: ContentEntry<T>) => number;
 }
 
+interface MdsvexModule<T> {
+	default: ConstructorOfATypedSvelteComponent;
+	metadata?: T;
+	frontmatter?: T;
+}
+
 export function createContentService<T>({
 	modules,
 	contentType,
@@ -40,10 +46,17 @@ export function createContentService<T>({
 	function getAll(): ContentEntry<T>[] {
 		if (!_all) {
 			_all = Object.entries(modules)
-				.map(([path, mod]) => ({
-					slug: slugFrom(path),
-					metadata: (mod as any).metadata as T
-				}))
+				.map(([path, mod]) => {
+					const module = mod as MdsvexModule<T>;
+					const metadata = module.metadata ?? module.frontmatter;
+					if (!metadata) {
+						throw new Error(`Missing metadata for ${path}`);
+					}
+					return {
+						slug: slugFrom(path),
+						metadata
+					};
+				})
 				.filter(filter)
 				.sort(sort);
 		}
@@ -52,21 +65,27 @@ export function createContentService<T>({
 
 	function getBySlug(slug: string): ContentPageData<T> {
 		const path = `${contentDir}${slug}.svx`;
-		const mod = modules[path] as any;
+		const module = modules[path] as MdsvexModule<T> | undefined;
 
-		if (!mod) {
+		if (!module) {
 			throw error(404, `${contentType} not found: ${slug}`);
 		}
 
-		const entry = { slug, metadata: mod.metadata as T };
+		const metadata = module.metadata ?? module.frontmatter;
+
+		if (!metadata) {
+			throw error(500, `Missing metadata for ${contentType}: ${slug}`);
+		}
+
+		const entry = { slug, metadata };
 		if (!filter(entry)) {
 			throw error(404, `${contentType} not found: ${slug}`);
 		}
 
 		return {
 			slug,
-			metadata: mod.metadata,
-			content: mod.default
+			metadata,
+			content: module.default
 		};
 	}
 

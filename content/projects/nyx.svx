@@ -1,28 +1,25 @@
----
-title: Nyx
-description: The website you're currently browsing! My attempt at building the perfect portfolio site... or at least a decent one.
-date: 2024-08-16
-published: true
-imageUrl: /projects/nyx.webp
-imageAlt: The Nyx portfolio website GitHub repository
-tags:
-  - svelte
-  - sveltekit
-  - typescript
-  - portfolio
-  - blog
-  - web
-  - meta
-links:
-  - text: GitHub
-    url: https://github.com/JasonLovesDoggo/nyx
-  - text: Live Site
-    url: https://jasonamri.dev
-    icon: external
-  - text: Design Ideation
-    url: https://notes.jasoncameron.dev/Website
-    icon: external
----
+~~~
+title = "Nyx"
+description = "The website you're currently browsing! My attempt at building the perfect portfolio site... or at least a decent one."
+date = "2024-08-16"
+published = true
+imageUrl = "/projects/nyx.webp"
+imageAlt = "The Nyx portfolio website GitHub repository"
+tags = [
+  "svelte",
+  "sveltekit",
+  "typescript",
+  "portfolio",
+  "blog",
+  "web",
+  "meta",
+]
+links = [
+  { text = "GitHub", url = "https://github.com/JasonLovesDoggo/nyx" },
+  { text = "Live Site", url = "https://jasonamri.dev", icon = "external" },
+  { text = "Design Ideation", url = "https://notes.jasoncameron.dev/Website", icon = "external" },
+]
+~~~
 # Nyx
 
 Welcome to the most meta project in my portfolio - the very website you're reading this on! Nyx is my personal portfolio and blog, built with an unhealthy obsession for pixel-perfect design and probably too many subtle animations.

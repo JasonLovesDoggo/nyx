@@ -1,20 +1,19 @@
----
-title: Scoping in Java
-description: A comprehensive tutorial on scoping in Java, including access controls and variable scoping with code examples and explanations.
-published_at: '2025-04-25'
-tags:
-  - java
-  - scoping
-  - access controls
-  - variable scoping
-sources:
-  - title: "Oracle. (n.d.). The Java Tutorials"
-    url: "https://docs.oracle.com/javase/tutorial/"
-  - title: "GeeksforGeeks. (n.d.). Java Programming Language"
-    url: "https://www.geeksforgeeks.org/java/"
-  - title: "W3Schools. (n.d.). Java Tutorial"
-    url: "https://www.w3schools.com/java/"
----
+~~~
+title = "Scoping in Java"
+description = "A comprehensive tutorial on scoping in Java, including access controls and variable scoping with code examples and explanations."
+published_at = "2025-04-25"
+tags = [
+  "java",
+  "scoping",
+  "access controls",
+  "variable scoping",
+]
+sources = [
+  { title = "Oracle. (n.d.). The Java Tutorials", url = "https://docs.oracle.com/javase/tutorial/" },
+  { title = "GeeksforGeeks. (n.d.). Java Programming Language", url = "https://www.geeksforgeeks.org/java/" },
+  { title = "W3Schools. (n.d.). Java Tutorial", url = "https://www.w3schools.com/java/" },
+]
+~~~
 
 # Scoping in Java
 

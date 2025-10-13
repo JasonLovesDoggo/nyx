@@ -1,25 +1,25 @@
----
-title: Hackathons Canada
-description: Hackathons Canada is a platform that connects students to hackathons across Canada (and beyond). It was built using Django, Caddy, Flower, Postgres, ValKey & Docker. I personally lead the backend team and personally handle DevOps and site administration.
-date: 2023-11-01
-published: true
-featured: false
-imageUrl: /projects/hackathonscanada.webp
-imageAlt: The Hackathons Canada Website GitHub repository
-tags:
-  - django
-  - caddy
-  - flower
-  - postgres
-  - valkey
-  - docker
-  - hackathons
-links:
-  - text: GitHub
-    url: https://github.com/Hackathons-Canada/HackathonsCanada
-  - text: Site
-    url: https://hackathonscanada.com
----
+~~~
+title = "Hackathons Canada"
+description = "Hackathons Canada is a platform that connects students to hackathons across Canada (and beyond). It was built using Django, Caddy, Flower, Postgres, ValKey & Docker. I personally lead the backend team and personally handle DevOps and site administration."
+date = "2023-11-01"
+published = true
+featured = false
+imageUrl = "/projects/hackathonscanada.webp"
+imageAlt = "The Hackathons Canada Website GitHub repository"
+tags = [
+  "django",
+  "caddy",
+  "flower",
+  "postgres",
+  "valkey",
+  "docker",
+  "hackathons",
+]
+links = [
+  { text = "GitHub", url = "https://github.com/Hackathons-Canada/HackathonsCanada" },
+  { text = "Site", url = "https://hackathonscanada.com" },
+]
+~~~
 
 # Hackathons Canada
 

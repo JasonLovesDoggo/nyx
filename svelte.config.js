@@ -11,6 +11,7 @@ import remarkGfm from 'remark-gfm';
 import remarkAbbr from 'remark-abbr';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeUnwrapImages from 'rehype-unwrap-images';
+import { parse } from 'smol-toml';
 
 const highlighter = await createHighlighter({
 	langs: Object.keys(bundledLanguages),
@@ -23,6 +24,23 @@ const mdsvexOptions = {
 	// layout: {
 	// 	_: 'src/mdsvex.svelte'
 	// },
+	frontmatter: {
+		type: 'toml',
+		marker: '~',
+		parse: (frontmatter, messages) => {
+			if (!frontmatter?.trim()) {
+				return {};
+			}
+			try {
+				return parse(frontmatter);
+			} catch (e) {
+				messages.push(
+					'Parsing error on line ' + e.line + ', column ' + e.column + ': ' + e.message
+				);
+				return {};
+			}
+		}
+	},
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
 			let rawcode = highlighter.codeToHtml(code, {

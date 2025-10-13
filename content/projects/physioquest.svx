@@ -1,26 +1,25 @@
----
-title: PhysioQuest
-description: PhysioQuest uses AI to gamify physiotherapy exercises, encouraging consistent and accurate completion. This approach aims to boost adherence to prescribed routines, potentially enhancing rehabilitation outcomes. Built with Python, OpenCV, HTML, SCSS & Django. Winner @ JamHacks 7.
-date: 2023-06-01
-published: true
-featured: false
-imageUrl: /projects/physioquest.webp
-imageAlt: The PhysioQuest GitHub repository
-tags:
-  - python
-  - opencv
-  - html
-  - scss
-  - django
-  - ai
-  - hackathon
-links:
-  - text: GitHub
-    url: https://github.com/JasonLovesDoggo/jamhacks
-  - text: Devpost
-    url: https://devpost.com/software/physioquest
-    icon: devpost
----
+~~~
+title = "PhysioQuest"
+description = "PhysioQuest uses AI to gamify physiotherapy exercises, encouraging consistent and accurate completion. This approach aims to boost adherence to prescribed routines, potentially enhancing rehabilitation outcomes. Built with Python, OpenCV, HTML, SCSS & Django. Winner @ JamHacks 7."
+date = "2023-06-01"
+published = true
+featured = false
+imageUrl = "/projects/physioquest.webp"
+imageAlt = "The PhysioQuest GitHub repository"
+tags = [
+  "python",
+  "opencv",
+  "html",
+  "scss",
+  "django",
+  "ai",
+  "hackathon",
+]
+links = [
+  { text = "GitHub", url = "https://github.com/JasonLovesDoggo/jamhacks" },
+  { text = "Devpost", url = "https://devpost.com/software/physioquest", icon = "devpost" },
+]
+~~~
 
 # PhysioQuest
 

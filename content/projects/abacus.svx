@@ -1,24 +1,23 @@
----
-title: Abacus
-description: Abacus at it's core is a simple counter. However, it was designed from the ground up to be scalable, secure and easy to use. It was build using Golang, Gin, Docker, Redis. In fact it's currently powereing the page view counter on this site.
-date: 2023-10-01
-published: true
-featured: true
-imageUrl: /projects/abacus.webp
-imageAlt: The Abacus GitHub repository
-tags:
-  - golang
-  - gin
-  - docker
-  - redis
-  - analytics
-links:
-  - text: GitHub
-    url: https://github.com/jasonlovesdoggo/abacus
-  - text: Docs
-    url: https://abacus.jasoncameron.dev
-    icon: docs
----
+~~~
+title = "Abacus"
+description = "Abacus at it's core is a simple counter. However, it was designed from the ground up to be scalable, secure and easy to use. It was build using Golang, Gin, Docker, Redis. In fact it's currently powereing the page view counter on this site."
+date = "2023-10-01"
+published = true
+featured = true
+imageUrl = "/projects/abacus.webp"
+imageAlt = "The Abacus GitHub repository"
+tags = [
+  "golang",
+  "gin",
+  "docker",
+  "redis",
+  "analytics",
+]
+links = [
+  { text = "GitHub", url = "https://github.com/jasonlovesdoggo/abacus" },
+  { text = "Docs", url = "https://abacus.jasoncameron.dev", icon = "docs" },
+]
+~~~
 
 # Abacus
 

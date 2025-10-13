@@ -1,21 +1,20 @@
----
-title: Understanding References and Pass-by-Value in Java
-description: A comprehensive tutorial on how Java handles references, object passing, and the behavior of arrays and ArrayLists in method calls.
-published_at: '2025-05-01'
-tags:
-  - java
-  - references
-  - pointers
-  - arrays
-  - arraylist
-sources:
-  - title: "Oracle. (n.d.). The Java Tutorials"
-    url: "https://docs.oracle.com/javase/tutorial/"
-  - title: "GeeksforGeeks. (n.d.). Java Programming Language"
-    url: "https://www.geeksforgeeks.org/java/"
-  - title: "Tutorialspoint. (n.d.). Java Tutorial"
-    url: "https://www.tutorialspoint.com/java/"
----
+~~~
+title = "Understanding References and Pass-by-Value in Java"
+description = "A comprehensive tutorial on how Java handles references, object passing, and the behavior of arrays and ArrayLists in method calls."
+published_at = "2025-05-01"
+tags = [
+  "java",
+  "references",
+  "pointers",
+  "arrays",
+  "arraylist",
+]
+sources = [
+  { title = "Oracle. (n.d.). The Java Tutorials", url = "https://docs.oracle.com/javase/tutorial/" },
+  { title = "GeeksforGeeks. (n.d.). Java Programming Language", url = "https://www.geeksforgeeks.org/java/" },
+  { title = "Tutorialspoint. (n.d.). Java Tutorial", url = "https://www.tutorialspoint.com/java/" },
+]
+~~~
 
 # Understanding References and Pass-by-Value in Java
 
