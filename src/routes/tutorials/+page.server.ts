@@ -4,8 +4,6 @@
  */
 
 import { getAllTutorials } from '$lib/content/tutorials';
-import type { PageServerLoad } from '../$types';
+import { createListingPage } from '$lib/utils/pagemeta';
 
-export const load: PageServerLoad = () => ({
-	tutorials: getAllTutorials()
-});
+export const { load } = createListingPage(getAllTutorials, 'tutorials');

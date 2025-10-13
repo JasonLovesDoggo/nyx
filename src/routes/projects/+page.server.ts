@@ -1,6 +1,4 @@
-import type { PageServerLoad } from './$types';
 import { getAllProjects } from '$lib/content/projects';
+import { createListingPage } from '$lib/utils/pagemeta';
 
-export const load: PageServerLoad = async () => ({
-	projects: getAllProjects()
-});
+export const { load } = createListingPage(getAllProjects, 'projects');

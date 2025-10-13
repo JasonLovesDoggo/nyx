@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from '$types';
 import { getFeaturedProjects } from '$lib/content/projects';
 import { fetchLatestCommits } from '$lib/api/commits';
 import { getLatestPosts } from '$lib/content/posts';

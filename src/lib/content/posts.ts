@@ -1,5 +1,4 @@
-import { error } from '@sveltejs/kit';
-import type { SvelteComponent } from 'svelte';
+import { createContentService, type ContentEntry } from './factory';
 
 export interface PostMetadata {
 	title: string;
@@ -10,66 +9,20 @@ export interface PostMetadata {
 	tags?: string[];
 }
 
-export interface PostEntry {
-	slug: string;
-	metadata: PostMetadata;
-}
+export type PostEntry = ContentEntry<PostMetadata>;
 
-export interface PostPageData extends PostEntry {
-	content: ConstructorOfATypedSvelteComponent;
-}
+const postService = createContentService<PostMetadata>({
+	modules: import.meta.glob('/content/posts/*.svx', { eager: true }),
+	contentType: 'post',
+	filter: (p) => {
+		const publishedAt = p.metadata?.published_at;
+		return !!publishedAt && !isNaN(new Date(publishedAt).getTime());
+	},
+	sort: (a, b) => +new Date(b.metadata.published_at!) - +new Date(a.metadata.published_at!)
+});
 
-// Eager‑glob at build time
-const postModules = import.meta.glob('/content/posts/*.svx', { eager: true });
+export const getAllPosts = postService.getAll;
+export const getPostBySlug = postService.getBySlug;
 
-// Helpers
-function slugFrom(path: string) {
-	return path.split('/').pop()!.replace('.svx', '');
-}
-
-let _allPosts: { slug: string; metadata: PostMetadata | undefined }[];
-export function getAllPosts(): { slug: string; metadata: PostMetadata | undefined }[] {
-	if (!_allPosts) {
-		_allPosts = Object.entries(postModules)
-			.map(([path, mod]) => {
-				const metadata = (mod as PostEntry)?.metadata as PostMetadata | undefined;
-
-				if (!metadata) {
-					console.error('❌ Invalid post module (YAML frontmatter failed to parse):', {
-						path,
-						suggestion:
-							'Check for unquoted colons, em-dashes, or invalid YAML syntax in frontmatter'
-					});
-				} else if (!metadata.published_at) {
-					console.error('❌ Invalid post module (missing published_at):', { path });
-				}
-
-				return {
-					slug: slugFrom(path),
-					metadata
-				};
-			})
-			.filter((p) => {
-				const publishedAt = p.metadata?.published_at;
-				return publishedAt && !isNaN(new Date(publishedAt).getTime());
-			})
-			.sort((a, b) => +new Date(b.metadata!.published_at!) - +new Date(a.metadata!.published_at!));
-	}
-	return _allPosts;
-}
-
-export function getPostBySlug(slug: string): PostPageData {
-	const path = `/content/posts/${slug}.svx`;
-	const mod = (postModules as Record<string, SvelteComponent>)[path];
-	if (!mod || !mod.metadata.published_at) throw error(404, `Post not found: ${slug}`);
-	return { slug, metadata: mod.metadata, content: mod.default } satisfies PostPageData;
-}
-
-let _latestPosts: { slug: string; metadata: PostMetadata | undefined }[];
-const postcount = 2;
-export function getLatestPosts(): { slug: string; metadata: PostMetadata | undefined }[] {
-	if (!_latestPosts) {
-		_latestPosts = getAllPosts().slice(0, postcount);
-	}
-	return _latestPosts;
-}
+const POST_COUNT = 2;
+export const getLatestPosts = () => postService.getLatest(POST_COUNT);

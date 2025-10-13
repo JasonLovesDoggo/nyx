@@ -3,11 +3,12 @@
  * All Rights Reserved
  */
 
-import type { PageLoad, EntryGenerator } from './$types';
 import { getAllTutorials, getTutorialBySlug } from '$lib/content/tutorials';
+import { createContentPage } from '$lib/utils/pagemeta';
 
-export const prerender = true;
+const { prerender, entries, load } = createContentPage({
+	getAll: getAllTutorials,
+	getBySlug: getTutorialBySlug
+});
 
-export const entries: EntryGenerator = () => getAllTutorials().map((t) => ({ slug: t.slug }));
-
-export const load: PageLoad = ({ params }) => getTutorialBySlug(params.slug);
+export { prerender, entries, load };

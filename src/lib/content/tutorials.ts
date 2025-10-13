@@ -3,8 +3,7 @@
  * All Rights Reserved
  */
 
-import { error } from '@sveltejs/kit';
-import type { SvelteComponent } from 'svelte';
+import { createContentService, type ContentEntry } from './factory';
 
 export interface TutorialMetadata {
 	title: string;
@@ -16,52 +15,20 @@ export interface TutorialMetadata {
 	sources?: { title: string; url: string }[]; // sources or references for the tutorial
 }
 
-export interface TutorialEntry {
-	slug: string;
-	metadata: TutorialMetadata;
-}
+export type TutorialEntry = ContentEntry<TutorialMetadata>;
 
-export interface TutorialPageData extends TutorialEntry {
-	content: ConstructorOfATypedSvelteComponent;
-}
+const tutorialService = createContentService<TutorialMetadata>({
+	modules: import.meta.glob('/content/tutorials/*.svx', { eager: true }),
+	contentType: 'tutorial',
+	filter: (p) => {
+		const publishedAt = p.metadata.published_at;
+		return !!publishedAt && !isNaN(new Date(publishedAt).getTime());
+	},
+	sort: (a, b) => +new Date(b.metadata.published_at!) - +new Date(a.metadata.published_at!)
+});
 
-// Eager‑glob at build time
-const tutorialModules = import.meta.glob('/content/tutorials/*.svx', { eager: true });
+export const getAllTutorials = tutorialService.getAll;
+export const getTutorialBySlug = tutorialService.getBySlug;
 
-// Helpers
-function slugFrom(path: string) {
-	return path.split('/').pop()!.replace('.svx', '');
-}
-
-let _allTutorials: TutorialEntry[];
-export function getAllTutorials(): TutorialEntry[] {
-	if (!_allTutorials) {
-		_allTutorials = Object.entries(tutorialModules)
-			.map(([path, mod]) => ({
-				slug: slugFrom(path),
-				metadata: (mod as TutorialEntry).metadata as TutorialMetadata
-			}))
-			.filter((p) => {
-				const publishedAt = p.metadata.published_at;
-				return publishedAt && !isNaN(new Date(publishedAt).getTime());
-			})
-			.sort((a, b) => +new Date(b.metadata.published_at!) - +new Date(a.metadata.published_at!));
-	}
-	return _allTutorials;
-}
-
-export function getTutorialBySlug(slug: string): TutorialPageData {
-	const path = `/content/tutorials/${slug}.svx`;
-	const mod = (tutorialModules as Record<string, SvelteComponent>)[path];
-	if (!mod || !mod.metadata.published_at) throw error(404, `Tutorial not found: ${slug}`);
-	return { slug, metadata: mod.metadata, content: mod.default } satisfies TutorialPageData;
-}
-
-let _latestTutorials: TutorialEntry[];
-const tutorialcount = 3; // Show 3 latest tutorials
-export function getLatestTutorials(): TutorialEntry[] {
-	if (!_latestTutorials) {
-		_latestTutorials = getAllTutorials().slice(0, tutorialcount);
-	}
-	return _latestTutorials;
-}
+const TUTORIAL_COUNT = 3; // Show 3 latest tutorials
+export const getLatestTutorials = () => tutorialService.getLatest(TUTORIAL_COUNT);

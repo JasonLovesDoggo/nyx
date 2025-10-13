@@ -1,8 +1,9 @@
-import type { PageLoad, EntryGenerator } from './$types';
 import { getAllPosts, getPostBySlug } from '$lib/content/posts';
+import { createContentPage } from '$lib/utils/pagemeta';
 
-export const prerender = true;
+const { prerender, entries, load } = createContentPage({
+	getAll: getAllPosts,
+	getBySlug: getPostBySlug
+});
 
-export const entries: EntryGenerator = () => getAllPosts().map((p) => ({ slug: p.slug }));
-
-export const load: PageLoad = ({ params }) => getPostBySlug(params.slug);
+export { prerender, entries, load };

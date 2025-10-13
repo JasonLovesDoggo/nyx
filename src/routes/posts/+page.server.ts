@@ -1,6 +1,4 @@
 import { getAllPosts } from '$lib/content/posts';
-import type { PageServerLoad } from '../$types';
+import { createListingPage } from '$lib/utils/pagemeta';
 
-export const load: PageServerLoad = () => ({
-	posts: getAllPosts()
-});
+export const { load } = createListingPage(getAllPosts, 'posts');
