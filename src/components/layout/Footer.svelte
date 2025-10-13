@@ -12,13 +12,11 @@
 	const shortSha = PUBLIC_COMMIT_SHA ? PUBLIC_COMMIT_SHA.substring(0, 7) : 'dev';
 	const commitLinkUrl = PUBLIC_COMMIT_SHA ? `${Site.repo.commitBaseUrl}${PUBLIC_COMMIT_SHA}` : '#';
 
-	// Store the initial visit timestamp
-	const visitStartStore = persistentWritable<number>('visit-start', {
-		defaultValue: () => Date.now()
-	});
-
 	let timeOnSite = $state('00:00');
-	const visitStart = $derived($visitStartStore);
+
+	const totalTimeOnSite = persistentWritable<number>('total-time-on-site', {
+		defaultValue: 0
+	});
 
 	function formatTime(seconds: number): string {
 		const hours = Math.floor(seconds / 3600);
@@ -33,13 +31,26 @@
 
 	onMount(() => {
 		if (browser) {
-			// Update timer every second
+			const sessionStart = Date.now();
+			const initialTime = $totalTimeOnSite;
+
 			const interval = setInterval(() => {
-				const elapsed = Math.floor((Date.now() - visitStart) / 1000);
-				timeOnSite = formatTime(elapsed);
+				const sessionElapsed = Math.floor((Date.now() - sessionStart) / 1000);
+				timeOnSite = formatTime(initialTime + sessionElapsed);
 			}, 1000);
 
-			return () => clearInterval(interval);
+			const saveTime = () => {
+				const sessionElapsed = Math.floor((Date.now() - sessionStart) / 1000);
+				$totalTimeOnSite = initialTime + sessionElapsed;
+			};
+
+			window.addEventListener('beforeunload', saveTime);
+
+			return () => {
+				clearInterval(interval);
+				window.removeEventListener('beforeunload', saveTime);
+				saveTime();
+			};
 		}
 	});
 </script>
