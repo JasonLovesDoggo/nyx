@@ -36,7 +36,8 @@
 		<h1 class="text-3xl font-bold md:text-4xl">
 			Hey! I'm
 			<span class="text-accent">
-				<span>
+				<span class="sr-only">Jason</span>
+				<span aria-hidden="true">
 					<span>J</span><span
 						class="decoration-accent/30 underline decoration-dashed opacity-70"
 						onmouseenter={() => (isNameHovered = true)}
@@ -45,11 +46,11 @@
 						onblur={() => (isNameHovered = false)}
 						tabindex="0"
 						role="button"
-						aria-label="Jason Cameron - Hover or focus to see a fun fact">a</span
+						aria-label="Hover or focus to see a fun fact about my name">a</span
 					><span>son</span>
 					<span class:hidden={!isNameHovered}>'JSON'</span>
 				</span>
-				<span>Cameron</span>
+				<span> Cameron</span>
 			</span>
 		</h1>
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
