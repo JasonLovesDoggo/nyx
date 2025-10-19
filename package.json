@@ -2,7 +2,7 @@
 	"name": "nyx",
 	"repository": "github.com/jasonlovesdoggo/nyx",
 	"private": true,
-	"version": "0.7.0",
+	"version": "0.8.0",
 	"type": "module",
 	"packageManager": "pnpm@10.15.1",
 	"scripts": {
@@ -58,6 +58,7 @@
 		"typescript": "^5.9.2",
 		"typescript-eslint": "^8.42.0",
 		"vite": "^6.3.5",
+		"wrangler": "4.43.0",
 		"yaml": "^2.8.1"
 	},
 	"pnpm": {

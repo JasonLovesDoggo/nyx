@@ -3,6 +3,11 @@ pages_build_output_dir = ".svelte-kit/cloudflare"
 compatibility_date = "2025-03-27"
 compatibility_flags = [ "nodejs_compat" ]
 
+# Cloudflare KV backing the SSR caches (created as `nyx-cache`)
+[[kv_namespaces]]
+binding = "NYXCACHE"
+id = "56cd1c76c106445a90921a6715aa9f29"
+
 [placement]
 mode = "off"
 
