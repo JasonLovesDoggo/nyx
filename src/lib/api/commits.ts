@@ -1,5 +1,6 @@
 import { measurePerformance } from '$lib/utils/performance';
-
+import { getKV, setKV, isCacheStale } from '$lib/utils/edge-cache';
+import type { KVNamespace } from '@cloudflare/workers-types';
 export interface CommitLanguage {
 	size: number;
 	name: string;
@@ -41,9 +42,8 @@ export interface CommitData {
 	totalCommits: number;
 }
 
-// Simple in-memory cache with TTL
-let CACHE: { data: CommitData; ts: number } | null = null;
-const TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
+const KV_KEY = 'katib:commits';
+const TTL_MS = 60 * 60 * 1000; // 1 hour
 
 // Fallback data as provided (v2 shape)
 const FALLBACK_RAW: KatibV2Response = {
@@ -122,55 +122,58 @@ function processResponse(data: KatibV2Response): CommitData {
 }
 
 /**
- * Fetches the latest commits from the katib API with timeout + cache (6h)
+ * Fetches the latest commits from the katib API with KV cache (stale-while-revalidate)
  */
-export async function fetchLatestCommits(): Promise<CommitData> {
-	// Return cached data immediately if available
-	if (CACHE) {
-		// Check if cache is stale
-		if (Date.now() - CACHE.ts >= TTL_MS) {
-			console.log('[PERF] fetchLatestCommits: STALE CACHE - triggering background refresh...');
-			// Trigger background refresh without awaiting
-			void refreshCache();
+export async function fetchLatestCommits(kv?: KVNamespace): Promise<CommitData> {
+	// If KV available, try cache-first approach
+	if (kv) {
+		const cached = await getKV<CommitData>(kv, KV_KEY);
+		if (cached) {
+			// Check if stale before refreshing
+			if (isCacheStale(cached, TTL_MS)) {
+				console.log('[PERF] fetchLatestCommits: Cache stale, refreshing in background');
+				void refreshCache(kv);
+			} else {
+				console.log('[PERF] fetchLatestCommits: Cache fresh, using cached data');
+			}
+			return cached.data;
 		}
-		return CACHE.data;
 	}
 
-	// No cache available, must fetch synchronously
+	// No KV or no cache - fetch directly
 	console.log('[PERF] fetchLatestCommits: NO CACHE - fetching from katib...');
-	return await refreshCache();
+	return await refreshCache(kv);
 }
 
-async function refreshCache(): Promise<CommitData> {
+async function refreshCache(kv?: KVNamespace): Promise<CommitData> {
 	return await measurePerformance('katib-api-fetch', async () => {
 		try {
-			const controller = new AbortController();
-			const id = setTimeout(() => controller.abort(), 2500);
 			const response = await fetch(
 				'https://katib.jasoncameron.dev/v2/commits/latest?username=JasonLovesDoggo&limit=5',
 				{
 					headers: { Accept: 'application/json', 'User-Agent': 'nyx-website/1.0' },
-					signal: controller.signal
+					signal: AbortSignal.timeout(800) // 800ms timeout (lowered from 2500ms)
 				}
 			);
-			clearTimeout(id);
 
 			if (!response.ok) throw new Error(`HTTP ${response.status}`);
 			const json: KatibV2Response = await response.json();
 			console.log(`[PERF] katib-response-size: ${JSON.stringify(json).length} bytes`);
 			const data = processResponse(json);
-			CACHE = { data, ts: Date.now() };
+			if (kv) await setKV(kv, KV_KEY, data);
 			return data;
 		} catch (err) {
-			console.warn('katib fetch failed, using fallback or cache:', err);
-			if (CACHE) {
-				console.log('Using stale cache after fetch failure');
-				return CACHE.data;
+			console.warn('katib fetch failed:', err);
+			// Try KV cache if available
+			if (kv) {
+				const cached = await getKV<CommitData>(kv, KV_KEY);
+				if (cached) {
+					console.log('Using stale KV cache after fetch failure');
+					return cached.data;
+				}
 			}
 			console.log('Using fallback data after fetch failure');
-			const data = processResponse(FALLBACK_RAW);
-			CACHE = { data, ts: Date.now() };
-			return data;
+			return processResponse(FALLBACK_RAW);
 		}
 	});
 }
