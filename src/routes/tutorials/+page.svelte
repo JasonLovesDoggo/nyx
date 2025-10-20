@@ -5,9 +5,7 @@
 
 <script lang="ts">
 	import { formatDate } from '$lib/utils/date';
-	import { scale } from 'svelte/transition';
 	import type { TutorialEntry } from '$lib/content/tutorials';
-	import { backOut } from 'svelte/easing';
 
 	export let data: { tutorials: TutorialEntry[] };
 </script>
@@ -30,11 +28,6 @@
   after:content-[''] hover:after:w-full
   focus-visible:ring-2
 "
-					in:scale|global={{
-						delay: 250 * index + 100,
-						duration: 750,
-						easing: backOut
-					}}
 				>
 					<div class="flex items-baseline justify-between gap-4">
 						<h2

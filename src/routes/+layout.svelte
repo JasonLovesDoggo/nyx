@@ -4,6 +4,7 @@
 	import Footer from '../components/layout/Footer.svelte';
 	import Sidebar from '../components/layout/Sidebar.svelte';
 	import { page } from '$app/state';
+	import { onNavigate } from '$app/navigation';
 	import Site from '$lib/config/common';
 	import BackgroundEffect from '$components/BackgroundEffect.svelte';
 	import { BackgroundEnabled } from '$lib/stores/theme';
@@ -21,6 +22,18 @@
 	function closeSidebar() {
 		isSidebarOpen = false;
 	}
+
+	// Enable View Transitions API for SvelteKit navigation
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <svelte:head>

@@ -53,55 +53,40 @@
 
 /*View Transitions */
 
-/* for firefox */
+/* for firefox - match view transition timing */
 @utility bg-* {
-	@apply transition-colors duration-600 ease-in-out;
+	@apply transition-colors duration-400 ease-in-out;
 }
 
 @utility text-* {
-	@apply transition-colors duration-600 ease-in-out;
+	@apply transition-colors duration-400 ease-in-out;
 }
 
 @utility border-* {
-	@apply transition-colors duration-600 ease-in-out;
+	@apply transition-colors duration-400 ease-in-out;
 }
 
 @utility ring-* {
-	@apply transition-colors duration-600 ease-in-out;
+	@apply transition-colors duration-400 ease-in-out;
 }
 
 @utility text-normal {
 	font-size: var(--text-base); /* 1rem (16px) */
 	line-height: var(--text-base--line-height); /* calc(1.5 / 1) */
 }
-/*for chrome*/
+/* View transitions - smooth crossfade for everything */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-	animation: none;
-	mix-blend-mode: normal;
+	animation-duration: 0.4s;
+	animation-timing-function: ease-in-out;
 }
 
-::view-transition-old(root) {
-	z-index: 0;
-}
-
-::view-transition-new(root) {
-	z-index: 9999;
-	animation: reveal 0.7s linear forwards;
-}
-
-/* Circle Reveal Keyframe */
-@keyframes reveal {
-	from {
-		clip-path: circle(
-			0% at var(--x, 50%) var(--y, 50%)
-		); /*todo: make the effect take place at the current cursor location? (set x, cursor)*/
-		opacity: 0.7;
-	}
-	to {
-		clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
-		opacity: 1;
-	}
+/* Shared element transitions - smooth morph for titles and images */
+::view-transition-old(*):not(::view-transition-old(root)),
+::view-transition-new(*):not(::view-transition-new(root)) {
+	animation-duration: 0.4s;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	overflow: clip;
 }
 
 @utility link {

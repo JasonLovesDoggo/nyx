@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils/date';
-	import { scale } from 'svelte/transition';
 	import type { PostEntry } from '$lib/content/posts';
-	import { backOut } from 'svelte/easing';
 
 	export let data: { posts: PostEntry[] };
 </script>
@@ -25,15 +23,11 @@
   after:content-[''] hover:after:w-full
   focus-visible:ring-2
 "
-					in:scale|global={{
-						delay: 250 * index + 100,
-						duration: 750,
-						easing: backOut
-					}}
 				>
 					<div class="flex items-baseline justify-between gap-4">
 						<h2
 							class="text-text group-hover:text-accent text-lg font-medium transition-colors duration-200 ease-in-out"
+							style:view-transition-name="post-title-{post.slug}"
 						>
 							{post.metadata.title}
 						</h2>

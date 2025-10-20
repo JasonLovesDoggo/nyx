@@ -33,6 +33,7 @@
 							src={project.metadata.image.url}
 							alt={project.metadata.image.alt}
 							class="mb-4 aspect-video w-full rounded-md"
+							style:view-transition-name="project-img-{project.slug}"
 						/>
 					{:else}
 						<div class="bg-surface2 mb-4 aspect-video w-full rounded-md"></div>
@@ -40,6 +41,7 @@
 					<div class="flex items-center justify-between gap-3 pe-3">
 						<h2
 							class="text-text group-hover:text-accent min-w-0 flex-1 truncate text-xl font-semibold"
+							style:view-transition-name="project-title-{project.slug}"
 						>
 							{project.metadata.title}
 						</h2>
