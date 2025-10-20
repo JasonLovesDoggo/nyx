@@ -52,7 +52,7 @@
 				| Updated {formatDate(data.metadata.updated_at)}
 			{/if}
 		</p>
-		<PostTags post={data} slug={data.slug} />
+		<PostTags post={data} />
 	</header>
 
 	<article class="prose mx-auto mb-6 max-w-4xl">

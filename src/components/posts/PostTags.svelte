@@ -5,12 +5,11 @@
 
 	interface Props {
 		post: PostEntry;
-		slug: string;
 		showIcon?: boolean;
 		colored?: boolean;
 	}
 
-	let { post, slug, showIcon = true, colored = true }: Props = $props();
+	let { post, showIcon = true, colored = true }: Props = $props();
 
 	// Simple hash function
 	function hashCode(str: string): number {
@@ -23,7 +22,7 @@
 	}
 
 	// Assign hash-based color to each tag
-	const colorHash = post.metadata.title?.hash || slug;
+	const colorHash = post.metadata.title?.hash || post.slug;
 	const tagColors =
 		post.metadata.tags?.reduce(
 			(acc, tag, index) => {
@@ -41,7 +40,7 @@
 			<IconTag size={18} />
 		{/if}
 
-		{#each post.metadata.tags as tag (slug + tag)}
+		{#each post.metadata.tags as tag (post.slug + tag)}
 			<span
 				class="tag bg-surface0 rounded px-2 py-1 font-semibold"
 				class:text-subtext0={!colored}

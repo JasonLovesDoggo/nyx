@@ -102,7 +102,7 @@
 						<p class="text-subtext1 text-sm">
 							{post.metadata.description}
 						</p>
-						<PostTags {post} slug={post.slug} showIcon={false} colored={false} />
+						<PostTags {post} showIcon={false} colored={false} />
 					</article>
 				</a>
 			{/each}
