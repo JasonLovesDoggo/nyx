@@ -2,6 +2,7 @@
 	import { formatDate } from '$lib/utils/date';
 	import type { PostPageData } from '$lib/content/posts';
 	import SlabTitle from '$components/SlabTitle.svelte';
+	import PostTags from '$components/posts/PostTags.svelte';
 
 	export let data: PostPageData;
 	import '$lib/styles/content.css';
@@ -51,13 +52,7 @@
 				| Updated {formatDate(data.metadata.updated_at)}
 			{/if}
 		</p>
-		{#if data.metadata.tags}
-			<div class="flex flex-wrap gap-2">
-				{#each data.metadata.tags as tag (data.slug + tag)}
-					<span class="bg-surface1 rounded px-2 py-1 text-xs">{tag}</span>
-				{/each}
-			</div>
-		{/if}
+		<PostTags post={data} slug={data.slug} />
 	</header>
 
 	<article class="prose mx-auto mb-6 max-w-4xl">

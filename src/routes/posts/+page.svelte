@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils/date';
 	import type { PostEntry } from '$lib/content/posts';
+	import PostTags from '$components/posts/PostTags.svelte';
 
 	export let data: { posts: PostEntry[] };
 
@@ -101,6 +102,7 @@
 						<p class="text-subtext1 text-sm">
 							{post.metadata.description}
 						</p>
+						<PostTags {post} slug={post.slug} showIcon={false} colored={false} />
 					</article>
 				</a>
 			{/each}
