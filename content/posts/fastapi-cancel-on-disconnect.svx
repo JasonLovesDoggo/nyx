@@ -1,8 +1,11 @@
 ~~~
-title = "Stop Wasting CPU: Kill Dead FastAPI Streams When Clients Bail"
 description = "Monitor FastAPI client connections and auto-cancel abandoned streaming tasks with structured concurrency"
 published_at = "2025-07-06"
 tags = ["fastapi", "python", "async", "streaming"]
+
+[title]
+text = "Stop Burning CPU on Dead FastAPI Streams"
+config = "4 3ci 3 2c 8 3c 3i"
 ~~~
 
 ## The Problem
@@ -100,14 +103,6 @@ async with cancel_on_disconnect(request):
 
 Without this: million-row job runs after user closes browser.  
 With this: disconnection kills task instantly.
-
-## Impact
-
-Real ML service results:
-- Orphaned tasks: ~40/sec → 0 during peak
-- CPU utilization: -15% 
-- P95 response times: -200ms
-- OOM incidents: daily → never
 
 ## Database gotcha
 

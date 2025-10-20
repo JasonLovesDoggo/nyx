@@ -1,8 +1,12 @@
 ~~~
-title = "How to Stop AI Streams Without Breaking Everything"
 description = "Build reliable cancellation for Agno AI streaming with FastAPI, WebSockets, and Redis. 5 battle-tested patterns with real failure modes."
 published_at = "2025-07-05"
 tags = ["agno", "ai-streaming", "fastapi", "cancellation", "redis"]
+
+[title]
+text = "How to Stop AI streams in Agno"
+config = "3.5 3c 10 3ic 4c 2ceh  3.5"
+hash = "hi"
 ~~~
 
 ## The Pain Point
@@ -15,13 +19,13 @@ In [Agno](https://github.com/agno-agi/agno), we solved this by implementing grac
 
 ## Choose Your Cancellation Strategy
 
-| Method               | Use Case                           | Pros                           | Cons                              |
-| -------------------- | ---------------------------------- | ------------------------------ | --------------------------------- |
-| HTTP Disconnect      | FastAPI streaming endpoints        | Simple, no infra needed        | Relies on ASGI behavior           |
-| AbortController      | Browser clients                    | Instant client-side cancel     | Doesn't notify backend cleanly    |
-| WebSocket Disconnect | Real-time chat                     | Clean disconnect handling      | Requires WebSocket support        |
-| SSE Monitoring       | Live updates / events              | Works with standard HTTP       | Not all clients support SSE       |
-| Redis Stop Endpoint  | Mobile apps, stateful backend control | Durable + works across tabs | Adds Redis dependency           |
+| Method               | Use Case                              | Pros                        | Cons                           |
+|----------------------|---------------------------------------|-----------------------------|--------------------------------|
+| HTTP Disconnect      | FastAPI streaming endpoints           | Simple, no infra needed     | Relies on ASGI behavior        |
+| AbortController      | Browser clients                       | Instant client-side cancel  | Doesn't notify backend cleanly |
+| WebSocket Disconnect | Real-time chat                        | Clean disconnect handling   | Requires WebSocket support     |
+| SSE Monitoring       | Live updates / events                 | Works with standard HTTP    | Not all clients support SSE    |
+| Redis Stop Endpoint  | Mobile apps, stateful backend control | Durable + works across tabs | Adds Redis dependency          |
 
 ## Pattern 1: HTTP Disconnect Detection (Agno's Primary Method)
 

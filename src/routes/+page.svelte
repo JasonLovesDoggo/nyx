@@ -22,7 +22,10 @@
 	type PageData = {
 		featuredProjects: FeaturedProject[];
 		commitData: CommitData;
-		latestPosts: { slug: string; metadata: { title: string; published_at: string } }[];
+		latestPosts: {
+			slug: string;
+			metadata: { title: { text: string; config?: string }; published_at: string };
+		}[];
 	};
 
 	let { data }: { data: PageData } = $props();
@@ -277,16 +280,21 @@
 				{#if data.latestPosts.length > 0}
 					<ul class="list-none space-y-2">
 						{#each data.latestPosts as post (post.slug)}
+							{@const words = post.metadata.title.text.split(' ')}
+							{@const safePath = post.slug.split('/').pop() || post.slug}
 							<li>
 								<a
 									href={'/posts/' + post.slug}
 									class="text-subtext0 hover:text-accent flex min-w-0 items-center gap-2 text-sm"
 								>
-									<span
-										class="min-w-0 flex-1 truncate"
-										style:view-transition-name="post-title-{post.slug}"
-									>
-										{post.metadata.title}
+									<span class="min-w-0 flex-1 truncate">
+										{#each words as word, i}
+											{@const normalized = word.toLowerCase().replace(/[^a-z0-9\s-_]/g, '')}
+											{@const vtName = `_${safePath}__${normalized}`}
+											<span style="view-transition-name: {vtName};">
+												{word}{i < words.length - 1 ? ' ' : ''}
+											</span>
+										{/each}
 									</span>
 
 									{#if post.metadata.published_at}

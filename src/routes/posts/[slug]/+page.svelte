@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils/date';
 	import type { PostPageData } from '$lib/content/posts';
+	import SlabTitle from '$components/SlabTitle.svelte';
 
 	export let data: PostPageData;
 	import '$lib/styles/content.css';
@@ -11,18 +12,18 @@
 </script>
 
 <svelte:head>
-	<title>{data.metadata.title}</title>
+	<title>{data.metadata.title.text}</title>
 	<meta name="description" content={data.metadata.description} />
 	{#if data.metadata.tags}
 		<meta name="keywords" content={data.metadata.tags.join(', ')} />
 	{/if}
-	<meta property="og:title" content={data.metadata.title} />
+	<meta property="og:title" content={data.metadata.title.text} />
 	<meta property="og:description" content={data.metadata.description} />
 	{#if data.metadata.image}
 		<meta property="og:image" content={new URL(data.metadata.image.url, page.url.origin).href} />
 	{/if}
 	<meta property="og:type" content="article" />
-	<meta name="twitter:title" content={data.metadata.title} />
+	<meta name="twitter:title" content={data.metadata.title.text} />
 	<meta name="twitter:description" content={data.metadata.description} />
 	{#if data.metadata.image}
 		<meta
@@ -32,11 +33,14 @@
 	{/if}
 </svelte:head>
 
-<article class="prose mx-auto mb-6 max-w-4xl">
-	<header class="mb-8 space-y-2">
-		<h1 class="text-3xl font-bold" style:view-transition-name="post-title-{data.slug}">
-			{data.metadata.title}
-		</h1>
+<div class="mx-auto max-w-4xl px-4">
+	<header class="mb-12 space-y-4">
+		<SlabTitle
+			title={data.metadata.title.text}
+			slug={data.slug}
+			config={data.metadata.title?.config}
+			hash={data.metadata.title?.hash}
+		/>
 		<p class="text-subtext0 text-sm">
 			{#if data.metadata.published_at}
 				{formatDate(data.metadata.published_at)}
@@ -56,9 +60,7 @@
 		{/if}
 	</header>
 
-	<hr />
-
-	<div class="mt-8">
+	<article class="prose mx-auto mb-6 max-w-4xl">
 		<Content />
-	</div>
-</article>
+	</article>
+</div>

@@ -55,36 +55,35 @@
 
 /* for firefox - match view transition timing */
 @utility bg-* {
-	@apply transition-colors duration-400 ease-in-out;
+	@apply transition-colors duration-500 ease-in-out;
 }
 
 @utility text-* {
-	@apply transition-colors duration-400 ease-in-out;
+	@apply transition-colors duration-500 ease-in-out;
 }
 
 @utility border-* {
-	@apply transition-colors duration-400 ease-in-out;
+	@apply transition-colors duration-500 ease-in-out;
 }
 
 @utility ring-* {
-	@apply transition-colors duration-400 ease-in-out;
+	@apply transition-colors duration-500 ease-in-out;
 }
 
 @utility text-normal {
 	font-size: var(--text-base); /* 1rem (16px) */
 	line-height: var(--text-base--line-height); /* calc(1.5 / 1) */
 }
-/* View transitions - smooth crossfade for everything */
+/* View transitions - instant crossfade for page navigation */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-	animation-duration: 0.4s;
-	animation-timing-function: ease-in-out;
+	animation-duration: 0s;
 }
 
 /* Shared element transitions - smooth morph for titles and images */
 ::view-transition-old(*):not(::view-transition-old(root)),
 ::view-transition-new(*):not(::view-transition-new(root)) {
-	animation-duration: 0.4s;
+	animation-duration: 0.6s;
 	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	overflow: clip;
 }

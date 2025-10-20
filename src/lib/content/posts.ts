@@ -6,7 +6,11 @@ export interface PostImage {
 }
 
 export interface PostMetadata {
-	title: string;
+	title: {
+		text: string;
+		config?: string;
+		hash?: string;
+	};
 	description: string;
 	image?: PostImage;
 	updated_at?: string;
