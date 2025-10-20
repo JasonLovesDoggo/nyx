@@ -12,6 +12,7 @@ import remarkAbbr from 'remark-abbr';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeUnwrapImages from 'rehype-unwrap-images';
 import { parse } from 'smol-toml';
+import rehypeExternalLinks from 'rehype-external-links';
 
 const highlighter = await createHighlighter({
 	langs: Object.keys(bundledLanguages),
@@ -68,6 +69,14 @@ const mdsvexOptions = {
 				properties: {
 					className: ['sec-anchor']
 				}
+			}
+		],
+		[
+			rehypeExternalLinks,
+			{
+				target: '_blank',
+				rel: ['noopener', 'noreferrer'],
+				protocols: ['http', 'https'] // 👈 only these count as external
 			}
 		],
 		rehypeKatex,
