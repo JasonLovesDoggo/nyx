@@ -33,5 +33,5 @@ const postService = createContentService<PostMetadata>({
 export const getAllPosts = postService.getAll;
 export const getPostBySlug = postService.getBySlug;
 
-const POST_COUNT = 2;
+const POST_COUNT = 4;
 export const getLatestPosts = () => postService.getLatest(POST_COUNT);
