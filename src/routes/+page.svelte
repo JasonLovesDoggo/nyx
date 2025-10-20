@@ -282,7 +282,10 @@
 									href={'/posts/' + post.slug}
 									class="text-subtext0 hover:text-accent flex min-w-0 items-center gap-2 text-sm"
 								>
-									<span class="min-w-0 flex-1 truncate">
+									<span
+										class="min-w-0 flex-1 truncate"
+										style:view-transition-name="post-title-{post.slug}"
+									>
 										{post.metadata.title}
 									</span>
 

@@ -46,12 +46,16 @@
 								src={project.metadata.image.url}
 								alt={project.metadata.image.alt}
 								class="aspect-video w-full transition-transform duration-300 group-hover:scale-105"
+								style:view-transition-name="project-img-{project.slug}"
 							/>
 						</div>
 					{/if}
 
 					<div class="space-y-3 p-5">
-						<h3 class="text-text group-hover:text-accent text-xl font-semibold transition-colors">
+						<h3
+							class="text-text group-hover:text-accent text-xl font-semibold transition-colors"
+							style:view-transition-name="project-title-{project.slug}"
+						>
 							{project.metadata.title}
 						</h3>
 						<p class="text-subtext0 line-clamp-2 text-sm">{project.metadata.description}</p>

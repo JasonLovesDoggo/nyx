@@ -8,11 +8,8 @@ import { persistentWritable } from './persistance';
 
 function handleTransition(callback: () => void) {
 	if (!browser) return;
-	if (document.startViewTransition) {
-		document.startViewTransition(callback);
-	} else {
-		callback();
-	}
+	// Just use CSS transitions - no view transitions for theme changes
+	callback();
 }
 
 // --- Accent Colors ---

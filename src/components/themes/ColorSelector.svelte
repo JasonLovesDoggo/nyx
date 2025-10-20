@@ -1,23 +1,35 @@
 <script>
 	import { Accent, accentColorNames, BackgroundEnabled } from '$lib/stores/theme';
+
+	$: selectedIndex = accentColorNames.indexOf($Accent);
+	$: row = Math.floor(selectedIndex / 7);
+	$: col = selectedIndex % 7;
 </script>
 
-<div class="grid grid-cols-7 gap-2.5 md:gap-1.5">
-	{#key $Accent}
-		{#each accentColorNames as colorName (colorName)}
-			{@const isSelected = $Accent === colorName}
-			<button
-				aria-label={`Select ${colorName} accent color`}
-				title={colorName.charAt(0).toUpperCase() + colorName.slice(1)}
-				onclick={() => ($Accent = colorName)}
-				style:background-color={`var(--color-${colorName})`}
-				style:color={`var(--color-${colorName})`}
-				class={`aspect-square min-h-5 w-full min-w-5 cursor-pointer rounded-md shadow-sm transition-all duration-150 ${isSelected ? 'ring-offset-base scale-105 ring-2 ring-current ring-offset-2' : 'opacity-80 hover:scale-110 hover:opacity-100'}`}
-			>
-				<span class="sr-only">{colorName}</span>
-			</button>
-		{/each}
-	{/key}
+<div class="relative grid grid-cols-7 gap-2.5 md:gap-1.5">
+	{#each accentColorNames as colorName, i}
+		{@const isSelected = $Accent === colorName}
+		<button
+			aria-label={`Select ${colorName} accent color`}
+			title={colorName.charAt(0).toUpperCase() + colorName.slice(1)}
+			onclick={() => ($Accent = colorName)}
+			style:background-color={`var(--color-${colorName})`}
+			class={`aspect-square min-h-5 w-full min-w-5 cursor-pointer rounded-md shadow-sm transition-all duration-150 ${isSelected ? 'scale-105' : 'opacity-80 hover:scale-110 hover:opacity-100'}`}
+		>
+			<span class="sr-only">{colorName}</span>
+		</button>
+	{/each}
+
+	<!-- animated ring -->
+	<div
+		class="ring-offset-base pointer-events-none absolute aspect-square min-h-5 min-w-5 rounded-md ring-2 ring-offset-2 transition-all duration-300 ease-out"
+		style="
+			transform: translate(calc({col} * (100% + 0.625rem)), calc({row} * (100% + 0.625rem)));
+			width: calc((100% - 6 * 0.625rem) / 7);
+			color: var(--color-{$Accent});
+			--tw-ring-color: currentColor;
+		"
+	></div>
 </div>
 
 <div class="mt-4 flex items-center">

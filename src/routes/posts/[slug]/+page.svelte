@@ -34,7 +34,9 @@
 
 <article class="prose mx-auto mb-6 max-w-4xl">
 	<header class="mb-8 space-y-2">
-		<h1 class="text-3xl font-bold">{data.metadata.title}</h1>
+		<h1 class="text-3xl font-bold" style:view-transition-name="post-title-{data.slug}">
+			{data.metadata.title}
+		</h1>
 		<p class="text-subtext0 text-sm">
 			{#if data.metadata.published_at}
 				{formatDate(data.metadata.published_at)}

@@ -40,18 +40,22 @@
 <article class="prose mx-auto mb-6 max-w-4xl">
 	<!-- Banner Image -->
 	{#if data.metadata.image}
-		<div class=" bg-red mb-8 rounded-lg md:rounded-xl">
+		<div class="mb-8 rounded-lg md:rounded-xl">
 			<img
 				src={data.metadata.image.url}
 				alt={data.metadata.image.alt}
 				class="aspect-video rounded-lg md:rounded-xl"
+				style:view-transition-name="project-img-{data.slug}"
 			/>
 		</div>
 	{/if}
 
 	<!-- Header Section -->
 	<header class="mb-8 space-y-4">
-		<h1 class="text-3xl font-bold md:text-4xl">
+		<h1
+			class="text-3xl font-bold md:text-4xl"
+			style:view-transition-name="project-title-{data.slug}"
+		>
 			{data.metadata.title}
 		</h1>
 
