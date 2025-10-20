@@ -12,9 +12,7 @@ config = "8c 8"
 fmt.Println("Hello, World!");
 ```
 
-After way too much procrastination, I finally built a new website. It's built with [SvelteKit](https://svelte.
-dev/docs/kit/introduction), [MDsveX]
-(https://mdsvex.pngwn.io/), Tailwind, and
+After way too much procrastination, I finally built a new website. It's built with [SvelteKit](https://svelte.dev/docs/kit/introduction), [MDsveX](https://mdsvex.pngwn.io/), Tailwind, and
 themed with [Catppuccin](https://catppuccin.com/) (the same palette I use in my editors).
 
 I wanted to fully build my own site from scratch. Give my frontend skills a real workout, experiment with UI design, and see what I could actually pull off.
