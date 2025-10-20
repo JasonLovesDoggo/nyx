@@ -110,14 +110,14 @@
 {/snippet}
 
 {#if href}
-	<a {href} class="mx-auto mb-6 block w-full max-w-4xl outline-none">
+	<a {href} class="mx-auto mb-6 block w-full max-w-4xl px-4 outline-none">
 		<h2 class="mx-auto flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-2">
 			{@render slabWords()}
 		</h2>
 	</a>
 {:else}
 	<h1
-		class="mx-auto mb-6 flex w-full max-w-4xl flex-wrap items-center justify-center gap-x-3 gap-y-2"
+		class="mx-auto mb-6 flex w-full max-w-4xl flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4"
 	>
 		{@render slabWords()}
 	</h1>
