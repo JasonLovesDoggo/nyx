@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils/date';
 	import type { PostEntry } from '$lib/content/posts';
+	import PostTags from '$components/posts/PostTags.svelte';
 
 	export let data: { posts: PostEntry[] };
 
@@ -26,7 +27,7 @@
 		let hash = 0;
 		for (let i = 0; i < str.length; i++) {
 			hash = (hash << 5) - hash + str.charCodeAt(i);
-			hash = hash & hash;
+			hash |= 0;
 		}
 		return Math.abs(hash);
 	}
@@ -101,6 +102,7 @@
 						<p class="text-subtext1 text-sm">
 							{post.metadata.description}
 						</p>
+						<PostTags {post} showIcon={false} colored={false} />
 					</article>
 				</a>
 			{/each}

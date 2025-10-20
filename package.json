@@ -2,7 +2,7 @@
 	"name": "nyx",
 	"repository": "github.com/jasonlovesdoggo/nyx",
 	"private": true,
-	"version": "0.8.0",
+	"version": "0.9.0",
 	"type": "module",
 	"packageManager": "pnpm@10.15.1",
 	"scripts": {

@@ -1,0 +1,27 @@
+~~~
+description = "Hey there - What this site is built with and how it works."
+published_at = "2025-10-19"
+tags = ["meta", "web-dev", "sveltekit"]
+
+[title]
+text = "Hello World"
+config = "8c 8"
+~~~
+
+```go
+fmt.Println("Hello, World!");
+```
+
+After way too much procrastination, I finally built a new website. It's built with [SvelteKit](https://svelte.
+dev/docs/kit/introduction), [MDsveX]
+(https://mdsvex.pngwn.io/), Tailwind, and
+themed with [Catppuccin](https://catppuccin.com/) (the same palette I use in my editors).
+
+I wanted to fully build my own site from scratch. Give my frontend skills a real workout, experiment with UI design, and see what I could actually pull off.
+
+Finally, I want to write more. More posts about things I'm building, solutions to problems that took forever to figure out, and short notes that don't need to be full blog posts but might help someone.
+
+You can see my [design ideation notes](https://notes.jasoncameron.dev/Website) if you're curious about the process. Code's on [GitHub](https://github.com/jasonlovesdoggo/nyx).
+
+So yeah, new site. Let's see where this goes.
+
