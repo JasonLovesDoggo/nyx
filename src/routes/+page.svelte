@@ -300,7 +300,7 @@
 									{#if post.metadata.published_at}
 										<span class="text-surface1 mx-2 flex-shrink-0 text-xs">–</span>
 										<span class="text-subtext1 flex-shrink-0 text-xs whitespace-nowrap">
-											{formatDate(post.metadata.published_at)}
+											{formatDate(post.metadata.published_at, { shortMonth: true })}
 										</span>
 									{/if}
 								</a>

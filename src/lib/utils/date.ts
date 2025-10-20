@@ -1,8 +1,12 @@
-export function formatDate(dateString: string, options?: { yearMonthOnly?: boolean }) {
+export function formatDate(
+	dateString: string,
+	options?: { yearMonthOnly?: boolean; shortMonth?: boolean }
+) {
 	try {
+		const monthFormat = options?.shortMonth ? 'short' : 'long';
 		const formatOptions: Intl.DateTimeFormatOptions = options?.yearMonthOnly
-			? { year: 'numeric', month: 'long' }
-			: { year: 'numeric', month: 'long', day: 'numeric' };
+			? { year: 'numeric', month: monthFormat }
+			: { year: 'numeric', month: monthFormat, day: '2-digit' };
 
 		// Parse YYYY-MM-DD as local date to avoid timezone issues
 		const match = dateString.match(/^(\d{4})-(\d{2})-(\d{2})/);
