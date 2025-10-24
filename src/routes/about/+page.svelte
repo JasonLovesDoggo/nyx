@@ -158,9 +158,9 @@
 					Some of my more notable projects are {@render GithubProject(
 						'RedditVideoMakerBot',
 						'https://github.com/elebumm/RedditVideoMakerBot',
-						8250
+						8265
 					)} where I reverse engineered TikTok's TTS API and <!--todo: blogpost!?-->
-					{@render GithubProject('Anubis', '/projects/anubis', 12980)}, an anti AI scraper tool
+					{@render GithubProject('Anubis', '/projects/anubis', 13914)}, an anti AI scraper tool
 					which is currently being used by organizations such as The Linux Foundation or the UN.
 					Most of my work is centered around backend development or system administration. Some
 					sites that I run include {@render ExternalLink('https://maclyonsden.com/', 'metropolis')},
