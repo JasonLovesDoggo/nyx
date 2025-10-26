@@ -106,5 +106,5 @@ export function getRandomAccentColor() {
 }
 
 export const BackgroundEnabled = persistentWritable<boolean>('background-enabled', {
-	defaultValue: true
+	defaultValue: false
 });
