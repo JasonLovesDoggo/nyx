@@ -10,9 +10,13 @@
 
 	type Props = {
 		projects: FeaturedProject[];
+		maxProjects: number;
 	};
 
-	let { projects }: Props = $props();
+	let { projects, maxProjects }: Props = $props();
+
+	// reduce projects down to maxProjects
+	projects = projects.slice(0, maxProjects);
 </script>
 
 {#if projects.length > 0}
