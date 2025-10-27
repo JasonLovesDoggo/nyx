@@ -10,12 +10,16 @@ interface NavItem {
 // Separate main nav items from the 'More' items
 export const mainNavItems: NavItem[] = [
 	{ title: 'About', href: '/about' },
-	{ title: 'Tutorials', href: '/tutorials' },
+	{ title: 'Posts', href: '/posts' },
 	{ title: 'Projects', href: '/projects' },
 	{ title: 'Resume', href: '/resume.pdf', external: true }
 ];
 
-export const moreNavItems: NavItem[] = [{ title: 'Posts', href: '/posts' }];
+export const moreNavItems: NavItem[] = [
+	{ title: 'Tutorials', href: '/tutorials' },
+	{ title: 'Notes', href: 'https://notes.jasoncameron.dev', external: true },
+	{ title: 'Terminal', href: 'https://terminal.jasoncameron.dev', external: true }
+];
 // Example 'More' items - add your 20+ items here
 // export const moreNavItems: NavItem[] = [
 // 	{ title: 'Blog', href: '/blog' }, // Example internal
