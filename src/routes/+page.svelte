@@ -39,7 +39,7 @@
 		<h1 class="text-3xl font-bold md:text-4xl">
 			Hey! I'm
 			<span class="text-accent">
-				<span class="sr-only">Jason</span>
+				<span class="sr-only select-none">Jason</span>
 				<span aria-hidden="true">
 					<span>J</span><span
 						class="decoration-accent/30 underline decoration-dashed opacity-70"
@@ -57,7 +57,12 @@
 			</span>
 		</h1>
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
-			A student building and securing web infrastructure. I've written software that is trusted by
+			I'm currently working as a Senior SWE @ <a
+				class="link text-accent/85"
+				target="_blank"
+				rel="noopener"
+				href="https://stan.store">Stan</a
+			>. I've written software that is trusted by
 			<a
 				class="link text-accent/85"
 				target="_blank"
@@ -76,8 +81,11 @@
 			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://gitlab.gnome.org"
 				>GNOME</a
 			>,
-			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://bugs.winehq.com"
-				>Wine</a
+			<a
+				class="link text-accent/85"
+				target="_blank"
+				rel="noopener"
+				href="https://gitlab.steamos.cloud">Value</a
 			>,
 			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://trac.ffmpeg.org"
 				>FFmpeg</a
@@ -85,13 +93,8 @@
 			and many others<a
 				href="/projects/anubis"
 				class="hover:text-accent ml-0.5 align-super text-xs font-semibold">[1]</a
-			>. My code is used by
-			<b class="text-accent">millions</b> of people worldwide. <br />I focus on
-			<b class="text-text">backend web development</b>,
-			<b class="text-text">scalable and distributed systems</b>,
-			<b class="text-text">DevOps</b>, and
-			<b class="text-text">cybersecurity</b>, especially crafting defenses against automated
-			threats. I enjoy leading initiatives and tackling complex technical challenges.
+			>. Seeing code I wrote actually help people at scale is what keeps me building. Currently
+			building AI that helps people articulate their ideas and share them at scale.
 		</p>
 		<div class="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2">
 			{#each Home.socialLinks as link (link.href)}
@@ -124,7 +127,7 @@
 	<Experience />
 
 	<!-- Section: Featured Projects -->
-	<Featured projects={data.featuredProjects} />
+	<Featured projects={data.featuredProjects} maxProjects={2} />
 
 	<!-- Section: Bento Grid Container -->
 	<section class="px-4 md:px-0">

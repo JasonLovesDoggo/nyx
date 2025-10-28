@@ -1,0 +1,92 @@
+~~~
+title = "ToyReduce"
+description = "A tiny, distributed MapReduce system in Go with automatic parallelization, fault-tolerant scheduling, and P2P shuffle. Features real-time web UI for monitoring and job submission."
+date = "2025-10-13"
+published = true
+tags = ["golang", "distributed-systems", "mapreduce", "hadoop", "p2p", "web-ui", "svelte"]
+
+[image]
+url = "/projects/toyreduce.webp"
+alt = "ToyReduce distributed MapReduce system"
+
+[[links]]
+text = "GitHub"
+url = "https://github.com/JasonLovesDoggo/toyreduce"
+
+[[links]]
+text = "Demo"
+url = "https://github.com/user-attachments/assets/c1b89e8c-bd8b-4c79-9994-19b00951a3a2"
+~~~
+
+# ToyReduce
+
+A tiny, hackable distributed MapReduce system written in Go that implements the core ideas from Google's MapReduce paper with aspects of Hadoop's architecture. It features automatic parallelization, fault-tolerant task scheduling, distributed intermediate storage, and peer-to-peer data transfer over plain HTTP.
+
+Workers store intermediate data locally and shuffle via P2P, eliminating the centralized storage bottleneck. The system includes a real-time web UI for job monitoring and submission.
+
+## Architecture
+
+The system follows a Hadoop-like shuffle architecture with three types of nodes:
+
+- **Master** (port 8080): Manages job queue, assigns tasks to workers, tracks completion, provides web UI
+- **Workers** (ephemeral ports): Execute map/reduce tasks, store intermediate data in bbolt, serve partitions via HTTP
+- **Store** (port 8081): Persists final job results only (not intermediate data)
+
+Workers register with the master and provide their data endpoint. During the reduce phase, workers fetch partition data directly from other workers in parallel, creating a true peer-to-peer data transfer system.
+
+## How It Works
+
+1. **Map Phase**: Workers execute map tasks and store partitioned intermediate data in local bbolt storage
+2. **Shuffle Phase**: Reduce workers fetch their assigned partition from all map workers in parallel via P2P HTTP requests
+3. **Reduce Phase**: Workers execute reduce tasks and send final results to the central store for persistence
+
+## Built-in Executors
+
+ToyReduce comes with several built-in MapReduce executors:
+
+- **wordcount** - Count word frequencies in text files
+- **actioncount** - Count action types in log files (format: `user_123 did login`)
+- **maxvalue** - Find maximum value per metric key (format: `cpu_usage:75.23`)
+- **urldedup** - Deduplicate URLs (one unique URL per line)
+- **average** - Calculate average value per metric key (format: `temperature:23.5`)
+
+## Custom Executors
+
+Creating custom executors is straightforward by implementing the `Worker` interface:
+
+```go
+type Worker interface {
+    Map(chunk []string, emit Emitter) error
+    Reduce(key string, values []string, emit Emitter) error
+    Description() string
+}
+```
+
+## Key Features
+
+- **Distributed Processing**: Automatic parallelization across multiple workers
+- **Fault Tolerance**: Task reassignment on worker failure
+- **P2P Shuffle**: Workers communicate directly to transfer intermediate data
+- **Real-time Monitoring**: Web UI for job submission and status tracking
+- **Local Storage**: Each worker uses bbolt for efficient intermediate data storage
+- **Hackable Design**: Simple codebase designed for learning and experimentation
+- **HTTP-based**: All communication happens over plain HTTP, no complex protocols
+
+## Quick Start
+
+```bash
+# Terminal 1: Store (final results)
+toyreduce store
+
+# Terminal 2: Master (coordinator + web UI at :8080)
+toyreduce master --store-url http://localhost:8081
+
+# Terminal 3+: Workers (compute + local storage)
+toyreduce worker --master-url http://localhost:8080
+toyreduce worker --master-url http://localhost:8080
+
+# Submit job (via CLI or web UI)
+toyreduce submit --executor wordcount --path /var/data/file --reduce-tasks 4
+```
+
+ToyReduce is built as an educational tool for understanding distributed systems concepts, making it perfect for learning how MapReduce works under the hood.

@@ -37,7 +37,8 @@ export const experienceTimeline: ExperienceTimelineItem[] = [
 		logoUrl: '/logos/stan.svg',
 		logoAlt: 'Stan Logo',
 		startDate: '2025-06-01',
-		details: 'Senior Full Stack Engineer at Stan, building tools for creators and entrepreneurs.',
+		details:
+			'Senior Full Stack Engineer at Stan, building AI products that help millions articulate their ideas and share them at scale.',
 		logoScale: 1.15
 	},
 	{

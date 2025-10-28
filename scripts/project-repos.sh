@@ -20,5 +20,6 @@ PROJECT_REPOS=(
     "redditvideomakerbot" "https://github.com/elebumm/RedditVideoMakerBot"
     "scavenger" "https://github.com/wlmac/scavenger"
     "screentimeshowdown" "https://github.com/JasonLovesDoggo/screentimeshowdown"
+    "toyreduce" "https://github.com/JasonLovesDoggo/toyreduce"
 )
 
