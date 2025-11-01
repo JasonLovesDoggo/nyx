@@ -85,7 +85,7 @@
 				class="link text-accent/85"
 				target="_blank"
 				rel="noopener"
-				href="https://gitlab.steamos.cloud">Value</a
+				href="https://gitlab.steamos.cloud">Valve</a
 			>,
 			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://trac.ffmpeg.org"
 				>FFmpeg</a

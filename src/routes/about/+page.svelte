@@ -1,25 +1,22 @@
 <script lang="ts">
 	import {
 		IconUser,
-		IconTrophy,
 		IconBrandGithub,
 		IconBrandLinkedin,
 		IconMail,
 		IconDog,
 		IconStar,
-		IconBriefcase
+		IconRocket,
+		IconCode
 	} from '@tabler/icons-svelte';
-	import { achievements, type AchievementItem } from '$lib/config/about';
 	import Site from '$lib/config/common';
-	import { experienceTimeline, type ExperienceTimelineItem } from '$lib/config/pages';
+	import AnchorHeader from '$lib/components/AnchorHeader.svelte';
 
 	const handleEmailClick = () => {
 		const email = atob('Y29udGFjdEA=') + window.location.hostname;
 		window.location.href = `mailto:${email}`;
 	};
 
-	type Items = AchievementItem[];
-	type TimelineItems = ExperienceTimelineItem[];
 	type str = string; // my IDE yells at me if i use string in the snippet. :shrug:
 	type num = number; // my IDE yells at me if i use string in the snippet. :shrug:
 </script>
@@ -34,40 +31,6 @@
 	</a>
 {/snippet}
 
-{#snippet Listem(items: Items, text: str, Icon: typeof IconTrophy)}
-	<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
-		<h3 class="mb-4 flex items-center gap-2 text-xl font-semibold">
-			<Icon size={24} class="text-accent" />
-			{text}
-		</h3>
-
-		<div class="custom-scrollbar max-h-60 space-y-2 overflow-y-auto pl-2 text-sm">
-			{#each items as thing (thing)}
-				<div
-					class="text-subtext0 hover:text-text flex items-start gap-2 transition-colors duration-200"
-				>
-					<span class="text-accent font-medium">—</span>
-					{#if typeof thing === 'string'}
-						<span>{thing}</span>
-					{:else}
-						<a
-							href={thing.href}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="hover:text-accent transition-colors"
-						>
-							<span class="font-medium">{thing.title}</span>
-							{#if thing.description}
-								<span class="text-subtext0 block text-xs">{thing.description}</span>
-							{/if}
-						</a>
-					{/if}
-				</div>
-			{/each}
-		</div>
-	</div>
-{/snippet}
-
 {#snippet GithubProject(title: str, href: str, stars: num)}
 	<a {href} id={title.toLowerCase()} target="_blank" rel="noopener noreferrer" class="link">
 		{title}
@@ -80,60 +43,10 @@
 	</span>
 {/snippet}
 
-{#snippet ExperienceTimeline(items: TimelineItems, text: str, Icon: typeof IconTrophy)}
-	<div class="bg-base rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md">
-		<h3 class="mb-4 flex items-center gap-2 text-xl font-semibold">
-			<Icon size={24} class="text-accent" />
-			{text}
-		</h3>
-
-		<div class="custom-scrollbar max-h-60 space-y-4 overflow-y-auto pl-2">
-			{#each items as job (job.company + job.startDate)}
-				<div class="border-accent border-l-2 pb-4 pl-4">
-					<div class="flex items-center gap-2">
-						{#if job.logoUrl}
-							<img src={job.logoUrl} alt={job.logoAlt} class="h-6 w-6 rounded-sm" />
-						{/if}
-						<a
-							href={job.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="hover:text-accent font-medium transition-colors"
-						>
-							{job.company}
-						</a>
-					</div>
-					<div class="text-subtext0 mt-1 text-sm">
-						<div class="font-medium">{job.role}</div>
-						<div class="text-xs">
-							{new Date(job.startDate).toLocaleDateString('en-US', {
-								year: 'numeric',
-								month: 'short'
-							})}
-							{#if job.endDate}
-								- {new Date(job.endDate).toLocaleDateString('en-US', {
-									year: 'numeric',
-									month: 'short'
-								})}
-							{:else}
-								- Present
-							{/if}
-						</div>
-						{#if job.details}
-							<div class="mt-1">{job.details}</div>
-						{/if}
-					</div>
-				</div>
-			{/each}
-		</div>
-	</div>
-{/snippet}
-
 <div class="mx-auto max-w-6xl space-y-8 px-4 py-8 md:px-6">
 	<!-- About Me Section -->
 	<section class="space-y-6">
 		<h1 class="flex items-center gap-3 text-3xl font-bold md:text-4xl">
-			<IconUser size={36} class="text-accent" />
 			<span>About Me</span>
 		</h1>
 
@@ -148,27 +61,27 @@
 
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
-					I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a student and
-					programmer with 5+ YoE based out of Toronto, Canada. I like to make
+					<b>Hey!</b> I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a
+					Senior Software Engineer at Stan based out of Toronto, Canada. I like to make
 					<a href="/projects" class="link">cool projects</a>
 					when i'm bored. <!--todo: make toronto canada something cool-->
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					Some of my more notable projects are {@render GithubProject(
+					Some of my more notable projects include {@render GithubProject(
 						'RedditVideoMakerBot',
 						'https://github.com/elebumm/RedditVideoMakerBot',
-						8265
-					)} where I reverse engineered TikTok's TTS API and <!--todo: blogpost!?-->
-					{@render GithubProject('Anubis', '/projects/anubis', 13914)}, an anti AI scraper tool
-					which is currently being used by organizations such as The Linux Foundation or the UN.
-					Most of my work is centered around backend development or system administration. Some
-					sites that I run include {@render ExternalLink('https://maclyonsden.com/', 'metropolis')},
+						8269
+					)}, where I reverse engineered TikTok's TTS API, and
+					{@render GithubProject('Anubis', '/projects/anubis', 14146)}, an anti-scraper tool
+					currently protecting infrastructure at The Linux Foundation and the UN. My work focuses on
+					backend development and system architecture. I maintain several services including
+					{@render ExternalLink('https://maclyonsden.com/', 'metropolis')},
 					{@render ExternalLink('https://ctf.mcpt.ca', 'mCTF')},
-					{@render ExternalLink('https://mcpt.ca', 'MCPT')}, {@render ExternalLink(
+					{@render ExternalLink('https://mcpt.ca', 'MCPT')}, and {@render ExternalLink(
 						'https://jasoncameron.dev/foodle/',
-						'foodle'
-					)} as well as a bunch of others.
+						'Foodle'
+					)}.
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
@@ -177,7 +90,7 @@
 						class="link"
 						target="_blank">photography</a
 					>, organizing/participating at/mentoring hackathons and spending time with my dog, Bella (<a
-						href="#bella"
+						href="#my-dog-bella"
 						class="link">see below</a
 					>). I also have a passion for exploring the world in general! Feel free to
 					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
@@ -229,14 +142,61 @@
 		</div>
 	</section>
 
-	<!-- Achievements Section -->
-	<section id="achievements-section" class="space-y-6">
-		<!-- Achievements list -->
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-			{@render Listem(achievements, 'Achievements', IconTrophy)}
-			{@render ExperienceTimeline(experienceTimeline, 'Employment History', IconBriefcase)}
-		</div>
-	</section>
+	<!--	&lt;!&ndash; What I'm Working On Section &ndash;&gt;-->
+	<!--	<section class="space-y-6">-->
+	<!--		<AnchorHeader level="h2" class="flex items-center gap-3 text-2xl font-bold">-->
+	<!--			<span>What I'm Working On</span>-->
+	<!--		</AnchorHeader>-->
+
+	<!--		<div class="space-y-6">-->
+	<!--			<div class="prose prose-sm max-w-none">-->
+	<!--				<p class="text-subtext0 text-base leading-relaxed">-->
+	<!--					Currently, I'm deep into <span class="text-text font-medium">systems programming with Rust</span>,-->
+	<!--					focusing on building performant, memory-safe applications. I've been exploring the intersection of-->
+	<!--					low-level control and high-level abstractions, which has been both challenging and rewarding.-->
+	<!--					Alongside this, I'm diving into <span class="text-text font-medium">ML/AI engineering</span>,-->
+	<!--					particularly working with LLMs and computer vision applications to solve real-world problems.-->
+	<!--				</p>-->
+
+	<!--				<p class="text-subtext0 text-base leading-relaxed">-->
+	<!--					My main active projects include maintaining <a href="https://github.com/TecharoHQ/anubis" class="link">Anubis</a>,-->
+	<!--					the anti-bot defense system that's now protecting major organizations, and continuously improving this portfolio site.-->
+	<!--					I'm also contributing to various open-source projects and working on technical writing to share what I've learned-->
+	<!--					with the community.-->
+	<!--				</p>-->
+
+	<!--				<p class="text-subtext0 text-base leading-relaxed">-->
+	<!--					Looking ahead, I'm focused on <span class="text-text font-medium">scaling my impact through open source</span>.-->
+	<!--					This means not just contributing code, but also improving documentation, mentoring newcomers, and building tools-->
+	<!--					that make developers' lives easier. I believe in the power of well-crafted software and clear communication to-->
+	<!--					solve complex problems.-->
+	<!--				</p>-->
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--	</section>-->
+
+	<!--	&lt;!&ndash; My Approach Section &ndash;&gt;-->
+	<!--	<section class="space-y-6">-->
+	<!--		<AnchorHeader level="h2" class="flex items-center gap-3 text-2xl font-bold">-->
+	<!--			<span>How I Work</span>-->
+	<!--		</AnchorHeader>-->
+
+	<!--		<div class="space-y-6">-->
+	<!--			<div class="prose prose-sm max-w-none">-->
+	<!--				<p class="text-subtext0 text-base leading-relaxed">-->
+	<!--					I'm a strong believer in <span class="text-text font-medium">building in public</span> and sharing knowledge openly.-->
+	<!--					Most of my work is open source, from the tools I build to the configurations I use. I think transparency in-->
+	<!--					development (not just code) leads to better software and helps others learn from both successes and mistakes.-->
+	<!--				</p>-->
+
+	<!--				<p class="text-subtext0 text-base leading-relaxed">-->
+	<!--					Beyond writing code, I'm passionate about <span class="text-text font-medium">mentoring and community building</span>.-->
+	<!--					I regularly participate in hackathons as both a mentor and organizer, helping the next generation of developers-->
+	<!--					find their path. There's something special about seeing someone have that "aha!" moment when a concept clicks.-->
+	<!--				</p>-->
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--	</section>-->
 
 	<!-- Hobbies Section -->
 	<section id="hobbies-section" class="space-y-8">
@@ -284,10 +244,10 @@
 
 		<!-- My Dog -->
 		<div class="bg-base rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md">
-			<h3 id="bella" class="mb-5 flex items-center gap-2 text-xl font-semibold">
+			<AnchorHeader level="h3" class="mb-5 flex items-center gap-2 text-xl font-semibold">
 				<IconDog size={24} class="text-accent" />
 				My Dog (Bella!)
-			</h3>
+			</AnchorHeader>
 
 			<div class="mb-5 grid grid-cols-1 gap-4 md:grid-cols-3">
 				<img
@@ -317,6 +277,11 @@
 </div>
 
 <style>
+	/* Offset for fixed navbar when navigating to anchors */
+	:global(html) {
+		scroll-padding-top: 5rem; /* Adjust based on your navbar height */
+	}
+
 	/* Custom scrollbar */
 	.custom-scrollbar::-webkit-scrollbar {
 		width: 6px;
