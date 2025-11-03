@@ -44,7 +44,7 @@ const Site: Site = {
 	name: 'Jason Cameron',
 	url: dev ? 'http://localhost:5173' : 'https://jasoncameron.dev',
 	description:
-		'Jason Cameron - Senior Software Engineer in Toronto, Canada. I occasionally like building cool shit',
+		'Jason Cameron - Senior Software Engineer in Toronto, Canada. I like occasionally building cool shit',
 	tags: [
 		'Jason Cameron',
 		'Senior Software Engineer',
