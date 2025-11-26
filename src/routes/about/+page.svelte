@@ -90,7 +90,7 @@
 						class="link"
 						target="_blank">photography</a
 					>, organizing/participating at/mentoring hackathons and spending time with my dog, Bella (<a
-						href="#my-dog-bella"
+						href="#bella"
 						class="link">see below</a
 					>). I also have a passion for exploring the world in general! Feel free to
 					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
@@ -244,7 +244,11 @@
 
 		<!-- My Dog -->
 		<div class="bg-base rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md">
-			<AnchorHeader level="h3" class="mb-5 flex items-center gap-2 text-xl font-semibold">
+			<AnchorHeader
+				level="h3"
+				id="bella"
+				class="mb-5 flex items-center gap-2 text-xl font-semibold"
+			>
 				<IconDog size={24} class="text-accent" />
 				My Dog (Bella!)
 			</AnchorHeader>
