@@ -20,21 +20,28 @@
 		size: number;
 		colored: boolean;
 		italic: boolean;
+		color?: string;
 	}
 
 	const wordConfigs: WordConfig[] = config
-		? config.split(' ').map((cfg) => {
-				const sizeMatch = cfg.match(/^([\d.]+)/);
-				const size = sizeMatch ? parseFloat(sizeMatch[1]) : 3;
-				const colored = cfg.includes('c');
-				const italic = cfg.includes('i');
-				return {
-					size,
-					colored,
-					italic
-				};
-			})
-		: words.map((_, i) => ({
+		? config
+				.split(/\s+/)
+				.filter(Boolean)
+				.map((cfg) => {
+					const colorMatch = cfg.match(/\[(#(?:[0-9a-fA-F]{3,8}))\]/);
+					const cleanedCfg = colorMatch ? cfg.replace(colorMatch[0], '') : cfg;
+					const sizeMatch = cleanedCfg.match(/^([\d.]+)/);
+					const size = sizeMatch ? parseFloat(sizeMatch[1]) : 3;
+					const colored = cleanedCfg.includes('c') || Boolean(colorMatch);
+					const italic = cleanedCfg.includes('i');
+					return {
+						size,
+						colored,
+						italic,
+						color: colorMatch?.[1]
+					};
+				})
+		: words.map((_) => ({
 				size: 3,
 				colored: false,
 				italic: false
@@ -94,15 +101,24 @@
 {#snippet slabWords()}
 	{#each words as word, i}
 		{@const vtName = getViewTransitionName(word)}
-		{@const wordConfig = wordConfigs[i]}
+		{@const wordConfig = wordConfigs[i] ?? {
+			size: 3,
+			colored: false,
+			italic: false,
+			color: undefined
+		}}
 		{@const h = hashCode(colorHash + i)}
 		{@const fontWeight = wordConfig.italic ? [300, 400, 500][h % 3] : 900}
+		{@const colorClass = wordConfig.color ? '' : getColorClass(i, wordConfig.colored)}
+		{@const inlineStyle = `view-transition-name: ${vtName}; font-size: ${wordConfig.size}rem; font-weight: ${fontWeight};${
+			wordConfig.color ? ` color: ${wordConfig.color};` : ''
+		}`}
 		<span
-			class="leading-none uppercase {getColorClass(i, wordConfig.colored)}"
+			class={`leading-none uppercase ${colorClass}`}
 			class:font-jetbrains-mono={!wordConfig.italic}
 			class:font-serif={wordConfig.italic}
 			class:italic={wordConfig.italic}
-			style="view-transition-name: {vtName}; font-size: {wordConfig.size}rem; font-weight: {fontWeight};"
+			style={inlineStyle}
 		>
 			{word}
 		</span>
