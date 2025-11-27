@@ -8,12 +8,12 @@ text = "AWS CDK Credentials Hell"
 config = "5c[#E68A00] 5[#00A3E0] 3b 7ci"
 ~~~
 
-# Unable to determine the default AWS account (InvalidClientTokenId): The security token included in the request is invalid.
+## Unable to determine the default AWS account (InvalidClientTokenId): The security token included in the request is invalid.
 
 If you're seeing this after your company migrated to AWS SSO — but `aws sts get-caller-identity` works fine and
 every single github issue you found couldn't help you - I got you.
 
-## The Cause
+### The Cause
 
 Stale credentials in `~/.aws/credentials` from before the migration. CDK finds these old keys before checking your SSO config.
 
