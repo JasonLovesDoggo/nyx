@@ -37,7 +37,7 @@
 	{/if}
 </svelte:head>
 
-<article class="prose mx-auto mb-6 max-w-4xl">
+<article class="prose mx-auto mb-6 max-w-prose">
 	<!-- Banner Image -->
 	{#if data.metadata.image}
 		<div class="mb-8 rounded-lg md:rounded-xl">

@@ -63,7 +63,7 @@
 	}
 </script>
 
-<div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-prose px-4 py-8 sm:px-6 lg:px-8">
 	<h1 class="text-text mb-8 text-3xl font-bold tracking-tight">Posts</h1>
 
 	{#if data.posts.length}

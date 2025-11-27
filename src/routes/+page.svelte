@@ -60,6 +60,7 @@
 				<span>Cameron</span>
 			</span>
 		</h1>
+		<!--note to self: Could be improved via Senior SWE (Fullstack, AI, Systems) @ Stan.. -->
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
 			I'm currently working as a Senior SWE @ <a
 				class="link text-accent/85"
