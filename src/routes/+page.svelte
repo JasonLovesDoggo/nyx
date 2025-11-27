@@ -50,10 +50,14 @@
 						tabindex="0"
 						role="button"
 						aria-label="Hover or focus to see a fun fact about my name">a</span
-					><span>son</span>
-					<span class:hidden={!isNameHovered}>'JSON'</span>
+					><span>son</span><span
+						aria-hidden="true"
+						class={`pointer-events-none inline-flex overflow-hidden align-baseline whitespace-nowrap transition-all duration-500 ease-out select-none ${
+							isNameHovered ? 'max-w-[7ch] opacity-100' : 'max-w-0 opacity-0'
+						}`}>&nbsp;'JSON'</span
+					>
 				</span>
-				<span> Cameron</span>
+				<span>Cameron</span>
 			</span>
 		</h1>
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
