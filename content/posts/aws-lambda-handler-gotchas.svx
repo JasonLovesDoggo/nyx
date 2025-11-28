@@ -1,0 +1,86 @@
+~~~
+description = "Runtime.InvalidEntrypoint can mean async handlers, architecture mismatches, or file permissions — CloudWatch won't tell you which."
+published_at = "2025-11-28"
+tags = ["aws", "lambda", "python", "docker", "debugging"]
+
+[title]
+text = "AWS Lambda InvalidEntrypoint Debugging"
+config = "6c[#FF9900] 5[#00A3E0] 6 4c"
+~~~
+
+## Runtime.InvalidEntrypoint... but the import works fine?
+
+If you're staring at `Runtime.InvalidEntrypoint` in CloudWatch, your Docker image looks correct, and `python3 -c "import handler"` works inside the container — there are three common causes that all produce the same useless error.
+
+## Async handlers aren't awaited
+
+Lambda doesn't natively support async handlers. It calls your function, gets a coroutine object, and dies trying to serialize it.
+
+Test locally to see the real error:
+```bash
+docker run -p 9000:8080 your-lambda-image:latest
+```
+```bash
+curl -X POST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+```
+```
+RuntimeWarning: coroutine 'handler' was never awaited
+Unable to marshal response: Object of type coroutine is not JSON serializable
+```
+
+The obvious fix is `asyncio.run()`, but that creates a new event loop every invocation — killing your httpx clients and connection pools.
+
+Use this decorator instead:
+```python
+import asyncio
+from functools import wraps
+
+def async_handler(func):
+    _loop = None
+
+    @wraps(func)
+    def wrapper(event, context):
+        nonlocal _loop
+        if _loop is None or _loop.is_closed():
+            _loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(_loop)
+        return _loop.run_until_complete(func(event, context))
+
+    return wrapper
+
+@other_decorators
+@async_handler
+async def handler(event, context):
+		...
+```
+
+The loop persists across warm invocations.
+
+## Architecture mismatch
+
+Building on an M-series Mac produces ARM64 images. If your Lambda is configured for x86_64, the entrypoint fails immediately with a 3ms init. CloudWatch just says `InvalidEntrypoint`.
+
+Match your Lambda architecture:
+```python
+function = _lambda.DockerImageFunction(
+    ...
+    architecture=_lambda.Architecture.ARM_64,
+)
+```
+
+## File permissions
+
+Lambda runs non-root. Files copied with restrictive permissions can't be read:
+```
+PermissionError: [Errno 13] Permission denied: '/var/task/handler.py'
+```
+
+Fix in your Dockerfile:
+```dockerfile
+COPY --chmod=644 handler.py ${LAMBDA_TASK_ROOT}/
+COPY --chmod=755 shared/ ${LAMBDA_TASK_ROOT}/shared/
+```
+
+## TL;DR
+
+`InvalidEntrypoint` is Lambda's catch-all error. Test locally first — the real error only shows up there.
