@@ -1,0 +1,76 @@
+~~~
+description = "AWS Lambda doesn't natively support async handlers. Here's a reusable decorator that fixes it while preserving connection pools across warm invocations."
+published_at = "2025-11-28"
+tags = ["aws", "lambda", "python", "async"]
+
+[title]
+text = "AWS Lambda Async Handler Gotcha"
+config = "6c[#FF9900] 5[#00A3E0] 3b 6c 4i"
+~~~
+
+## Runtime.InvalidEntrypoint... but the import works fine?
+
+If you're staring at `Runtime.InvalidEntrypoint` in CloudWatch, your Docker image looks correct, and `python3 -c "import handler"` works perfectly inside the container — check if your handler is `async`.
+
+Lambda doesn't await async handlers. It calls your function, gets a coroutine object back, and chokes trying to serialize it. The CloudWatch error tells you nothing useful.
+
+## Reproducing locally
+
+Test with the Lambda Runtime Interface Emulator:
+
+```bash
+docker run -p 9000:8080 your-lambda-image:latest
+```
+
+```bash
+curl -X POST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+```
+
+Now you get the real error:
+
+```
+RuntimeWarning: coroutine 'handler' was never awaited
+Unable to marshal response: Object of type coroutine is not JSON serializable
+```
+
+## The naive fix (and why it breaks things)
+
+The obvious solution is `asyncio.run()`:
+
+```python
+def handler(event, context):
+    return asyncio.run(_handler(event, context))
+```
+
+This works, but `asyncio.run()` creates a new event loop on every invocation. If you're reusing httpx clients, database pools, or any async resources across warm invocations — they're gone. New loop, new connections, back to cold start latency.
+
+## A decorator that preserves the loop
+
+```python
+import asyncio
+from functools import wraps
+
+def async_handler(func):
+    _loop = None
+
+    @wraps(func)
+    def wrapper(event, context):
+        nonlocal _loop
+        if _loop is None or _loop.is_closed():
+            _loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(_loop)
+        return _loop.run_until_complete(func(event, context))
+
+    return wrapper
+```
+
+The loop persists across warm invocations. Your connection pools survive.
+
+```python
+@async_handler
+async def handler(event, context):
+    async with httpx.AsyncClient() as client:  # or reuse a global client
+        ...
+```
+
+Stick it before your other decorators (Powertools, Sentry, whatever) and you're done.
