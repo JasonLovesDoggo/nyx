@@ -85,7 +85,10 @@ For detailed usage, configuration options, and a live demo, please refer to the 
 - https://scioly.org/
 - https://www.cfaarchive.org/
 - https://squirreljme.cc/
-- https://gitlab.steamos.cloud
+
+### Valve
+	- https://developer.valvesoftware.com/wiki/Main_Page
+	- https://gitlab.steamos.cloud
 
 ### The United Nations
 	- https://policytoolbox.iiep.unesco.org/
