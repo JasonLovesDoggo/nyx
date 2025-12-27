@@ -9,6 +9,10 @@ config = "3.5 3c 10 3ic 4c 2ceh  3.5"
 hash = "hi"
 ~~~
 
+<script>
+import Margin from '$components/posts/Margin.svelte';
+</script>
+
 ## The Pain Point
 
 Ever clicked "stop" on an AI chat and watched your browser hang for 30 seconds? That's what happens when streaming AI endpoints aren't wired for cancellation. The server keeps burning CPU on inference nobody wants while real users get slower responses.
@@ -21,7 +25,7 @@ In [Agno](https://github.com/agno-agi/agno), we solved this by implementing grac
 
 | Method               | Use Case                              | Pros                        | Cons                           |
 |----------------------|---------------------------------------|-----------------------------|--------------------------------|
-| HTTP Disconnect      | FastAPI streaming endpoints           | Simple, no infra needed     | Relies on ASGI behavior        |
+| HTTP Disconnect      | FastAPI streaming endpoints           | Simple, no infra needed     | Relies on ASGI behavior<Margin>ASGI (Asynchronous Server Gateway Interface) is Python's async web server spec. Breaking down ASGI vs WSGI vs WGSI vs RSGI is a whole other topic.</Margin>        |
 | AbortController      | Browser clients                       | Instant client-side cancel  | Doesn't notify backend cleanly |
 | WebSocket Disconnect | Real-time chat                        | Clean disconnect handling   | Requires WebSocket support     |
 | SSE Monitoring       | Live updates / events                 | Works with standard HTTP    | Not all clients support SSE    |
