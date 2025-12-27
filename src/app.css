@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import '@fontsource/jetbrains-mono/latin-400.css'; /* Regular weight, Latin only */
 @import '@fontsource/jetbrains-mono/latin-700.css'; /* Bold weight, Latin only */
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 @config './lib/styles/tailwind.config.js'; /*see https://github.com/tailwindlabs/tailwindcss-typography?tab=readme-ov-file#adding-custom-color-themes*/
 
 @theme {
@@ -16,6 +16,11 @@
 	--current-accent-color: var(--color-peach); /*accent default's to peach */
 	--x: 100%;
 	--y: 100%;
+}
+
+/* Offset for fixed navbar when navigating to anchors */
+html {
+	scroll-padding-top: 5rem;
 }
 
 @layer utilities {
