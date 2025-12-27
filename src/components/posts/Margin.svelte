@@ -17,7 +17,7 @@
 </script>
 
 <span class="sidenote-wrapper">
-	<button class="sidenote-ref" onclick={toggle} aria-expanded={expanded}>
+	<button class="sidenote-ref" onclick={toggle} aria-expanded={expanded} aria-label="Toggle margin note">
 		<sup class="sidenote-inline-number">[{number}]</sup>
 	</button>
 	<span class="sidenote" class:expanded
