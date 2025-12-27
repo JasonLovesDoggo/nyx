@@ -13,14 +13,14 @@
 			(function () {
 				try {
 					// get stored palette or fallback to system preference
-					const storedPalette = localStorage.getItem('palette');
+					const storedPalette = JSON.parse(localStorage.getItem('palette'));
 					const palette =
 						storedPalette ||
 						(window.matchMedia('(prefers-color-scheme: light)').matches ? 'latte' : 'mocha');
 					document.documentElement.classList.add(palette);
 
 					// get stored accent or default
-					const accent = localStorage.getItem('accent') || 'peach';
+					const accent = JSON.parse(localStorage.getItem('accent')) || 'peach';
 					document.documentElement.style.setProperty(
 						'--current-accent-color',
 						`var(--color-${accent})`
