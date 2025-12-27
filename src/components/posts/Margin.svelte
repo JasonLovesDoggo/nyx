@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { nextSidenoteNumber } from '$lib/stores/sidenote';
+	import { nextMarginNoteNumber } from '$lib/stores/marginnote';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
@@ -8,7 +8,7 @@
 
 	let { children }: Props = $props();
 
-	const number = nextSidenoteNumber();
+	const number = nextMarginNoteNumber();
 	let expanded = $state(false);
 
 	function toggle() {
@@ -16,26 +16,26 @@
 	}
 </script>
 
-<span class="sidenote-wrapper">
-	<button class="sidenote-ref" onclick={toggle} aria-expanded={expanded} aria-label="Toggle margin note">
-		<sup class="sidenote-inline-number">[{number}]</sup>
+<span class="marginnote-wrapper">
+	<button class="marginnote-ref" onclick={toggle} aria-expanded={expanded} aria-label="Toggle margin note">
+		<sup class="marginnote-inline-number">[{number}]</sup>
 	</button>
-	<span class="sidenote" class:expanded
-		><span class="sidenote-number">[{number}]</span>{@render children()}</span
+	<span class="marginnote" class:expanded
+		><span class="marginnote-number">[{number}]</span>{@render children()}</span
 	>
 </span>
 
 <style>
-	.sidenote-wrapper {
+	.marginnote-wrapper {
 		display: inline;
 	}
 
-	.sidenote-inline-number {
+	.marginnote-inline-number {
 		color: var(--current-accent-color);
 		font-weight: 600;
 	}
 
-	.sidenote-ref {
+	.marginnote-ref {
 		cursor: pointer;
 		font-size: 0.75rem;
 		vertical-align: super;
@@ -45,11 +45,11 @@
 		transition: color 0.2s ease;
 	}
 
-	.sidenote-ref:hover {
+	.marginnote-ref:hover {
 		opacity: 0.8;
 	}
 
-	.sidenote {
+	.marginnote {
 		display: block;
 		max-height: 0;
 		overflow: hidden;
@@ -64,7 +64,7 @@
 			margin 0.3s ease;
 	}
 
-	.sidenote.expanded {
+	.marginnote.expanded {
 		max-height: 500px;
 		opacity: 1;
 		padding: 0.75rem 1rem;
@@ -74,22 +74,22 @@
 		border-radius: 0 0.25rem 0.25rem 0;
 	}
 
-	.sidenote-number {
+	.marginnote-number {
 		font-weight: 600;
 		color: var(--current-accent-color);
 		margin-right: 0.25rem;
 	}
 
 	@media (min-width: 1280px) {
-		.sidenote-wrapper {
+		.marginnote-wrapper {
 			position: static;
 		}
 
-		.sidenote-ref {
+		.marginnote-ref {
 			cursor: pointer;
 		}
 
-		.sidenote {
+		.marginnote {
 			display: block;
 			position: absolute;
 			right: 0;
@@ -105,7 +105,7 @@
 			white-space: normal;
 		}
 
-		.sidenote.expanded {
+		.marginnote.expanded {
 			padding: 0 0 0 0.75rem;
 			background: transparent;
 			border-left: 2px solid var(--current-accent-color);
@@ -113,7 +113,7 @@
 			opacity: 1;
 		}
 
-		.sidenote-number {
+		.marginnote-number {
 			display: inline;
 		}
 	}

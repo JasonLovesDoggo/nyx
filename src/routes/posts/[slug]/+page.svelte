@@ -3,14 +3,14 @@
 	import type { PostPageData } from '$lib/content/posts';
 	import SlabTitle from '$components/SlabTitle.svelte';
 	import PostTags from '$components/posts/PostTags.svelte';
-	import { initSidenoteCounter } from '$lib/stores/sidenote';
+	import { initMarginNoteCounter } from '$lib/stores/marginnote';
 	import '$lib/styles/content.css';
 	import { page } from '$app/state';
 
 	export let data: PostPageData;
 
-	// Initialize sidenote counter for this post
-	initSidenoteCounter();
+	// Initialize margin note counter for this post
+	initMarginNoteCounter();
 
 	// Component generated from mdsvex
 	const Content = data.content;
