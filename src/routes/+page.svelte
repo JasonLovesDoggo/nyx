@@ -86,10 +86,7 @@
 			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://gitlab.gnome.org"
 				>GNOME</a
 			>,
-			<a
-				class="link text-accent/85"
-				href="/projects/anubis#valve">Valve</a
-			>,
+			<a class="link text-accent/85" href="/projects/anubis#valve">Valve</a>,
 			<a class="link text-accent/85" target="_blank" rel="noopener" href="https://trac.ffmpeg.org"
 				>FFmpeg</a
 			>
@@ -157,7 +154,7 @@
 					href={Site.out.calcom}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="bg-surface0 text-text hover:bg-accent/80 focus:ring-accent/50 focus:ring-offset-base inline-flex w-full items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium shadow-sm transition-colors hover:text-base focus:ring-2 focus:ring-offset-2 focus:outline-none"
+					class="bg-accent/80 focus:ring-accent/50 focus:ring-offset-base inline-flex w-full items-center justify-center gap-2 rounded-md px-3 py-1.5 text-base text-sm font-medium shadow-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
 				>
 					<IconCalendarEvent size={16} />
 					Book a Chat

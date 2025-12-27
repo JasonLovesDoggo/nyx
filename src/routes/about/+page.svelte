@@ -243,7 +243,7 @@
 		<!--		</div>-->
 
 		<!-- My Dog -->
-		<div class="bg-base rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+		<div class="bg-base rounded-lg p-6 transition-all duration-300">
 			<AnchorHeader
 				level="h3"
 				id="bella"
@@ -271,11 +271,11 @@
 				/>
 			</div>
 
-			<p class="text-subtext0 leading-relaxed">
-				Bella is a <span class="font-medium">4-year-old</span> goldendoodle who loves to play with
-				her soccer ball, go on walks/runs and explore <b>everything</b>. Whenever we go on a walk we
-				both know we have an adventure ahead of us. <!--todo make auto-->
-			</p>
+			<!--			<p class="text-subtext0 leading-relaxed">-->
+			<!--				Bella is a <span class="font-medium">4-year-old</span> goldendoodle who loves to play with-->
+			<!--				her soccer ball, go on walks/runs and explore <b>everything</b>. Whenever we go on a walk we-->
+			<!--				both know we have an adventure ahead of us. &lt;!&ndash;todo make auto&ndash;&gt;-->
+			<!--			</p>-->
 		</div>
 	</section>
 </div>
@@ -284,24 +284,5 @@
 	/* Offset for fixed navbar when navigating to anchors */
 	:global(html) {
 		scroll-padding-top: 5rem; /* Adjust based on your navbar height */
-	}
-
-	/* Custom scrollbar */
-	.custom-scrollbar::-webkit-scrollbar {
-		width: 6px;
-	}
-
-	.custom-scrollbar::-webkit-scrollbar-track {
-		background: rgba(0, 0, 0, 0.05);
-		border-radius: 10px;
-	}
-
-	.custom-scrollbar::-webkit-scrollbar-thumb {
-		background: var(--color-accent);
-		border-radius: 10px;
-	}
-
-	.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-		background: var(--color-accent-hover);
 	}
 </style>

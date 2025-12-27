@@ -60,7 +60,7 @@
 	<div class="relative">
 		<!-- The raised section for the webring -->
 		<div
-			class="bg-crust border-surface0/20 absolute -top-10 right-5 z-10 flex items-center rounded-t-lg border-t border-r border-l px-4 py-2 shadow-sm md:right-8"
+			class="bg-mantle border-surface0/20 absolute -top-10 right-5 z-10 flex items-center rounded-t-lg border-t border-r border-l px-4 py-2 shadow-sm md:right-8"
 		>
 			<div class="text-subtext1 flex items-center gap-x-1 text-xs whitespace-nowrap md:text-sm">
 				<span class="text-overlay1">Webrings:</span>
