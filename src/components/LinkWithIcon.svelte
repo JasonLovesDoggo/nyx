@@ -11,10 +11,8 @@
 
 	let { href, text, icon, external = false, class: extraClasses = '' }: Props = $props();
 
-	const target = external ? '_blank' : undefined;
-	const rel = external ? 'noopener noreferrer' : undefined;
-
-	const IconComponent = icon ? icon : null;
+	const target = $derived(external ? '_blank' : undefined);
+	const rel = $derived(external ? 'noopener noreferrer' : undefined);
 </script>
 
 <a
@@ -24,7 +22,8 @@
 	class={`text-subtext1 hover:text-accent inline-flex items-center gap-1.5 transition-colors duration-200 ${extraClasses}`}
 >
 	{#if icon}
-		<IconComponent size={18} stroke={1.5} class="flex-shrink-0" />
+		{@const IconComponent = icon}
+		<IconComponent size={18} stroke={1.5} class="shrink-0" />
 	{/if}
 	<span>{text}</span>
 </a>
