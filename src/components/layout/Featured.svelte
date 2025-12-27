@@ -42,7 +42,7 @@
 			{#each projects as project (project.slug)}
 				<a
 					href={`/projects/${project.slug}`}
-					class="border-surface0 bg-mantle hover:border-accent focus-visible:border-accent group block overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl focus:outline-none"
+					class="border-surface0 bg-base hover:border-accent focus-visible:border-accent group block overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl focus:outline-none"
 				>
 					{#if project.metadata.image}
 						<div class="overflow-hidden">

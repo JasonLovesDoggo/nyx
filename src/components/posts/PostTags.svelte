@@ -22,7 +22,9 @@
 	}
 
 	// Assign hash-based color to each tag
+	// svelte-ignore state_referenced_locally - post doeant change
 	const colorHash = post.metadata.title?.hash || post.slug;
+	// svelte-ignore state_referenced_locally - post doeant change
 	const tagColors =
 		post.metadata.tags?.reduce(
 			(acc, tag, index) => {
