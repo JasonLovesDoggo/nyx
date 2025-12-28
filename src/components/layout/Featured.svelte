@@ -16,10 +16,10 @@
 	let { projects, maxProjects }: Props = $props();
 
 	// reduce projects down to maxProjects
-	projects = projects.slice(0, maxProjects);
+	const displayProjects = $derived(projects.slice(0, maxProjects));
 </script>
 
-{#if projects.length > 0}
+{#if displayProjects.length > 0}
 	<section class="px-4 py-8 md:px-0">
 		<div class="mb-8 flex items-center justify-between">
 			<h2 class="flex items-center gap-3 text-2xl font-semibold md:text-3xl">
@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-			{#each projects as project (project.slug)}
+			{#each displayProjects as project (project.slug)}
 				<a
 					href={`/projects/${project.slug}`}
 					class="border-surface0 bg-base hover:border-accent focus-visible:border-accent group block overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl focus:outline-none"

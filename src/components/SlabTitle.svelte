@@ -9,9 +9,9 @@
 
 	let { title, slug, href, config, hash }: Props = $props();
 
-	const words = title.split(' ');
-	const safePath = slug.split('/').pop() || slug;
-	const colorHash = hash || slug;
+	const words = $derived(title.split(' '));
+	const safePath = $derived(slug.split('/').pop() || slug);
+	const colorHash = $derived(hash || slug);
 
 	// Parse config string like "4c 3i 5ci 2.5"
 	// Format: <size in rem><c?><i?>
@@ -23,29 +23,31 @@
 		color?: string;
 	}
 
-	const wordConfigs: WordConfig[] = config
-		? config
-				.split(/\s+/)
-				.filter(Boolean)
-				.map((cfg) => {
-					const colorMatch = cfg.match(/\[(#(?:[0-9a-fA-F]{3,8}))\]/);
-					const cleanedCfg = colorMatch ? cfg.replace(colorMatch[0], '') : cfg;
-					const sizeMatch = cleanedCfg.match(/^([\d.]+)/);
-					const size = sizeMatch ? parseFloat(sizeMatch[1]) : 3;
-					const colored = cleanedCfg.includes('c') || Boolean(colorMatch);
-					const italic = cleanedCfg.includes('i');
-					return {
-						size,
-						colored,
-						italic,
-						color: colorMatch?.[1]
-					};
-				})
-		: words.map((_) => ({
-				size: 3,
-				colored: false,
-				italic: false
-			}));
+	const wordConfigs: WordConfig[] = $derived(
+		config
+			? config
+					.split(/\s+/)
+					.filter(Boolean)
+					.map((cfg) => {
+						const colorMatch = cfg.match(/\[(#(?:[0-9a-fA-F]{3,8}))\]/);
+						const cleanedCfg = colorMatch ? cfg.replace(colorMatch[0], '') : cfg;
+						const sizeMatch = cleanedCfg.match(/^([\d.]+)/);
+						const size = sizeMatch ? parseFloat(sizeMatch[1]) : 3;
+						const colored = cleanedCfg.includes('c') || Boolean(colorMatch);
+						const italic = cleanedCfg.includes('i');
+						return {
+							size,
+							colored,
+							italic,
+							color: colorMatch?.[1]
+						};
+					})
+			: words.map((_) => ({
+					size: 3,
+					colored: false,
+					italic: false
+				}))
+	);
 
 	// Simple hash function
 	function hashCode(str: string): number {

@@ -12,7 +12,7 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const Content = data.content;
+	const Content = $derived(data.content);
 </script>
 
 <svelte:head>
