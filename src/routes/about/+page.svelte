@@ -93,9 +93,8 @@
 						href="#bella"
 						class="link">see below</a
 					>). I also have a passion for exploring the world in general! Feel free to
-					<a href={Site.out.calcom} target="_blank" rel="noopener noreferrer" class="link"
-						>book a chat</a
-					> if you'd like to connect.
+					<button onclick={handleEmailClick} class="link cursor-pointer">shoot me an email</button> if
+					you'd like to chat.
 				</p>
 
 				<div class="flex flex-wrap gap-3 pt-2">
@@ -125,7 +124,7 @@
 					<span
 						role="button"
 						aria-label="Send an email to contact"
-						class="hover:text-accent inline-flex items-center gap-1.5 text-sm transition-colors"
+						class="hover:text-accent inline-flex cursor-pointer items-center gap-1.5 text-sm transition-colors"
 						tabindex="0"
 						onclick={handleEmailClick}
 						onkeydown={(e) => {
