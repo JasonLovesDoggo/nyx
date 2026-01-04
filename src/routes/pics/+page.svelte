@@ -37,7 +37,7 @@
 			aria-label="count of photos"
 			class="text-subtext0 inline-block align-baseline text-sm leading-none font-normal"
 		>
-			&lbrace;{data.images.length}&rbrace;
+			[{data.images.length}]
 		</span>
 	</h1>
 	<p class="text-subtext0 text-sm">
