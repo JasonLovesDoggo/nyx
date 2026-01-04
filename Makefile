@@ -26,12 +26,12 @@ clean-project-images:
 
 # Development server
 dev:
-	pnpm dev
+	bun run dev
 
 # Build project
 build:
-	pnpm run build
+	bun run build
 
 # Run tests
 test:
-	pnpm run test
+	bun run test
