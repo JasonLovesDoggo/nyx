@@ -5,9 +5,11 @@
 	import Sidebar from '../components/layout/Sidebar.svelte';
 	import { page } from '$app/state';
 	import { onNavigate } from '$app/navigation';
+	import { onMount } from 'svelte';
 	import Site from '$lib/config/common';
 	import BackgroundEffect from '$components/BackgroundEffect.svelte';
 	import { BackgroundEnabled } from '$lib/stores/theme';
+	import { initCodeBlocks } from '$lib/client/codeblocks';
 
 	const { data, children } = $props();
 
@@ -33,6 +35,10 @@
 				await navigation.complete;
 			});
 		});
+	});
+
+	onMount(() => {
+		initCodeBlocks();
 	});
 </script>
 

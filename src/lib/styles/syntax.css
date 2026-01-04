@@ -23,3 +23,175 @@ html.mocha .shiki span,
 	background-color: var(--shiki-mocha-bg) !important;
 	color: var(--shiki-mocha) !important;
 }
+
+.code-block {
+	position: relative;
+	margin: 1.25rem 0;
+}
+
+.code-block__caption {
+	display: block;
+	font-family: var(--font-jetbrains-mono, 'JetBrains Mono', monospace);
+	font-size: 0.8125rem;
+	font-variant-ligatures: no-contextual;
+	font-variant-numeric: tabular-nums;
+	letter-spacing: -0.01em;
+	color: var(--catppuccin-color-subtext0);
+	margin: 0 0 0.35rem 0.25rem;
+}
+
+.prose .code-block__caption {
+	font-size: 0.8125rem;
+}
+
+.code-block__body {
+	/*top right bottom left*/
+	padding: 0.3rem 0.3rem 0.3rem 0.7rem;
+	position: relative;
+	border-radius: 0.4rem;
+	border: 1px solid color-mix(in oklch, transparent 60%, var(--catppuccin-color-overlay0));
+	background: color-mix(
+		in oklch,
+		var(--catppuccin-color-base) 96%,
+		var(--catppuccin-color-surface0) 4%
+	);
+	overflow: hidden;
+}
+
+.code-block__body--nolabel {
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+}
+
+.code-block__meta-row {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 0.2rem;
+}
+
+.code-block__lang {
+	font-size: 0.62rem;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--catppuccin-color-subtext1);
+}
+
+.code-block__copy {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.1rem;
+	border-radius: 0.3rem;
+	border: 1px solid transparent;
+	background: transparent;
+	color: var(--catppuccin-color-subtext1);
+	opacity: 0.4;
+	cursor: pointer;
+	transition:
+		color 0.15s ease,
+		opacity 0.15s ease;
+}
+
+.code-block__copy--floating {
+	position: absolute;
+	top: 0.45rem;
+	right: 0.55rem;
+}
+
+.code-block__copy:hover,
+.code-block__copy:focus-visible {
+	color: var(--current-accent-color, var(--catppuccin-color-peach));
+	opacity: 1;
+}
+
+.code-block__copy .icon-check {
+	display: none;
+}
+
+.code-block__copy[data-copied='true'] .icon-copy {
+	display: none;
+}
+
+.code-block__copy[data-copied='true'] {
+	opacity: 1;
+}
+
+.code-block__copy[data-copied='true'] .icon-check {
+	display: inline;
+	color: var(--catppuccin-color-green);
+}
+
+code {
+	font-family: var(--font-jetbrains-mono, 'JetBrains Mono', monospace);
+	background: var(--inline-code-bg, color-mix(in oklab, var(--catppuccin-color-base) 85%, #ffffff));
+	padding: 0 0.25em;
+	font-size: 1rem;
+	font-variant-ligatures: no-contextual;
+	color: var(--current-accent-color, var(--catppuccin-color-peach));
+}
+
+pre {
+	font-family: var(--font-jetbrains-mono, 'JetBrains Mono', monospace);
+	background: transparent !important;
+	padding: 0.8rem 1rem;
+	overflow-x: auto;
+	max-width: 100%;
+	margin: 0;
+	scrollbar-width: thin;
+	scrollbar-color: color-mix(in oklch, transparent 35%, var(--catppuccin-color-overlay0))
+		color-mix(in oklch, transparent 95%, var(--catppuccin-color-crust));
+}
+
+.prose :where(code):not(:where([class~='not-prose'] *)) {
+	font-size: 0.875rem;
+	color: var(--current-accent-color, var(--catppuccin-color-peach));
+}
+
+.prose :where(pre):not(:where([class~='not-prose'] *)),
+.prose :where(pre code):not(:where([class~='not-prose'] *)) {
+	font-size: 0.875rem;
+}
+
+.code-block pre::-webkit-scrollbar {
+	height: 4px;
+}
+
+.code-block pre::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.code-block pre::-webkit-scrollbar-thumb {
+	background: color-mix(
+		in oklch,
+		var(--current-accent-color, var(--catppuccin-color-peach)) 45%,
+		transparent 55%
+	);
+	border-radius: 999px;
+}
+
+pre code {
+	background: none;
+	padding: initial;
+}
+
+.shiki {
+	font-family: var(--font-jetbrains-mono, 'JetBrains Mono', monospace);
+	font-size: 0.875rem;
+	padding: 0;
+	overflow-x: auto;
+	max-width: 100%;
+	background: transparent !important;
+
+	.diff.add {
+		background-color: hsla(190, 70%, 50%, 0.15);
+	}
+
+	.diff.remove {
+		background-color: hsla(340, 80%, 66%, 0.15);
+	}
+
+	.highlighted {
+		background-color: hsla(220, 30%, 80%, 0.15);
+	}
+}

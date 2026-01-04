@@ -72,10 +72,7 @@
 					width={image.src.img.w}
 					height={image.src.img.h}
 					onload={(e) => {
-						const target = e.currentTarget as HTMLElement | null;
-						if (target) {
-							target.style.opacity = '1';
-						}
+						(e.currentTarget as HTMLImageElement).style.opacity = '1';
 					}}
 				/>
 			</picture>
