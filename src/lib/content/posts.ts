@@ -1,4 +1,4 @@
-import { createContentService, type ContentEntry } from './factory';
+import { createContentService, type ContentEntry, type ContentPageData } from './factory';
 
 export interface PostImage {
 	url: string;
@@ -19,10 +19,15 @@ export interface PostMetadata {
 }
 
 export type PostEntry = ContentEntry<PostMetadata>;
+export type PostPageData = ContentPageData<PostMetadata>;
 
 const postService = createContentService<PostMetadata>({
-	modules: import.meta.glob('/content/posts/*.svx', { eager: true }),
+	modules: import.meta.glob('/content/posts/*/+page.svx'),
 	contentType: 'post',
+	slugFromPath: (path) => {
+		const cleaned = path.replace(/\/\+page\.svx$/, '');
+		return cleaned.substring(cleaned.lastIndexOf('/') + 1);
+	},
 	filter: (p) => {
 		const publishedAt = p.metadata?.published_at;
 		return !!publishedAt && !isNaN(new Date(publishedAt).getTime());

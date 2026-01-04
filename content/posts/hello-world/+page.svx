@@ -8,7 +8,7 @@ text = "Hello World"
 config = "8c 8"
 ~~~
 
-```go
+```go file="main.go"
 fmt.Println("Hello, World!");
 ```
 
