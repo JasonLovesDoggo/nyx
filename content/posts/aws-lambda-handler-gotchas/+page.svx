@@ -31,7 +31,7 @@ Unable to marshal response: Object of type coroutine is not JSON serializable
 The obvious fix is `asyncio.run()`, but that creates a new event loop every invocation — killing your httpx clients and connection pools.
 
 Use this decorator instead:
-```python
+```python file=src/handler.py
 import asyncio
 from functools import wraps
 
