@@ -10,7 +10,8 @@ export const load: PageLoad = async () => {
 			eager: true,
 			query: {
 				enhanced: true,
-				w: '2000;1200;800'
+				w: '2000;1200;800',
+				format: 'avif;webp'
 			}
 		}
 	);
