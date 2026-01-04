@@ -85,10 +85,8 @@
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">
-					Outside of software, I enjoy playing Ultimate frisbee, <a
-						href="/photos"
-						class="link"
-						target="_blank">photography</a
+					Outside of software, I enjoy playing Ultimate frisbee, <a href="/pics" class="link"
+						>photography</a
 					>, organizing/participating at/mentoring hackathons and spending time with my dog, Bella (<a
 						href="#bella"
 						class="link">see below</a
@@ -231,7 +229,7 @@
 		<!--					photos on Google Maps have garnered over 350,000 views, which encourages me to keep-->
 		<!--					exploring and sharing my perspective.-->
 		<!--				</p>-->
-		<!--				<a href="/photos" class="group text-accent inline-flex items-center gap-1 hover:underline">-->
+		<!--				<a href="/pics" class="group text-accent inline-flex items-center gap-1 hover:underline">-->
 		<!--					View my photo gallery-->
 		<!--					<IconArrowRight-->
 		<!--						size={14}-->

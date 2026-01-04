@@ -12,10 +12,11 @@ export const mainNavItems: NavItem[] = [
 	{ title: 'About', href: '/about' },
 	{ title: 'Posts', href: '/posts' },
 	{ title: 'Projects', href: '/projects' },
-	{ title: 'Resume', href: '/resume.pdf', external: true }
+	{ title: 'Pics', href: '/pics' }
 ];
 
 export const moreNavItems: NavItem[] = [
+	{ title: 'Resume', href: '/resume.pdf', external: true },
 	{ title: 'Tutorials', href: '/tutorials' },
 	{ title: 'Notes', href: 'https://notes.jasoncameron.dev', external: true },
 	{ title: 'Terminal', href: 'https://terminal.jasoncameron.dev', external: true }

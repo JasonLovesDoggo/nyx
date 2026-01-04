@@ -25,37 +25,46 @@
 		isDaytime = hour >= 6 && hour < 21;
 	}
 
-	onMount(async () => {
+	onMount(() => {
 		// Start clock
 		updateTime();
 		const interval = setInterval(updateTime, 1000);
+		let destroyed = false;
 
 		if (browser && mapContainer) {
-			const L = (await import('leaflet')).default;
-			await import('leaflet/dist/leaflet.css');
-			mapInstance = L.map(mapContainer, {
-				zoomControl: false,
-				attributionControl: false,
-				dragging: true,
-				scrollWheelZoom: true,
-				doubleClickZoom: true,
-				boxZoom: true,
-				keyboard: true,
-				touchZoom: true
-			}).setView([43.6532, -79.3832], 11);
+			(async () => {
+				const L = (await import('leaflet')).default;
+				await import('leaflet/dist/leaflet.css');
 
-			L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-				maxZoom: 19,
-				attribution: '',
-				keepBuffer: 4,
-				updateWhenIdle: false,
-				updateWhenZooming: false
-			}).addTo(mapInstance);
+				if (destroyed || !mapContainer) {
+					return;
+				}
 
-			leafletLoaded = true;
+				mapInstance = L.map(mapContainer, {
+					zoomControl: false,
+					attributionControl: false,
+					dragging: true,
+					scrollWheelZoom: true,
+					doubleClickZoom: true,
+					boxZoom: true,
+					keyboard: true,
+					touchZoom: true
+				}).setView([43.6532, -79.3832], 11);
+
+				L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+					maxZoom: 19,
+					attribution: '',
+					keepBuffer: 4,
+					updateWhenIdle: false,
+					updateWhenZooming: false
+				}).addTo(mapInstance);
+
+				leafletLoaded = true;
+			})();
 		}
 
 		return () => {
+			destroyed = true;
 			clearInterval(interval);
 		};
 	});
