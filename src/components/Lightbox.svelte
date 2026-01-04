@@ -4,6 +4,7 @@
 	type ImageData = {
 		id: string;
 		src: Picture;
+		alt: string;
 	};
 
 	type Props = {
@@ -16,7 +17,9 @@
 
 	let { images, currentIndex, onclose, onprev, onnext }: Props = $props();
 
-	let image = $derived(images[currentIndex]);
+	let image = $derived(
+		currentIndex >= 0 && currentIndex < images.length ? images[currentIndex] : null
+	);
 	let isLoading = $state(false);
 	let lightboxEl: HTMLDivElement | null = $state(null);
 
@@ -63,11 +66,15 @@
 		if (!el) return;
 
 		const handleTouchStart = (e: TouchEvent) => {
-			touchStartX = e.touches[0].clientX;
+			if (e.touches.length > 0) {
+				touchStartX = e.touches[0].clientX;
+			}
 		};
 
 		const handleTouchMove = (e: TouchEvent) => {
-			touchEndX = e.touches[0].clientX;
+			if (e.touches.length > 0) {
+				touchEndX = e.touches[0].clientX;
+			}
 		};
 
 		const handleTouchEnd = () => {
@@ -97,48 +104,50 @@
 
 <svelte:window onkeydown={handleKeydown} />
 
-<div
-	class="lightbox"
-	onclick={handleBackdropClick}
-	onkeydown={handleKeydown}
-	role="button"
-	tabindex="-1"
-	bind:this={lightboxEl}
->
-	<button
-		class="text-accent absolute top-1/2 left-1 z-[10000] -translate-y-1/2 cursor-pointer overflow-visible border-none bg-transparent px-4 py-8 text-3xl transition-transform duration-200 hover:scale-110 md:left-4 md:px-8 md:py-16 md:text-5xl"
-		onclick={onprev}
-		aria-label="Previous image"
+{#if image}
+	<div
+		class="lightbox"
+		onclick={handleBackdropClick}
+		onkeydown={handleKeydown}
+		role="button"
+		tabindex="-1"
+		bind:this={lightboxEl}
 	>
-		<span class="block scale-y-[1.5] transition-transform duration-200">‹</span>
-	</button>
+		<button
+			class="text-accent absolute top-1/2 left-1 z-[10000] -translate-y-1/2 cursor-pointer overflow-visible border-none bg-transparent px-4 py-8 text-3xl transition-transform duration-200 hover:scale-110 md:left-4 md:px-8 md:py-16 md:text-5xl"
+			onclick={onprev}
+			aria-label="Previous image"
+		>
+			<span class="block scale-y-[1.5] transition-transform duration-500">‹</span>
+		</button>
 
-	{#if isLoading}
-		<div class="loading">
-			<div class="spinner"></div>
-		</div>
-	{/if}
-
-	<picture class:loading={isLoading}>
-		{#if image.src.sources?.avif}
-			<source srcset={image.src.sources.avif} type="image/avif" />
+		{#if isLoading}
+			<div class="loading">
+				<div class="spinner"></div>
+			</div>
 		{/if}
-		{#if image.src.sources?.webp}
-			<source srcset={image.src.sources.webp} type="image/webp" />
-		{/if}
-		<img src={image.src.img.src} alt="" onload={handleImageLoad} />
-	</picture>
 
-	<button
-		class="text-accent absolute top-1/2 right-1 z-[10000] -translate-y-1/2 cursor-pointer overflow-visible border-none bg-transparent px-4 py-8 text-3xl transition-transform duration-200 hover:scale-110 md:right-4 md:px-8 md:py-16 md:text-5xl"
-		onclick={onnext}
-		aria-label="Next image"
-	>
-		<span class="block scale-y-[1.5] transition-transform duration-200">›</span>
-	</button>
+		<picture class:loading={isLoading}>
+			{#if image.src.sources?.avif}
+				<source srcset={image.src.sources.avif} type="image/avif" />
+			{/if}
+			{#if image.src.sources?.webp}
+				<source srcset={image.src.sources.webp} type="image/webp" />
+			{/if}
+			<img src={image.src.img.src} alt={image.alt} onload={handleImageLoad} />
+		</picture>
 
-	<div class="counter"><span class="text-accent">{currentIndex + 1}</span> / {images.length}</div>
-</div>
+		<button
+			class="text-accent absolute top-1/2 right-1 z-[10000] -translate-y-1/2 cursor-pointer overflow-visible border-none bg-transparent px-4 py-8 text-3xl transition-transform duration-200 hover:scale-110 md:right-4 md:px-8 md:py-16 md:text-5xl"
+			onclick={onnext}
+			aria-label="Next image"
+		>
+			<span class="block scale-y-[1.5] transition-transform duration-500">›</span>
+		</button>
+
+		<div class="counter"><span class="text-accent">{currentIndex + 1}</span> / {images.length}</div>
+	</div>
+{/if}
 
 <style>
 	.lightbox {

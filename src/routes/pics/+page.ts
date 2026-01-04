@@ -1,8 +1,9 @@
 import type { PageLoad } from './$types';
 import type { PhotoData } from '$types/photos';
+import type { Picture } from 'imagetools-core';
 
 export const load: PageLoad = async () => {
-	const imageModules = import.meta.glob(
+	const imageModules = import.meta.glob<Picture>(
 		'/src/content/images/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp}',
 		{
 			import: 'default',
@@ -22,7 +23,7 @@ export const load: PageLoad = async () => {
 				?.replace(/\.[^/.]+$/, '') || '';
 		return {
 			id: filename,
-			src: module as any,
+			src: module,
 			alt: filename.replace(/[-_]/g, ' '),
 			path
 		};
