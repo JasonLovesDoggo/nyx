@@ -26,7 +26,7 @@
 </script>
 
 <svelte:head>
-	<title>Photos | Jason Cameron</title>
+	<title>Pics | Jason Cameron</title>
 	<meta name="description" content="A collection of my photography." />
 </svelte:head>
 
@@ -35,7 +35,7 @@
 		pics <span aria-label="count of photos" class="count">&lbrace;{data.images.length}&rbrace;</span
 		>
 	</h1>
-	<p>photos from around toronto and beyond.</p>
+	<p>photos from around toronto and beyond. Captured on a pixel 6, pixel 8 or a Canon T7</p>
 	<br />
 	<div class="grid">
 		{#each data.images as image, index (image.id)}
@@ -135,7 +135,7 @@
 
 	@media (max-width: 1400px) {
 		.grid {
-			columns: 2;
+			columns: 2 !important;
 		}
 	}
 
@@ -145,7 +145,7 @@
 			padding-right: 1.5rem;
 		}
 		.grid {
-			columns: 1;
+			columns: 1 !important;
 		}
 	}
 </style>
