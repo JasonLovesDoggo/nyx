@@ -18,6 +18,7 @@ interface CreateContentServiceOptions<T> {
 	contentType: string;
 	filter?: (entry: ContentEntry<T>) => boolean;
 	sort?: (a: ContentEntry<T>, b: ContentEntry<T>) => number;
+	slugFromPath?: (path: string) => string;
 }
 
 interface MdsvexModule<T> {
@@ -26,59 +27,89 @@ interface MdsvexModule<T> {
 	frontmatter?: T;
 }
 
+type ModuleLoader<T> = MdsvexModule<T> | (() => Promise<MdsvexModule<T>>);
+
+const defaultSlugFromPath = (path: string) =>
+	path
+		.split('/')
+		.pop()!
+		.replace(/\.[^.]+$/, '');
+
+function normalizePath(path: string) {
+	return path.replace(/\\/g, '/');
+}
+
+async function resolveModule<T>(loader: ModuleLoader<T>): Promise<MdsvexModule<T>> {
+	if (typeof loader === 'function') {
+		return await loader();
+	}
+	return loader;
+}
+
 export function createContentService<T>({
 	modules,
 	contentType,
 	filter = () => true,
-	sort = () => 0
+	sort = () => 0,
+	slugFromPath
 }: CreateContentServiceOptions<T>) {
-	const contentDir =
-		Object.keys(modules).length > 0
-			? Object.keys(modules)[0].substring(0, Object.keys(modules)[0].lastIndexOf('/') + 1)
-			: '';
+	const slugResolver = slugFromPath
+		? (path: string) => slugFromPath(normalizePath(path))
+		: (path: string) => defaultSlugFromPath(normalizePath(path));
 
-	function slugFrom(path: string): string {
-		return path.split('/').pop()!.replace('.svx', '');
-	}
+	const entries = Object.entries(modules).map(([path, loader]) => ({
+		path: normalizePath(path),
+		slug: slugResolver(path),
+		loader: loader as ModuleLoader<T>
+	}));
 
-	let _all: ContentEntry<T>[];
+	const loaderBySlug = new Map<string, { path: string; loader: ModuleLoader<T> }>();
+	entries.forEach((entry) => loaderBySlug.set(entry.slug, entry));
 
-	function getAll(): ContentEntry<T>[] {
-		if (!_all) {
-			_all = Object.entries(modules)
-				.map(([path, mod]) => {
-					const module = mod as MdsvexModule<T>;
+	const moduleCache = new Map<string, MdsvexModule<T>>();
+	let allPromise: Promise<ContentEntry<T>[]> | null = null;
+
+	async function getAll(): Promise<ContentEntry<T>[]> {
+		if (!allPromise) {
+			allPromise = Promise.all(
+				entries.map(async ({ slug, loader, path }) => {
+					let module = moduleCache.get(slug);
+					if (!module) {
+						module = await resolveModule(loader);
+						moduleCache.set(slug, module);
+					}
 					const metadata = module.metadata ?? module.frontmatter;
 					if (!metadata) {
 						throw new Error(`Missing metadata for ${path}`);
 					}
-					return {
-						slug: slugFrom(path),
-						metadata
-					};
+					return { slug, metadata };
 				})
-				.filter(filter)
-				.sort(sort);
+			)
+				.then((items) => items.filter(filter))
+				.then((items) => items.sort(sort));
 		}
-		return _all;
+		return allPromise;
 	}
 
-	function getBySlug(slug: string): ContentPageData<T> {
-		const path = `${contentDir}${slug}.svx`;
-		const module = modules[path] as MdsvexModule<T> | undefined;
-
-		if (!module) {
+	async function getBySlug(slug: string): Promise<ContentPageData<T>> {
+		const entry = loaderBySlug.get(slug);
+		if (!entry) {
 			throw error(404, `${contentType} not found: ${slug}`);
 		}
 
-		const metadata = module.metadata ?? module.frontmatter;
+		let module = moduleCache.get(slug);
+		if (!module) {
+			module = await resolveModule(entry.loader);
+			moduleCache.set(slug, module);
+		}
 
+		const metadata = module.metadata ?? module.frontmatter;
 		if (!metadata) {
 			throw error(500, `Missing metadata for ${contentType}: ${slug}`);
 		}
 
-		const entry = { slug, metadata };
-		if (!filter(entry)) {
+		const contentEntry = { slug, metadata };
+		if (!filter(contentEntry)) {
 			throw error(404, `${contentType} not found: ${slug}`);
 		}
 
@@ -89,8 +120,9 @@ export function createContentService<T>({
 		};
 	}
 
-	function getLatest(count: number): ContentEntry<T>[] {
-		return getAll().slice(0, count);
+	async function getLatest(count: number): Promise<ContentEntry<T>[]> {
+		const all = await getAll();
+		return all.slice(0, count);
 	}
 
 	return {
