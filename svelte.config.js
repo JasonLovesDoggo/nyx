@@ -93,7 +93,7 @@ const mdsvexOptions = {
 					transformers: [transformerColorizedBrackets()]
 				});
 			} catch (error) {
-				console.warn(`Failed to highlight language "${infoString}". Falling back to text.`, error);
+				console.warn(`Failed to highlight language "${highlightLang}". Falling back to text.`, error);
 				highlighted = highlighter.codeToHtml(code, {
 					lang: 'text',
 					themes: catppuccinThemes,
