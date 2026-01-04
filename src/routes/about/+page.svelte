@@ -71,7 +71,7 @@
 					Some of my more notable projects include {@render GithubProject(
 						'RedditVideoMakerBot',
 						'https://github.com/elebumm/RedditVideoMakerBot',
-						8296
+						8300
 					)}, where I reverse engineered TikTok's TTS API, and
 					{@render GithubProject('Anubis', '/projects/anubis', 15810)}, an anti-scraper tool
 					currently protecting infrastructure at The Linux Foundation and the UN. My work focuses on
