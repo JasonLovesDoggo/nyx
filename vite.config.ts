@@ -5,14 +5,18 @@ import { defineConfig } from 'vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
-export default defineConfig({
-	plugins: [
-		enhancedImages(),
-		tailwindcss(),
-		sveltekit(),
-		// visualizer({ emitFile: true, filename: 'stats.html' }),
-		devtoolsJson()
-	],
+export default defineConfig(({ command }) => {
+	const isBuild = command === 'build';
 
-	server: { fs: { allow: ['.'] } }
+	return {
+		plugins: [
+			isBuild && enhancedImages(), // only enable when building for production
+			tailwindcss(),
+			sveltekit(),
+			// visualizer({ emitFile: true, filename: 'stats.html' }),
+			!isBuild && devtoolsJson()
+		].filter(Boolean),
+
+		server: { fs: { allow: ['.'] } }
+	};
 });

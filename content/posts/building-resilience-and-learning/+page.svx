@@ -1,6 +1,5 @@
 ~~~
 description = "Resources for building skills, resilience, and learning independently in an uncertain world"
-published_at = "2025-12-21"
 tags = ["learning", "resilience", "growth", "self-improvement"]
 
 [title]
