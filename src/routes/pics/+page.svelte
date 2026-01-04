@@ -68,7 +68,7 @@
 					class="block h-auto w-full opacity-0 transition-opacity duration-200 group-hover:opacity-80"
 					src={image.src.img.src}
 					alt={image.alt}
-					loading="lazy"
+					loading="eager"
 					width={image.src.img.w}
 					height={image.src.img.h}
 					onload={(e) => {
