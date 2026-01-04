@@ -3,7 +3,7 @@
  * All Rights Reserved
  */
 
-import { createContentService, type ContentEntry } from './factory';
+import { createContentService, type ContentEntry, type ContentPageData } from './factory';
 
 export interface TutorialImage {
 	url: string;
@@ -26,6 +26,7 @@ export interface TutorialMetadata {
 }
 
 export type TutorialEntry = ContentEntry<TutorialMetadata>;
+export type TutorialPageData = ContentPageData<TutorialMetadata>;
 
 const tutorialService = createContentService<TutorialMetadata>({
 	modules: import.meta.glob('/content/tutorials/*.svx', { eager: true }),

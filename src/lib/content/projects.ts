@@ -34,10 +34,12 @@ const projectService = createContentService<ProjectMetadata>({
 export const getAllProjects = projectService.getAll;
 export const getProjectBySlug = projectService.getBySlug;
 
-let _featuredProjects: ProjectEntry[];
-export function getFeaturedProjects(): ProjectEntry[] {
-	if (!_featuredProjects) {
-		_featuredProjects = getAllProjects().filter((p) => p.metadata.featured);
+let featuredProjectsPromise: Promise<ProjectEntry[]> | null = null;
+export function getFeaturedProjects(): Promise<ProjectEntry[]> {
+	if (!featuredProjectsPromise) {
+		featuredProjectsPromise = getAllProjects().then((projects) =>
+			projects.filter((p) => p.metadata.featured)
+		);
 	}
-	return _featuredProjects;
+	return featuredProjectsPromise;
 }

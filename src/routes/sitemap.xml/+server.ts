@@ -6,9 +6,14 @@ import { getAllTutorials } from '$lib/content/tutorials';
 export const prerender = true;
 
 export async function GET() {
-	const posts = getAllPosts().filter((post) => post.metadata?.published_at);
-	const projects = getAllProjects().filter((project) => project.metadata?.published);
-	const tutorials = getAllTutorials().filter((tutorial) => tutorial.metadata?.published_at);
+	const [posts, projects, tutorials] = await Promise.all([
+		getAllPosts(),
+		getAllProjects(),
+		getAllTutorials()
+	]);
+	const publishedPosts = posts.filter((post) => post.metadata?.published_at);
+	const publishedProjects = projects.filter((project) => project.metadata?.published);
+	const publishedTutorials = tutorials.filter((tutorial) => tutorial.metadata?.published_at);
 
 	const staticPages = [
 		{ path: '', priority: '1.0', changefreq: 'weekly' },
@@ -17,7 +22,7 @@ export async function GET() {
 		{ path: '/projects', priority: '0.8', changefreq: 'monthly' },
 		{ path: '/tutorials', priority: '0.8', changefreq: 'monthly' },
 		{ path: '/socials', priority: '0.5', changefreq: 'monthly' },
-		{ path: '/photos', priority: '0.6', changefreq: 'monthly' }
+		{ path: '/pics', priority: '0.6', changefreq: 'monthly' }
 	];
 
 	const headers = { 'Content-Type': 'application/xml' };
@@ -34,7 +39,7 @@ export async function GET() {
 	</url>`
 		)
 		.join('')}
-	${posts
+	${publishedPosts
 		.map(
 			(post) => `
 	<url>
@@ -45,7 +50,7 @@ export async function GET() {
 	</url>`
 		)
 		.join('')}
-	${projects
+	${publishedProjects
 		.map(
 			(project) => `
 	<url>
@@ -56,7 +61,7 @@ export async function GET() {
 	</url>`
 		)
 		.join('')}
-	${tutorials
+	${publishedTutorials
 		.map(
 			(tutorial) => `
 	<url>

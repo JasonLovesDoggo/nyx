@@ -4,7 +4,7 @@ import { getAllPosts } from '$lib/content/posts';
 export const prerender = true;
 
 export async function GET() {
-	const posts = getAllPosts().filter((post) => post.metadata?.published_at);
+	const posts = (await getAllPosts()).filter((post) => post.metadata?.published_at);
 
 	const headers = { 'Content-Type': 'application/xml' };
 
@@ -21,7 +21,7 @@ export async function GET() {
 			.map(
 				(post) => `
 		<item>
-			<title><![CDATA[${post.metadata!.title}]]></title>
+			<title><![CDATA[${post.metadata!.title.text}]]></title>
 			<description><![CDATA[${post.metadata!.description}]]></description>
 			<link>${Site.url}/posts/${post.slug}</link>
 			<guid isPermaLink="true">${Site.url}/posts/${post.slug}</guid>

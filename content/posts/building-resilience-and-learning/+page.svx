@@ -1,0 +1,25 @@
+~~~
+description = "Resources for building skills, resilience, and learning independently in an uncertain world"
+published_at = "2025-12-21"
+tags = ["learning", "resilience", "growth", "self-improvement"]
+
+[title]
+text = "Building Resilience and Learning Without a Map"
+config = "8c 4"
+~~~
+
+[Reilly Wood's thread](https://x.com/reillywood/status/1370424931477954560) - about learning under pressure. Short but lands.
+
+["How to do everything"](https://drmaciver.substack.com/p/how-to-do-everything) by David MacIver - tangible take on starting things when you don't know what you're doing.
+
+["theory building without a mentor"](https://jyn.dev/theory-building-without-a-mentor/) by jyn - basically, you probably won't get one so figure out how to think for yourself.
+
+["the gen z resilience drought"](https://jordanstacey.substack.com/p/the-gen-z-resilience-drought) by Jordan Stacey - uncomfortable read about what we're actually missing.
+
+["You're Not Burnt Out. You're Existentially Starving."](https://neilthanedar.com/youre-not-burnt-out-youre-existentially-starving/) by Neil Thanedar - people call it burnout but it's something different. Worth the distinction.
+
+["how i think when i think about programming"](https://www.alicemaz.com/writing/program.html) by alice maz - structural thinking. How to actually design something that works.
+
+The pattern: nobody's coming to save you, and the sooner you accept that the better you get at building things. That's it.
+
+Start somewhere. Pick one thing you actually care about learning and stop waiting for permission or the perfect conditions. You won't get them.
