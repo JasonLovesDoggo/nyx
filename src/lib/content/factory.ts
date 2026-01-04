@@ -57,11 +57,14 @@ export function createContentService<T>({
 		? (path: string) => slugFromPath(normalizePath(path))
 		: (path: string) => defaultSlugFromPath(normalizePath(path));
 
-	const entries = Object.entries(modules).map(([path, loader]) => ({
-		path: normalizePath(path),
-		slug: slugResolver(path),
-		loader: loader as ModuleLoader<T>
-	}));
+	const entries = Object.entries(modules).map(([path, loader]) => {
+		const normalizedPath = normalizePath(path);
+		return {
+			path: normalizedPath,
+			slug: slugResolver(normalizedPath),
+			loader: loader as ModuleLoader<T>
+		};
+	});
 
 	const loaderBySlug = new Map<string, { path: string; loader: ModuleLoader<T> }>();
 	entries.forEach((entry) => loaderBySlug.set(entry.slug, entry));
