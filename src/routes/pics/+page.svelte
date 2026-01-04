@@ -58,7 +58,7 @@
 				{/if}
 				<img
 					src={image.src.img.src}
-					alt=""
+					alt={image.alt}
 					loading="lazy"
 					width={image.src.img.w}
 					height={image.src.img.h}
