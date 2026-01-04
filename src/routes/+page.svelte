@@ -40,8 +40,8 @@
 			Hey! I'm
 			<span class="text-accent">
 				<span class="sr-only select-none">Jason</span>
-				<span aria-hidden="true">
-					<span>J</span><span
+				<span>
+					<span aria-hidden="true">J</span><span
 						class="decoration-accent/30 underline decoration-dashed opacity-70"
 						onmouseenter={() => (isNameHovered = true)}
 						onmouseleave={() => (isNameHovered = false)}
@@ -50,8 +50,7 @@
 						tabindex="0"
 						role="button"
 						aria-label="Hover or focus to see a fun fact about my name">a</span
-					><span>son</span><span
-						aria-hidden="true"
+					><span aria-hidden="true">son</span><span
 						class={`pointer-events-none inline-flex overflow-hidden align-baseline whitespace-nowrap transition-all duration-500 ease-out select-none ${
 							isNameHovered ? 'max-w-[7ch] opacity-100' : 'max-w-0 opacity-0'
 						}`}>&nbsp;'JSON'</span
