@@ -9,25 +9,35 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="og:locale" content="en_US" />
 
-		<script>
-			(function () {
+		<script data-theme-init>
+			(() => {
 				try {
-					// get stored palette or fallback to system preference
-					const storedPalette = JSON.parse(localStorage.getItem('palette'));
-					const palette =
-						storedPalette ||
-						(window.matchMedia('(prefers-color-scheme: light)').matches ? 'latte' : 'mocha');
-					document.documentElement.classList.add(palette);
+					const safeParse = (raw) => {
+						if (!raw) return null;
+						try {
+							return JSON.parse(raw);
+						} catch {
+							return raw;
+						}
+					};
 
-					// get stored accent or default
-					const accent = JSON.parse(localStorage.getItem('accent')) || 'peach';
+					const storedPalette = safeParse(localStorage.getItem('palette'));
+					const storedAccent = safeParse(localStorage.getItem('accent'));
+
+					const palette =
+						storedPalette ??
+						(window.matchMedia('(prefers-color-scheme: light)').matches ? 'latte' : 'mocha');
+					if (palette) {
+						document.documentElement.classList.add(palette);
+					}
+
+					const accent = storedAccent ?? 'peach';
 					document.documentElement.style.setProperty(
 						'--current-accent-color',
 						`var(--color-${accent})`
 					);
-				} catch (e) {
-					// in case localStorage or matchMedia is unavailable
-					console.warn('Theme bootstrapping failed', e);
+				} catch (error) {
+					console.warn('Theme bootstrapping failed', error);
 				}
 			})();
 		</script>
