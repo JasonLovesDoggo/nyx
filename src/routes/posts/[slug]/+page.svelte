@@ -3,10 +3,14 @@
 	import type { PostPageData } from '$lib/content/posts';
 	import SlabTitle from '$components/SlabTitle.svelte';
 	import PostTags from '$components/posts/PostTags.svelte';
-
-	export let data: PostPageData;
+	import { initMarginNoteCounter } from '$lib/stores/marginnote';
 	import '$lib/styles/content.css';
 	import { page } from '$app/state';
+
+	export let data: PostPageData;
+
+	// Initialize margin note counter for this post
+	initMarginNoteCounter();
 
 	// Component generated from mdsvex
 	const Content = data.content;
@@ -34,8 +38,8 @@
 	{/if}
 </svelte:head>
 
-<div class="mx-auto max-w-4xl px-4">
-	<header class="mb-12 space-y-4">
+<div class="mx-auto max-w-4xl">
+	<header class="post-header mb-12 space-y-4 px-4">
 		<SlabTitle
 			title={data.metadata.title.text}
 			slug={data.slug}
@@ -55,7 +59,11 @@
 		<PostTags post={data} />
 	</header>
 
-	<article class="prose mx-auto mb-6 max-w-4xl">
+	<article class="prose relative mb-6 max-w-none overflow-visible px-4">
 		<Content />
 	</article>
+
+	<p class="post-footer text-overlay0 mt-8 px-4 pb-8 text-center text-sm">
+		Thanks for reading! Hope you found this useful.
+	</p>
 </div>

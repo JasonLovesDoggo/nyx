@@ -267,19 +267,6 @@
 					class="h-40 w-full rounded-md object-cover shadow-sm transition-transform duration-300 hover:scale-[1.03]"
 				/>
 			</div>
-
-			<!--			<p class="text-subtext0 leading-relaxed">-->
-			<!--				Bella is a <span class="font-medium">4-year-old</span> goldendoodle who loves to play with-->
-			<!--				her soccer ball, go on walks/runs and explore <b>everything</b>. Whenever we go on a walk we-->
-			<!--				both know we have an adventure ahead of us. &lt;!&ndash;todo make auto&ndash;&gt;-->
-			<!--			</p>-->
 		</div>
 	</section>
 </div>
-
-<style>
-	/* Offset for fixed navbar when navigating to anchors */
-	:global(html) {
-		scroll-padding-top: 5rem; /* Adjust based on your navbar height */
-	}
-</style>
