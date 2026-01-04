@@ -18,6 +18,11 @@
 
 	let image = $derived(images[currentIndex]);
 	let isLoading = $state(false);
+	let lightboxEl: HTMLDivElement | null = $state(null);
+
+	// Swipe support
+	let touchStartX = 0;
+	let touchEndX = 0;
 
 	function handleBackdropClick(e: MouseEvent) {
 		if (e.target === e.currentTarget) {
@@ -51,6 +56,43 @@
 			document.body.style.overflow = '';
 		};
 	});
+
+	// Touch/swipe event listeners
+	$effect(() => {
+		const el = lightboxEl;
+		if (!el) return;
+
+		const handleTouchStart = (e: TouchEvent) => {
+			touchStartX = e.touches[0].clientX;
+		};
+
+		const handleTouchMove = (e: TouchEvent) => {
+			touchEndX = e.touches[0].clientX;
+		};
+
+		const handleTouchEnd = () => {
+			const diff = touchStartX - touchEndX;
+			const threshold = 50;
+
+			if (Math.abs(diff) > threshold) {
+				if (diff > 0) {
+					onnext();
+				} else {
+					onprev();
+				}
+			}
+		};
+
+		el.addEventListener('touchstart', handleTouchStart);
+		el.addEventListener('touchmove', handleTouchMove);
+		el.addEventListener('touchend', handleTouchEnd);
+
+		return () => {
+			el.removeEventListener('touchstart', handleTouchStart);
+			el.removeEventListener('touchmove', handleTouchMove);
+			el.removeEventListener('touchend', handleTouchEnd);
+		};
+	});
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
@@ -61,10 +103,15 @@
 	onkeydown={handleKeydown}
 	role="button"
 	tabindex="-1"
+	bind:this={lightboxEl}
 >
-	<button class="nav prev" onclick={onprev} aria-label="Previous image"
-		><span class="arrow">&lt;</span></button
+	<button
+		class="text-accent absolute top-1/2 left-1 z-[10000] -translate-y-1/2 cursor-pointer overflow-visible border-none bg-transparent px-4 py-8 text-3xl transition-transform duration-200 hover:scale-110 md:left-4 md:px-8 md:py-16 md:text-5xl"
+		onclick={onprev}
+		aria-label="Previous image"
 	>
+		<span class="block scale-y-[1.5] transition-transform duration-200">‹</span>
+	</button>
 
 	{#if isLoading}
 		<div class="loading">
@@ -82,11 +129,15 @@
 		<img src={image.src.img.src} alt="" onload={handleImageLoad} />
 	</picture>
 
-	<button class="nav next" onclick={onnext} aria-label="Next image"
-		><span class="arrow">&gt;</span></button
+	<button
+		class="text-accent absolute top-1/2 right-1 z-[10000] -translate-y-1/2 cursor-pointer overflow-visible border-none bg-transparent px-4 py-8 text-3xl transition-transform duration-200 hover:scale-110 md:right-4 md:px-8 md:py-16 md:text-5xl"
+		onclick={onnext}
+		aria-label="Next image"
 	>
+		<span class="block scale-y-[1.5] transition-transform duration-200">›</span>
+	</button>
 
-	<div class="counter">{currentIndex + 1} / {images.length}</div>
+	<div class="counter"><span class="text-accent">{currentIndex + 1}</span> / {images.length}</div>
 </div>
 
 <style>
@@ -99,6 +150,7 @@
 		justify-content: center;
 		background-color: rgba(0, 0, 0, 0.95);
 		cursor: pointer;
+		overflow: visible;
 	}
 
 	picture {
@@ -112,38 +164,6 @@
 		max-height: 85vh;
 		object-fit: contain;
 		display: block;
-	}
-
-	.nav {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		background: none;
-		border: none;
-		color: rgba(255, 255, 255, 0.4);
-		font-size: 3rem;
-		cursor: pointer;
-		padding: 2rem 1.5rem;
-		transition: color 0.2s;
-		z-index: 10000;
-	}
-
-	.nav .arrow {
-		display: block;
-		transform: scaleY(3);
-		font-weight: 200;
-	}
-
-	.nav:hover {
-		color: rgba(255, 255, 255, 0.7);
-	}
-
-	.nav.prev {
-		left: 1rem;
-	}
-
-	.nav.next {
-		right: 1rem;
 	}
 
 	.counter {
