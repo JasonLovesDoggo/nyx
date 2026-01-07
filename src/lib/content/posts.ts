@@ -21,6 +21,22 @@ export interface PostMetadata {
 export type PostEntry = ContentEntry<PostMetadata>;
 export type PostPageData = ContentPageData<PostMetadata>;
 
+const includeDrafts = import.meta.env.DEV;
+const draftSortFallback = Number.MIN_SAFE_INTEGER;
+
+const parsePublishedAt = (value?: string): number | null => {
+	if (!value) {
+		return null;
+	}
+	const timestamp = new Date(value).getTime();
+	return Number.isNaN(timestamp) ? null : timestamp;
+};
+
+const getSortValue = (entry: PostEntry) =>
+	parsePublishedAt(entry.metadata.published_at) ?? draftSortFallback;
+
+const isPublished = (entry: PostEntry) => parsePublishedAt(entry.metadata.published_at) !== null;
+
 const postService = createContentService<PostMetadata>({
 	modules: import.meta.glob('/content/posts/*/+page.svx'),
 	contentType: 'post',
@@ -28,11 +44,8 @@ const postService = createContentService<PostMetadata>({
 		const cleaned = path.replace(/\/\+page\.svx$/, '');
 		return cleaned.substring(cleaned.lastIndexOf('/') + 1);
 	},
-	filter: (p) => {
-		const publishedAt = p.metadata?.published_at;
-		return !!publishedAt && !isNaN(new Date(publishedAt).getTime());
-	},
-	sort: (a, b) => +new Date(b.metadata.published_at!) - +new Date(a.metadata.published_at!)
+	filter: (entry) => includeDrafts || isPublished(entry),
+	sort: (a, b) => getSortValue(b) - getSortValue(a)
 });
 
 export const getAllPosts = postService.getAll;
