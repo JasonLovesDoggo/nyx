@@ -21,6 +21,7 @@
 		colored: boolean;
 		italic: boolean;
 		color?: string;
+		colorClass?: string;
 	}
 
 	const wordConfigs: WordConfig[] = $derived(
@@ -29,17 +30,21 @@
 					.split(/\s+/)
 					.filter(Boolean)
 					.map((cfg) => {
-						const colorMatch = cfg.match(/\[(#(?:[0-9a-fA-F]{3,8}))\]/);
+						const colorMatch = cfg.match(/\[([^\]]+)\]/);
 						const cleanedCfg = colorMatch ? cfg.replace(colorMatch[0], '') : cfg;
 						const sizeMatch = cleanedCfg.match(/^([\d.]+)/);
 						const size = sizeMatch ? parseFloat(sizeMatch[1]) : 3;
 						const colored = cleanedCfg.includes('c') || Boolean(colorMatch);
 						const italic = cleanedCfg.includes('i');
+						const colorToken = colorMatch?.[1];
+						const inlineColor = colorToken?.startsWith('#') ? colorToken : undefined;
+						const classColor = inlineColor ? undefined : colorToken;
 						return {
 							size,
 							colored,
 							italic,
-							color: colorMatch?.[1]
+							color: inlineColor,
+							colorClass: classColor
 						};
 					})
 			: words.map((_) => ({
@@ -111,7 +116,9 @@
 		}}
 		{@const h = hashCode(colorHash + i)}
 		{@const fontWeight = wordConfig.italic ? [300, 400, 500][h % 3] : 900}
-		{@const colorClass = wordConfig.color ? '' : getColorClass(i, wordConfig.colored)}
+		{@const colorClass = wordConfig.color
+			? ''
+			: (wordConfig.colorClass ?? getColorClass(i, wordConfig.colored))}
 		{@const inlineStyle = `view-transition-name: ${vtName}; font-size: ${wordConfig.size}rem; font-weight: ${fontWeight};${
 			wordConfig.color ? ` color: ${wordConfig.color};` : ''
 		}`}
