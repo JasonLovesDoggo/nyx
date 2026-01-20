@@ -79,7 +79,7 @@
 			alternateName: ['jsoncam', 'jasonlovesdoggo', 'json'],
 			url: Site.url,
 			description:
-				'Senior Software Engineer based in Toronto, Canada. Expert in Golang, Python, DevOps, and hackathon development.',
+				'Senior Software Engineer based in Toronto, Canada.',
 			jobTitle: 'Senior Software Engineer',
 			birthDate: Site.seo.birthDate,
 			worksFor: {
