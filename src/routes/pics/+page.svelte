@@ -4,7 +4,11 @@
 	import Lightbox from '$components/Lightbox.svelte';
 	import { usePicsFilters } from '$lib/hooks/use-pics-filters.svelte';
 	import { useLightboxNav } from '$lib/hooks/use-lightbox-nav.svelte';
-	import { IconCamera, IconCalendar, IconX } from '@tabler/icons-svelte';
+	import { IconCamera, IconDeviceMobile, IconCalendar, IconX } from '@tabler/icons-svelte';
+
+	function isPhone(camera: string): boolean {
+		return /iphone|pixel|samsung/i.test(camera);
+	}
 
 	type Props = {
 		data: PageData;
@@ -66,7 +70,11 @@
 				class:hover:bg-surface1={!active}
 				onclick={() => filters.toggleFilter('camera', camera)}
 			>
-				<IconCamera size={14} stroke={1.5} />
+				{#if isPhone(camera)}
+					<IconDeviceMobile size={14} stroke={1.5} />
+				{:else}
+					<IconCamera size={14} stroke={1.5} />
+				{/if}
 				{camera}
 				{#if active}
 					<IconX size={12} stroke={2} />

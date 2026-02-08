@@ -29,15 +29,14 @@ export function usePicsFilters(getImages: () => PhotoData[]) {
 
 	const isFiltering = $derived(selectedCameras.length > 0 || selectedYears.length > 0);
 
-	const uniqueCameras = $derived(
-		[
-			...new SvelteSet(
-				getImages()
-					.map((img) => img.exif.camera)
-					.filter((c): c is string => c !== null)
-			)
-		].sort()
-	);
+	const uniqueCameras = $derived.by(() => {
+		const counts = new Map<string, number>();
+		for (const img of getImages()) {
+			const cam = img.exif.camera;
+			if (cam) counts.set(cam, (counts.get(cam) ?? 0) + 1);
+		}
+		return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([cam]) => cam);
+	});
 
 	const uniqueYears = $derived(
 		[
