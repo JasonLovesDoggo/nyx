@@ -362,6 +362,60 @@ const manifest: Manifest = {
 			]
 		},
 		{
+			id: 'DSCF0618',
+			hash: 'sha256:8e1704b5f7c7d59afc7901920b6a4c61193134a9af67ca577cfe4ef3c4dc3894',
+			originalWidth: 7728,
+			originalHeight: 5152,
+			alt: '',
+			exif: {
+				camera: 'FUJIFILM X100VI',
+				aperture: 2,
+				shutterSpeed: '1/512',
+				iso: 500,
+				focalLength: 23,
+				dateTaken: '2026-02-02'
+			},
+			variants: [
+				{
+					width: 2000,
+					format: 'webp',
+					url: '/pics/8e1704b5/2000.webp'
+				},
+				{
+					width: 2000,
+					format: 'jpeg',
+					url: '/pics/8e1704b5/2000.jpg'
+				},
+				{
+					width: 1200,
+					format: 'webp',
+					url: '/pics/8e1704b5/1200.webp'
+				},
+				{
+					width: 1200,
+					format: 'jpeg',
+					url: '/pics/8e1704b5/1200.jpg'
+				},
+				{
+					width: 800,
+					format: 'webp',
+					url: '/pics/8e1704b5/800.webp'
+				},
+				{
+					width: 800,
+					format: 'jpeg',
+					url: '/pics/8e1704b5/800.jpg'
+				},
+				{
+					width: 7728,
+					format: 'jpeg',
+					url: '/pics/8e1704b5/7728.jpg',
+					original: true,
+					size: 17801632
+				}
+			]
+		},
+		{
 			id: '_MG_0577',
 			hash: 'sha256:05631b76c6f88e14ca9bb18355ab3df5ef83d3ef38379669d258900198e34cf0',
 			originalWidth: 6000,
@@ -524,6 +578,60 @@ const manifest: Manifest = {
 			]
 		},
 		{
+			id: 'DSCF0479',
+			hash: 'sha256:8f8f10e557286d81b750cabf2adcc5447301b04986c6f2b6a346816d3b4bd036',
+			originalWidth: 2048,
+			originalHeight: 1365,
+			alt: '',
+			exif: {
+				camera: null,
+				aperture: null,
+				shutterSpeed: null,
+				iso: null,
+				focalLength: null,
+				dateTaken: null
+			},
+			variants: [
+				{
+					width: 2000,
+					format: 'webp',
+					url: '/pics/8f8f10e5/2000.webp'
+				},
+				{
+					width: 2000,
+					format: 'jpeg',
+					url: '/pics/8f8f10e5/2000.jpg'
+				},
+				{
+					width: 1200,
+					format: 'webp',
+					url: '/pics/8f8f10e5/1200.webp'
+				},
+				{
+					width: 1200,
+					format: 'jpeg',
+					url: '/pics/8f8f10e5/1200.jpg'
+				},
+				{
+					width: 800,
+					format: 'webp',
+					url: '/pics/8f8f10e5/800.webp'
+				},
+				{
+					width: 800,
+					format: 'jpeg',
+					url: '/pics/8f8f10e5/800.jpg'
+				},
+				{
+					width: 2048,
+					format: 'jpeg',
+					url: '/pics/8f8f10e5/2048.jpg',
+					original: true,
+					size: 1223984
+				}
+			]
+		},
+		{
 			id: 'PXL_20240414_234010698',
 			hash: 'sha256:84a40964c11c58e0d8e39f49a8c39736b0ef76cc17bd5fc0676d746cb96eec1b',
 			originalWidth: 3072,
@@ -628,6 +736,60 @@ const manifest: Manifest = {
 					url: '/pics/627b0ff2/3072.jpg',
 					original: true,
 					size: 4615071
+				}
+			]
+		},
+		{
+			id: '_DSF0888',
+			hash: 'sha256:a1949dbe43f40ca990589dbfdf148422d5acda8efe4d54acb30010a617b9d86a',
+			originalWidth: 7728,
+			originalHeight: 5152,
+			alt: '',
+			exif: {
+				camera: 'FUJIFILM X100VI',
+				aperture: 5,
+				shutterSpeed: '1/500',
+				iso: 125,
+				focalLength: 23,
+				dateTaken: '2026-02-04'
+			},
+			variants: [
+				{
+					width: 2000,
+					format: 'webp',
+					url: '/pics/a1949dbe/2000.webp'
+				},
+				{
+					width: 2000,
+					format: 'jpeg',
+					url: '/pics/a1949dbe/2000.jpg'
+				},
+				{
+					width: 1200,
+					format: 'webp',
+					url: '/pics/a1949dbe/1200.webp'
+				},
+				{
+					width: 1200,
+					format: 'jpeg',
+					url: '/pics/a1949dbe/1200.jpg'
+				},
+				{
+					width: 800,
+					format: 'webp',
+					url: '/pics/a1949dbe/800.webp'
+				},
+				{
+					width: 800,
+					format: 'jpeg',
+					url: '/pics/a1949dbe/800.jpg'
+				},
+				{
+					width: 7728,
+					format: 'jpeg',
+					url: '/pics/a1949dbe/7728.jpg',
+					original: true,
+					size: 18482639
 				}
 			]
 		},
@@ -1006,6 +1168,60 @@ const manifest: Manifest = {
 					url: '/pics/2b9c3201/4080.jpg',
 					original: true,
 					size: 5294860
+				}
+			]
+		},
+		{
+			id: '_DSF0936',
+			hash: 'sha256:aea7f033d81128a5bd469ca2f1d5196b1b9f8145ea58d2ccd9a43ba23df420cf',
+			originalWidth: 5152,
+			originalHeight: 7728,
+			alt: '',
+			exif: {
+				camera: 'FUJIFILM X100VI',
+				aperture: 2,
+				shutterSpeed: '1/1250',
+				iso: 500,
+				focalLength: 23,
+				dateTaken: '2026-02-05'
+			},
+			variants: [
+				{
+					width: 2000,
+					format: 'webp',
+					url: '/pics/aea7f033/2000.webp'
+				},
+				{
+					width: 2000,
+					format: 'jpeg',
+					url: '/pics/aea7f033/2000.jpg'
+				},
+				{
+					width: 1200,
+					format: 'webp',
+					url: '/pics/aea7f033/1200.webp'
+				},
+				{
+					width: 1200,
+					format: 'jpeg',
+					url: '/pics/aea7f033/1200.jpg'
+				},
+				{
+					width: 800,
+					format: 'webp',
+					url: '/pics/aea7f033/800.webp'
+				},
+				{
+					width: 800,
+					format: 'jpeg',
+					url: '/pics/aea7f033/800.jpg'
+				},
+				{
+					width: 5152,
+					format: 'jpeg',
+					url: '/pics/aea7f033/5152.jpg',
+					original: true,
+					size: 15805465
 				}
 			]
 		},

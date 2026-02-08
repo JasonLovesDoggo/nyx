@@ -1,0 +1,25 @@
+~~~
+description = "Architecting my new pictures page"
+tags = ["photos", "pics", "portfolio", "webdev"]
+
+
+[title]
+text = "Architecting my new pictures page"
+config = "4ic[#7183FF] 2 5 4c 3"
+~~~
+
+Hello world!
+
+
+Introduce my love for my Fujifilm X100VI https://www.fujifilm-x.com/en-ca/products/cameras/x100vi/
+
+Show the old pics page and talk about why I wanted to redesign it
+
+My journey with a photos page because I've always thought it was really special
+
+In some margin notes, include my old Stack Overflow post about some quirky CSS https://stackoverflow.com/questions/74987281/make-a-border-wrap-around-elements-following-different-heights/74996157
+
+Include some little bits like the acts of manipulation, the pipeline etc..
+End out with design choices and why I did it and then the final result
+
+

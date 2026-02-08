@@ -5,7 +5,7 @@
 
 	let mapContainer = $state<HTMLDivElement>();
 	let leafletLoaded = $state(false);
-	let mapInstance: any = null;
+	let mapInstance: L.Map | null = null;
 	let currentTime = $state('');
 	let isDaytime = $state(true);
 

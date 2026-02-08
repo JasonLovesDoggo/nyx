@@ -1,6 +1,6 @@
 import { page } from '$app/state';
 import { goto } from '$app/navigation';
-import { SvelteSet, SvelteURLSearchParams } from 'svelte/reactivity';
+import { SvelteMap, SvelteSet, SvelteURLSearchParams } from 'svelte/reactivity';
 import type { PhotoData } from '$types/photos';
 
 // Each filter dimension: a URL param key and a function to extract the
@@ -30,7 +30,7 @@ export function usePicsFilters(getImages: () => PhotoData[]) {
 	const isFiltering = $derived(selectedCameras.length > 0 || selectedYears.length > 0);
 
 	const uniqueCameras = $derived.by(() => {
-		const counts = new Map<string, number>();
+		const counts = new SvelteMap<string, number>();
 		for (const img of getImages()) {
 			const cam = img.exif.camera;
 			if (cam) counts.set(cam, (counts.get(cam) ?? 0) + 1);

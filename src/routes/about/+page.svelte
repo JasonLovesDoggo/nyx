@@ -1,13 +1,10 @@
 <script lang="ts">
 	import {
-		IconUser,
 		IconBrandGithub,
 		IconBrandLinkedin,
 		IconMail,
 		IconDog,
-		IconStar,
-		IconRocket,
-		IconCode
+		IconStar
 	} from '@tabler/icons-svelte';
 	import Site from '$lib/config/common';
 	import AnchorHeader from '$lib/components/AnchorHeader.svelte';

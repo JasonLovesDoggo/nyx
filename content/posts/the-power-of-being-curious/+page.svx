@@ -1,0 +1,112 @@
+~~~
+description = "Exploring how following small threads of curiosity can lead to big discoveries"
+tags = ["curiosity", "learning", "cybersecurity", "engineering", "story"]
+
+
+[title]
+text = "The Power of Being Curious"
+config = "4 4[text-red] 4 4 8c"
+~~~
+
+When I was 12 or 13, I opened a random file on my family computer. I don't remember what I was supposed to be doing. I just remember seeing code — probably C# — and thinking: *what is this?*
+
+That moment wasn't special. I didn't have some prodigy-level insight. I just wanted to know more. So I got a tutor for three weeks. Then I figured out the rest myself.
+
+This is the pattern of my life. I took apart doorbells as a kid to understand how they worked. I built Discord bots because I wanted to see if I could. I made Foodle — one of the first Wordle clones — and watched it hit 700,000 unique visitors and 6 million pageviews. Not because I had a business plan. Because I was curious what would happen.
+
+I'm 17. I work as a Senior Software Engineer making $200k. I helped scale a product called Stanley from $20k ARR to $1.4M ARR. I compete in CyberPatriot — currently 18th internationally, tied for first in Canada. I've organized CTFs.
+
+None of this happened because I'm talented. It happened because I don't stop pulling threads.
+
+Einstein said it better than I can: "I have no special talents. I am only passionately curious."
+
+I used to think that was false modesty. Now I think he was being precise.
+
+---
+
+## The Bug
+
+A few days ago, I watched a YouTube video about account takeover vulnerabilities. The researcher was explaining a common flaw in password reset flows: systems that validate whether a reset token is *valid*, but don't check whether the email you're resetting actually matches the email encoded in that token.
+
+I thought: *that's so cool.*
+
+Then I thought: *I wonder if Stan Store is vulnerable to this.*
+
+I work at Stan. So I went looking.
+
+The exact vulnerability from the video wasn't there. Our password reset flow was fine. Most people would have stopped here. The thing I was looking for didn't exist. Case closed.
+
+But I'd already been reading the code. And while I was in there, I noticed something else. An IPC endpoint that didn't validate something quite right. I flagged it mentally and moved on.
+
+The next day, I came back to it. I started tracing whether user-controlled data could flow into that endpoint. It could.
+
+Here's what I found:
+
+Stan Store has a feature where fans can purchase community products. When they do, they enter an email address, and the system creates a magic link so they can access what they bought.
+
+The flaw was in how that magic link got validated.
+
+1. Attacker finds a creator's email (not hard — it's often public)
+2. Attacker purchases a community product, enters `creator@example.com` as the email
+3. System creates fan records for that email and returns a magic link to the attacker
+4. Attacker visits the magic link
+5. The backend looks up the user by email — and finds the *creator's* account
+6. System issues a login token for the creator's account
+7. Attacker now has full access to the victim's account
+
+Full account takeover. From a $0 purchase flow.
+
+I messaged my coworker KC:
+
+> "do you know if in community purchase.payment_data["email"] is user controlled? I may see an account takeover vuln if so."
+
+We went back and forth. He explained the fan/user_fan relationship model. I re-explained the exploit path. Then I tested it.
+
+The Slack messages from that moment:
+
+```
+Json Cameron: wait
+Json Cameron: yo
+Json Cameron: kdc
+Json Cameron: it works
+Json Cameron: ihj
+Json Cameron: uh
+Json Cameron: uhhhh
+Json Cameron: it totally works
+```
+
+We hopped on a call. Narrowed down the exact issue. Patched it 20 minutes later.
+
+Two days. One YouTube video. One critical vulnerability found and fixed.
+
+---
+
+## The Lesson
+
+Here's what I keep coming back to: the video I watched had nothing to do with the bug I found.
+
+I went looking for one thing. It wasn't there. But because I was already curious, already in the codebase, already asking "what if" — I found something else entirely. Something worse. Something that mattered.
+
+This is how curiosity actually works. It's not a straight line. You don't watch a video about X and find X. You watch a video about X, go looking, find nothing, but notice Y along the way, and Y turns out to be the thing.
+
+Most people stop when the original thing isn't there. The curious ones keep going.
+
+I'm not saying curiosity is safe. It can waste your time. It can lead you places you shouldn't go. It can get you in trouble if you're not careful about ethics and boundaries.
+
+But the alternative is worse. The alternative is never opening the random file. Never taking apart the doorbell. Never asking "I wonder if we're vulnerable to this."
+
+The alternative is a life where you only find what you're looking for.
+
+---
+
+George Bernard Shaw wrote: "Some men see things as they are and ask why. Others dream things that never were and ask why not."
+
+I'd add a third: some people see things they don't understand and ask *how does this work?*
+
+Those are my people.
+
+You can just do things. You can open the file. You can watch the video and then go check. You can take apart the doorbell. You can get a tutor for three weeks and then figure out the rest yourself.
+
+The world is full of threads waiting to be pulled. Most people walk past them.
+
+Don't.

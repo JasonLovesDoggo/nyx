@@ -271,6 +271,11 @@ async function processImage(
 	const originalHeight = metadata.height ?? 0;
 	const exifData = await extractExif(buffer);
 
+	if (!exifData.camera) {
+		console.warn(`  Skipping ${filename}: no camera model in EXIF data`);
+		return null;
+	}
+
 	// Preserve manually edited alt text from previous entry (non-empty = edited)
 	const previousEntry = existingById.get(id);
 	const alt = previousEntry && previousEntry.alt !== '' ? previousEntry.alt : '';
