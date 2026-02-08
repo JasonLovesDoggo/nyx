@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import type { ImageVariant } from '$types/photos';
 	import Lightbox from '$components/Lightbox.svelte';
 
 	type Props = {
@@ -23,6 +24,20 @@
 	function nextImage() {
 		currentIndex = (currentIndex + 1) % data.images.length;
 	}
+
+	function buildSrcset(variants: ImageVariant[], format: string, baseUrl: string): string {
+		return variants
+			.filter((v) => v.format === format)
+			.map((v) => `${baseUrl}${v.url} ${v.width}w`)
+			.join(', ');
+	}
+
+	function getFallbackSrc(variants: ImageVariant[], baseUrl: string): string {
+		const fallback = variants.find((v) => v.format === 'jpeg' && v.width === 1200);
+		return fallback ? `${baseUrl}${fallback.url}` : `${baseUrl}${variants[0].url}`;
+	}
+
+	const sizes = '(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw';
 </script>
 
 <svelte:head>
@@ -44,7 +59,7 @@
 		photos from around Toronto and beyond. Captured on a Pixel 6, Pixel 8 or a Canon T7
 	</p>
 	<br />
-	<div class="columns-1 break-inside-avoid gap-x-4 md:columns-2 xl:columns-3">
+	<div class="columns-1 gap-x-4 md:columns-2 xl:columns-3">
 		{#each data.images as image, index (image.id)}
 			<picture
 				class="group mb-4 block cursor-pointer break-inside-avoid overflow-hidden"
@@ -58,19 +73,21 @@
 					}
 				}}
 			>
-				{#if image.src.sources?.avif}
-					<source srcset={image.src.sources.avif} type="image/avif" />
-				{/if}
-				{#if image.src.sources?.webp}
-					<source srcset={image.src.sources.webp} type="image/webp" />
-				{/if}
+				<source
+					srcset={buildSrcset(image.variants, 'webp', data.r2BaseUrl)}
+					{sizes}
+					type="image/webp"
+				/>
 				<img
 					class="block h-auto w-full opacity-0 transition-opacity duration-200 group-hover:opacity-80"
-					src={image.src.img.src}
+					srcset={buildSrcset(image.variants, 'jpeg', data.r2BaseUrl)}
+					src={getFallbackSrc(image.variants, data.r2BaseUrl)}
 					alt={image.alt}
-					loading="eager"
-					width={image.src.img.w}
-					height={image.src.img.h}
+					loading="lazy"
+					decoding="async"
+					width={image.originalWidth}
+					height={image.originalHeight}
+					{sizes}
 					onload={(e) => {
 						(e.currentTarget as HTMLImageElement).style.opacity = '1';
 					}}
@@ -83,6 +100,7 @@
 {#if lightboxOpen}
 	<Lightbox
 		images={data.images}
+		r2BaseUrl={data.r2BaseUrl}
 		{currentIndex}
 		onclose={() => (lightboxOpen = false)}
 		onprev={prevImage}

@@ -1,21 +1,16 @@
 <script lang="ts">
-	import type { Picture } from 'imagetools-core';
-
-	type ImageData = {
-		id: string;
-		src: Picture;
-		alt: string;
-	};
+	import type { PhotoData, ImageVariant } from '$types/photos';
 
 	type Props = {
-		images: ImageData[];
+		images: PhotoData[];
+		r2BaseUrl: string;
 		currentIndex: number;
 		onclose: () => void;
 		onprev: () => void;
 		onnext: () => void;
 	};
 
-	let { images, currentIndex, onclose, onprev, onnext }: Props = $props();
+	let { images, r2BaseUrl, currentIndex, onclose, onprev, onnext }: Props = $props();
 
 	let image = $derived(
 		currentIndex >= 0 && currentIndex < images.length ? images[currentIndex] : null
@@ -26,6 +21,20 @@
 	// Swipe support
 	let touchStartX = 0;
 	let touchEndX = 0;
+
+	function buildSrcset(variants: ImageVariant[], format: string): string {
+		return variants
+			.filter((v) => v.format === format)
+			.map((v) => `${r2BaseUrl}${v.url} ${v.width}w`)
+			.join(', ');
+	}
+
+	function getLargestSrc(variants: ImageVariant[]): string {
+		// Prefer largest jpeg as img fallback
+		const sorted = variants.filter((v) => v.format === 'jpeg').sort((a, b) => b.width - a.width);
+		const pick = sorted[0] ?? variants[0];
+		return `${r2BaseUrl}${pick.url}`;
+	}
 
 	function handleBackdropClick(e: MouseEvent) {
 		if (e.target === e.currentTarget) {
@@ -128,13 +137,8 @@
 		{/if}
 
 		<picture class:loading={isLoading}>
-			{#if image.src.sources?.avif}
-				<source srcset={image.src.sources.avif} type="image/avif" />
-			{/if}
-			{#if image.src.sources?.webp}
-				<source srcset={image.src.sources.webp} type="image/webp" />
-			{/if}
-			<img src={image.src.img.src} alt={image.alt} onload={handleImageLoad} />
+			<source srcset={buildSrcset(image.variants, 'webp')} sizes="70vw" type="image/webp" />
+			<img src={getLargestSrc(image.variants)} alt={image.alt} onload={handleImageLoad} />
 		</picture>
 
 		<button
@@ -145,7 +149,9 @@
 			<span class="block scale-y-[1.5] transition-transform duration-500">›</span>
 		</button>
 
-		<div class="counter"><span class="text-accent">{currentIndex + 1}</span> / {images.length}</div>
+		<div class="counter">
+			<span class="text-accent">{currentIndex + 1}</span> / {images.length}
+		</div>
 	</div>
 {/if}
 
