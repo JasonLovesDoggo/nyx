@@ -54,7 +54,7 @@
 		</span>
 	</h1>
 	<p class="text-subtext0 text-sm">
-		photos from around Toronto and beyond. Captured on a Pixel 6, Pixel 8 or a Canon T7
+		photos from around Toronto and beyond. Captured on various cameras and phones over the years.
 	</p>
 
 	<!-- Filter bar -->
