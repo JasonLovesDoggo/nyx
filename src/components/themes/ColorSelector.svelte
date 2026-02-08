@@ -7,7 +7,7 @@
 </script>
 
 <div class="relative grid grid-cols-7 gap-2.5 md:gap-1.5">
-	{#each accentColorNames as colorName, i}
+	{#each accentColorNames as colorName (colorName)}
 		{@const isSelected = $Accent === colorName}
 		<button
 			aria-label={`Select ${colorName} accent color`}
