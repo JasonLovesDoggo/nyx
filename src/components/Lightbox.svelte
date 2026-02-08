@@ -2,6 +2,9 @@
 	import type { PhotoData, ImageVariant } from '$types/photos';
 	import { IconCamera } from '@tabler/icons-svelte';
 
+	// Persists across lightbox open/close since the component remounts each time
+	let persistedShowExif = true;
+
 	type Props = {
 		images: PhotoData[];
 		r2BaseUrl: string;
@@ -18,7 +21,7 @@
 	);
 	let isLoading = $state(false);
 	let lightboxEl: HTMLDivElement | null = $state(null);
-	let showExif = $state(false);
+	let showExif = $state(persistedShowExif);
 	let currentQuality = $state<'preview' | 'high' | 'original'>('preview');
 
 	// Swipe support
@@ -35,7 +38,7 @@
 	}
 
 	function getOriginalVariant(variants: ImageVariant[]): ImageVariant | null {
-		return variants.find((v) => v.format === 'jpeg' && v.size != null) ?? null;
+		return variants.find((v) => v.original) ?? null;
 	}
 
 	function formatFileSize(bytes: number): string {
@@ -90,6 +93,7 @@
 			onnext();
 		} else if (e.key === 'i') {
 			showExif = !showExif;
+			persistedShowExif = showExif;
 		}
 	}
 
@@ -208,17 +212,21 @@
 					onclick={loadOriginal}
 					aria-label="Load original resolution"
 				>
-					Original ({formatFileSize(originalVariant.size ?? 0)})
+					Load original ({image.originalWidth}x{image.originalHeight})
 				</button>
 			{/if}
 			<button
-				class="cursor-pointer rounded bg-black/60 p-2 backdrop-blur-sm transition-colors hover:bg-black/80 {showExif
-					? 'text-accent'
-					: 'text-white/80'}"
-				onclick={() => (showExif = !showExif)}
+				class="flex cursor-pointer items-center gap-1.5 rounded px-3 py-2 text-xs font-medium backdrop-blur-sm transition-colors {showExif
+					? 'text-accent bg-white/20'
+					: 'bg-black/60 text-white/50 hover:bg-black/80 hover:text-white/80'}"
+				onclick={() => {
+					showExif = !showExif;
+					persistedShowExif = showExif;
+				}}
 				aria-label="Toggle EXIF data"
 			>
-				<IconCamera size={18} stroke={1.5} />
+				<IconCamera size={14} stroke={1.5} />
+				Info
 			</button>
 		</div>
 

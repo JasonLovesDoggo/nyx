@@ -13,6 +13,7 @@ interface ImageVariant {
 	width: number;
 	format: 'webp' | 'jpeg';
 	url: string;
+	original?: boolean;
 	size?: number;
 }
 
@@ -85,7 +86,8 @@ const manifest: Manifest = {
 					width: 3072,
 					format: 'jpeg',
 					url: '/pics/88448148/3072.jpg',
-					size: 1297896
+					original: true,
+					size: 3159868
 				}
 			]
 		},
@@ -138,7 +140,8 @@ const manifest: Manifest = {
 					width: 6000,
 					format: 'jpeg',
 					url: '/pics/30eaa6cd/6000.jpg',
-					size: 2440140
+					original: true,
+					size: 8137603
 				}
 			]
 		},
@@ -191,7 +194,8 @@ const manifest: Manifest = {
 					width: 6000,
 					format: 'jpeg',
 					url: '/pics/0242161e/6000.jpg',
-					size: 2061620
+					original: true,
+					size: 7876780
 				}
 			]
 		},
@@ -244,7 +248,8 @@ const manifest: Manifest = {
 					width: 2129,
 					format: 'jpeg',
 					url: '/pics/69b275ee/2129.jpg',
-					size: 1434464
+					original: true,
+					size: 3853256
 				}
 			]
 		},
@@ -297,7 +302,8 @@ const manifest: Manifest = {
 					width: 6000,
 					format: 'jpeg',
 					url: '/pics/0e0e59e5/6000.jpg',
-					size: 3231552
+					original: true,
+					size: 12465350
 				}
 			]
 		},
@@ -350,7 +356,8 @@ const manifest: Manifest = {
 					width: 6000,
 					format: 'jpeg',
 					url: '/pics/e05b0732/6000.jpg',
-					size: 1446512
+					original: true,
+					size: 4740383
 				}
 			]
 		},
@@ -403,7 +410,8 @@ const manifest: Manifest = {
 					width: 6000,
 					format: 'jpeg',
 					url: '/pics/05631b76/6000.jpg',
-					size: 1168886
+					original: true,
+					size: 7313751
 				}
 			]
 		},
@@ -456,7 +464,8 @@ const manifest: Manifest = {
 					width: 3072,
 					format: 'jpeg',
 					url: '/pics/18517937/3072.jpg',
-					size: 2561919
+					original: true,
+					size: 7311272
 				}
 			]
 		},
@@ -509,7 +518,8 @@ const manifest: Manifest = {
 					width: 6000,
 					format: 'jpeg',
 					url: '/pics/4f5e02f7/6000.jpg',
-					size: 1666197
+					original: true,
+					size: 9076846
 				}
 			]
 		},
@@ -562,7 +572,8 @@ const manifest: Manifest = {
 					width: 3072,
 					format: 'jpeg',
 					url: '/pics/84a40964/3072.jpg',
-					size: 2714385
+					original: true,
+					size: 6970034
 				}
 			]
 		},
@@ -615,7 +626,8 @@ const manifest: Manifest = {
 					width: 3072,
 					format: 'jpeg',
 					url: '/pics/627b0ff2/3072.jpg',
-					size: 1431255
+					original: true,
+					size: 4615071
 				}
 			]
 		},
@@ -668,7 +680,8 @@ const manifest: Manifest = {
 					width: 4080,
 					format: 'jpeg',
 					url: '/pics/08843f92/4080.jpg',
-					size: 2093320
+					original: true,
+					size: 5853367
 				}
 			]
 		},
@@ -721,7 +734,8 @@ const manifest: Manifest = {
 					width: 3072,
 					format: 'jpeg',
 					url: '/pics/6f84485a/3072.jpg',
-					size: 792834
+					original: true,
+					size: 2390674
 				}
 			]
 		},
@@ -774,7 +788,8 @@ const manifest: Manifest = {
 					width: 6000,
 					format: 'jpeg',
 					url: '/pics/587bc985/6000.jpg',
-					size: 2179532
+					original: true,
+					size: 6384048
 				}
 			]
 		},
@@ -827,7 +842,8 @@ const manifest: Manifest = {
 					width: 3072,
 					format: 'jpeg',
 					url: '/pics/9076af7b/3072.jpg',
-					size: 1156601
+					original: true,
+					size: 3824662
 				}
 			]
 		},
@@ -880,7 +896,8 @@ const manifest: Manifest = {
 					width: 4080,
 					format: 'jpeg',
 					url: '/pics/cf63f7fc/4080.jpg',
-					size: 1242200
+					original: true,
+					size: 4267507
 				}
 			]
 		},
@@ -933,7 +950,8 @@ const manifest: Manifest = {
 					width: 4080,
 					format: 'jpeg',
 					url: '/pics/f6e6d57a/4080.jpg',
-					size: 1548884
+					original: true,
+					size: 4820248
 				}
 			]
 		},
@@ -986,7 +1004,8 @@ const manifest: Manifest = {
 					width: 4080,
 					format: 'jpeg',
 					url: '/pics/2b9c3201/4080.jpg',
-					size: 1910042
+					original: true,
+					size: 5294860
 				}
 			]
 		},
@@ -1039,7 +1058,8 @@ const manifest: Manifest = {
 					width: 4000,
 					format: 'jpeg',
 					url: '/pics/4c20a135/4000.jpg',
-					size: 1279230
+					original: true,
+					size: 7980943
 				}
 			]
 		},
@@ -1092,7 +1112,8 @@ const manifest: Manifest = {
 					width: 6000,
 					format: 'jpeg',
 					url: '/pics/80e4cf2d/6000.jpg',
-					size: 1995331
+					original: true,
+					size: 9999748
 				}
 			]
 		},
@@ -1145,7 +1166,8 @@ const manifest: Manifest = {
 					width: 4080,
 					format: 'jpeg',
 					url: '/pics/3a1be024/4080.jpg',
-					size: 1083711
+					original: true,
+					size: 4037774
 				}
 			]
 		},
@@ -1198,7 +1220,8 @@ const manifest: Manifest = {
 					width: 4080,
 					format: 'jpeg',
 					url: '/pics/575f2958/4080.jpg',
-					size: 2989457
+					original: true,
+					size: 7581681
 				}
 			]
 		},
@@ -1251,7 +1274,8 @@ const manifest: Manifest = {
 					width: 4080,
 					format: 'jpeg',
 					url: '/pics/3c5af4f0/4080.jpg',
-					size: 1533864
+					original: true,
+					size: 4287464
 				}
 			]
 		},
@@ -1304,7 +1328,8 @@ const manifest: Manifest = {
 					width: 3600,
 					format: 'jpeg',
 					url: '/pics/e3b9bb41/3600.jpg',
-					size: 1136177
+					original: true,
+					size: 3062718
 				}
 			]
 		},
@@ -1357,7 +1382,8 @@ const manifest: Manifest = {
 					width: 4080,
 					format: 'jpeg',
 					url: '/pics/53518925/4080.jpg',
-					size: 1672549
+					original: true,
+					size: 5105756
 				}
 			]
 		}

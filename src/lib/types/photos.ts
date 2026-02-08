@@ -11,6 +11,7 @@ export interface ImageVariant {
 	width: number;
 	format: 'webp' | 'jpeg';
 	url: string;
+	original?: boolean;
 	size?: number;
 }
 

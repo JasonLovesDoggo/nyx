@@ -31,6 +31,7 @@ const IMAGES_DIR = join(import.meta.dir, '..', 'src', 'content', 'images');
 const MANIFEST_PATH = join(IMAGES_DIR, 'manifest.ts');
 const SUPPORTED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.tiff', '.webp', '.heif', '.avif']);
 const WIDTHS = [2000, 1200, 800] as const;
+const QUALITY: Record<number, number> = { 2000: 95, 1200: 85, 800: 80 };
 const FORMATS = ['webp', 'jpeg'] as const;
 const R2_BUCKET = process.env.R2_BUCKET ?? 'nyx-pics';
 const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL ?? 'https://assets.jsn.cam';
@@ -52,6 +53,7 @@ interface ImageVariant {
 	width: number;
 	format: 'webp' | 'jpeg';
 	url: string;
+	original?: boolean;
 	size?: number;
 }
 
@@ -216,6 +218,7 @@ interface ImageVariant {
 	width: number;
 	format: 'webp' | 'jpeg';
 	url: string;
+	original?: boolean;
 	size?: number;
 }
 
@@ -287,11 +290,12 @@ async function processImage(
 			const r2Path = `pics/${hashPrefix}/${width}.${ext}`;
 			const contentType = format === 'webp' ? 'image/webp' : 'image/jpeg';
 
+			const quality = QUALITY[width];
 			let outputBuffer: Buffer;
 			if (format === 'webp') {
-				outputBuffer = await resized.clone().webp({ quality: 80 }).toBuffer();
+				outputBuffer = await resized.clone().webp({ quality }).toBuffer();
 			} else {
-				outputBuffer = await resized.clone().jpeg({ quality: 80 }).toBuffer();
+				outputBuffer = await resized.clone().jpeg({ quality }).toBuffer();
 			}
 
 			uploadPromises.push(uploadToR2(outputBuffer, r2Path, contentType));
@@ -300,13 +304,14 @@ async function processImage(
 	}
 
 	// Original-resolution JPEG variant with file size
-	const originalJpeg = await sharp(buffer).jpeg({ quality: 85 }).toBuffer();
+	const originalJpeg = await sharp(buffer).jpeg({ quality: 100 }).toBuffer();
 	const originalR2Path = `pics/${hashPrefix}/${originalWidth}.jpg`;
 	uploadPromises.push(uploadToR2(originalJpeg, originalR2Path, 'image/jpeg'));
 	variants.push({
 		width: originalWidth,
 		format: 'jpeg',
 		url: `/${originalR2Path}`,
+		original: true,
 		size: originalJpeg.length
 	});
 
