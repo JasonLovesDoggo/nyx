@@ -17,7 +17,7 @@
 	let { data }: Props = $props();
 
 	const filters = usePicsFilters(() => data.images);
-	const lightbox = useLightboxNav(() => filters.filtered.length);
+	const lightbox = useLightboxNav(() => filters.filtered);
 
 	function buildSrcset(variants: ImageVariant[], format: string, baseUrl: string): string {
 		return variants

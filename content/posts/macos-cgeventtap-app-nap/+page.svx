@@ -1,11 +1,11 @@
 ~~~
 description = "A deep dive into CGEventTap, App Nap, and the nuclear option that actually works"
 
-[//]: # (published_at = "2026-01-20")
 tags = ["macos", "swift", "cgeventtap", "app-nap", "system-programming"]
 
 [title]
 text = "Why Your macOS Global Hotkeys Die in the Background"
+
 config = "3 4c 5 6ci 4c 2 3 10"
 ~~~
 
