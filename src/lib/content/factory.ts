@@ -19,6 +19,7 @@ interface CreateContentServiceOptions<T> {
 	filter?: (entry: ContentEntry<T>) => boolean;
 	sort?: (a: ContentEntry<T>, b: ContentEntry<T>) => number;
 	slugFromPath?: (path: string) => string;
+	validate?: (metadata: unknown, slug: string) => metadata is T;
 }
 
 interface MdsvexModule<T> {
@@ -51,7 +52,8 @@ export function createContentService<T>({
 	contentType,
 	filter = () => true,
 	sort = () => 0,
-	slugFromPath
+	slugFromPath,
+	validate: validator
 }: CreateContentServiceOptions<T>) {
 	const slugResolver = slugFromPath
 		? (path: string) => slugFromPath(normalizePath(path))
@@ -83,7 +85,10 @@ export function createContentService<T>({
 					}
 					const metadata = module.metadata ?? module.frontmatter;
 					if (!metadata) {
-						throw new Error(`Missing metadata for ${path}`);
+						throw new Error(`[${contentType}] "${slug}": missing frontmatter entirely`);
+					}
+					if (validator && !validator(metadata, slug)) {
+						throw new Error(`[${contentType}] "${slug}": frontmatter failed validation`);
 					}
 					return { slug, metadata };
 				})
@@ -108,7 +113,10 @@ export function createContentService<T>({
 
 		const metadata = module.metadata ?? module.frontmatter;
 		if (!metadata) {
-			throw error(500, `Missing metadata for ${contentType}: ${slug}`);
+			throw error(500, `[${contentType}] "${slug}": missing frontmatter entirely`);
+		}
+		if (validator && !validator(metadata, slug)) {
+			throw error(500, `[${contentType}] "${slug}": frontmatter failed validation`);
 		}
 
 		const contentEntry = { slug, metadata };
