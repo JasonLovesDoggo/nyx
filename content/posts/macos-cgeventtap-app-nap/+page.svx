@@ -1,0 +1,335 @@
+~~~
+description = "A deep dive into CGEventTap, App Nap, and the nuclear option that actually works"
+
+tags = ["macos", "swift", "cgeventtap", "app-nap", "system-programming"]
+
+[title]
+text = "Why Your macOS Global Hotkeys Die in the Background"
+
+config = "3 4c 5 6ci 4c 2 3 10"
+~~~
+
+I built a macOS app with a global hotkey. It worked perfectly until I switched to another app. Then it just stopped working. No errors, no warnings, just silence.
+
+This is how I spent a week debugging macOS's event system and the unorthodox fix that actually worked.
+
+## The Problem
+
+I'm building [Flow](https://github.com/wispr-ai/flow), a voice dictation app that uses the Fn (Globe) key to start/stop recording. The implementation looks straightforward:
+
+```swift
+let eventMask = (1 << CGEventType.flagsChanged.rawValue)
+let eventTap = CGEvent.tapCreate(
+    tap: .cgSessionEventTap,
+    place: .headInsertEventTap,
+    options: .listenOnly,
+    eventsOfInterest: CGEventMask(eventMask),
+    callback: eventTapCallback,
+    userInfo: Unmanaged.passUnretained(self).toOpaque()
+)
+CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
+```
+
+Works perfectly when Flow is focused. Switch to Safari? The callback stops firing.
+
+## The Root Cause: App Nap
+
+macOS has an aggressive power-saving feature called [App Nap](https://developer.apple.com/library/archive/documentation/Performance/Conceptual/power_efficiency_guidelines_osx/AppNap.html). When your app isn't visible, macOS throttles it to save battery.
+
+Here's what happens:
+
+1. I switch to another app
+2. macOS sees Flow has no visible windows
+3. [App Nap](https://developer.apple.com/documentation/foundation/nsprocessinfo/1617030-beginactivity) kicks in, suspending my process
+4. My [`CGEventTap`](https://developer.apple.com/documentation/coregraphics/1454426-cgeventtapcreate) callback doesn't respond in time
+5. macOS interprets this as "the tap is broken" and **disables it entirely**
+
+The killer detail: this happens silently. No error, no callback. The tap just goes dark.
+
+You can verify this by checking:
+
+```swift
+if !CGEvent.tapIsEnabled(tap: eventTap) {
+    print("Tap was disabled by the system!")
+}
+```
+
+## Attempt #1: Health Check Timer
+
+"Easy fix," I thought. "Just re-enable the tap periodically."
+
+```swift
+Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+    guard let tap = self?.eventTap else { return }
+    if !CGEvent.tapIsEnabled(tap: tap) {
+        CGEvent.tapEnable(tap: tap, enable: true)
+    }
+}
+```
+
+**Result:** The timer itself gets throttled by App Nap. Can't fix a scheduling problem with more scheduled code.
+
+## Attempt #2: Dedicated Background Thread
+
+"The main thread is throttled. What if I move the tap to its own high-QoS thread?"
+
+```swift
+let thread = Thread { [weak self] in
+    let runLoop = CFRunLoopGetCurrent()
+    CFRunLoopAddSource(runLoop, runLoopSource, .commonModes)
+    CGEvent.tapEnable(tap: eventTap, enable: true)
+
+    let timer = CFRunLoopTimerCreateWithHandler(
+        kCFAllocatorDefault,
+        CFAbsoluteTimeGetCurrent() + 1.0,
+        1.0, 0, 0
+    ) { _ in
+        self?.ensureTapEnabled()
+    }
+    CFRunLoopAddTimer(runLoop!, timer!, .commonModes)
+    CFRunLoopRun()
+}
+thread.qualityOfService = .userInteractive
+thread.start()
+```
+
+**Result:** App Nap suspends the **entire process**, not individual threads. Everything freezes together.
+
+## Attempt #3: ProcessInfo.beginActivity
+
+Apple provides an [API for exactly this](https://developer.apple.com/documentation/foundation/nsprocessinfo/1617030-beginactivity): telling the system your app needs to stay active.
+
+```swift
+appNapActivity = ProcessInfo.processInfo.beginActivity(
+    options: [.userInitiated, .latencyCritical],
+    reason: "Monitoring global hotkey"
+)
+```
+
+The options look perfect:
+- `.userInitiated` - "The user asked for this"
+- `.latencyCritical` - "Timing matters"
+
+**Result:** Reduces throttling but doesn't prevent it entirely. After ~30 seconds backgrounded, the tap still dies.
+
+## Attempt #4: IOKit Power Assertions
+
+Time to go lower. [IOKit power assertions](https://developer.apple.com/documentation/iokit/iopmlib_h) are what video players use to prevent sleep.
+
+```swift
+var powerAssertionID: IOPMAssertionID = 0
+IOPMAssertionCreateWithName(
+    kIOPMAssertionTypePreventUserIdleSystemSleep as CFString,
+    IOPMAssertionLevel(kIOPMAssertionLevelOn),
+    "Flow: Monitoring global hotkey" as CFString,
+    &powerAssertionID
+)
+```
+
+**Result:** Prevents system sleep but NOT App Nap. They're different subsystems. Power management and process scheduling live in different parts of the kernel.
+
+## Attempt #5: Active Tap Instead of Listen-Only
+
+Maybe passive taps get less priority? Let me try an active tap:
+
+```swift
+options: .defaultTap  // Changed from .listenOnly
+```
+
+An active tap can modify events, not just observe them. Maybe it gets special treatment?
+
+**Result:** No difference. App Nap doesn't care about tap type.
+
+## Attempt #6: The Kitchen Sink
+
+At this point I threw everything at the problem:
+
+```swift
+// All of these together
+ProcessInfo.processInfo.beginActivity(
+    options: [.userInitiated, .latencyCritical],
+    reason: "Monitoring global hotkey"
+)
+
+IOPMAssertionCreateWithName(
+    kIOPMAssertionTypePreventUserIdleSystemSleep as CFString,
+    IOPMAssertionLevel(kIOPMAssertionLevelOn),
+    assertionName,
+    &powerAssertionID
+)
+
+let thread = Thread { /* high-priority dedicated thread */ }
+thread.qualityOfService = .userInteractive
+thread.start()
+```
+
+**Result:** Better, but still unreliable. The tap survives longer but eventually dies after a few minutes.
+
+## The Solution: Separate Helper Process
+
+After a week of failed attempts, I found this in Apple's docs:
+
+> Apps with [`LSUIElement=true`](https://developer.apple.com/documentation/bundleresources/information_property_list/lsuielement) (agent apps without dock icons) are NOT subject to the same App Nap restrictions.
+
+The insight: **App Nap targets GUI processes**. It looks for apps with visible windows and suspends them when those windows aren't visible. A process without any windows doesn't get the same treatment.
+
+### The Architecture
+
+![Flow App and FlowHelper communicating via stdin/stdout](/images/flow-helper-architecture.svg)
+
+Instead of fighting App Nap in my main process, I spawn a tiny helper whose only job is keyboard monitoring.
+
+The helper doesn't need to be an `.app` bundle with `LSUIElement`. A plain executable works because:
+
+1. **Process isolation**: App Nap targets the GUI process, not child processes
+2. **No windows = no nap**: macOS doesn't consider windowless processes "backgrounded"
+3. **No inheritance**: Child processes don't inherit their parent's nap status
+
+### The Protocol
+
+Simple JSON over stdin/stdout. No XPC, no Mach ports, no distributed notifications.
+
+**Helper → Main App (stdout):**
+```json
+{"event":"ready"}
+{"event":"hotkey","trigger":"pressed"}
+{"event":"hotkey","trigger":"released"}
+```
+
+**Main App → Helper (stdin):**
+```json
+{"command":"setHotkey","hotkey":{"kind":"globe"}}
+{"command":"quit"}
+```
+
+Boring, debuggable, works.
+
+### The Helper
+
+~400 lines of Swift:
+
+```swift
+// main.swift
+import ApplicationServices
+import Foundation
+
+let handler = HotkeyHandler(hotkey: .globe)
+
+guard handler.startListening() else {
+    exit(1)
+}
+
+print("{\"event\":\"ready\"}")
+fflush(stdout)
+
+DispatchQueue.global(qos: .userInteractive).async {
+    while let line = readLine() {
+        // Parse and handle commands
+    }
+}
+
+RunLoop.main.run()
+```
+
+The event tap code is identical to before, just in a separate process.
+
+### Launching It
+
+```swift
+func start() {
+    let process = Process()
+    process.executableURL = findHelperURL()
+
+    let output = Pipe()
+    let input = Pipe()
+    process.standardOutput = output
+    process.standardInput = input
+
+    output.fileHandleForReading.readabilityHandler = { [weak self] handle in
+        let data = handle.availableData
+        self?.handleOutput(data)
+    }
+
+    try process.run()
+}
+```
+
+I keep `GlobeKeyHandler` as a fallback for when the helper isn't available.
+
+## Why stdin/stdout?
+
+You might wonder why I didn't use [XPC](https://developer.apple.com/documentation/xpc), the "proper" IPC on macOS.
+
+1. **No entitlements**: stdin/stdout works without App Sandbox
+2. **No registration**: XPC services need specific bundle structures
+3. **Debuggable**: I can run the helper in Terminal and type JSON at it
+4. **Simple**: ~50 lines vs hundreds for XPC boilerplate
+
+## The Gotchas
+
+### Helper Discovery
+
+The helper needs to be found at runtime:
+
+```swift
+private func findHelperURL() -> URL? {
+    // 1. Inside app bundle (production)
+    if let url = Bundle.main.url(
+        forResource: "FlowHelper",
+        withExtension: nil,
+        subdirectory: "Helpers"
+    ) {
+        return url
+    }
+
+    // 2. Next to executable (development)
+    // 3. FlowHelper/.build/debug/FlowHelper (SPM)
+    // ...
+}
+```
+
+### Accessibility Permissions
+
+Both processes need [Accessibility permissions](https://developer.apple.com/documentation/applicationservices/kaxtrustedcheckoptionprompt). The helper checks independently:
+
+```swift
+let options = ["AXTrustedCheckOptionPrompt": false] as CFDictionary
+guard AXIsProcessTrustedWithOptions(options) else {
+    sendError("Accessibility permission not granted")
+    return false
+}
+```
+
+### Auto-restart
+
+If the helper crashes, restart it:
+
+```swift
+process.terminationHandler = { [weak self] _ in
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        self?.start()
+    }
+}
+```
+
+## Lessons Learned
+
+1. **App Nap is process-level**, not thread-level. Threading doesn't help.
+
+2. **[`ProcessInfo.beginActivity`](https://developer.apple.com/documentation/foundation/nsprocessinfo/1617030-beginactivity) helps** but isn't bulletproof for event taps.
+
+3. **Power assertions prevent sleep**, not App Nap. Different systems.
+
+4. **Separate processes are the nuclear option** that actually works.
+
+5. **[`LSUIElement`](https://developer.apple.com/documentation/bundleresources/information_property_list/lsuielement) apps** are exempt from App Nap.
+
+6. **stdin/stdout is underrated** for simple IPC.
+
+## Conclusion
+
+macOS tries hard to save battery. Usually that's great. But when your app genuinely needs background event monitoring, you have to work with the system's assumptions.
+
+App Nap is fundamentally about **visible windows**. A windowless process doesn't fit macOS's model of "an app the user switched away from." By moving event monitoring to a windowless helper, I sidestep the entire problem.
+
+Is it elegant? Debatable. Does it work? Absolutely. After a week of failed attempts, "it works" is pretty damn elegant.

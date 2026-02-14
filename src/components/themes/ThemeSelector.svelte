@@ -10,7 +10,7 @@
 <div
 	class="ring-surface0 relative mb-4 flex flex-wrap items-center justify-center gap-1 rounded-md p-1 ring-1 md:justify-start"
 >
-	{#each paletteNames as name, i}
+	{#each paletteNames as name (name)}
 		{@const isSelected = $Palette === name}
 		<button
 			onclick={() => ($Palette = name)}

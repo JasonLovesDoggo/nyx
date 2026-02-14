@@ -5,7 +5,6 @@
 		IconArrowRight,
 		IconExternalLink,
 		IconArticle,
-		IconCode,
 		IconCalendarEvent,
 		IconActivity
 	} from '@tabler/icons-svelte';
@@ -290,7 +289,7 @@
 									class="text-subtext0 hover:text-accent flex min-w-0 items-center gap-2 text-sm"
 								>
 									<span class="min-w-0 flex-1 truncate">
-										{#each words as word, i}
+										{#each words as word, i (i)}
 											{@const normalized = word.toLowerCase().replace(/[^a-z0-9\s-_]/g, '')}
 											{@const vtName = `_${safePath}__${normalized}`}
 											<span style="view-transition-name: {vtName};">

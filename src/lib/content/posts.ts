@@ -45,7 +45,21 @@ const postService = createContentService<PostMetadata>({
 		return cleaned.substring(cleaned.lastIndexOf('/') + 1);
 	},
 	filter: (entry) => includeDrafts || isPublished(entry),
-	sort: (a, b) => getSortValue(b) - getSortValue(a)
+	sort: (a, b) => getSortValue(b) - getSortValue(a),
+	validate: (meta: unknown, slug: string): meta is PostMetadata => {
+		const m = meta as Record<string, unknown>;
+		if (!m.title || typeof m.title !== 'object') {
+			throw new Error(`[post] "${slug}": missing or invalid "title" (expected { text, config? })`);
+		}
+		const title = m.title as Record<string, unknown>;
+		if (typeof title.text !== 'string' || !title.text) {
+			throw new Error(`[post] "${slug}": missing "title.text"`);
+		}
+		if (typeof m.description !== 'string' || !m.description) {
+			throw new Error(`[post] "${slug}": missing "description"`);
+		}
+		return true;
+	}
 });
 
 export const getAllPosts = postService.getAll;

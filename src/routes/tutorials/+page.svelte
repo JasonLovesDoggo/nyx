@@ -15,7 +15,7 @@
 
 	{#if data.tutorials.length}
 		<div class="space-y-5">
-			{#each data.tutorials as tutorial, index (tutorial.slug)}
+			{#each data.tutorials as tutorial (tutorial.slug)}
 				<a
 					href={`/tutorials/${tutorial.slug}`}
 					class="

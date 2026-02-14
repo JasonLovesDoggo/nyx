@@ -8,6 +8,10 @@ compatibility_flags = [ "nodejs_compat" ]
 binding = "NYXCACHE"
 id = "56cd1c76c106445a90921a6715aa9f29"
 
+[[r2_buckets]]
+binding = "PICS_BUCKET"
+bucket_name = "nyx-pics"
+
 [placement]
 mode = "off"
 

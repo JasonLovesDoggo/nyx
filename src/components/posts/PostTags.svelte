@@ -22,18 +22,16 @@
 	}
 
 	// Assign hash-based color to each tag
-	// svelte-ignore state_referenced_locally - post doeant change
-	const colorHash = post.metadata.title?.hash || post.slug;
-	// svelte-ignore state_referenced_locally - post doeant change
-	const tagColors =
+	const tagColors = $derived(
 		post.metadata.tags?.reduce(
-			(acc, tag, index) => {
-				const hash = hashCode(colorHash + tag);
+			(acc, tag) => {
+				const hash = hashCode(post.slug + tag);
 				acc[tag] = accentColorNames[hash % accentColorNames.length];
 				return acc;
 			},
 			{} as Record<string, string>
-		) || {};
+		) || {}
+	);
 </script>
 
 {#if post.metadata.tags && post.metadata.tags.length > 0}

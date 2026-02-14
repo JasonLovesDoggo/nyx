@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { SvelteMap } from 'svelte/reactivity';
+
 	interface Props {
 		title: string;
 		slug: string;
@@ -47,7 +49,7 @@
 							colorClass: classColor
 						};
 					})
-			: words.map((_) => ({
+			: words.map(() => ({
 					size: 3,
 					colored: false,
 					italic: false
@@ -65,7 +67,7 @@
 	}
 
 	// Track word counts for duplicate words
-	const wordCounts = new Map<string, number>();
+	const wordCounts = new SvelteMap<string, number>();
 
 	function getViewTransitionName(word: string): string {
 		const normalized = word.toLowerCase().replace(/[^a-z0-9\s-_]/g, '');
@@ -106,7 +108,7 @@
 </script>
 
 {#snippet slabWords()}
-	{#each words as word, i}
+	{#each words as word, i (i)}
 		{@const vtName = getViewTransitionName(word)}
 		{@const wordConfig = wordConfigs[i] ?? {
 			size: 3,

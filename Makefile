@@ -1,13 +1,14 @@
 # Makefile for Nyx project
 SHELL := /bin/zsh
 # Define PHONY targets
-.PHONY: help generate-project-images clean-project-images dev build test
+.PHONY: help generate-project-images clean-project-images sync-pics dev build test
 
 # Default target - show help
 help:
 	@echo "Available targets:"
 	@echo "  make generate-project-images  - Generate GitHub project banner images"
 	@echo "  make clean-project-images     - Remove all generated project images"
+	@echo "  make sync-pics                - Sync /pics images to R2 and update manifest"
 	@echo "  make dev                      - Start development server"
 	@echo "  make build                    - Build the project"
 	@echo "  make test                     - Run tests"
@@ -23,6 +24,10 @@ clean-project-images:
 	@echo "Cleaning project images..."
 	@rm -f static/projects/*.jpg static/projects/*.webp
 	@echo "Project images cleaned!"
+
+# Sync /pics images to R2 and update manifest
+sync-pics:
+	bun run scripts/sync-pics.ts
 
 # Development server
 dev:
