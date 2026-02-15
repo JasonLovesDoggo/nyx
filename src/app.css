@@ -91,3 +91,17 @@
 @utility link {
 	@apply text-accent hover:bg-accent hover:text-mantle decoration-dashed underline-offset-4 duration-200 not-hover:underline;
 }
+
+.leaflet-container,
+.leaflet-control-attribution,
+.leaflet-pane,
+.leaflet-tile-pane,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane,
+.leaflet-popup-pane {
+	z-index: 0 !important;
+} /*see https://github.com/JasonLovesDoggo/nyx/issues/16#issuecomment-3903776073*/
+.leaflet-control-attribution {
+	display: none !important;
+}
