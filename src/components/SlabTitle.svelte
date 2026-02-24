@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { SvelteMap } from 'svelte/reactivity';
-
 	interface Props {
 		title: string;
 		slug: string;
@@ -66,14 +64,12 @@
 		return Math.abs(hash);
 	}
 
-	// Track word counts for duplicate words
-	const wordCounts = new SvelteMap<string, number>();
-
-	function getViewTransitionName(word: string): string {
+	function getViewTransitionName(word: string, wordIndex: number, allWords: string[]): string {
 		const normalized = word.toLowerCase().replace(/[^a-z0-9\s-_]/g, '');
-		const count = wordCounts.get(normalized) || 0;
-		wordCounts.set(normalized, count + 1);
-		return `_${safePath}__${normalized}${count > 0 ? '___' + count : ''}`;
+		const previousOccurrences = allWords
+			.slice(0, wordIndex)
+			.filter((w) => w.toLowerCase().replace(/[^a-z0-9\s-_]/g, '') === normalized).length;
+		return `_${safePath}__${normalized}${previousOccurrences > 0 ? '___' + previousOccurrences : ''}`;
 	}
 
 	// Accent colors (Catppuccin)
@@ -109,7 +105,7 @@
 
 {#snippet slabWords()}
 	{#each words as word, i (i)}
-		{@const vtName = getViewTransitionName(word)}
+		{@const vtName = getViewTransitionName(word, i, words)}
 		{@const wordConfig = wordConfigs[i] ?? {
 			size: 3,
 			colored: false,
