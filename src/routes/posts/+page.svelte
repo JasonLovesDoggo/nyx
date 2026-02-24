@@ -3,7 +3,7 @@
 	import type { PostEntry } from '$lib/content/posts';
 	import PostTags from '$components/posts/PostTags.svelte';
 
-	export let data: { posts: PostEntry[] };
+	let { data }: { data: { posts: PostEntry[] } } = $props();
 
 	const words = (title: string) => title.split(' ');
 	const safePath = (slug: string) => slug.split('/').pop() || slug;

@@ -3,13 +3,12 @@
 	import type { PostPageData } from '$lib/content/posts';
 	import SlabTitle from '$components/SlabTitle.svelte';
 	import PostTags from '$components/posts/PostTags.svelte';
-
-	export let data: PostPageData;
 	import '$lib/styles/content.css';
 	import { page } from '$app/state';
 
-	// Component generated from mdsvex
-	const Content = data.content;
+	let { data }: { data: PostPageData } = $props();
+
+	const Content = $derived(data.content);
 </script>
 
 <svelte:head>

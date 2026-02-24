@@ -7,7 +7,7 @@
 	import { formatDate } from '$lib/utils/date';
 	import type { TutorialEntry } from '$lib/content/tutorials';
 
-	export let data: { tutorials: TutorialEntry[] };
+	let { data }: { data: { tutorials: TutorialEntry[] } } = $props();
 </script>
 
 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">

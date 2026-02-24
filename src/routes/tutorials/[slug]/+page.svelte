@@ -1,23 +1,24 @@
 <script lang="ts">
 	import { formatDate } from '$lib/utils/date';
 	import type { TutorialPageData } from '$lib/content/tutorials';
-
-	export let data: TutorialPageData;
 	import '$lib/styles/content.css';
 	import { page } from '$app/state';
 	import { getRandomAccentColor } from '$lib/stores/theme';
 
-	const Content = data.content;
+	let { data }: { data: TutorialPageData } = $props();
+
+	const Content = $derived(data.content);
 
 	// Assign a random color to each tag
-	let tagColors =
+	const tagColors = $derived(
 		data.metadata.tags?.reduce(
 			(acc, tag) => {
 				acc[tag] = getRandomAccentColor();
 				return acc;
 			},
 			{} as Record<string, string>
-		) || {};
+		) || {}
+	);
 </script>
 
 <svelte:head>
