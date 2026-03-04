@@ -7,6 +7,7 @@ import createRedirects from '$utils/redirects';
 
 const redirects = createRedirects([
 	{ paths: ['/github', '/gh'], url: Site.out.github },
+	{ paths: ['/twitter', '/x'], url: Site.out.x },
 	{ paths: ['/linkedin', '/li'], url: Site.out.linkedin },
 	{ paths: '/bluesky', url: Site.out.bluesky },
 	{ paths: ['/insta', '/ig'], url: Site.out.instagram },
