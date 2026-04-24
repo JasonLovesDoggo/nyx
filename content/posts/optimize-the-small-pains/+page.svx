@@ -1,5 +1,5 @@
 ~~~
-description = "My zsh took 1.4 seconds to start. I'd been ignoring it for years. Twenty minutes of fixing it later, it's down to 150ms — and I started thinking about all the other small pains I'd been pretending weren't there."
+description = "My zsh took 1.4 seconds to start. I'd been ignoring it for years. Ten seconds of prompting later, it's down to 150ms — and I started thinking about all the other small pains I'd been pretending weren't there."
 published_at = "2026-04-24"
 tags = ["zsh", "developer-experience", "shell", "nvm", "fnm", "productivity"]
 
@@ -14,7 +14,9 @@ I'd been ignoring it for years.
 
 Not because I didn't notice. I noticed every time. I just told myself the same thing you probably tell yourself: *"It's only a second. Not worth fixing right now."*
 
-Today I finally fixed it. Twenty minutes. It now starts in 150ms.
+Today I finally fixed it. Ten seconds of prompting an agent. It now starts in 150ms.
+
+That's the part that bothers me. Not that the fix existed — fixes always exist. That the activation energy was *ten seconds of typing* and I had spent **years** stepping around it.
 
 ## The Profile
 
@@ -55,11 +57,11 @@ Result: 1.4s → 150ms. About 9x faster. Forever.
 
 ## The Real Lesson
 
-Here's the math I should have done years ago.
+The math I should have done years ago: 1.25 seconds saved × ~50 shells a day × 250 working days = **4.3 hours a year**. Not huge. But the time isn't the real cost.
 
-I open new shells, conservatively, 50 times a day. 1.25 seconds saved per shell × 50 shells × 250 working days = **4.3 hours a year**. Not a huge number. But it compounds with every other small pain you're pretending isn't there.
+The real cost is the **micro-context-switch**. Every time my shell stalled, I'd glance at Slack, refresh a tab, lose the thread of what I was about to type. The 1.4 seconds wasn't 1.4 seconds. It was 1.4 seconds plus however long it took to remember what I was doing.
 
-And the time isn't even the real cost. The real cost is the **micro-context-switch**. Every time my shell stalled, I'd glance at Slack, refresh a tab, lose the thread of what I was about to type. The 1.4 seconds wasn't 1.4 seconds. It was 1.4 seconds plus however long it took to remember what I was doing.
+The activation energy used to be: *open a new tab, profile it, read three blog posts, decide between fnm and lazy-loading nvm, write the snippet, test it.* Maybe 30 minutes. Just enough friction to keep losing to "I'll do it later." The agent collapsed all of that into one sentence. The decision wasn't whether to fix it, it was whether to *ask*.
 
 There's a whole class of these in your life. The function key on your keyboard that does nothing useful. The git alias you keep meaning to write. The dotfile that emits a deprecation warning on every shell. The CI step that takes 8 minutes when it could take 30 seconds. The build that watches a directory it doesn't need to watch.
 
@@ -69,6 +71,6 @@ You walk past these every day. You've trained yourself to not see them. That's t
 
 Not all of them. One.
 
-Open the thing that annoys you most. Time it, profile it, search "why is X slow." There is, almost always, a fix that takes less time than you've spent being annoyed by it this month alone.
+Open the thing that annoys you most. Ask the agent. The fix almost always takes less time than you've spent being annoyed by it this month alone.
 
 The 1.4 second shell wasn't the problem. The years of putting up with it was.
