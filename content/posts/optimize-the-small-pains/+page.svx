@@ -1,0 +1,74 @@
+~~~
+description = "My zsh took 1.4 seconds to start. I'd been ignoring it for years. Twenty minutes of fixing it later, it's down to 150ms — and I started thinking about all the other small pains I'd been pretending weren't there."
+published_at = "2026-04-24"
+tags = ["zsh", "developer-experience", "shell", "nvm", "fnm", "productivity"]
+
+[title]
+text = "Optimize the Small Pains"
+config = "4 4 3c 5"
+~~~
+
+My zsh took 1.4 seconds to start. Every new tab. Every `:terminal` in nvim. Every shell-out from a script. 1.4 seconds of staring at a blank prompt, every single time.
+
+I'd been ignoring it for years.
+
+Not because I didn't notice. I noticed every time. I just told myself the same thing you probably tell yourself: *"It's only a second. Not worth fixing right now."*
+
+Today I finally fixed it. Twenty minutes. It now starts in 150ms.
+
+## The Profile
+
+The fix isn't the interesting part. The interesting part is that I knew, vaguely, what the problem was the whole time. nvm is slow. Everyone knows nvm is slow. I just never bothered to measure it.
+
+```
+$ zsh -ic 'zmodload zsh/zprof; source ~/.zshrc; zprof' | head
+ 1)    1   768.51   71.24%   nvm_auto
+ 2)    1   306.87   28.45%   compinit
+```
+
+That's it. nvm was eating 770ms on every shell start. compinit, another 300ms. Together they were 99% of the problem. The other ~30 lines of my `.zshrc` collectively cost less than `nvm_auto` did by itself.
+
+## The Fix
+
+Two changes.
+
+**Replace nvm with [fnm](https://github.com/Schniz/fnm).** It's a Rust drop-in for nvm. Same `.nvmrc` files, same `--use-on-cd` auto-switching, ~5ms init instead of 770ms.
+
+```diff
+- export NVM_DIR="$HOME/.nvm"
+- [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
++ eval "$(fnm env --use-on-cd --shell zsh)"
+```
+
+**Cache compinit for 24 hours.** It does an expensive security audit and dump rebuild on every shell start. You don't need that. You install completions like once a week.
+
+```zsh
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+```
+
+Result: 1.4s → 150ms. About 9x faster. Forever.
+
+## The Real Lesson
+
+Here's the math I should have done years ago.
+
+I open new shells, conservatively, 50 times a day. 1.25 seconds saved per shell × 50 shells × 250 working days = **4.3 hours a year**. Not a huge number. But it compounds with every other small pain you're pretending isn't there.
+
+And the time isn't even the real cost. The real cost is the **micro-context-switch**. Every time my shell stalled, I'd glance at Slack, refresh a tab, lose the thread of what I was about to type. The 1.4 seconds wasn't 1.4 seconds. It was 1.4 seconds plus however long it took to remember what I was doing.
+
+There's a whole class of these in your life. The function key on your keyboard that does nothing useful. The git alias you keep meaning to write. The dotfile that emits a deprecation warning on every shell. The CI step that takes 8 minutes when it could take 30 seconds. The build that watches a directory it doesn't need to watch.
+
+You walk past these every day. You've trained yourself to not see them. That's the dangerous part — not that they exist, but that you've stopped noticing they exist.
+
+## Pick One This Week
+
+Not all of them. One.
+
+Open the thing that annoys you most. Time it, profile it, search "why is X slow." There is, almost always, a fix that takes less time than you've spent being annoyed by it this month alone.
+
+The 1.4 second shell wasn't the problem. The years of putting up with it was.
