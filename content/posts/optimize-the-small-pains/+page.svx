@@ -1,5 +1,5 @@
 ~~~
-description = "My zsh took 1.4 seconds to start. Ten seconds of prompting an agent fixed it. The fix was easy. Years of ignoring it was the part worth thinking about."
+description = "My zsh took 1.4 seconds to start. Five seconds of benchmarking found the problem. The fix was easy. Years of ignoring it was the part worth thinking about."
 published_at = "2026-04-24"
 tags = ["zsh", "developer-experience", "shell", "nvm", "fnm", "productivity"]
 
@@ -10,7 +10,7 @@ config = "4 4 3c 5"
 
 My zsh took 1.4 seconds to start. Every new tab, every `:terminal` in nvim, every shell-out from a script. I'd been ignoring it for years. Not because I didn't notice, I noticed every time. I just kept telling myself it wasn't worth fixing right now.
 
-Today I asked an agent to look at it. Ten seconds of typing. It now starts in 150ms.
+Today I actually looked at it. Five seconds of benchmarking, twenty minutes of fixing. It now starts in 150ms.
 
 ## The Profile
 
@@ -51,8 +51,8 @@ fi
 
 ## The Part Worth Thinking About
 
-The fix took less time than writing this paragraph. The activation energy used to be: open a new tab, profile it, read three blog posts, pick between fnm and lazy-loading nvm, write the snippet, test it. Maybe 30 minutes. Just enough friction to keep losing to "I'll do it later" for years.
+The fix took less time than I'd spent being annoyed by it in any given week. The blocker was never the work, it was sitting down to look at it once. "It's only a second" is true right up until you multiply it by every shell you've opened for the last three years.
 
-That's gone now. The cost of asking is basically zero. So the things I used to step around (the function key that does nothing useful, the git alias I keep meaning to write, the dotfile that prints a deprecation warning on every shell, the CI step that takes 8 minutes when it could take 30 seconds) are all suddenly worth fixing.
+I have a list of these. The function key that does nothing useful. The git alias I keep meaning to write. The dotfile that prints a deprecation warning on every shell. The CI step that takes 8 minutes when it could take 30 seconds.
 
-Probably worth going through the list.
+Probably worth going through it.
