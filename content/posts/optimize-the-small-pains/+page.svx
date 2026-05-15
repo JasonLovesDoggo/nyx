@@ -1,0 +1,58 @@
+~~~
+description = "My zsh took 1.4 seconds to start. Five seconds of benchmarking found the problem. The fix was easy. Years of ignoring it was the part worth thinking about."
+published_at = "2026-04-24"
+tags = ["zsh", "developer-experience", "shell", "nvm", "fnm", "productivity"]
+
+[title]
+text = "Optimize the Small Pains"
+config = "4 4 3c 5"
+~~~
+
+My zsh took 1.4 seconds to start. Every new tab, every `:terminal` in nvim, every shell-out from a script. I'd been ignoring it for years. Not because I didn't notice, I noticed every time. I just kept telling myself it wasn't worth fixing right now.
+
+Today I actually looked at it. Five seconds of benchmarking, twenty minutes of fixing. It now starts in 150ms.
+
+## The Profile
+
+I knew, vaguely, what the problem was the whole time. nvm is slow. Everyone knows nvm is slow. I just never bothered to measure it.
+
+```
+$ zsh -ic 'zmodload zsh/zprof; source ~/.zshrc; zprof' | head
+ 1)    1   768.51   71.24%   nvm_auto
+ 2)    1   306.87   28.45%   compinit
+```
+
+That's it. nvm was eating 770ms on every shell start. compinit, another 300ms. Together they were 99% of the problem. The other ~30 lines of my `.zshrc` collectively cost less than `nvm_auto` did by itself.
+
+## The Fix
+
+Two changes.
+
+**Replace nvm with [fnm](https://github.com/Schniz/fnm).** It's a Rust drop-in for nvm. Same `.nvmrc` files, same `--use-on-cd` auto-switching, ~5ms init instead of 770ms.
+
+```diff
+- export NVM_DIR="$HOME/.nvm"
+- [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
++ eval "$(fnm env --use-on-cd --shell zsh)"
+```
+
+**Cache compinit for 24 hours.** It does an expensive security audit and dump rebuild on every shell start. You don't need that. You install completions like once a week.
+
+```zsh
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+```
+
+1.4s to 150ms. About 9x.
+
+## The Part Worth Thinking About
+
+The fix took less time than I'd spent being annoyed by it in any given week. The blocker was never the work, it was sitting down to look at it once. "It's only a second" is true right up until you multiply it by every shell you've opened for the last three years.
+
+I have a list of these. The function key that does nothing useful. The git alias I keep meaning to write. The dotfile that prints a deprecation warning on every shell. The CI step that takes 8 minutes when it could take 30 seconds.
+
+Probably worth going through it.
