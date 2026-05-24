@@ -111,10 +111,6 @@ const mdsvexOptions = {
 					transformers
 				});
 			}
-			// Prepend the generated rules. Class names are content hashes, so blocks
-			// that share token styles share definitions and duplicate <style> rules
-			// across blocks are harmless (and gzip away).
-			highlighted = `<style>${styleToClass.getCSS()}</style>${highlighted}`;
 			const encoded = escapeHtml(Buffer.from(code).toString('base64'));
 			const safeLang = escapeHtml(highlightLang);
 			const safeFile = file ? escapeHtml(file) : '';
@@ -143,7 +139,17 @@ const mdsvexOptions = {
 		</div>
 	</figure>`;
 			const escaped = escapeSvelte(block);
-			return `{@html \`${escaped}\` }`;
+			// The generated rules must reach a real <style> element with literal braces:
+			// escapeSvelte turns "{" into "&#123;", which is fine in HTML text but dead
+			// inside <style> (a raw-text element where entities aren't decoded). So inject
+			// the CSS separately, escaping only what would break the @html template literal
+			// (backslash, backtick, ${) and leaving braces intact.
+			const css = styleToClass
+				.getCSS()
+				.replace(/\\/g, '\\\\')
+				.replace(/`/g, '\\`')
+				.replace(/\$\{/g, '\\${');
+			return `{@html \`<style>${css}</style>${escaped}\` }`;
 		}
 	},
 	remarkPlugins: [remarkToc, remarkMath, remarkAbbr, remarkGfm],
