@@ -5,6 +5,7 @@ import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
 import { bundledLanguages, createHighlighter } from 'shiki';
 import { transformerColorizedBrackets } from '@shikijs/colorized-brackets';
+import { transformerStyleToClass } from '@shikijs/transformers';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex-svelte';
 import remarkGfm from 'remark-gfm';
@@ -84,23 +85,36 @@ const mdsvexOptions = {
 			const infoString = [lang, meta].filter(Boolean).join(' ');
 			const { lang: parsedLang, file } = getCodeMeta(infoString);
 			const highlightLang = parsedLang || 'text';
+			// Hoist Shiki's per-token inline styles into shared classes. With four
+			// themes and defaultColor:false, every token span would otherwise inline
+			// four hex colors; this collapses each unique color-set to one class plus
+			// a small stylesheet, shrinking the raw output ~3.5x with identical colors.
+			const styleToClass = transformerStyleToClass({ classPrefix: 'tk-' });
+			const transformers = [transformerColorizedBrackets(), styleToClass];
 			let highlighted;
 			try {
 				highlighted = highlighter.codeToHtml(code, {
 					lang: highlightLang,
 					themes: catppuccinThemes,
 					defaultColor: false,
-					transformers: [transformerColorizedBrackets()]
+					transformers
 				});
 			} catch (error) {
-				console.warn(`Failed to highlight language "${highlightLang}". Falling back to text.`, error);
+				console.warn(
+					`Failed to highlight language "${highlightLang}". Falling back to text.`,
+					error
+				);
 				highlighted = highlighter.codeToHtml(code, {
 					lang: 'text',
 					themes: catppuccinThemes,
 					defaultColor: false,
-					transformers: [transformerColorizedBrackets()]
+					transformers
 				});
 			}
+			// Prepend the generated rules. Class names are content hashes, so blocks
+			// that share token styles share definitions and duplicate <style> rules
+			// across blocks are harmless (and gzip away).
+			highlighted = `<style>${styleToClass.getCSS()}</style>${highlighted}`;
 			const encoded = escapeHtml(Buffer.from(code).toString('base64'));
 			const safeLang = escapeHtml(highlightLang);
 			const safeFile = file ? escapeHtml(file) : '';
