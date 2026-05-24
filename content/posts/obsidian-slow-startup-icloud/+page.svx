@@ -1,0 +1,40 @@
+~~~
+description = "When your vault lives in ~/Documents, iCloud quietly evicts your notes to the cloud as empty stubs and re-downloads them one by one on every launch. Here's how to spot it and fix it."
+published_at = "2026-05-24"
+tags = ["obsidian", "macos", "icloud", "performance", "debugging"]
+
+[title]
+text = "Your Slow Obsidian Is iCloud's Fault"
+config = "3 4c[#D98E5C] 6c[#A88BFA] 2.5 5ci 4c"
+~~~
+
+Pro tip: if your Obsidian takes stupidly long to load on macOS, look at iCloud before you start culling plugins. It's quietly deleting your notes out from under you.
+
+Mine crept up to a ~1 minute stall on "loading plugins" every launch. I thought it was the 24 community plugins I'd accumulated like barnacles. Wrong. The vault is 31MB, 328 notes. That should open instantly.
+
+## The culprit: dataless files
+
+My vault lives in `~/Documents`, which iCloud Drive manages with **Optimize Mac Storage** on. That lets macOS evict file *contents* to the cloud and leave a stub behind. The file still shows up at its real size, but the bytes aren't there. `stat` rats it out:
+
+```bash
+stat -f '%z bytes  flags=%Sf' ~/Documents/notes/content/some-note.md
+```
+```
+2578 bytes  flags=compressed,dataless  -- some-note.md
+```
+
+`dataless` is the tell. Reading the file blocks while macOS pulls it back from iCloud. I scanned the vault: **511 of 689 files were dataless**, including the plugin `main.js` files themselves.
+
+On launch Obsidian reads every `.md` to build its link/tag cache, then loads each plugin's code. That's hundreds of file reads, and every dataless one stalls on an iCloud download before it returns. The "loading plugins" screen just sits there waiting on the network while macOS drags each file back down one at a time.
+
+## The fix
+
+Rehydrate everything, then pin it so iCloud can't evict it again:
+
+```bash
+brctl download ~/Documents/notes/content
+```
+
+Then right-click the folder in Finder and pick **Keep Downloaded**. Next launch was instant.
+
+The same trap catches anything that walks a directory tree on startup: Electron apps, project indexers, anything that stats a `node_modules`. When launches go mysteriously slow and your data lives in iCloud Drive, check for `dataless` before blaming the software.
