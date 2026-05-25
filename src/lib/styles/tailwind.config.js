@@ -24,7 +24,11 @@ export const theme = {
 					'--tw-prose-pre-code': 'inherit', // Inherit from shiki for code blocks
 					'--tw-prose-pre-bg': 'var(--color-mantle)', // Background for code blocks
 					'--tw-prose-th-borders': 'var(--color-surface1)',
-					'--tw-prose-td-borders': 'var(--color-surface0)'
+					'--tw-prose-td-borders': 'var(--color-surface0)',
+					// @tailwindcss/typography wraps inline code in literal backticks via
+					// code::before/::after. Kill them.
+					'code::before': { content: '""' },
+					'code::after': { content: '""' }
 				}
 			}
 		})
