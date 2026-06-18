@@ -4,11 +4,10 @@
 # This script uses a predefined mapping to generate images with correct filenames
 
 set -e
-# Script directory
-SCRIPT_DIR="$(dirname "$0")"
 
-# Output directory for project images
-OUTPUT_DIR="../static/projects"
+SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd -P)"
+PROJECT_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
+OUTPUT_DIR="$PROJECT_ROOT/static/projects"
 
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"

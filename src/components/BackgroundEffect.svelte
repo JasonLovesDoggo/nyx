@@ -61,11 +61,56 @@
 		}
 	};
 
+	// Controls we must never steal the mousedown from (focus, clicks, typing).
+	const INTERACTIVE_SELECTOR =
+		'a, button, input, textarea, select, label, summary, [role="button"], [contenteditable]';
+
+	const caretFromPoint = (x: number, y: number): { node: Node; offset: number } | null => {
+		const doc = document as Document & {
+			caretPositionFromPoint?(cx: number, cy: number): { offsetNode: Node; offset: number } | null;
+		};
+		if (typeof doc.caretPositionFromPoint === 'function') {
+			const pos = doc.caretPositionFromPoint(x, y);
+			return pos ? { node: pos.offsetNode, offset: pos.offset } : null;
+		}
+		if (typeof doc.caretRangeFromPoint === 'function') {
+			const range = doc.caretRangeFromPoint(x, y);
+			return range ? { node: range.startContainer, offset: range.startOffset } : null;
+		}
+		return null;
+	};
+
+	// Did the press actually land on rendered text? Browsers snap the caret to the
+	// nearest text node even when you click in the empty end-of-line margin, so we
+	// confirm the pixel sits inside one of the text's line boxes.
+	const startedOnText = (x: number, y: number): boolean => {
+		const hit = caretFromPoint(x, y);
+		if (!hit || hit.node.nodeType !== Node.TEXT_NODE) return false;
+		if (!(hit.node.textContent ?? '').trim()) return false;
+
+		const range = document.createRange();
+		range.selectNodeContents(hit.node);
+		return Array.from(range.getClientRects()).some(
+			(r) => x >= r.left && x <= r.right && y >= r.top && y <= r.bottom
+		);
+	};
+
+	const shouldKeepSelection = (event: MouseEvent): boolean => {
+		const target = event.target as Element | null;
+		if (target?.closest(INTERACTIVE_SELECTOR)) return true;
+		return startedOnText(event.clientX, event.clientY);
+	};
+
 	$effect(() => {
 		const handleMouseMove = (event: MouseEvent) => render(event);
 		const handleMouseLeave = () => render({ clientX: -1, clientY: -1 });
 		const handleMouseDown = (event: MouseEvent) => {
 			isMouseDown = true;
+			// Primary-button drags that don't start on text drive the background
+			// effect, so suppress the browser's native drag-select for them.
+			if (event.button === 0 && !shouldKeepSelection(event)) {
+				event.preventDefault();
+			}
 			render(event);
 		};
 		const handleMouseUp = (event: MouseEvent) => {
@@ -79,7 +124,7 @@
 
 		document.addEventListener('mousemove', handleMouseMove, { capture: true, passive: true });
 		document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
-		document.addEventListener('mousedown', handleMouseDown, { capture: true, passive: true });
+		document.addEventListener('mousedown', handleMouseDown, { capture: true });
 		document.addEventListener('mouseup', handleMouseUp, { capture: true, passive: true });
 		document.addEventListener('dragend', handleDragEnd, { capture: true, passive: true });
 
