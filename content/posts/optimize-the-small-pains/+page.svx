@@ -1,5 +1,5 @@
 ~~~
-description = "My zsh took 1.4 seconds to start. Five seconds of benchmarking found the problem. The fix was easy. Years of ignoring it was the part worth thinking about."
+description = "xkcd's 'Is It Worth the Time?' chart tells you when to optimize. It leaves out the pain that quietly bills you every day until you fix it."
 published_at = "2026-04-24"
 tags = ["zsh", "developer-experience", "shell", "nvm", "fnm", "productivity"]
 
@@ -8,27 +8,31 @@ text = "Optimize the Small Pains"
 config = "4 4 3c 5"
 ~~~
 
-My zsh took 1.4 seconds to start. Every new tab, every `:terminal` in nvim, every shell-out from a script. I'd been ignoring it for years. Not because I didn't notice, I noticed every time. I just kept telling myself it wasn't worth fixing right now.
+There's a particular kind of problem that's small enough to ignore every single time you hit it, which means you ignore it forever. Each instance is too cheap to bother with. Added up, it's one of the most expensive things you own, and you never even feel it leave.
 
-Today I actually looked at it. Five seconds of benchmarking, twenty minutes of fixing. It now starts in 150ms.
+It's the inverse of the sunk cost fallacy. Sunk cost says: I've already poured so much in, I should keep going. This says: each payment is so small I'll just keep paying it. Both leave you stuck. The difference is that sunk cost traps you with money you already spent, and this one signs you up to keep spending, one installment so tiny you never bother to add them up.
 
-## The Profile
+Worse, the longer you wait, the worse the trade gets. Not because the fix gets harder, but because a one-time fix pays a dividend for as long as you use the thing, and every day you defer it is a day of that dividend you simply throw away. The best time to fix a recurring pain was the first day it annoyed you. The second best time is right now.
 
-I knew, vaguely, what the problem was the whole time. nvm is slow. Everyone knows nvm is slow. I just never bothered to measure it.
+## The One That Got Me
 
-```
+Here's the one that finally made me notice the pattern. My zsh took 1.4 seconds to start, every new tab, every `:terminal` in nvim, every shell-out from a script. I'd ignored it for years. Each second was easy to wave off, and I'd quietly assumed the fix would be a whole thing.
+
+I had no idea what was actually slow, so I measured:
+
+```console
 $ zsh -ic 'zmodload zsh/zprof; source ~/.zshrc; zprof' | head
  1)    1   768.51   71.24%   nvm_auto
  2)    1   306.87   28.45%   compinit
 ```
 
-That's it. nvm was eating 770ms on every shell start. compinit, another 300ms. Together they were 99% of the problem. The other ~30 lines of my `.zshrc` collectively cost less than `nvm_auto` did by itself.
+nvm. 770ms on every single shell start, 71% of my startup time, and something I'd never once suspected. compinit was another 300ms. Those two lines were 99% of the problem. <Margin>If you'd made me guess beforehand I'd have blamed my prompt or some plugin, then spent an afternoon being confidently wrong about it.</Margin>
 
 ## The Fix
 
-Two changes.
+Two changes, neither one clever.
 
-**Replace nvm with [fnm](https://github.com/Schniz/fnm).** It's a Rust drop-in for nvm. Same `.nvmrc` files, same `--use-on-cd` auto-switching, ~5ms init instead of 770ms.
+**Replace nvm with [fnm](https://github.com/Schniz/fnm).** Googled "nvm slow alternative", fnm was the first result. Rust reimplementation, same `.nvmrc` files, same `--use-on-cd` auto-switching, about 5ms of init instead of 770.
 
 ```diff
 - export NVM_DIR="$HOME/.nvm"
@@ -36,7 +40,7 @@ Two changes.
 + eval "$(fnm env --use-on-cd --shell zsh)"
 ```
 
-**Cache compinit for 24 hours.** It does an expensive security audit and dump rebuild on every shell start. You don't need that. You install completions like once a week.
+**Cache compinit for 24 hours.** By default it runs a full security audit and rebuild on every shell start, whether or not anything changed. You install new completions maybe once a week. The rest of the time it's doing that work for absolutely fuck-all.
 
 ```zsh
 autoload -Uz compinit
@@ -47,12 +51,10 @@ else
 fi
 ```
 
-1.4s to 150ms. About 9x.
+From 1.4s to 150ms. About 9x. <Margin>That `(#qN.mh+24)` is a zsh glob qualifier: file exists, modified more than 24 hours ago. zsh globbing is genuinely incredible and almost nobody uses it.</Margin>
 
-## The Part Worth Thinking About
+## The Math Was Never Hard
 
-The fix took less time than I'd spent being annoyed by it in any given week. The blocker was never the work, it was sitting down to look at it once. "It's only a second" is true right up until you multiply it by every shell you've opened for the last three years.
+I'd spent three years assuming this was big and the fix was annoying. It was less than twenty minutes and two lines, and most of that was reading fnm's README.
 
-I have a list of these. The function key that does nothing useful. The git alias I keep meaning to write. The dotfile that prints a deprecation warning on every shell. The CI step that takes 8 minutes when it could take 30 seconds.
-
-Probably worth going through it.
+The fix is almost never the hard part. The hard part is deciding that a small, recurring thing deserves one block of your attention today, instead of another year of installments. So if something has been quietly annoying you on a loop, take it as the signal it actually is. The fact that it keeps coming back is the whole argument for fixing it now.
