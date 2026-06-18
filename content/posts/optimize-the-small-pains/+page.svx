@@ -1,5 +1,5 @@
 ~~~
-description = "xkcd's 'Is It Worth the Time?' chart tells you when to optimize. It leaves out the pain that quietly bills you every day until you fix it."
+description = "We learn to suffer what we could simply end, paying interest on problems we could fix once."
 published_at = "2026-04-24"
 tags = ["zsh", "developer-experience", "shell", "nvm", "fnm", "productivity"]
 
