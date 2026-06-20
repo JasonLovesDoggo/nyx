@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { IconCalendarEvent } from '@tabler/icons-svelte';
 	import type { ProjectPageData } from '$types/projects';
-	import { page } from '$app/state';
 	import { formatDate } from '$utils/date';
 	import { getIconByName } from '$lib/content/projects';
+	import Site from '$lib/config/common';
 
 	import '$lib/styles/content.css';
 	import ProjectTags from '$components/projects/ProjectTags.svelte';
@@ -24,16 +24,13 @@
 	<meta property="og:title" content={data.metadata.title} />
 	<meta property="og:description" content={data.metadata.description} />
 	{#if data.metadata.image}
-		<meta property="og:image" content={new URL(data.metadata.image.url, page.url.origin).href} />
+		<meta property="og:image" content={new URL(data.metadata.image.url, Site.url).href} />
 	{/if}
 	<meta property="og:type" content="article" />
 	<meta name="twitter:title" content={data.metadata.title} />
 	<meta name="twitter:description" content={data.metadata.description} />
 	{#if data.metadata.image}
-		<meta
-			name="twitter:image:src"
-			content={new URL(data.metadata.image.url, page.url.origin).href}
-		/>
+		<meta name="twitter:image:src" content={new URL(data.metadata.image.url, Site.url).href} />
 	{/if}
 </svelte:head>
 

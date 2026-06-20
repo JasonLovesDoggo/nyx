@@ -2,8 +2,8 @@
 	import { formatDate } from '$lib/utils/date';
 	import type { TutorialPageData } from '$lib/content/tutorials';
 	import '$lib/styles/content.css';
-	import { page } from '$app/state';
 	import { getRandomAccentColor } from '$lib/stores/theme';
+	import Site from '$lib/config/common';
 
 	let { data }: { data: TutorialPageData } = $props();
 
@@ -30,16 +30,13 @@
 	<meta property="og:title" content={data.metadata.title} />
 	<meta property="og:description" content={data.metadata.description} />
 	{#if data.metadata.image}
-		<meta property="og:image" content={new URL(data.metadata.image.url, page.url.origin).href} />
+		<meta property="og:image" content={new URL(data.metadata.image.url, Site.url).href} />
 	{/if}
 	<meta property="og:type" content="article" />
 	<meta name="twitter:title" content={data.metadata.title} />
 	<meta name="twitter:description" content={data.metadata.description} />
 	{#if data.metadata.image}
-		<meta
-			name="twitter:image:src"
-			content={new URL(data.metadata.image.url, page.url.origin).href}
-		/>
+		<meta name="twitter:image:src" content={new URL(data.metadata.image.url, Site.url).href} />
 	{/if}
 </svelte:head>
 
