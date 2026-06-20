@@ -1,0 +1,37 @@
+~~~
+title = "Caddy Defender"
+description = "A Caddy module for blocking, redirecting, throttling, or poisoning requests from AI crawlers and cloud IP ranges."
+date = "2025-01-14"
+published = true
+featured = false
+tags = ["go", "caddy", "security", "ai", "anti-bot", "waf", "ip-filtering"]
+
+[image]
+url = "/projects/caddy-defender.webp"
+alt = "The Caddy Defender GitHub repository"
+
+[[links]]
+text = "GitHub"
+url = "https://github.com/JasonLovesDoggo/caddy-defender"
+
+[[links]]
+text = "Docs"
+url = "https://defender.jsn.cam/"
+icon = "docs"
+~~~
+
+# Caddy Defender
+
+Caddy Defender is a Caddy module for controlling traffic from AI crawlers, cloud services, and other known IP ranges before they can scrape or train on a site.
+
+The module can block requests outright, return a custom response, redirect traffic, drop connections, mark requests for rate limiting, or stream slow tarpit responses. It ships with embedded IP ranges for services such as OpenAI, DeepSeek, GitHub Copilot, Google Cloud, AWS, Azure, Cloudflare, DigitalOcean, Linode, Mistral, OCI, Vultr, and more.
+
+## Key Features
+
+- **Caddy-native middleware:** Configures directly through the `defender` directive in a Caddyfile.
+- **Embedded ranges:** Includes maintained IP range sets for major AI and cloud providers.
+- **Flexible responses:** Supports block, custom, drop, garbage, redirect, ratelimit, and tarpit modes.
+- **Custom ranges:** Allows site-specific CIDR ranges alongside the built-in provider keys.
+- **Container support:** Provides a prebuilt Docker image for running Caddy with the module included.
+
+For setup details and configuration examples, see the [Caddy Defender documentation](https://defender.jsn.cam/).
