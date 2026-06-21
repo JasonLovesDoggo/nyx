@@ -5,6 +5,7 @@ import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
 import { bundledLanguages, createHighlighter } from 'shiki';
 import { transformerColorizedBrackets } from '@shikijs/colorized-brackets';
+import { transformerStyleToClass } from '@shikijs/transformers';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex-svelte';
 import remarkGfm from 'remark-gfm';
@@ -84,21 +85,30 @@ const mdsvexOptions = {
 			const infoString = [lang, meta].filter(Boolean).join(' ');
 			const { lang: parsedLang, file } = getCodeMeta(infoString);
 			const highlightLang = parsedLang || 'text';
+			// Hoist Shiki's per-token inline styles into shared classes. With four
+			// themes and defaultColor:false, every token span would otherwise inline
+			// four hex colors; this collapses each unique color-set to one class plus
+			// a small stylesheet, shrinking the raw output ~3.5x with identical colors.
+			const styleToClass = transformerStyleToClass({ classPrefix: 'tk-' });
+			const transformers = [transformerColorizedBrackets(), styleToClass];
 			let highlighted;
 			try {
 				highlighted = highlighter.codeToHtml(code, {
 					lang: highlightLang,
 					themes: catppuccinThemes,
 					defaultColor: false,
-					transformers: [transformerColorizedBrackets()]
+					transformers
 				});
 			} catch (error) {
-				console.warn(`Failed to highlight language "${highlightLang}". Falling back to text.`, error);
+				console.warn(
+					`Failed to highlight language "${highlightLang}". Falling back to text.`,
+					error
+				);
 				highlighted = highlighter.codeToHtml(code, {
 					lang: 'text',
 					themes: catppuccinThemes,
 					defaultColor: false,
-					transformers: [transformerColorizedBrackets()]
+					transformers
 				});
 			}
 			const encoded = escapeHtml(Buffer.from(code).toString('base64'));
@@ -129,7 +139,17 @@ const mdsvexOptions = {
 		</div>
 	</figure>`;
 			const escaped = escapeSvelte(block);
-			return `{@html \`${escaped}\` }`;
+			// The generated rules must reach a real <style> element with literal braces:
+			// escapeSvelte turns "{" into "&#123;", which is fine in HTML text but dead
+			// inside <style> (a raw-text element where entities aren't decoded). So inject
+			// the CSS separately, escaping only what would break the @html template literal
+			// (backslash, backtick, ${) and leaving braces intact.
+			const css = styleToClass
+				.getCSS()
+				.replace(/\\/g, '\\\\')
+				.replace(/`/g, '\\`')
+				.replace(/\$\{/g, '\\${');
+			return `{@html \`<style>${css}</style>${escaped}\` }`;
 		}
 	},
 	remarkPlugins: [remarkToc, remarkMath, remarkAbbr, remarkGfm],

@@ -17,6 +17,16 @@ export default defineConfig(({ command }) => {
 			!isBuild && devtoolsJson()
 		].filter(Boolean),
 
+		build: {
+			target: 'esnext', // modern browsers only: no legacy syntax, no polyfills
+			cssMinify: 'lightningcss',
+			modulePreload: { polyfill: false } // modern browsers support modulepreload natively
+			// NOTE: deliberately no rollupOptions.output.manualChunks. SvelteKit already
+			// route-splits the client and isolates lazy deps (leaflet is its own chunk via
+			// dynamic import). A React-style per-package manualChunks is ignored for the
+			// client build here and only reshapes the server worker bundle, so it's omitted.
+		},
+
 		server: { fs: { allow: ['.'] } }
 	};
 });
