@@ -51,7 +51,7 @@
 					touchZoom: true
 				}).setView([43.6532, -79.3832], 11);
 
-				L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+				L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_31yr_1_c550289dfdcca99ae44a32c2', {
 					maxZoom: 19,
 					attribution: '',
 					keepBuffer: 4,
