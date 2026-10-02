@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { IconMapPin, IconSun, IconMoon } from '@tabler/icons-svelte';
+	import { IconSun, IconMoon } from '@tabler/icons-svelte';
 	import { browser } from '$app/env';
 
 	let mapContainer = $state<HTMLDivElement>();
@@ -84,8 +84,7 @@
 		onclick={recenterMap}
 		class="text-text hover:text-accent mb-3 flex w-full cursor-pointer items-center gap-2 text-left text-sm font-semibold transition-colors"
 	>
-		<IconMapPin size={16} class="text-accent" />
-		Currently Based In 📍
+		Currently Based In
 	</button>
 	<div class="bg-surface0 relative w-full flex-1 overflow-hidden rounded-lg">
 		{#if browser}
