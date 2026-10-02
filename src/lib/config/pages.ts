@@ -25,11 +25,23 @@ export interface ExperienceTimelineItem {
 	logoAlt: string;
 	startDate: string;
 	endDate?: string; // optional endDate. If present, it's a past role.
+	status?: 'current' | 'past'; // Allows marking a past role without an exact end date.
 	details?: string; // Optional details for expansion
 	logoScale?: number; // Optional logo scale multiplier
+	logoMonochrome?: boolean;
 }
 
 export const experienceTimeline: ExperienceTimelineItem[] = [
+	{
+		company: 'Flint',
+		role: 'MTS',
+		url: 'https://www.flint.com/',
+		logoUrl: '/logos/flint.svg',
+		logoAlt: 'Flint Logo',
+		startDate: '2026-10-01',
+		status: 'current',
+		logoMonochrome: true
+	},
 	{
 		company: 'Stan',
 		role: 'Sr Full Stack Engineer',
@@ -37,6 +49,7 @@ export const experienceTimeline: ExperienceTimelineItem[] = [
 		logoUrl: '/logos/stan.svg',
 		logoAlt: 'Stan Logo',
 		startDate: '2025-06-01',
+		status: 'past',
 		details:
 			'Senior Full Stack Engineer at Stan, building AI products that help millions articulate their ideas and share them at scale.',
 		logoScale: 1.15

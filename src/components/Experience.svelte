@@ -5,7 +5,7 @@
 	import { formatDate } from '#lib/utils/date.js';
 
 	function isPast(item: ExperienceTimelineItem): boolean {
-		return !!item.endDate;
+		return item.status === 'past' || !!item.endDate;
 	}
 </script>
 
@@ -25,6 +25,7 @@
 							aria-label={`View details for ${item.role} at ${item.company}`}
 						>
 							<img
+								class:monochrome-logo={item.logoMonochrome}
 								src={item.logoUrl}
 								alt={item.logoAlt}
 								class="flex max-h-8 min-h-7 w-auto min-w-6 grow-9 object-contain"
@@ -52,6 +53,7 @@
 						<div class="mb-3 flex items-start justify-between">
 							<div class="flex items-center gap-3">
 								<img
+									class:monochrome-logo={item.logoMonochrome}
 									src={item.logoUrl}
 									alt={item.logoAlt}
 									class="h-10 w-auto max-w-16 shrink-0 rounded-md object-contain p-1"
@@ -80,13 +82,15 @@
 							<IconCalendarEvent size={14} class="flex-shrink-0" />
 
 							<span>{formatDate(item.startDate, { yearMonthOnly: true })}</span>
-							<span>-</span>
+							<span>{isPast(item) && !item.endDate ? '·' : '-'}</span>
 							{#if item.endDate}
 								{#if new Date(item.endDate) > new Date()}
 									<span>{formatDate(item.endDate, { yearMonthOnly: true })}</span>
 								{:else}
 									<span>{formatDate(item.endDate, { yearMonthOnly: true })}</span>
 								{/if}
+							{:else if isPast(item)}
+								<span>Past</span>
 							{:else if new Date(item.startDate) > new Date()}
 								<span class="text-accent">Incoming</span>
 							{:else}
@@ -115,3 +119,13 @@
 		{/each}
 	</div>
 </section>
+
+<style>
+	.monochrome-logo {
+		filter: brightness(0) invert(1);
+	}
+
+	:global(.latte) .monochrome-logo {
+		filter: brightness(0);
+	}
+</style>
