@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { IconSun, IconMoon } from '@tabler/icons-svelte';
+	import { IconMapPin, IconSun, IconMoon } from '@tabler/icons-svelte';
 	import { browser } from '$app/env';
 
 	let mapContainer = $state<HTMLDivElement>();
@@ -8,6 +8,8 @@
 	let mapInstance: L.Map | null = null;
 	let currentTime = $state('');
 	let isDaytime = $state(true);
+	// Center the city label in the current zoom-11 basemap.
+	const mapCenter: [number, number] = [37.7873, -122.408];
 
 	function updateTime() {
 		const now = new Date();
@@ -49,7 +51,7 @@
 					boxZoom: true,
 					keyboard: true,
 					touchZoom: true
-				}).setView([37.7749, -122.4194], 11);
+				}).setView(mapCenter, 11);
 
 				L.tileLayer(
 					'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_31yr_1_c550289dfdcca99ae44a32c2',
@@ -74,7 +76,7 @@
 
 	function recenterMap() {
 		if (mapInstance) {
-			mapInstance.setView([37.7749, -122.4194], 11);
+			mapInstance.setView(mapCenter, 11);
 		}
 	}
 </script>
@@ -84,6 +86,7 @@
 		onclick={recenterMap}
 		class="text-text hover:text-accent mb-3 flex w-full cursor-pointer items-center gap-2 text-left text-sm font-semibold transition-colors"
 	>
+		<IconMapPin size={16} class="text-accent" />
 		Currently Based In
 	</button>
 	<div class="bg-surface0 relative w-full flex-1 overflow-hidden rounded-lg">
@@ -100,7 +103,7 @@
 			</div>
 		{/if}
 	</div>
-	<div class="mt-3 flex flex-col items-center gap-1 text-center">
+	<div class="mt-3 flex items-center justify-between gap-2">
 		<button
 			onclick={recenterMap}
 			class="text-subtext0 hover:text-accent cursor-pointer text-xs whitespace-nowrap transition-colors"
