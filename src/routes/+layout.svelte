@@ -30,12 +30,41 @@
 	onNavigate((navigation) => {
 		if (navigation.shallow) return;
 		if (!document.startViewTransition) return;
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
 		return new Promise((resolve) => {
-			document.startViewTransition(async () => {
+			const transition = document.startViewTransition(async () => {
 				resolve();
 				await navigation.complete;
 			});
+
+			// Let user scrolling reveal the live page immediately, rather than a
+			// transition image lagging behind it. Don't cancel on navigation's own
+			// programmatic scroll restoration.
+			const controller = new AbortController();
+			const skip = () => transition.skipTransition();
+			const options = { passive: true, signal: controller.signal };
+			window.addEventListener('wheel', skip, options);
+			window.addEventListener('touchmove', skip, options);
+			window.addEventListener(
+				'keydown',
+				(event) => {
+					if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+					if (
+						event.target instanceof HTMLElement &&
+						event.target.closest('input, textarea, select, button, [contenteditable]')
+					)
+						return;
+					if (
+						['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)
+					) {
+						skip();
+					}
+				},
+				{ signal: controller.signal }
+			);
+			const cleanup = () => controller.abort();
+			void transition.finished.then(cleanup, cleanup);
 		});
 	});
 

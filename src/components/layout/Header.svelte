@@ -41,7 +41,8 @@
 <style>
 	.header {
 		mask: linear-gradient(black, black, transparent);
-		backdrop-filter: blur(10px);
+		/* Keep the standard alias last so minification doesn't leave only WebKit's. */
 		-webkit-backdrop-filter: blur(10px);
+		backdrop-filter: blur(10px);
 	}
 </style>
