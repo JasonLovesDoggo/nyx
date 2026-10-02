@@ -2,8 +2,8 @@
  * Copyright (c) 2025. Jason Cameron
  * All Rights Reserved
  */
-import Site from '$lib/config/common';
-import createRedirects from '$utils/redirects';
+import Site from '#lib/config/common.js';
+import createRedirects from '#lib/utils/redirects.js';
 
 const redirects = createRedirects([
 	{ paths: ['/github', '/gh'], url: Site.out.github },

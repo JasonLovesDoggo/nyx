@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils/date';
-	import type { TutorialPageData } from '$lib/content/tutorials';
-	import '$lib/styles/content.css';
-	import { getRandomAccentColor } from '$lib/stores/theme';
-	import Site from '$lib/config/common';
+	import { formatDate } from '#lib/utils/date.js';
+	import type { TutorialPageData } from '#lib/content/tutorials.js';
+	import '#lib/styles/content.css';
+	import { getRandomAccentColor } from '#lib/stores/theme.js';
+	import Site from '#lib/config/common.js';
 
 	let { data }: { data: TutorialPageData } = $props();
 

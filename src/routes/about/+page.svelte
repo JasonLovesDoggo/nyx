@@ -6,8 +6,8 @@
 		IconDog,
 		IconStar
 	} from '@tabler/icons-svelte';
-	import Site from '$lib/config/common';
-	import AnchorHeader from '$lib/components/AnchorHeader.svelte';
+	import Site from '#lib/config/common.js';
+	import AnchorHeader from '#lib/components/AnchorHeader.svelte';
 
 	const handleEmailClick = () => {
 		const email = atob('Y29udGFjdEA=') + window.location.hostname;

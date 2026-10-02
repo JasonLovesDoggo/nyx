@@ -11,14 +11,14 @@ export function useLightboxNav(getImages: () => LightboxImage[]) {
 	let hasOpenedFromParam = false;
 
 	function updateParam(id: string | null) {
-		const params = new URLSearchParams(page.url.searchParams);
+		const params = new URLSearchParams(page.url.searchParams.toString());
 		if (id) {
 			params.set('photo', id);
 		} else {
 			params.delete('photo');
 		}
 		const str = params.toString();
-		goto(str ? `?${str}` : page.url.pathname, { replaceState: true, noScroll: true });
+		goto(str ? `?${str}` : page.url.pathname, { replace: true, reset: false });
 	}
 
 	function openAt(index: number) {

@@ -4,3 +4,6 @@ pnpm-lock.yaml
 yarn.lock
 bun.lock
 bun.lockb
+
+# Generated Cloudflare runtime types
+src/worker-configuration.d.ts

@@ -1,5 +1,5 @@
-import type { Handle } from '@sveltejs/kit';
-import redirects from '$lib/config/redirects';
+import type { Handle } from '@sveltejs/kit/hooks';
+import redirects from '#lib/config/redirects.js';
 
 // This hook handles redirects for specific paths to their corresponding URLs.
 // I.E. A redirect from '/github' to Site.out.github or so.

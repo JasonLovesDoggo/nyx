@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
-	import Site from '$lib/config/common';
+	import { browser } from '$app/env';
+	import Site from '#lib/config/common.js';
+	import type { AbacusResponse } from '#lib/types/abacus.js';
 	import { IconInfoCircle } from '@tabler/icons-svelte';
-	import { persistentWritable } from '$lib/stores/persistance';
+	import { persistentWritable } from '#lib/stores/persistance.js';
 
 	let globalCount = $state(0);
 	let isLoading = $state(true);
@@ -72,7 +73,7 @@
 		try {
 			const response = await fetch(`${Site.abacus.instance}/get/${Site.abacus.namespace}/${KEY}`);
 			if (response.ok) {
-				const data = await response.json();
+				const data = (await response.json()) as AbacusResponse;
 				globalCount = data.value || 0;
 			} else if (response.status === 404) {
 				globalCount = 0;
@@ -165,13 +166,11 @@
 		<button
 			class="text-subtext1 hover:text-accent transition-colors"
 			aria-label="What is this?"
-			onclick={() => (showInfo = !showInfo)}
+			onclick={() => (showInfo = !showInfo)}><IconInfoCircle size={16} /></button
 		>
-			<IconInfoCircle size={16} />
-		</button>
 
 		<div
-			class="bg-base/70 border-accent/20 text-subtext0 absolute top-6 right-0 z-10 w-[14rem] rounded-lg border p-3 text-xs shadow-xl backdrop-blur-md transition-all duration-200 {showInfo
+			class="bg-base/70 border-accent/20 text-subtext0 absolute top-6 right-0 z-10 w-56 rounded-lg border p-3 text-xs shadow-xl backdrop-blur-md transition-all duration-200 {showInfo
 				? 'visible opacity-100'
 				: 'invisible opacity-0'} group-hover:visible group-hover:opacity-100"
 		>

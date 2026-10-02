@@ -6,11 +6,6 @@ declare global {
 		// interface Locals {}
 		// interface PageData {}
 		// interface PageState {}
-		interface Platform {
-			env: {
-				NYXCACHE: KVNamespace;
-			};
-		}
 	}
 }
 

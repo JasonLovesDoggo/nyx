@@ -1,6 +1,7 @@
-import Site from '$lib/config/common';
+import Site from '#lib/config/common.js';
+import type { AbacusResponse } from '#lib/types/abacus.js';
 import type { LayoutServerLoad } from './$types';
-import { measurePerformance } from '$lib/utils/performance';
+import { measurePerformance } from '#lib/utils/performance.js';
 
 export const load: LayoutServerLoad = async () => {
 	const { instance, namespace, key } = Site.abacus;
@@ -10,9 +11,9 @@ export const load: LayoutServerLoad = async () => {
 			const response = await fetch(`${instance}/hit/${namespace}/${key}`, {
 				signal: AbortSignal.timeout(600) // 600ms timeout
 			});
-			return response.json();
+			const data = (await response.json()) as AbacusResponse;
+			return { value: data.value.toLocaleString() };
 		});
-		footerData.value = footerData.value.toLocaleString();
 	} catch (error) {
 		console.error('Error fetching footer data:', error);
 		return {

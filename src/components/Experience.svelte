@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Popover } from 'bits-ui';
-	import { experienceTimeline, type ExperienceTimelineItem } from '$lib/config/pages.js';
+	import { experienceTimeline, type ExperienceTimelineItem } from '#lib/config/pages.js';
 	import { IconX, IconExternalLink, IconCalendarEvent } from '@tabler/icons-svelte';
-	import { formatDate } from '$lib/utils/date';
+	import { formatDate } from '#lib/utils/date.js';
 
 	function isPast(item: ExperienceTimelineItem): boolean {
 		return !!item.endDate;
@@ -54,7 +54,7 @@
 								<img
 									src={item.logoUrl}
 									alt={item.logoAlt}
-									class="h-10 w-auto max-w-[4rem] flex-shrink-0 rounded-md object-contain p-1"
+									class="h-10 w-auto max-w-16 shrink-0 rounded-md object-contain p-1"
 									style={item.logoScale ? `transform: scale(${item.logoScale})` : ''}
 								/>
 								<div>

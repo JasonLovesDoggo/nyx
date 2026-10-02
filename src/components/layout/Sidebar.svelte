@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { mainNavItems, moreNavItems } from '$lib/config/navItems';
+	import { mainNavItems, moreNavItems } from '#lib/config/navItems.js';
 	import { IconX } from '@tabler/icons-svelte';
 	import { page } from '$app/state';
-	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
-	import ColorSelector from '$components/themes/ColorSelector.svelte';
+	import ThemeSelector from '#components/themes/ThemeSelector.svelte';
+	import ColorSelector from '#components/themes/ColorSelector.svelte';
 
 	let { isOpen, closeSidebar } = $props<{ isOpen: boolean; closeSidebar: () => void }>();
 
@@ -27,7 +27,7 @@
 	}`}
 	id="sidebar-nav"
 >
-	<div class="border-surface0 flex h-16 flex-shrink-0 items-center justify-between border-b p-4">
+	<div class="border-surface0 flex h-16 shrink-0 items-center justify-between border-b p-4">
 		<span class="text-accent font-mono text-lg font-semibold">Navigation</span>
 		<button
 			onclick={closeSidebar}
@@ -38,7 +38,7 @@
 		</button>
 	</div>
 
-	<div class="border-surface0 flex-shrink-0 border-b p-4">
+	<div class="border-surface0 shrink-0 border-b p-4">
 		<div class="pb-1">
 			<ThemeSelector />
 		</div>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { IconMapPin, IconSun, IconMoon } from '@tabler/icons-svelte';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 
 	let mapContainer = $state<HTMLDivElement>();
 	let leafletLoaded = $state(false);
@@ -51,13 +51,16 @@
 					touchZoom: true
 				}).setView([43.6532, -79.3832], 11);
 
-				L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_31yr_1_c550289dfdcca99ae44a32c2', {
-					maxZoom: 19,
-					attribution: '',
-					keepBuffer: 4,
-					updateWhenIdle: false,
-					updateWhenZooming: false
-				}).addTo(mapInstance);
+				L.tileLayer(
+					'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_31yr_1_c550289dfdcca99ae44a32c2',
+					{
+						maxZoom: 19,
+						attribution: '',
+						keepBuffer: 4,
+						updateWhenIdle: false,
+						updateWhenZooming: false
+					}
+				).addTo(mapInstance);
 
 				leafletLoaded = true;
 			})();

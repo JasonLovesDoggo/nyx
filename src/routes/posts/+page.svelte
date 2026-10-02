@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils/date';
-	import type { PostEntry } from '$lib/content/posts';
-	import PostTags from '$components/posts/PostTags.svelte';
+	import { formatDate } from '#lib/utils/date.js';
+	import type { PostEntry } from '#lib/content/posts.js';
+	import PostTags from '#components/posts/PostTags.svelte';
 
 	let { data }: { data: { posts: PostEntry[] } } = $props();
 

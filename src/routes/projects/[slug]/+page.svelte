@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { IconCalendarEvent } from '@tabler/icons-svelte';
-	import type { ProjectPageData } from '$types/projects';
-	import { formatDate } from '$utils/date';
-	import { getIconByName } from '$lib/content/projects';
-	import Site from '$lib/config/common';
+	import type { ProjectPageData } from '#lib/types/projects.js';
+	import { formatDate } from '#lib/utils/date.js';
+	import { getIconByName } from '#lib/content/projects.js';
+	import Site from '#lib/config/common.js';
 
-	import '$lib/styles/content.css';
-	import ProjectTags from '$components/projects/ProjectTags.svelte';
+	import '#lib/styles/content.css';
+	import ProjectTags from '#components/projects/ProjectTags.svelte';
 
 	type PageData = ProjectPageData;
 
