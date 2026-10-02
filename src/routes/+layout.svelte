@@ -10,7 +10,7 @@
 	import BackgroundEffect from '#components/BackgroundEffect.svelte';
 	import { BackgroundEnabled } from '#lib/stores/theme.js';
 	import { initCodeBlocks } from '#lib/client/codeblocks.js';
-	import { baseJsonLd, jsonLd } from '#lib/utils/jsonld.js';
+	import { baseJsonLd, jsonLdScript } from '#lib/utils/jsonld.js';
 
 	const { data, children } = $props();
 
@@ -70,7 +70,8 @@
 	<meta name="geo.placename" content={Site.seo.location.city} />
 	<link rel="canonical" href={Site.url + page.url.pathname} />
 
-	{@html `<script type="application/ld+json">${jsonLd(baseJsonLd(page.url.pathname))}</script>`}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON-LD, escaped in jsonLd() -->
+	{@html jsonLdScript(baseJsonLd(page.url.pathname))}
 </svelte:head>
 
 <div class="text-text mx-auto flex min-h-screen max-w-[90%] flex-col md:max-w-[80%]">

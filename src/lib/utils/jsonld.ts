@@ -14,6 +14,15 @@ export function jsonLd(data: JsonLd): string {
 	return JSON.stringify(data).replace(/</g, '\\u003c');
 }
 
+/**
+ * Full `<script type="application/ld+json">` element to inject via `{@html}`.
+ * Built here (not in the Svelte template) so the literal `</script>`
+ * doesn't break the Svelte ESLint parser.
+ */
+export function jsonLdScript(data: JsonLd): string {
+	return `<script type="application/ld+json">${jsonLd(data)}</script>`;
+}
+
 export function baseJsonLd(pathname: string): Graph {
 	const graph: Array<WebSite | Person | ProfilePage> = [
 		{
