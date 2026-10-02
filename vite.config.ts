@@ -5,6 +5,7 @@ import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
 import { bundledLanguages, createHighlighter } from 'shiki';
 import { transformerColorizedBrackets } from '@shikijs/colorized-brackets';
+import { transformerStyleToClass } from '@shikijs/transformers';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex-svelte';
 import remarkGfm from 'remark-gfm';
@@ -18,6 +19,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
+import { escapeTemplateLiteral, rehypeShikiStyles } from './scripts/shiki-styles.js';
 
 const catppuccinThemes = {
 	mocha: 'catppuccin-mocha',
@@ -90,6 +92,9 @@ function getCodeMeta(rawInfo = 'text') {
 			const infoString = [lang, meta].filter(Boolean).join(' ');
 			const { lang: parsedLang, file } = getCodeMeta(infoString);
 			const highlightLang = parsedLang || 'text';
+			// Share each token's four-theme color set through a content-hashed class.
+			const styleToClass = transformerStyleToClass({ classPrefix: 'tk-' });
+			const transformers = [transformerColorizedBrackets(), styleToClass];
 			let highlighted;
 
 			try {
@@ -97,7 +102,7 @@ function getCodeMeta(rawInfo = 'text') {
 					lang: highlightLang,
 					themes: catppuccinThemes,
 					defaultColor: false,
-					transformers: [transformerColorizedBrackets()]
+					transformers
 				});
 			} catch (error) {
 				console.warn(
@@ -109,18 +114,17 @@ function getCodeMeta(rawInfo = 'text') {
 					lang: 'text',
 					themes: catppuccinThemes,
 					defaultColor: false,
-					transformers: [transformerColorizedBrackets()]
+					transformers
 				});
 			}
 
-			const encoded = escapeHtml(Buffer.from(code).toString('base64'));
 			const safeLang = escapeHtml(highlightLang);
 			const safeFile = file ? escapeHtml(file) : '';
 			const showLang = highlightLang && highlightLang !== 'text';
 
 			const copyButton = (
 				floating = false
-			) => `<button type="button" class="code-block__copy${floating ? ' code-block__copy--floating' : ''}" aria-label="Copy code" data-code="${encoded}">
+			) => `<button type="button" class="code-block__copy${floating ? ' code-block__copy--floating' : ''}" aria-label="Copy code">
 				<svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<rect x="9" y="9" width="13" height="13" rx="2"></rect>
 					<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -150,7 +154,10 @@ function getCodeMeta(rawInfo = 'text') {
 
 			const escaped = escapeSvelte(block);
 
-			return `{@html \`${escaped}\` }`;
+			// <style> is raw text: preserve CSS braces rather than HTML-encoding them.
+			// The rehype pass deduplicates and minifies these rules per document.
+			const css = escapeTemplateLiteral(styleToClass.getCSS());
+			return `{@html \`<style data-shiki>${css}</style>${escaped}\` }`;
 		}
 	},
 	remarkPlugins: [remarkToc, remarkMath, remarkAbbr, remarkGfm],
@@ -167,7 +174,8 @@ function getCodeMeta(rawInfo = 'text') {
 			}
 		],
 		rehypeKatex,
-		rehypeUnwrapImages
+		rehypeUnwrapImages,
+		rehypeShikiStyles
 	]
 };
 
@@ -188,6 +196,16 @@ export default defineConfig(({ command }) => {
 			// visualizer({ emitFile: true, filename: 'stats.html' }),
 			!isBuild && devtoolsJson()
 		].filter(Boolean),
+
+		build: {
+			target: 'esnext', // modern browsers only: no legacy syntax, no polyfills
+			cssMinify: 'lightningcss',
+			modulePreload: { polyfill: false } // modern browsers support modulepreload natively
+			// NOTE: deliberately no rollupOptions.output.manualChunks. SvelteKit already
+			// route-splits the client and isolates lazy deps (leaflet is its own chunk via
+			// dynamic import). A React-style per-package manualChunks is ignored for the
+			// client build here and only reshapes the server worker bundle, so it's omitted.
+		},
 
 		server: { fs: { allow: ['.'] } }
 	};
