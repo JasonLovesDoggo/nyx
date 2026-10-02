@@ -94,6 +94,11 @@
 	animation: none;
 }
 
+/* Outgoing elements with no destination must not linger during other morphs. */
+::view-transition-old(*):only-child {
+	opacity: 0;
+}
+
 @utility link {
 	@apply text-accent hover:bg-accent hover:text-mantle decoration-dashed underline-offset-4 duration-200 not-hover:underline;
 }
