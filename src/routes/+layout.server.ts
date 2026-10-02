@@ -9,7 +9,7 @@ export const load: LayoutServerLoad = async () => {
 	try {
 		footerData = await measurePerformance('abacus-api-fetch', async () => {
 			const response = await fetch(`${instance}/hit/${namespace}/${key}`, {
-				signal: AbortSignal.timeout(600) // 600ms timeout
+				signal: AbortSignal.timeout(300) // 300ms timeout
 			});
 			const data = (await response.json()) as AbacusResponse;
 			return { value: data.value.toLocaleString() };

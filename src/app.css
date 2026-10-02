@@ -88,6 +88,12 @@
 	animation-duration: 0s;
 }
 
+/* Keep matched title/image transitions without fading unmatched elements. */
+::view-transition-old(*):only-child,
+::view-transition-new(*):only-child {
+	animation: none;
+}
+
 @utility link {
 	@apply text-accent hover:bg-accent hover:text-mantle decoration-dashed underline-offset-4 duration-200 not-hover:underline;
 }
