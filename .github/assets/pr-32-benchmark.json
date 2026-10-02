@@ -1,0 +1,215 @@
+{
+  "route": "/tutorials/pointers-references-java",
+  "baseline": "ceed2ed",
+  "pr": "ef26d50",
+  "runs": 7,
+  "conditions": {
+    "gzipLevel": 9,
+    "downloadMbps": 1.6,
+    "simulatedResponseDelayMs": 150,
+    "cpuThrottle": 4,
+    "coldCache": true
+  },
+  "summary": {
+    "main": {
+      "domReady": {
+        "median": 658.5,
+        "min": 646.6999999880791,
+        "max": 661
+      },
+      "load": {
+        "median": 1103.4000000059605,
+        "min": 1090.0999999940395,
+        "max": 1133.7000000029802
+      },
+      "ttfb": {
+        "median": 157.40000000596046,
+        "min": 156.09999999403954,
+        "max": 159.20000000298023
+      },
+      "htmlGzip": {
+        "median": 15002,
+        "min": 15002,
+        "max": 15002
+      },
+      "transferTotal": {
+        "median": 134804,
+        "min": 134804,
+        "max": 138151
+      }
+    },
+    "pr": {
+      "domReady": {
+        "median": 630,
+        "min": 622.7000000029802,
+        "max": 642.2000000029802
+      },
+      "load": {
+        "median": 1014,
+        "min": 1005.2999999970198,
+        "max": 1038.2999999970198
+      },
+      "ttfb": {
+        "median": 157,
+        "min": 155.79999999701977,
+        "max": 157.59999999403954
+      },
+      "htmlGzip": {
+        "median": 11305,
+        "min": 11305,
+        "max": 11305
+      },
+      "transferTotal": {
+        "median": 126949,
+        "min": 126949,
+        "max": 126949
+      }
+    }
+  },
+  "results": {
+    "main": [
+      {
+        "domReady": 661,
+        "load": 1094.6000000089407,
+        "ttfb": 159,
+        "fcp": 676,
+        "htmlGzip": 15002,
+        "transferTotal": 134804,
+        "tokenSpans": 1093,
+        "encoding": 0
+      },
+      {
+        "domReady": 659.2999999970198,
+        "load": 1108.6000000089407,
+        "ttfb": 156.79999999701977,
+        "fcp": 664,
+        "htmlGzip": 15002,
+        "transferTotal": 136036,
+        "tokenSpans": 1093,
+        "encoding": 0
+      },
+      {
+        "domReady": 659.5,
+        "load": 1103.4000000059605,
+        "ttfb": 159.20000000298023,
+        "fcp": 672,
+        "htmlGzip": 15002,
+        "transferTotal": 134804,
+        "tokenSpans": 1093,
+        "encoding": 0
+      },
+      {
+        "domReady": 656.3999999910593,
+        "load": 1090.0999999940395,
+        "ttfb": 157.09999999403954,
+        "fcp": 676,
+        "htmlGzip": 15002,
+        "transferTotal": 134804,
+        "tokenSpans": 1093,
+        "encoding": 0
+      },
+      {
+        "domReady": 646.6999999880791,
+        "load": 1107.199999988079,
+        "ttfb": 156.09999999403954,
+        "fcp": 660,
+        "htmlGzip": 15002,
+        "transferTotal": 136036,
+        "tokenSpans": 1093,
+        "encoding": 0
+      },
+      {
+        "domReady": 658.5,
+        "load": 1095.7999999970198,
+        "ttfb": 158.40000000596046,
+        "fcp": 668,
+        "htmlGzip": 15002,
+        "transferTotal": 134804,
+        "tokenSpans": 1093,
+        "encoding": 0
+      },
+      {
+        "domReady": 656.0999999940395,
+        "load": 1133.7000000029802,
+        "ttfb": 157.40000000596046,
+        "fcp": 660,
+        "htmlGzip": 15002,
+        "transferTotal": 138151,
+        "tokenSpans": 1093,
+        "encoding": 0
+      }
+    ],
+    "pr": [
+      {
+        "domReady": 627.5,
+        "load": 1007.5999999940395,
+        "ttfb": 155.8999999910593,
+        "fcp": 636,
+        "htmlGzip": 11305,
+        "transferTotal": 126949,
+        "tokenSpans": 1093,
+        "encoding": 1
+      },
+      {
+        "domReady": 642.2000000029802,
+        "load": 1038.2999999970198,
+        "ttfb": 157,
+        "fcp": 656,
+        "htmlGzip": 11305,
+        "transferTotal": 126949,
+        "tokenSpans": 1093,
+        "encoding": 1
+      },
+      {
+        "domReady": 622.7000000029802,
+        "load": 1006.7000000029802,
+        "ttfb": 156.5,
+        "fcp": 624,
+        "htmlGzip": 11305,
+        "transferTotal": 126949,
+        "tokenSpans": 1093,
+        "encoding": 1
+      },
+      {
+        "domReady": 624.0999999940395,
+        "load": 1005.2999999970198,
+        "ttfb": 155.79999999701977,
+        "fcp": 628,
+        "htmlGzip": 11305,
+        "transferTotal": 126949,
+        "tokenSpans": 1093,
+        "encoding": 1
+      },
+      {
+        "domReady": 630,
+        "load": 1014,
+        "ttfb": 157,
+        "fcp": 648,
+        "htmlGzip": 11305,
+        "transferTotal": 126949,
+        "tokenSpans": 1093,
+        "encoding": 1
+      },
+      {
+        "domReady": 630.5,
+        "load": 1014.2000000029802,
+        "ttfb": 157.59999999403954,
+        "fcp": 636,
+        "htmlGzip": 11305,
+        "transferTotal": 126949,
+        "tokenSpans": 1093,
+        "encoding": 1
+      },
+      {
+        "domReady": 640.7000000029802,
+        "load": 1014,
+        "ttfb": 157,
+        "fcp": 652,
+        "htmlGzip": 11305,
+        "transferTotal": 126949,
+        "tokenSpans": 1093,
+        "encoding": 1
+      }
+    ]
+  }
+}
