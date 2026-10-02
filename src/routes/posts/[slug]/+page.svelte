@@ -5,7 +5,7 @@
 	import PostTags from '#components/posts/PostTags.svelte';
 	import '#lib/styles/content.css';
 	import Site from '#lib/config/common.js';
-	import { jsonLd, postJsonLd } from '#lib/utils/jsonld.js';
+	import { postJsonLd, jsonLdScript } from '#lib/utils/jsonld.js';
 
 	let { data }: { data: PostPageData } = $props();
 
@@ -29,7 +29,8 @@
 	{#if data.metadata.image}
 		<meta name="twitter:image:src" content={new URL(data.metadata.image.url, Site.url).href} />
 	{/if}
-	{@html `<script type="application/ld+json">${jsonLd(postJsonLd(data))}</script>`}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON-LD, escaped in jsonLd() -->
+	{@html jsonLdScript(postJsonLd(data))}
 </svelte:head>
 
 <div class="mx-auto max-w-4xl px-4">
