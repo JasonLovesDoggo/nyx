@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ProjectEntry } from '$types/projects';
-	import { getRandomAccentColor } from '$lib/stores/theme';
+	import type { ProjectEntry } from '#lib/types/projects.js';
+	import { getRandomAccentColor } from '#lib/stores/theme.js';
 	import { IconTag } from '@tabler/icons-svelte';
 
 	export let project: ProjectEntry;

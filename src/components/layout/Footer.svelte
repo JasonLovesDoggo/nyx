@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { PUBLIC_COMMIT_SHA } from '$env/static/public';
+	import { PUBLIC_COMMIT_SHA } from '$app/env/public';
 	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
-	import Site, { Socials } from '$lib/config/common';
+	import { browser } from '$app/env';
+	import Site, { Socials } from '#lib/config/common.js';
 	import { IconClock, IconGitCommit } from '@tabler/icons-svelte';
-	import { persistentWritable } from '$lib/stores/persistance';
+	import { persistentWritable } from '#lib/stores/persistance.js';
 
 	const { value } = $props();
 
@@ -76,19 +76,26 @@
 					>
 				</a>
 				<span class="text-xs leading-none opacity-75">
-					<span class="opacity-40">&lbrace;</span><a
+					<span class="opacity-40">{'{'}</span>
+					<a
 						href="https://ctp-webr.ing/json/previous"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="text-accent hover:text-accent/80 px-0.5 align-top transition-colors duration-200"
 						title="Previous site in webring">&lt;</a
-					><span class="text-accent opacity-40">|</span><a
+					>
+
+					<span class="text-accent opacity-40">|</span>
+
+					<a
 						href="https://ctp-webr.ing/json/next"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="text-accent hover:text-accent/80 px-0.5 align-top transition-colors duration-200"
 						title="Next site in webring">&gt;</a
-					><span class="opacity-40">&rbrace;</span>
+					>
+
+					<span class="opacity-40">}</span>
 				</span>
 			</div>
 		</div>
@@ -142,12 +149,12 @@
 					class="text-subtext1 hover:text-accent flex items-center gap-x-1 transition-colors duration-200"
 					title="View deployment commit ({PUBLIC_COMMIT_SHA})"
 				>
-					<IconGitCommit size={18} stroke={1.5} class="flex-shrink-0" />
+					<IconGitCommit size={18} stroke={1.5} class="shrink-0" />
 					<span>{shortSha}</span>
 				</a>
 			{:else}
 				<span class="text-overlay1 flex items-center gap-x-1" title="Development Build">
-					<IconGitCommit size={18} stroke={1.5} class="flex-shrink-0" />
+					<IconGitCommit size={18} stroke={1.5} class="shrink-0" />
 					<span>{shortSha}</span>
 				</span>
 			{/if}

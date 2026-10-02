@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { IconFolders } from '@tabler/icons-svelte';
-	import type { ProjectEntry } from '$types/projects';
-	import { formatDate } from '$utils/date';
-	import ProjectTags from '$components/projects/ProjectTags.svelte';
+	import type { ProjectEntry } from '#lib/types/projects.js';
+	import { formatDate } from '#lib/utils/date.js';
+	import ProjectTags from '#components/projects/ProjectTags.svelte';
 
 	type PageData = {
 		projects: ProjectEntry[];

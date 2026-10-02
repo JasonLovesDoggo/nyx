@@ -1,5 +1,5 @@
-import { getAllProjects, getProjectBySlug } from '$lib/content/projects';
-import { createContentPage } from '$lib/utils/pagemeta';
+import { getAllProjects, getProjectBySlug } from '#lib/content/projects.js';
+import { createContentPage } from '#lib/utils/pagemeta.js';
 
 const { prerender, entries, load } = createContentPage({
 	getAll: getAllProjects,

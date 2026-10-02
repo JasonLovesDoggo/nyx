@@ -1,5 +1,5 @@
-import Site from '$lib/config/common';
-import { getAllPosts } from '$lib/content/posts';
+import Site from '#lib/config/common.js';
+import { getAllPosts } from '#lib/content/posts.js';
 
 export const prerender = true;
 

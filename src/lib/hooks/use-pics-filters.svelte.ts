@@ -1,7 +1,7 @@
 import { page } from '$app/state';
 import { goto } from '$app/navigation';
 import { SvelteMap, SvelteSet, SvelteURLSearchParams } from 'svelte/reactivity';
-import type { PhotoData } from '$types/photos';
+import type { PhotoData } from '#lib/types/photos.js';
 
 // Each filter dimension: a URL param key and a function to extract the
 // comparable value from a photo. Adding a new filter (e.g. tags) is just
@@ -62,7 +62,7 @@ export function usePicsFilters(getImages: () => PhotoData[]) {
 	);
 
 	function toggleFilter(key: FilterKey, value: string) {
-		const params = new SvelteURLSearchParams(page.url.searchParams);
+		const params = new SvelteURLSearchParams(page.url.searchParams.toString());
 		const current = params.getAll(key);
 		if (current.includes(value)) {
 			params.delete(key, value);
@@ -70,18 +70,18 @@ export function usePicsFilters(getImages: () => PhotoData[]) {
 			params.append(key, value);
 		}
 		const str = params.toString();
-		goto(str ? `?${str}` : page.url.pathname, { replaceState: true, noScroll: true });
+		goto(str ? `?${str}` : page.url.pathname, { replace: true, reset: false });
 	}
 
 	function clearFilter(key: FilterKey) {
-		const params = new SvelteURLSearchParams(page.url.searchParams);
+		const params = new SvelteURLSearchParams(page.url.searchParams.toString());
 		params.delete(key);
 		const str = params.toString();
-		goto(str ? `?${str}` : page.url.pathname, { replaceState: true, noScroll: true });
+		goto(str ? `?${str}` : page.url.pathname, { replace: true, reset: false });
 	}
 
 	function clearAll() {
-		goto(page.url.pathname, { replaceState: true, noScroll: true });
+		goto(page.url.pathname, { replace: true, reset: false });
 	}
 
 	return {

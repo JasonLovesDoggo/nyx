@@ -1,6 +1,6 @@
 <script>
 	import { IconPalette } from '@tabler/icons-svelte';
-	import { Palette, paletteNames } from '$lib/stores/theme.js';
+	import { Palette, paletteNames } from '#lib/stores/theme.js';
 </script>
 
 <h3 class="text-text mb-4 flex items-center gap-2 text-sm font-semibold">

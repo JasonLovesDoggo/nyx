@@ -1,5 +1,5 @@
 <script>
-	import { Socials } from '$lib/config/common';
+	import { Socials } from '#lib/config/common.js';
 	import { IconExternalLink } from '@tabler/icons-svelte';
 </script>
 

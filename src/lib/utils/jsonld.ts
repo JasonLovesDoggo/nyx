@@ -1,5 +1,5 @@
-import Site from '$lib/config/common';
-import type { PostPageData } from '$lib/content/posts';
+import Site from '#lib/config/common.js';
+import type { PostPageData } from '#lib/content/posts.js';
 import type { BlogPosting, Graph, Person, ProfilePage, WebSite, WithContext } from 'schema-dts';
 
 const siteId = `${Site.url}/#website`;

@@ -6,11 +6,11 @@
 	import { page } from '$app/state';
 	import { onNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import Site from '$lib/config/common';
-	import BackgroundEffect from '$components/BackgroundEffect.svelte';
-	import { BackgroundEnabled } from '$lib/stores/theme';
-	import { initCodeBlocks } from '$lib/client/codeblocks';
-	import { baseJsonLd, jsonLd } from '$lib/utils/jsonld';
+	import Site from '#lib/config/common.js';
+	import BackgroundEffect from '#components/BackgroundEffect.svelte';
+	import { BackgroundEnabled } from '#lib/stores/theme.js';
+	import { initCodeBlocks } from '#lib/client/codeblocks.js';
+	import { baseJsonLd, jsonLd } from '#lib/utils/jsonld.js';
 
 	const { data, children } = $props();
 
@@ -28,6 +28,7 @@
 
 	// Enable View Transitions API for SvelteKit navigation
 	onNavigate((navigation) => {
+		if (navigation.shallow) return;
 		if (!document.startViewTransition) return;
 
 		return new Promise((resolve) => {
@@ -76,10 +77,9 @@
 	{#if $BackgroundEnabled}
 		<BackgroundEffect />
 	{/if}
+
 	<Header {toggleSidebar} />
 	<Sidebar isOpen={isSidebarOpen} {closeSidebar} />
-	<main class="flex-1 px-0 py-8 md:px-5">
-		{@render children?.()}
-	</main>
+	<main class="flex-1 px-0 py-8 md:px-5">{@render children?.()}</main>
 	<Footer value={data.footerData.value} />
 </div>

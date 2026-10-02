@@ -6,8 +6,8 @@ import {
 	IconBrandLinkedin,
 	IconBrandX
 } from '@tabler/icons-svelte';
-import { dev } from '$app/environment';
-import Wakatime from '$lib/icons/Wakatime.svelte';
+import { dev } from '$app/env';
+import Wakatime from '#lib/icons/Wakatime.svelte';
 
 interface Site {
 	name: string;
@@ -112,12 +112,7 @@ export const Socials = [
 		icon: IconBrandLinkedin,
 		footer: true
 	},
-	{
-		url: Site.out.x,
-		label: 'X',
-		icon: IconBrandX,
-		footer: true
-	},
+	{ url: Site.out.x, label: 'X', icon: IconBrandX, footer: true },
 	{
 		url: Site.out.bluesky,
 		label: 'Bluesky',

@@ -1,8 +1,8 @@
-import type { ProjectMetadata } from '$types/projects';
+import type { ProjectMetadata } from '#lib/types/projects.js';
 import { IconBrandGithub, IconExternalLink, IconFileText, IconCode } from '@tabler/icons-svelte';
 import { createContentService, type ContentEntry } from './factory';
 
-const DevpostIcon = () => import('$lib/icons/Devpost.svelte');
+const DevpostIcon = () => import('#lib/icons/Devpost.svelte');
 
 // Type-safe function to get icon component by name
 export function getIconByName(name?: string) {

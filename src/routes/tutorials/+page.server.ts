@@ -3,7 +3,7 @@
  * All Rights Reserved
  */
 
-import { getAllTutorials } from '$lib/content/tutorials';
-import { createListingPage } from '$lib/utils/pagemeta';
+import { getAllTutorials } from '#lib/content/tutorials.js';
+import { createListingPage } from '#lib/utils/pagemeta.js';
 
 export const { load } = createListingPage(getAllTutorials, 'tutorials');

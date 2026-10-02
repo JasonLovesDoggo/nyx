@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { accentColorNames } from '$lib/stores/theme';
+	import { accentColorNames } from '#lib/stores/theme.js';
 	let gridElement = $state<HTMLElement | null>(null);
 	const rows = 5;
 	const columns = 5;

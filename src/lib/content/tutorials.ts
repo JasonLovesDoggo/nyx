@@ -29,7 +29,7 @@ export type TutorialEntry = ContentEntry<TutorialMetadata>;
 export type TutorialPageData = ContentPageData<TutorialMetadata>;
 
 const tutorialService = createContentService<TutorialMetadata>({
-	modules: import.meta.glob('/content/tutorials/*.svx', { eager: true }),
+	modules: import.meta.glob('/content/tutorials/*.svx'),
 	contentType: 'tutorial',
 	filter: (p) => {
 		const publishedAt = p.metadata.published_at;

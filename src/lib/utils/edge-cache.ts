@@ -1,5 +1,3 @@
-import type { KVNamespace } from '@cloudflare/workers-types';
-
 interface CacheEntry<T> {
 	data: T;
 	ts: number;

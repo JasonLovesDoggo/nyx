@@ -1,6 +1,6 @@
 <script lang="ts">
-	import LinkWithIcon from '$components/LinkWithIcon.svelte';
-	import Featured, { type FeaturedProject } from '$components/layout/Featured.svelte';
+	import LinkWithIcon from '#components/LinkWithIcon.svelte';
+	import Featured, { type FeaturedProject } from '#components/layout/Featured.svelte';
 	import {
 		IconArrowRight,
 		IconExternalLink,
@@ -8,15 +8,15 @@
 		IconCalendarEvent,
 		IconActivity
 	} from '@tabler/icons-svelte';
-	import Site from '$lib/config/common';
-	import { Home } from '$lib/config/pages';
-	import ThemeSelector from '$components/themes/ThemeSelector.svelte';
-	import ColorSelector from '$components/themes/ColorSelector.svelte';
-	import Experience from '$components/Experience.svelte';
-	import LocationMap from '$components/bento/LocationMap.svelte';
-	import TimeWaster from '$components/bento/TimeWaster.svelte';
-	import { formatDate } from '$utils/date';
-	import type { CommitData } from '$lib/api/commits';
+	import Site from '#lib/config/common.js';
+	import { Home } from '#lib/config/pages.js';
+	import ThemeSelector from '#components/themes/ThemeSelector.svelte';
+	import ColorSelector from '#components/themes/ColorSelector.svelte';
+	import Experience from '#components/Experience.svelte';
+	import LocationMap from '#components/bento/LocationMap.svelte';
+	import TimeWaster from '#components/bento/TimeWaster.svelte';
+	import { formatDate } from '#lib/utils/date.js';
+	import type { CommitData } from '#lib/api/commits.js';
 
 	type PageData = {
 		featuredProjects: FeaturedProject[];

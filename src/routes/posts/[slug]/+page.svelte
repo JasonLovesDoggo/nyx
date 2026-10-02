@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils/date';
-	import type { PostPageData } from '$lib/content/posts';
-	import SlabTitle from '$components/SlabTitle.svelte';
-	import PostTags from '$components/posts/PostTags.svelte';
-	import '$lib/styles/content.css';
-	import Site from '$lib/config/common';
-	import { jsonLd, postJsonLd } from '$lib/utils/jsonld';
+	import { formatDate } from '#lib/utils/date.js';
+	import type { PostPageData } from '#lib/content/posts.js';
+	import SlabTitle from '#components/SlabTitle.svelte';
+	import PostTags from '#components/posts/PostTags.svelte';
+	import '#lib/styles/content.css';
+	import Site from '#lib/config/common.js';
+	import { jsonLd, postJsonLd } from '#lib/utils/jsonld.js';
 
 	let { data }: { data: PostPageData } = $props();
 

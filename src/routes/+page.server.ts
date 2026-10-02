@@ -1,11 +1,12 @@
+import { env } from 'cloudflare:workers';
 import type { PageServerLoad } from './$types';
-import { getFeaturedProjects } from '$lib/content/projects';
-import { fetchLatestCommits } from '$lib/api/commits';
-import { getLatestPosts } from '$lib/content/posts';
-import { measurePerformance } from '$lib/utils/performance';
+import { getFeaturedProjects } from '#lib/content/projects.js';
+import { fetchLatestCommits } from '#lib/api/commits.js';
+import { getLatestPosts } from '#lib/content/posts.js';
+import { measurePerformance } from '#lib/utils/performance.js';
 
-export const load: PageServerLoad = async (event) => {
-	const kv = event.platform?.env?.NYXCACHE;
+export const load: PageServerLoad = async () => {
+	const kv = env.NYXCACHE;
 
 	return await measurePerformance('homepage-load-total', async () => {
 		const [featuredProjects, commitData, latestPosts] = await Promise.all([

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import type { ImageVariant } from '$types/photos';
-	import Lightbox from '$components/Lightbox.svelte';
-	import { usePicsFilters } from '$lib/hooks/use-pics-filters.svelte';
-	import { useLightboxNav } from '$lib/hooks/use-lightbox-nav.svelte';
+	import type { ImageVariant } from '#lib/types/photos.js';
+	import Lightbox from '#components/Lightbox.svelte';
+	import { usePicsFilters } from '#lib/hooks/use-pics-filters.svelte.js';
+	import { useLightboxNav } from '#lib/hooks/use-lightbox-nav.svelte.js';
 	import { IconCamera, IconDeviceMobile, IconCalendar, IconX } from '@tabler/icons-svelte';
 
 	function isPhone(camera: string): boolean {

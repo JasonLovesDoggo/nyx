@@ -1,4 +1,4 @@
-import type { GitHubRepo, Contributor, GithubUser } from './types';
+import type { GitHubRepo, GitHubRepoResponse, GithubUser } from './types';
 
 export async function fetchGitHubRepo(owner: string, name: string): Promise<GitHubRepo> {
 	try {
@@ -7,7 +7,7 @@ export async function fetchGitHubRepo(owner: string, name: string): Promise<GitH
 		if (!repoResponse.ok) {
 			throw new Error(`Failed to fetch repository: ${repoResponse.statusText}`);
 		}
-		const repoData = await repoResponse.json();
+		const repoData = (await repoResponse.json()) as GitHubRepoResponse;
 
 		// Fetch contributors
 		const contributorsResponse = await fetch(
@@ -16,7 +16,7 @@ export async function fetchGitHubRepo(owner: string, name: string): Promise<GitH
 		if (!contributorsResponse.ok) {
 			throw new Error(`Failed to fetch contributors: ${contributorsResponse.statusText}`);
 		}
-		const contributorsData = await contributorsResponse.json();
+		const contributorsData = (await contributorsResponse.json()) as GithubUser[];
 
 		return {
 			owner: repoData.owner.login,
@@ -24,14 +24,14 @@ export async function fetchGitHubRepo(owner: string, name: string): Promise<GitH
 			description: repoData.description || 'No description provided',
 			stars: repoData.stargazers_count,
 			contributors: contributorsData
-				.filter((e: GithubUser) => {
+				.filter((e) => {
 					if (e.type === 'Bot') return false; // Exclude bots
 					return true;
 				})
-				.map((contributor: GithubUser) => ({
+				.map((contributor) => ({
 					avatar_url: contributor.avatar_url,
 					username: contributor.login
-				})) as Contributor[]
+				}))
 		};
 	} catch (error) {
 		console.error('Error fetching GitHub data:', error);

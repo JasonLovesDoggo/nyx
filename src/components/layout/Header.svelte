@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Breadcrumb from './Breadcrumb.svelte';
 	import { IconMenu2 } from '@tabler/icons-svelte';
-	import { mainNavItems } from '$lib/config/navItems';
+	import { mainNavItems } from '#lib/config/navItems.js';
 
 	let { toggleSidebar } = $props<{ toggleSidebar: () => void }>();
 </script>

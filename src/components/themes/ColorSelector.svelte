@@ -1,5 +1,5 @@
 <script>
-	import { Accent, accentColorNames, BackgroundEnabled } from '$lib/stores/theme';
+	import { Accent, accentColorNames, BackgroundEnabled } from '#lib/stores/theme.js';
 
 	$: selectedIndex = accentColorNames.indexOf($Accent);
 	$: row = Math.floor(selectedIndex / 7);
