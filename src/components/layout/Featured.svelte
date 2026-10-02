@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { IconArrowRight, IconStar } from '@tabler/icons-svelte';
-	import type { ProjectMetadata } from '$types/projects';
-	import ProjectTags from '$components/projects/ProjectTags.svelte';
+	import type { ProjectMetadata } from '#lib/types/projects.js';
+	import ProjectTags from '#components/projects/ProjectTags.svelte';
 
 	export interface FeaturedProject {
 		slug: string;

@@ -1,4 +1,4 @@
-import { dev } from '$app/environment';
+import { dev } from '$app/env';
 
 export async function measurePerformance<T>(name: string, fn: () => Promise<T>): Promise<T> {
 	if (!dev) {

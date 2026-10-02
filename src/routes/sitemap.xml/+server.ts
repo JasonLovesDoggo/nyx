@@ -1,7 +1,7 @@
-import Site from '$lib/config/common';
-import { getAllPosts } from '$lib/content/posts';
-import { getAllProjects } from '$lib/content/projects';
-import { getAllTutorials } from '$lib/content/tutorials';
+import Site from '#lib/config/common.js';
+import { getAllPosts } from '#lib/content/posts.js';
+import { getAllProjects } from '#lib/content/projects.js';
+import { getAllTutorials } from '#lib/content/tutorials.js';
 
 export const prerender = true;
 

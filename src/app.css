@@ -74,18 +74,29 @@
 	font-size: var(--text-base); /* 1rem (16px) */
 	line-height: var(--text-base--line-height); /* calc(1.5 / 1) */
 }
+/* Shared element transitions - smooth morph for titles and images */
+::view-transition-old(*),
+::view-transition-new(*) {
+	animation-duration: 0.6s;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	overflow: clip;
+}
+
 /* View transitions - instant crossfade for page navigation */
 ::view-transition-old(root),
 ::view-transition-new(root) {
 	animation-duration: 0s;
 }
 
-/* Shared element transitions - smooth morph for titles and images */
-::view-transition-old(*):not(::view-transition-old(root)),
-::view-transition-new(*):not(::view-transition-new(root)) {
-	animation-duration: 0.6s;
-	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	overflow: clip;
+/* Keep matched title/image transitions without fading unmatched elements. */
+::view-transition-old(*):only-child,
+::view-transition-new(*):only-child {
+	animation: none;
+}
+
+/* Outgoing elements with no destination must not linger during other morphs. */
+::view-transition-old(*):only-child {
+	opacity: 0;
 }
 
 @utility link {

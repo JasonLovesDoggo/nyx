@@ -4,8 +4,8 @@
   -->
 
 <script lang="ts">
-	import { formatDate } from '$lib/utils/date';
-	import type { TutorialEntry } from '$lib/content/tutorials';
+	import { formatDate } from '#lib/utils/date.js';
+	import type { TutorialEntry } from '#lib/content/tutorials.js';
 
 	let { data }: { data: { tutorials: TutorialEntry[] } } = $props();
 </script>

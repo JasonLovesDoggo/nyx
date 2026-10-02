@@ -3,8 +3,8 @@
  * All Rights Reserved
  */
 
-@import '$lib/styles/headers.css';
-@import '$lib/styles/syntax.css';
+@import './headers.css';
+@import './syntax.css';
 
 input[type='checkbox'] {
 	width: 1.25rem;

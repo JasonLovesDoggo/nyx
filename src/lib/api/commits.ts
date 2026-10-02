@@ -1,6 +1,5 @@
-import { measurePerformance } from '$lib/utils/performance';
-import { getKV, setKV, isCacheStale } from '$lib/utils/edge-cache';
-import type { KVNamespace } from '@cloudflare/workers-types';
+import { measurePerformance } from '#lib/utils/performance.js';
+import { getKV, setKV, isCacheStale } from '#lib/utils/edge-cache.js';
 export interface CommitLanguage {
 	size: number;
 	name: string;

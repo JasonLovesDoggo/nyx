@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { PostEntry } from '$lib/content/posts';
-	import { accentColorNames } from '$lib/stores/theme';
+	import type { PostEntry } from '#lib/content/posts.js';
+	import { accentColorNames } from '#lib/stores/theme.js';
 	import { IconTag } from '@tabler/icons-svelte';
 
 	interface Props {

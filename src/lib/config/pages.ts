@@ -1,5 +1,5 @@
 import { IconBrandGithub, IconBrandLinkedin, IconBrandX } from '@tabler/icons-svelte';
-import Site from '$lib/config/common';
+import Site from '#lib/config/common.js';
 
 export const Home = {
 	socialLinks: [

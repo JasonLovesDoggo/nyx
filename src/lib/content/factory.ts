@@ -77,7 +77,7 @@ export function createContentService<T>({
 	async function getAll(): Promise<ContentEntry<T>[]> {
 		if (!allPromise) {
 			allPromise = Promise.all(
-				entries.map(async ({ slug, loader, path }) => {
+				entries.map(async ({ slug, loader }) => {
 					let module = moduleCache.get(slug);
 					if (!module) {
 						module = await resolveModule(loader);

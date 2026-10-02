@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils/date';
-	import type { PostPageData } from '$lib/content/posts';
-	import SlabTitle from '$components/SlabTitle.svelte';
-	import PostTags from '$components/posts/PostTags.svelte';
-	import '$lib/styles/content.css';
-	import { page } from '$app/state';
+	import { formatDate } from '#lib/utils/date.js';
+	import type { PostPageData } from '#lib/content/posts.js';
+	import SlabTitle from '#components/SlabTitle.svelte';
+	import PostTags from '#components/posts/PostTags.svelte';
+	import '#lib/styles/content.css';
+	import Site from '#lib/config/common.js';
+	import { postJsonLd, jsonLdScript } from '#lib/utils/jsonld.js';
 
 	let { data }: { data: PostPageData } = $props();
 
@@ -20,17 +21,16 @@
 	<meta property="og:title" content={data.metadata.title.text} />
 	<meta property="og:description" content={data.metadata.description} />
 	{#if data.metadata.image}
-		<meta property="og:image" content={new URL(data.metadata.image.url, page.url.origin).href} />
+		<meta property="og:image" content={new URL(data.metadata.image.url, Site.url).href} />
 	{/if}
 	<meta property="og:type" content="article" />
 	<meta name="twitter:title" content={data.metadata.title.text} />
 	<meta name="twitter:description" content={data.metadata.description} />
 	{#if data.metadata.image}
-		<meta
-			name="twitter:image:src"
-			content={new URL(data.metadata.image.url, page.url.origin).href}
-		/>
+		<meta name="twitter:image:src" content={new URL(data.metadata.image.url, Site.url).href} />
 	{/if}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON-LD, escaped in jsonLd() -->
+	{@html jsonLdScript(postJsonLd(data))}
 </svelte:head>
 
 <div class="mx-auto max-w-4xl px-4">

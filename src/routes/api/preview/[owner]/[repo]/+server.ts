@@ -9,7 +9,7 @@ export const GET: RequestHandler = (async ({ params }) => {
 	}
 
 	try {
-		const { fetchGitHubRepo } = await import('$lib/preview/github');
+		const { fetchGitHubRepo } = await import('#lib/preview/github.js');
 		const data = await fetchGitHubRepo(owner, repo);
 		return new Response(JSON.stringify(data), {
 			headers: { 'Content-Type': 'application/json' }

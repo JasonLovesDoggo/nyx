@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PhotoData, ImageVariant } from '$types/photos';
+	import type { PhotoData, ImageVariant } from '#lib/types/photos.js';
 	import { IconCamera } from '@tabler/icons-svelte';
 
 	// Persists across lightbox open/close since the component remounts each time

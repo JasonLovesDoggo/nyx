@@ -9,6 +9,7 @@ typeset -A PROJECT_REPOS
 PROJECT_REPOS=(
     "abacus" "https://github.com/jasonlovesdoggo/abacus"
     "anubis" "https://github.com/TecharoHQ/anubis"
+    "caddy-defender" "https://github.com/JasonLovesDoggo/caddy-defender"
     "foodle" "https://github.com/JasonLovesDoggo/foodle"
     "hackathonscanada" "https://github.com/Hackathons-Canada/HackathonsCanada"
     "mctf" "https://github.com/mcpt/ctf"

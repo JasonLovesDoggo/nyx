@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '$lib/styles/content.css';
+	import '#lib/styles/content.css';
 
 	let props = $props();
 </script>

@@ -6,10 +6,11 @@
 	import { page } from '$app/state';
 	import { onNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import Site from '$lib/config/common';
-	import BackgroundEffect from '$components/BackgroundEffect.svelte';
-	import { BackgroundEnabled } from '$lib/stores/theme';
-	import { initCodeBlocks } from '$lib/client/codeblocks';
+	import Site from '#lib/config/common.js';
+	import BackgroundEffect from '#components/BackgroundEffect.svelte';
+	import { BackgroundEnabled } from '#lib/stores/theme.js';
+	import { initCodeBlocks } from '#lib/client/codeblocks.js';
+	import { baseJsonLd, jsonLdScript } from '#lib/utils/jsonld.js';
 
 	const { data, children } = $props();
 
@@ -27,6 +28,7 @@
 
 	// Enable View Transitions API for SvelteKit navigation
 	onNavigate((navigation) => {
+		if (navigation.shallow) return;
 		if (!document.startViewTransition) return;
 
 		return new Promise((resolve) => {
@@ -68,63 +70,17 @@
 	<meta name="geo.placename" content={Site.seo.location.city} />
 	<link rel="canonical" href={Site.url + page.url.pathname} />
 
-	<!-- JSON-LD Person Schema -->
-	{@html `<script type="application/ld+json">
-		${JSON.stringify({
-			'@context': 'https://schema.org',
-			'@type': ['Person', 'ProfilePage'],
-			name: Site.seo.author,
-			givenName: 'Jason',
-			familyName: 'Cameron',
-			alternateName: ['jsoncam', 'jasonlovesdoggo', 'json'],
-			url: Site.url,
-			description:
-				'Senior Software Engineer based in Toronto, Canada.',
-			jobTitle: 'Senior Software Engineer',
-			birthDate: Site.seo.birthDate,
-			worksFor: {
-				'@type': 'Organization',
-				name: Site.seo.worksFor.name,
-				url: Site.seo.worksFor.url
-			},
-			address: {
-				'@type': 'PostalAddress',
-				addressLocality: Site.seo.location.city,
-				addressRegion: Site.seo.location.region,
-				addressCountry: 'CA'
-			},
-			sameAs: [
-				Site.out.github,
-				Site.out.linkedin,
-				Site.out.instagram,
-				Site.out.bluesky,
-				Site.out.wakatime
-			],
-			knowsAbout: [
-				'Software Engineering',
-				'DevOps',
-				'Golang',
-				'Python',
-				'Web Development',
-				'Backend Development'
-			],
-			mainEntity: {
-				'@type': 'Person',
-				name: Site.seo.author
-			},
-			identifier: Site.url
-		})}
-	</script>`}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON-LD, escaped in jsonLd() -->
+	{@html jsonLdScript(baseJsonLd(page.url.pathname))}
 </svelte:head>
 
 <div class="text-text mx-auto flex min-h-screen max-w-[90%] flex-col md:max-w-[80%]">
 	{#if $BackgroundEnabled}
 		<BackgroundEffect />
 	{/if}
+
 	<Header {toggleSidebar} />
 	<Sidebar isOpen={isSidebarOpen} {closeSidebar} />
-	<main class="flex-1 px-0 py-8 md:px-5">
-		{@render children?.()}
-	</main>
+	<main class="flex-1 px-0 py-8 md:px-5">{@render children?.()}</main>
 	<Footer value={data.footerData.value} />
 </div>

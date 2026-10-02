@@ -3,7 +3,7 @@
  * All Rights Reserved
  */
 
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import { persistentWritable } from './persistance';
 
 function handleTransition(callback: () => void) {
