@@ -11,6 +11,14 @@ export interface GitHubRepo {
 	contributors: Contributor[];
 }
 
+/** Fields consumed from GitHub's repository API response. */
+export interface GitHubRepoResponse {
+	owner: Pick<GithubUser, 'login'>;
+	name: string;
+	description: string | null;
+	stargazers_count: number;
+}
+
 export interface Contributor {
 	avatar_url: string;
 	username: string;
