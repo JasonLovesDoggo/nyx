@@ -58,13 +58,12 @@
 				<span>Cameron</span>
 			</span>
 		</h1>
-		<!--note to self: Could be improved via Senior SWE (Fullstack, AI, Systems) @ Stan.. -->
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
-			I'm currently working as a Senior SWE @ <a
+			I'm currently working as an MTS @ <a
 				class="link text-accent/85"
 				target="_blank"
 				rel="noopener"
-				href="https://stan.store">Stan</a
+				href="https://www.flint.com/">Flint</a
 			>. I've written software that is trusted by
 			<a
 				class="link text-accent/85"

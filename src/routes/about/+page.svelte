@@ -59,9 +59,9 @@
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
 					<b>Hey!</b> I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a
-					Senior Software Engineer at Stan based out of Toronto, Canada. I like to make
+					MTS at Flint based in San Francisco, California. I like to make
 					<a href="/projects" class="link">cool projects</a>
-					when i'm bored. <!--todo: make toronto canada something cool-->
+					when i'm bored.
 				</p>
 
 				<p class="text-subtext0 text-base leading-relaxed">

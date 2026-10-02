@@ -66,7 +66,7 @@
 	<meta name="author" content={Site.seo.author} />
 	<meta name="keywords" content={Site.tags.join(', ')} />
 	<meta name="robots" content="index, follow" />
-	<meta name="geo.region" content="CA-ON" />
+	<meta name="geo.region" content="US-CA" />
 	<meta name="geo.placename" content={Site.seo.location.city} />
 	<link rel="canonical" href={Site.url + page.url.pathname} />
 
