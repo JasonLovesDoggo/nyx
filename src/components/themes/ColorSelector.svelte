@@ -6,7 +6,9 @@
 	$: col = selectedIndex % 7;
 </script>
 
-<div class="relative grid grid-cols-7 gap-2.5 md:gap-1.5">
+<div
+	class="relative grid grid-cols-7 gap-[var(--swatch-gap)] [--swatch-gap:0.625rem] md:[--swatch-gap:0.375rem]"
+>
 	{#each accentColorNames as colorName (colorName)}
 		{@const isSelected = $Accent === colorName}
 		<button
@@ -22,10 +24,10 @@
 
 	<!-- animated ring -->
 	<div
-		class="ring-offset-base pointer-events-none absolute aspect-square min-h-5 min-w-5 rounded-md ring-2 ring-offset-2 transition-all duration-300 ease-out"
+		class="ring-offset-base pointer-events-none absolute top-0 left-0 aspect-square min-h-5 min-w-5 rounded-md ring-2 ring-offset-2 transition-all duration-300 ease-out"
 		style="
-			transform: translate(calc({col} * (100% + 0.625rem)), calc({row} * (100% + 0.625rem)));
-			width: calc((100% - 6 * 0.625rem) / 7);
+			transform: translate(calc({col} * (100% + var(--swatch-gap))), calc({row} * (100% + var(--swatch-gap))));
+			width: calc((100% - 6 * var(--swatch-gap)) / 7);
 			color: var(--color-{$Accent});
 			--tw-ring-color: currentColor;
 		"
