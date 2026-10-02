@@ -1,0 +1,70 @@
+.sse-demo {
+	margin: 1.75rem 0;
+	border: 1px solid var(--color-surface1);
+	border-radius: 0.75rem;
+	padding: 1.25rem;
+	background: var(--color-mantle);
+	color: var(--color-text);
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+.sse-demo .demo-heading {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 600;
+}
+.sse-demo .hint {
+	margin: 0.4rem 0 1rem;
+	color: var(--color-subtext0);
+}
+.sse-demo button {
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--color-surface2);
+	border-radius: 0.375rem;
+	background: var(--color-base);
+	color: var(--color-text);
+	font: inherit;
+	cursor: pointer;
+	min-height: 44px;
+}
+.sse-demo button:hover:not(:disabled),
+.sse-demo button[aria-pressed='true'] {
+	border-color: var(--current-accent-color);
+	color: var(--current-accent-color);
+}
+.sse-demo button:focus-visible {
+	outline: 2px solid var(--current-accent-color);
+	outline-offset: 3px;
+}
+.sse-demo button:disabled {
+	opacity: 0.4;
+	cursor: default;
+}
+.sse-demo .controls {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: center;
+}
+.sse-demo .pill {
+	display: inline-block;
+	padding: 0.1rem 0.45rem;
+	border: 1px solid var(--color-surface2);
+	border-radius: 0.25rem;
+	font-family: var(--font-mono, monospace);
+	font-size: 0.8rem;
+}
+.sse-demo .pill.inherited {
+	border-style: dashed;
+	border-color: var(--color-red);
+	color: var(--color-red);
+}
+.sse-demo .status {
+	margin: 1rem 0 0;
+	color: var(--color-subtext0);
+}
+@media (max-width: 480px) {
+	.sse-demo {
+		padding: 0.875rem;
+	}
+}

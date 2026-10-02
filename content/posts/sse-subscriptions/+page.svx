@@ -1,0 +1,79 @@
+~~~
+description = "Why 700 SSE connections had five million topic memberships, and the shared cache behind it."
+published_at = "2026-09-18"
+tags = ["go", "performance", "sse"]
+
+[title]
+text = "700 connections, five million subscriptions"
+
+[image]
+url = "/posts/sse-subscriptions/rollout.webp"
+alt = "SSE memory, CPU and topic memberships before and after removing the shared cache"
+~~~
+
+<script>
+  import TopicIndex from '$components/posts/sse/TopicIndex.svelte';
+  import SharedCache from '$components/posts/sse/SharedCache.svelte';
+</script>
+
+I was looking at the Grafana dashboard for our Go SSE server when I noticed the topic membership count: several million, for about 700 open connections.
+
+My first question was whether we were cleaning up on disconnect. We were. That made it more confusing.
+
+I'd been working through this service's CPU usage for a while. Pyroscope showed expensive topic matching, so we replaced the subscriber scans with an inverted index. An event comes in for a topic, we look up the connections subscribed to it, and send it to their outgoing queues.
+
+<TopicIndex />
+
+We also keep each connection's topic list so we know which entries to remove when it closes.
+
+But by the time we deployed the next fix, that index had **5,008,333 memberships across 721 connections**. Those were actual subscriptions, not empty slots we'd allocated. Completed fan streams had a median of 9,600 topics each.
+
+## User zero
+
+The subscription handler called an API with the connection's authenticated token to get its topics. Before adding those results, though, it loaded a cached list:
+
+```go
+currentTopics, _ := sh.Hub.GetUserTopics(userClaim.UserId)
+```
+
+Then it merged in the API response and saved the list back under that user ID.
+
+The problem was `UserId`. It came from a creator claim in the token. Fan tokens didn't have that claim, so the Go integer stayed at zero. All those fans shared one cache entry.
+
+<SharedCache />
+
+Each connection got a snapshot. Older connections didn't immediately gain the new topics, but reconnecting gave them the latest accumulated list.
+
+And the cache entry only disappeared when the last connection for that user ID closed. For user zero, that meant every fan had to disconnect at once. Individual connections cleaned up their index entries correctly, while new ones kept copying the growing cache back into the index.
+
+We removed the cache. The handler was already fetching subscriptions for each connection, so we could just use that response and keep the resulting list on the subscriber.
+
+This also needed a delivery test. With two distinct fan tokens and a local subscription API fixture, the old code delivered one fan's synthetic private event to the other. The fixed code passed the isolation test. That reproduced the bug locally; it doesn't tell us what payloads were delivered historically in production.
+
+## I also wanted to shrink the channels
+
+Each connection originally had a 10,000-slot outgoing channel. We'd already reduced that to 256 before finding the cache bug.
+
+I asked about going smaller again. But on a 64-bit process, going from 256 pointers to 64 saves 1,536 bytes per connection. At 700 connections, that's about one MiB, with less room to absorb a slow network write. It wasn't where the remaining memory was going.
+
+## After deployment
+
+A restart would have cleared the cache anyway, so I wanted to see whether the numbers stayed down as people reconnected.
+
+<img src="/posts/sse-subscriptions/rollout.webp" alt="Memory drops from roughly 1,000 MiB to below 200 MiB after deployment. CPU and memberships also fall and stay low through the next day, while connections stay in the hundreds." width="2160" height="1800" loading="lazy" />
+
+Roughly 26 hours later, we had 698 connections and 22,011 memberships. Across the 24-hour windows before and after the fix:
+
+| | Before | After |
+| --- | ---: | ---: |
+| Average memory | 857 MiB | 164 MiB |
+| Average CPU | 2.17% | 0.59% |
+
+In the later sample, the median fan stream had four topics. Four made a lot more sense than 9,600.
+
+<details>
+<summary>Measurement windows</summary>
+
+The resource averages use 288 five-minute CloudWatch observations per window: September 16, 17:15 UTC to September 17, 17:15 UTC, and September 17, 19:40 UTC to September 18, 19:40 UTC. Deployment completed September 17 at 17:22 UTC. Connection and membership counts are snapshots; fan topic counts come from separate samples of completed streams.
+
+</details>
