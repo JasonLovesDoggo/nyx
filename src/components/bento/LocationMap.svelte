@@ -101,7 +101,7 @@
 			</div>
 		{/if}
 	</div>
-	<div class="mt-3 flex items-center justify-between gap-2">
+	<div class="mt-3 flex flex-col items-center gap-1 text-center">
 		<button
 			onclick={recenterMap}
 			class="text-subtext0 hover:text-accent cursor-pointer text-xs whitespace-nowrap transition-colors"
