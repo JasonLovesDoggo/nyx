@@ -1,22 +1,4 @@
-const decoder = typeof TextDecoder !== 'undefined' ? new TextDecoder() : null;
 let delegationBound = false;
-
-function decodeBase64(payload: string): string | null {
-	if (!payload) return null;
-	try {
-		if (typeof atob === 'function') {
-			const binary = atob(payload);
-			if (decoder) {
-				const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
-				return decoder.decode(bytes);
-			}
-			return binary;
-		}
-	} catch (error) {
-		console.warn('Failed to decode code block payload', error);
-	}
-	return null;
-}
 
 async function copy(code: string): Promise<boolean> {
 	if (!code) return false;
@@ -54,10 +36,11 @@ function bindDelegatedHandler() {
 		const target = event.target as HTMLElement | null;
 		const button = target?.closest<HTMLButtonElement>('.code-block__copy');
 		if (!button) return;
-		const payload = button.dataset.code ?? '';
-		const decoded = decodeBase64(payload);
-		if (!decoded) return;
-		const success = await copy(decoded);
+		// Shiki already renders the complete source as text. Read only <code>
+		// (not the figure's caption or controls) instead of shipping it twice.
+		const code = button.closest('.code-block')?.querySelector('pre code')?.textContent;
+		if (!code) return;
+		const success = await copy(code);
 		if (success) {
 			button.dataset.copied = 'true';
 			setTimeout(() => {
