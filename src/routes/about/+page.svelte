@@ -59,7 +59,7 @@
 			<div class="space-y-4 md:col-span-2">
 				<p class="text-subtext0 text-base leading-relaxed">
 					<b>Hey!</b> I'm Jason Cameron <a class="link" href="/socials">(@JasonLovesDoggo)</a> — a
-					MTS at Flint based in San Francisco, California. I like to make
+					Founding Engineer at Flint based in San Francisco, California. I like to make
 					<a href="/projects" class="link">cool projects</a>
 					when i'm bored.
 				</p>

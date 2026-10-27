@@ -34,8 +34,8 @@ export function baseJsonLd(pathname: string): Graph {
 			alternateName: ['jsoncam', 'jasonlovesdoggo', 'json'],
 			url: Site.url,
 			image: siteUrl('/images/avatar.webp'),
-			description: 'Member of Technical Staff based in San Francisco, California.',
-			jobTitle: 'Member of Technical Staff',
+			description: 'Founding Engineer based in San Francisco, California.',
+			jobTitle: 'Founding Engineer',
 			birthDate: Site.seo.birthDate,
 			worksFor: {
 				'@type': 'Organization',

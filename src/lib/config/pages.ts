@@ -34,12 +34,14 @@ export interface ExperienceTimelineItem {
 export const experienceTimeline: ExperienceTimelineItem[] = [
 	{
 		company: 'Flint',
-		role: 'MTS',
+		role: 'Founding Engineer',
 		url: 'https://www.flint.com/',
 		logoUrl: '/logos/flint.svg',
 		logoAlt: 'Flint Logo',
 		startDate: '2026-10-01',
 		status: 'current',
+		details:
+			'Building autonomous website technology that helps companies turn more of their ad traffic into customers.',
 		logoMonochrome: true
 	},
 	{

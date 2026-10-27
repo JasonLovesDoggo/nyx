@@ -59,7 +59,7 @@
 			</span>
 		</h1>
 		<p class="text-subtext0 max-w-prose text-lg leading-relaxed">
-			I'm currently working as an MTS @ <a
+			I'm currently a Founding Engineer @ <a
 				class="link text-accent/85"
 				target="_blank"
 				rel="noopener"
@@ -90,8 +90,9 @@
 			and many others<a
 				href="/projects/anubis"
 				class="hover:text-accent ml-0.5 align-super text-xs font-semibold">[1]</a
-			>. Seeing code I wrote actually help people at scale is what keeps me building. Currently
-			building AI that helps people articulate their ideas and share them at scale.
+			>. Seeing code I wrote actually help people at scale is what keeps me building. At Flint,
+			we're building autonomous website technology that helps companies turn more of their ad
+			traffic into customers.
 		</p>
 		<div class="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2">
 			{#each Home.socialLinks as link (link.href)}
