@@ -7,3 +7,6 @@ bun.lockb
 
 # Generated Cloudflare runtime types
 src/worker-configuration.d.ts
+
+# Generated font face declarations
+static/fonts/fonts.css
