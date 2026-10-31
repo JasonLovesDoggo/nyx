@@ -8,20 +8,22 @@
 	let mapInstance: L.Map | null = null;
 	let currentTime = $state('');
 	let isDaytime = $state(true);
+	// Center the city label in the current zoom-11 basemap.
+	const mapCenter: [number, number] = [37.7873, -122.408];
 
 	function updateTime() {
 		const now = new Date();
-		const torontoTime = new Intl.DateTimeFormat('en-US', {
-			timeZone: 'America/Toronto',
+		const localTime = new Intl.DateTimeFormat('en-US', {
+			timeZone: 'America/Los_Angeles',
 			hour: '2-digit',
 			minute: '2-digit',
 			second: '2-digit',
 			hour12: false
 		}).format(now);
-		currentTime = torontoTime;
+		currentTime = localTime;
 
 		// Check if daytime (6 AM - 9 PM)
-		const hour = parseInt(torontoTime.split(':')[0]);
+		const hour = parseInt(localTime.split(':')[0]);
 		isDaytime = hour >= 6 && hour < 21;
 	}
 
@@ -49,7 +51,7 @@
 					boxZoom: true,
 					keyboard: true,
 					touchZoom: true
-				}).setView([43.6532, -79.3832], 11);
+				}).setView(mapCenter, 11);
 
 				L.tileLayer(
 					'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_31yr_1_c550289dfdcca99ae44a32c2',
@@ -74,7 +76,7 @@
 
 	function recenterMap() {
 		if (mapInstance) {
-			mapInstance.setView([43.6532, -79.3832], 11);
+			mapInstance.setView(mapCenter, 11);
 		}
 	}
 </script>
@@ -85,7 +87,7 @@
 		class="text-text hover:text-accent mb-3 flex w-full cursor-pointer items-center gap-2 text-left text-sm font-semibold transition-colors"
 	>
 		<IconMapPin size={16} class="text-accent" />
-		Currently Based In 📍
+		Currently Based In
 	</button>
 	<div class="bg-surface0 relative w-full flex-1 overflow-hidden rounded-lg">
 		{#if browser}
@@ -106,7 +108,7 @@
 			onclick={recenterMap}
 			class="text-subtext0 hover:text-accent cursor-pointer text-xs whitespace-nowrap transition-colors"
 		>
-			Toronto, ON
+			San Francisco, CA
 		</button>
 		{#if currentTime}
 			<div class="flex items-center gap-1">

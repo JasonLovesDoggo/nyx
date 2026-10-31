@@ -44,12 +44,13 @@ const Site: Site = {
 	name: 'Jason Cameron',
 	url: dev ? 'http://localhost:5173' : 'https://jasoncameron.dev',
 	description:
-		'Jason Cameron - Shipping from Toronto, Canada. I like occasionally building cool shit',
+		'Jason Cameron - Shipping from San Francisco, California. I like occasionally building cool shit',
 	tags: [
 		'Jason Cameron',
 		'Senior Software Engineer',
-		'Toronto Software Developer',
+		'United States',
 		'Canada',
+		'Toronto',
 		'Golang Developer',
 		'Python Developer',
 		'DevOps Engineer',
@@ -57,7 +58,7 @@ const Site: Site = {
 		'Backend Developer',
 		'Full Stack Developer',
 		'Hackathon Developer',
-		'Toronto Tech',
+		'San Francisco',
 		'Canadian Developer',
 		'Web Development',
 		'Cloud Computing',
@@ -68,13 +69,13 @@ const Site: Site = {
 		author: 'Jason Cameron',
 		birthDate: '2006-04-19',
 		worksFor: {
-			name: 'Stan',
-			url: 'https://stan.store'
+			name: 'Flint',
+			url: 'https://www.flint.com/'
 		},
 		location: {
-			city: 'Toronto',
-			region: 'Ontario',
-			country: 'Canada'
+			city: 'San Francisco',
+			region: 'California',
+			country: 'United States'
 		}
 	},
 	abacus: {
